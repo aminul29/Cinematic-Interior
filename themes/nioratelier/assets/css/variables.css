@@ -1,0 +1,28 @@
+:root {
+  /* Colors */
+  --nior-obsidian: #0c0d0e;
+  --nior-surface: #141618;
+  --nior-surface-light: #1f2226;
+  --nior-taupe: #2a2725;
+  --nior-gold: #c9a25e;
+  --nior-gold-light: #e0be7d;
+  --nior-gold-glow: rgba(201, 162, 94, 0.35);
+  --nior-white: #f5f5f7;
+  --nior-muted: rgba(245, 245, 247, 0.65);
+  --nior-subtle: rgba(245, 245, 247, 0.38);
+  --nior-border: rgba(201, 162, 94, 0.16);
+  --nior-border-strong: rgba(201, 162, 94, 0.32);
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Easing curves */
+  --ease-out-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-velvet: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Spacing */
+  --section-pad-y: clamp(80px, 12vh, 160px);
+  --container-max: 1360px;
+  --header-height: 88px;
+}

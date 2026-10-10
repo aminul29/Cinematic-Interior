@@ -1,0 +1,133 @@
+/* 'Our Clients' Physics Falling Logos Section */
+.nior-falling-section {
+  position: relative;
+  background-color: var(--nior-surface);
+  padding: var(--section-pad-y) 0;
+  border-top: 1px solid var(--nior-border);
+  border-bottom: 1px solid var(--nior-border);
+  overflow: hidden;
+}
+
+.nior-falling-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 60px;
+
+  .nior-eyebrow {
+    justify-content: center;
+    &::before { display: none; }
+  }
+
+  h2 {
+    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 15px;
+    color: var(--nior-muted);
+  }
+}
+
+/* Physics Falling Arena */
+.nior-falling-arena {
+  position: relative;
+  min-height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+/* Luxury Client Logo Grid */
+.nior-falling-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 680px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+/* Logo Card Chip */
+.nior-logo-chip {
+  background: rgba(20, 22, 24, 0.85);
+  border: 1px solid var(--nior-border);
+  border-radius: 8px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  min-height: 120px;
+  cursor: default;
+  position: relative;
+  will-change: transform, opacity;
+  transform: translateY(-280px) scale(0.65) rotate(var(--chip-init-rot, 0deg));
+  opacity: 0;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+
+  &:hover {
+    border-color: var(--nior-gold);
+    box-shadow: 0 12px 32px var(--nior-gold-glow);
+  }
+
+  .nior-logo-chip__img {
+    width: 100%;
+    max-width: 160px;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(0.9) grayscale(0.2);
+    transition: filter 0.3s ease;
+  }
+
+  &:hover .nior-logo-chip__img {
+    filter: brightness(1) grayscale(0);
+  }
+
+  .nior-logo-chip__title {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--nior-white);
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  .nior-logo-chip__sub {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--nior-gold);
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+}
+
+/* Subtle architectural watermark */
+.nior-falling-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-serif);
+  font-size: clamp(80px, 16vw, 200px);
+  font-weight: 700;
+  color: rgba(201, 162, 94, 0.025);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  letter-spacing: 0.15em;
+}

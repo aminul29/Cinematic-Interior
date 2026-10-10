@@ -1,0 +1,31 @@
+/**
+ * Nior Atelier Main Script Orchestrator
+ * Entry ES Module loading all specialized components.
+ */
+
+import { initSmoothScroll } from './modules/smooth-scroll.js';
+import { initPreloader } from './modules/preloader.js';
+import { initHeroCanvas } from './modules/hero-canvas.js';
+import { initFallingLogos } from './modules/falling-logos.js';
+import { initRackFocus } from './modules/rack-focus.js';
+import { initKineticIngress } from './modules/kinetic-ingress.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Initialize buttery-smooth Lenis scrolling
+  initSmoothScroll();
+
+  // 2. Initialize architectural counter preloader (0-100%)
+  initPreloader(() => {
+    // 3. Initialize hero canvas scrubbing once assets are preloaded
+    initHeroCanvas();
+
+    // 4. Initialize Apple-style rack-focus word typography
+    initRackFocus();
+
+    // 5. Initialize client logos physics drop animation
+    initFallingLogos();
+
+    // 6. Initialize two-way 3D kinetic ingress for cards and sections
+    initKineticIngress();
+  });
+});
