@@ -40,7 +40,7 @@
           </h1>
 
           <p class="nior-hero-sub">
-            Nior Atelier transforms spatial concepts into extraordinary environments. From central entertainment stages to bespoke hospitality and luxury residences, we unite architecture, craftsmanship, and business performance.
+            Uniting architecture, custom fabrication, and spatial performance to craft unforgettable environments.
           </p>
 
           <div class="nior-hero-actions">

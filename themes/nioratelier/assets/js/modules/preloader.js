@@ -78,4 +78,15 @@ export function initPreloader(onComplete) {
       toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
   }
+
+  // Active navigation link highlighting
+  const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
+  document.querySelectorAll('.nior-header__nav-link, .nior-mobile-menu__nav a').forEach((link) => {
+    const linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, '') || '/';
+    if (linkPath === currentPath) {
+      link.classList.add('is-active');
+    } else {
+      link.classList.remove('is-active');
+    }
+  });
 }

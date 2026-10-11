@@ -26,7 +26,7 @@
       <!-- Project 1: V Stage Lounge -->
       <div class="nior-portfolio-card">
         <div class="nior-portfolio-card__img-wrap">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/walkthrough/4F88F454-8032-42DF-8E8E-1ABC6B73825E.jpeg' ); ?>" alt="V Stage Lounge" loading="lazy" />
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/projects/bar.jpg' ); ?>" alt="V Stage Lounge" loading="lazy" />
         </div>
         <div class="nior-portfolio-card__body">
           <span class="nior-portfolio-card__category">Nightlife · Entertainment · F&B</span>
@@ -38,7 +38,7 @@
       <!-- Project 2: V Sing Cocktail Bar -->
       <div class="nior-portfolio-card">
         <div class="nior-portfolio-card__img-wrap">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/walkthrough/3A961802-66BF-4A47-8299-4C8FF892F8BC.jpeg' ); ?>" alt="V Sing Cocktail Bar" loading="lazy" />
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/projects/bar2.jpg' ); ?>" alt="V Sing Cocktail Bar" loading="lazy" />
         </div>
         <div class="nior-portfolio-card__body">
           <span class="nior-portfolio-card__category">Hospitality · Bar & Lounge</span>
@@ -86,7 +86,7 @@
       <!-- Project 6: Velvet Lounge Zone -->
       <div class="nior-portfolio-card">
         <div class="nior-portfolio-card__img-wrap">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/walkthrough/86C17A23-9646-4B69-889B-6E8AC238AAD0.jpeg' ); ?>" alt="Velvet Lounge Zone" loading="lazy" />
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/projects/dining.jpg' ); ?>" alt="Velvet Lounge Zone" loading="lazy" />
         </div>
         <div class="nior-portfolio-card__body">
           <span class="nior-portfolio-card__category">VIP Lounge · Private Club</span>
@@ -95,10 +95,60 @@
         </div>
       </div>
 
+      <!-- Project 7: Haute Fashion Boutique -->
+      <div class="nior-portfolio-card">
+        <div class="nior-portfolio-card__img-wrap">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/projects/fashion.jpg' ); ?>" alt="Haute Fashion Boutique" loading="lazy" />
+        </div>
+        <div class="nior-portfolio-card__body">
+          <span class="nior-portfolio-card__category">Retail · Flagship Boutique</span>
+          <h3>L'Aura Fashion Flagship</h3>
+          <p>Minimalist micro-cement plinths, recessed linear illumination, fluted brass hanging rails, and geometric changing suites.</p>
+        </div>
+      </div>
+
+      <!-- Project 8: Bespoke Jewelry Atelier -->
+      <div class="nior-portfolio-card">
+        <div class="nior-portfolio-card__img-wrap">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/projects/jewelry.jpg' ); ?>" alt="Bespoke Jewelry Atelier" loading="lazy" />
+        </div>
+        <div class="nior-portfolio-card__body">
+          <span class="nior-portfolio-card__category">Luxury Retail · Jewelry</span>
+          <h3>Aethel Fine Jewelry</h3>
+          <p>Anti-reflective museum-grade glass showcases, brushed titanium trims, and focused 4000K spot illumination.</p>
+        </div>
+      </div>
+
+      <!-- Project 9: Haute Perfume Gallery -->
+      <div class="nior-portfolio-card">
+        <div class="nior-portfolio-card__img-wrap">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/projects/perfume.jpg' ); ?>" alt="Haute Perfume Gallery" loading="lazy" />
+        </div>
+        <div class="nior-portfolio-card__body">
+          <span class="nior-portfolio-card__category">Beauty & Fragrance · Retail</span>
+          <h3>Atelier Parfumerie</h3>
+          <p>Curved fluted timber alcoves, illuminated tester pedestals, and seamless acoustic dampening ceilings.</p>
+        </div>
+      </div>
+
+      <!-- Project 10: Luxury Showhouse Estate -->
+      <div class="nior-portfolio-card">
+        <div class="nior-portfolio-card__img-wrap">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/projects/showhouse.jpg' ); ?>" alt="Luxury Showhouse Villa" loading="lazy" />
+        </div>
+        <div class="nior-portfolio-card__body">
+          <span class="nior-portfolio-card__category">Residential · Architecture & Build</span>
+          <h3>Pavilion Showhouse Estate</h3>
+          <p>Floor-to-ceiling panoramic glass walls, floating open-riser timber staircase, and bespoke Italian marble islands.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 <!-- /wp:html -->
 
+<!-- wp:pattern {"slug":"nioratelier/sectors-grid"} /-->
 <!-- wp:pattern {"slug":"nioratelier/falling-logos"} /-->
 <!-- wp:pattern {"slug":"nioratelier/cta-handover"} /-->
+

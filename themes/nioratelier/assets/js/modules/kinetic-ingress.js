@@ -138,4 +138,47 @@ export function initKineticIngress() {
       }
     );
   }
+
+  // 5. Cinematic Scenario Cards: Staggered Parallax Ingress
+  const scenarioCards = document.querySelectorAll('.nior-scenario-card');
+  scenarioCards.forEach((card) => {
+    const media = card.querySelector('.nior-scenario-card__media');
+    const content = card.querySelector('.nior-scenario-card__content');
+
+    if (media && content) {
+      gsap.fromTo(
+        media,
+        { opacity: 0, y: 50, scale: 0.95 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 82%',
+            toggleActions: 'play reverse play reverse',
+          },
+        }
+      );
+
+      gsap.fromTo(
+        content,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          delay: 0.15,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 82%',
+            toggleActions: 'play reverse play reverse',
+          },
+        }
+      );
+    }
+  });
 }

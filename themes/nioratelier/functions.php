@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'NIOR_VERSION', '1.2.2' );
+define( 'NIOR_VERSION', '1.3.0' );
 define( 'NIOR_THEME_DIR', get_template_directory() );
 define( 'NIOR_THEME_URI', get_template_directory_uri() );
 
@@ -70,6 +70,7 @@ function nioratelier_enqueue_assets() {
         'nior-header-footer'    => 'assets/css/header-footer.css',
         'nior-cinematic-hero'   => 'assets/css/cinematic-hero.css',
         'nior-video-scrub-hero' => 'assets/css/video-scrub-hero.css',
+        'nior-cinematic-scenarios' => 'assets/css/cinematic-scenarios.css',
         'nior-falling-logos'    => 'assets/css/falling-logos.css',
         'nior-sections'         => 'assets/css/sections.css',
         'nior-pages'            => 'assets/css/pages.css',
@@ -147,3 +148,56 @@ function nioratelier_script_type_module( $tag, $handle, $src ) {
     return $tag;
 }
 add_filter( 'script_loader_tag', 'nioratelier_script_type_module', 10, 3 );
+
+/**
+ * Automatically provisions core pages if they do not exist yet.
+ * Ensures multi-page routing functions out-of-the-box in local and production.
+ */
+function nioratelier_ensure_default_pages() {
+    $pages = array(
+        'about'    => 'About Us',
+        'services' => 'Services',
+        'projects' => 'Projects',
+        'contact'  => 'Contact',
+    );
+
+    foreach ( $pages as $slug => $title ) {
+        $existing = get_page_by_path( $slug );
+        if ( ! $existing ) {
+            wp_insert_post( array(
+                'post_title'     => $title,
+                'post_name'      => $slug,
+                'post_status'    => 'publish',
+                'post_type'      => 'page',
+                'comment_status' => 'closed',
+            ) );
+        }
+    }
+}
+add_action( 'init', 'nioratelier_ensure_default_pages', 20 );
+
+/**
+ * Ensures newly added patterns are registered immediately without transient delay.
+ */
+function nioratelier_register_patterns() {
+    if ( ! WP_Block_Patterns_Registry::get_instance()->is_registered( 'nioratelier/cinematic-scenarios' ) ) {
+        $file = NIOR_THEME_DIR . '/patterns/cinematic-scenarios.php';
+        if ( file_exists( $file ) ) {
+            ob_start();
+            include $file;
+            $rendered = ob_get_clean();
+
+            register_block_pattern(
+                'nioratelier/cinematic-scenarios',
+                array(
+                    'title'       => __( 'Cinematic Scenarios Showcase', 'nioratelier' ),
+                    'categories'  => array( 'nior-cinematic' ),
+                    'content'     => $rendered,
+                )
+            );
+        }
+    }
+}
+add_action( 'init', 'nioratelier_register_patterns', 15 );
+
+

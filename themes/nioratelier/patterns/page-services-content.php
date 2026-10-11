@@ -77,4 +77,5 @@
 <!-- /wp:html -->
 
 <!-- wp:pattern {"slug":"nioratelier/signature-approach"} /-->
+<!-- wp:pattern {"slug":"nioratelier/integrated-process"} /-->
 <!-- wp:pattern {"slug":"nioratelier/cta-handover"} /-->

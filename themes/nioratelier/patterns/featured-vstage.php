@@ -11,7 +11,7 @@
   <div class="nior-container">
     <div class="nior-vstage-grid">
       <div class="nior-vstage-media">
-        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/walkthrough/4F88F454-8032-42DF-8E8E-1ABC6B73825E.jpeg' ); ?>" alt="V Stage Lounge Interior Design by Nior Atelier" loading="lazy" />
+        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/projects/bar.jpg' ); ?>" alt="V Stage Lounge Interior Design by Nior Atelier" loading="lazy" />
         <div class="nior-vstage-tag">Featured Case Study</div>
       </div>
 

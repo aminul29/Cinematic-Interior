@@ -43,10 +43,30 @@
         <cite>Nior Atelier Philosophy · 2026</cite>
       </div>
     </div>
+
+    <!-- 11,000 SQ FT Production Facility Gallery -->
+    <div style="margin-top: 60px;">
+      <span class="nior-eyebrow">Production Infrastructure</span>
+      <h3 style="font-family: var(--font-serif); font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 24px; color: var(--nior-white);">11,000 SQ FT Workshop & Joinery Factory</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        <div style="border-radius: 8px; overflow: hidden; aspect-ratio: 16/10; background: var(--nior-surface);">
+          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-1.jpg' ) ); ?>" alt="Nior Atelier Joinery & Fabrication Machinery" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy" />
+        </div>
+        <div style="border-radius: 8px; overflow: hidden; aspect-ratio: 16/10; background: var(--nior-surface);">
+          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-2.jpg' ) ); ?>" alt="Bespoke Metalwork & Millwork Assembly" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy" />
+        </div>
+        <div style="border-radius: 8px; overflow: hidden; aspect-ratio: 16/10; background: var(--nior-surface);">
+          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-3.jpg' ) ); ?>" alt="Direct Material Procurement & Custom Finishing" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 <!-- /wp:html -->
 
 <!-- wp:pattern {"slug":"nioratelier/value-pillars"} /-->
 <!-- wp:pattern {"slug":"nioratelier/integrated-process"} /-->
+<!-- wp:pattern {"slug":"nioratelier/why-nior"} /-->
 <!-- wp:pattern {"slug":"nioratelier/cta-handover"} /-->
+
