@@ -6,6 +6,7 @@
 import { initSmoothScroll } from './modules/smooth-scroll.js';
 import { initPreloader } from './modules/preloader.js';
 import { initHeroCanvas } from './modules/hero-canvas.js';
+import { initVideoScrub } from './modules/video-scrub.js';
 import { initFallingLogos } from './modules/falling-logos.js';
 import { initRackFocus } from './modules/rack-focus.js';
 import { initKineticIngress } from './modules/kinetic-ingress.js';
@@ -16,8 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2. Initialize architectural counter preloader (0-100%)
   initPreloader(() => {
-    // 3. Initialize hero canvas scrubbing once assets are preloaded
+    // 3. Initialize hero media layers (Canvas or Video scrub depending on active pattern)
     initHeroCanvas();
+    initVideoScrub();
 
     // 4. Initialize Apple-style rack-focus word typography
     initRackFocus();
@@ -29,3 +31,4 @@ document.addEventListener('DOMContentLoaded', () => {
     initKineticIngress();
   });
 });
+

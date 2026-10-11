@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'NIOR_VERSION', '1.0.0' );
+define( 'NIOR_VERSION', '1.1.0' );
 define( 'NIOR_THEME_DIR', get_template_directory() );
 define( 'NIOR_THEME_URI', get_template_directory_uri() );
 
@@ -64,14 +64,15 @@ function nioratelier_enqueue_assets() {
 
     // 2. Scoped CSS modules
     $css_modules = array(
-        'nior-variables'      => 'assets/css/variables.css',
-        'nior-base'           => 'assets/css/base.css',
-        'nior-preloader'      => 'assets/css/preloader.css',
-        'nior-header-footer'  => 'assets/css/header-footer.css',
-        'nior-cinematic-hero' => 'assets/css/cinematic-hero.css',
-        'nior-falling-logos'  => 'assets/css/falling-logos.css',
-        'nior-sections'       => 'assets/css/sections.css',
-        'nior-pages'          => 'assets/css/pages.css',
+        'nior-variables'        => 'assets/css/variables.css',
+        'nior-base'             => 'assets/css/base.css',
+        'nior-preloader'        => 'assets/css/preloader.css',
+        'nior-header-footer'    => 'assets/css/header-footer.css',
+        'nior-cinematic-hero'   => 'assets/css/cinematic-hero.css',
+        'nior-video-scrub-hero' => 'assets/css/video-scrub-hero.css',
+        'nior-falling-logos'    => 'assets/css/falling-logos.css',
+        'nior-sections'         => 'assets/css/sections.css',
+        'nior-pages'            => 'assets/css/pages.css',
     );
 
     $prev_handle = 'nior-google-fonts';
@@ -128,6 +129,8 @@ function nioratelier_enqueue_assets() {
             'sequenceBase'    => NIOR_THEME_URI . '/assets/img/sequence/frame_',
             'totalFrames'     => 101,
             'walkthroughVideo'=> NIOR_THEME_URI . '/assets/img/walkthrough_master.mp4',
+            'scrubVideo'      => NIOR_THEME_URI . '/assets/img/hero-scrub.mp4',
+            'posterImage'     => NIOR_THEME_URI . '/assets/img/hero-poster.webp',
             'isFrontPage'     => is_front_page(),
         )
     );
