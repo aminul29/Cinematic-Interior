@@ -199,11 +199,15 @@ function initStagedIngress(heroTrack, isStatic) {
     },
   });
 
+  // Stage 0: Center Brand Title Card Dissolves & Glides Upward as Scrub Commences
+  tl.to('#niorHeroCenterBrand', { opacity: 0, y: -45, scale: 0.96, duration: 0.12, ease: 'power2.inOut' }, 0);
+  tl.to('.nior-hero-scroll-prompt', { opacity: 0, duration: 0.08 }, 0.04);
+
   // Stage 1: Status Badge
-  tl.to('.nior-hero-badge', { opacity: 1, y: 0, duration: 0.15 }, 0.05);
+  tl.to('.nior-hero-badge', { opacity: 1, y: 0, duration: 0.15 }, 0.08);
 
   // Stage 2: Main Headline
-  tl.to('.nior-hero-headline', { opacity: 1, y: 0, scale: 1, duration: 0.22 }, 0.15);
+  tl.to('.nior-hero-headline', { opacity: 1, y: 0, scale: 1, duration: 0.22 }, 0.16);
 
   // Stage 3: Subtitle & CTA Group
   tl.to('.nior-hero-sub', { opacity: 1, y: 0, duration: 0.18 }, 0.30);
@@ -218,5 +222,4 @@ function initStagedIngress(heroTrack, isStatic) {
   // Stage 6: Clean Upward Glissando Before Next Section Arrives
   tl.to('.nior-video-hero-ui-container', { y: -70, opacity: 0, duration: 0.18, ease: 'power2.in' }, 0.82);
   tl.to('.nior-hero-floating-card', { y: -40, opacity: 0, duration: 0.15, ease: 'power2.in' }, 0.85);
-  tl.to('.nior-hero-scroll-prompt', { opacity: 0, duration: 0.1 }, 0.20);
 }

@@ -21,6 +21,12 @@
       <div class="nior-video-scrim-vignette"></div>
     </div>
 
+    <div id="niorHeroCenterBrand" class="nior-hero-center-brand">
+      <div class="nior-hero-center-brand__title">NIOR ATELIER</div>
+      <div class="nior-hero-center-brand__divider"></div>
+      <div class="nior-hero-center-brand__tagline">Architecture · Design · Build</div>
+    </div>
+
     <div class="nior-video-hero-content">
       <div class="nior-container">
         <div class="nior-video-hero-ui-container">

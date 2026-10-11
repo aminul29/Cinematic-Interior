@@ -17,6 +17,10 @@
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--nior-border);
+
+    .nior-header__brand .nior-header__logo-img {
+      height: 38px;
+    }
   }
 
   .nior-header__inner {
@@ -27,8 +31,24 @@
   }
 
   .nior-header__brand {
-    display: flex;
-    flex-direction: column;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+
+    &:hover {
+      opacity: 0.92;
+      transform: scale(1.02);
+    }
+
+    .nior-header__logo-img {
+      display: block;
+      height: clamp(42px, 5.2vw, 52px);
+      width: auto;
+      object-fit: contain;
+      border-radius: 4px;
+      transition: height 0.3s ease;
+    }
 
     .nior-header__logo-text {
       font-family: var(--font-serif);
