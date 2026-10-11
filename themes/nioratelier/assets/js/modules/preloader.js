@@ -68,6 +68,17 @@ export function initPreloader(onComplete) {
     }, { passive: true });
   }
 
+  // Header logo recovery fallback for cross-environment directory discrepancies
+  const headerLogo = document.querySelector('.nior-header__logo-img');
+  if (headerLogo && window.niorConfig?.themeUri) {
+    headerLogo.addEventListener('error', () => {
+      const targetSrc = `${window.niorConfig.themeUri}/assets/img/logo-cropped.webp`;
+      if (headerLogo.src !== targetSrc) {
+        headerLogo.src = targetSrc;
+      }
+    }, { once: true });
+  }
+
   // Mobile drawer toggle
   const toggleBtn = document.getElementById('niorMobileToggle');
   const mobileDrawer = document.getElementById('niorMobileDrawer');

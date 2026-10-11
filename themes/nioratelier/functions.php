@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'NIOR_VERSION', '1.3.2' );
+define( 'NIOR_VERSION', '1.3.3' );
 define( 'NIOR_THEME_DIR', get_template_directory() );
 define( 'NIOR_THEME_URI', get_template_directory_uri() );
 
@@ -200,4 +200,25 @@ function nioratelier_register_patterns() {
 }
 add_action( 'init', 'nioratelier_register_patterns', 15 );
 
-
+/**
+ * Dynamically resolves theme asset URLs inside template parts (e.g. Header logo)
+ * ensuring seamless rendering across different environment directory names
+ * (nioratelier vs nioratelier-theme) and across local/production hosts.
+ */
+function nioratelier_filter_template_part_assets( $block_content, $block ) {
+    if ( isset( $block['attrs']['slug'] ) && 'header' === $block['attrs']['slug'] ) {
+        $theme_uri = esc_url( get_template_directory_uri() );
+        $block_content = str_replace(
+            array(
+                '/wp-content/themes/nioratelier/assets/img/logo-cropped.webp',
+                '/wp-content/themes/nioratelier-theme/assets/img/logo-cropped.webp',
+                'https://nioratelier.com/wp-content/themes/nioratelier/assets/img/logo-cropped.webp',
+                'http://nioratelier.local/wp-content/themes/nioratelier-theme/assets/img/logo-cropped.webp',
+            ),
+            $theme_uri . '/assets/img/logo-cropped.webp',
+            $block_content
+        );
+    }
+    return $block_content;
+}
+add_filter( 'render_block_core_template_part', 'nioratelier_filter_template_part_assets', 10, 2 );
