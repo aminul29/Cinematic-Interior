@@ -46,7 +46,8 @@
       height: clamp(62px, 7vw, 76px);
       width: auto;
       object-fit: contain;
-      border-radius: 6px;
+      mix-blend-mode: screen;
+      border-radius: 0;
       transition: height 0.3s ease;
     }
 
