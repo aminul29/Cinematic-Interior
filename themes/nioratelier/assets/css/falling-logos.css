@@ -39,39 +39,35 @@
   padding: 20px 0;
 }
 
-/* Luxury Client Logo Grid */
+/* Luxury Client Logo Grid - Centered 6 + 5 Balanced Arrangement */
 .nior-falling-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
-
-  @media (max-width: 1100px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (max-width: 680px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
 }
 
 /* Logo Card Chip */
 .nior-logo-chip {
+  flex: 0 1 calc((100% - 100px) / 6);
+  min-width: 160px;
+  max-width: 195px;
+  height: 120px;
+  min-height: 120px;
+  box-sizing: border-box;
   background: rgba(20, 22, 24, 0.85);
   border: 1px solid var(--nior-border);
   border-radius: 8px;
-  padding: 24px 20px;
+  padding: 20px 18px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  min-height: 120px;
   cursor: default;
   position: relative;
   will-change: transform, opacity;
@@ -80,39 +76,50 @@
   transition: border-color 0.4s ease, box-shadow 0.4s ease;
 
   &:hover {
-    border-color: var(--nior-gold);
-    box-shadow: 0 12px 32px var(--nior-gold-glow);
+    border-color: rgba(201, 162, 94, 0.75);
+    box-shadow: 0 0 24px rgba(201, 162, 94, 0.2);
   }
 
   .nior-logo-chip__img {
     width: 100%;
-    max-width: 160px;
+    max-width: 135px;
+    max-height: 42px;
     height: auto;
     object-fit: contain;
-    filter: brightness(0.9) grayscale(0.2);
-    transition: filter 0.3s ease;
+    opacity: 0.72;
+    filter: brightness(0.92);
+    transition: opacity 0.4s ease, filter 0.4s ease;
   }
 
   &:hover .nior-logo-chip__img {
-    filter: brightness(1) grayscale(0);
+    opacity: 1;
+    filter: brightness(0) saturate(100%) invert(74%) sepia(26%) saturate(674%) hue-rotate(357deg) brightness(92%) contrast(89%);
   }
+}
 
-  .nior-logo-chip__title {
-    font-family: var(--font-sans);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    color: var(--nior-white);
-    margin-top: 6px;
-    text-transform: uppercase;
+/* Tablet Layout (3 columns) */
+@media (max-width: 1100px) {
+  .nior-logo-chip {
+    flex: 0 1 calc((100% - 40px) / 3);
+    max-width: 260px;
   }
+}
 
-  .nior-logo-chip__sub {
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    color: var(--nior-gold);
-    margin-top: 4px;
-    text-transform: uppercase;
+/* Mobile Layout (2 columns) */
+@media (max-width: 680px) {
+  .nior-falling-grid {
+    gap: 12px;
+  }
+  .nior-logo-chip {
+    flex: 0 1 calc((100% - 12px) / 2);
+    min-width: 140px;
+    height: 105px;
+    min-height: 105px;
+    padding: 16px 12px;
+  }
+  .nior-logo-chip .nior-logo-chip__img {
+    max-width: 115px;
+    max-height: 36px;
   }
 }
 

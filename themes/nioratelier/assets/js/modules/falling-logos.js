@@ -12,7 +12,7 @@ export function initFallingLogos() {
   if (!gsap || !ScrollTrigger) return;
 
   // Initial random rotation offsets for natural organic feel
-  const rotations = [-8, 6, -5, 7, -9, 4, -6, 8, -4, 5];
+  const rotations = [-7, 6, -5, 7, -8, 4, -6, 8, -4, 5, -6];
 
   chips.forEach((chip, i) => {
     const rot = rotations[i % rotations.length];
