@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'NIOR_VERSION', '1.3.4' );
+define( 'NIOR_VERSION', '1.4.0' );
 define( 'NIOR_THEME_DIR', get_template_directory() );
 define( 'NIOR_THEME_URI', get_template_directory_uri() );
 
@@ -72,6 +72,7 @@ function nioratelier_enqueue_assets() {
         'nior-video-scrub-hero' => 'assets/css/video-scrub-hero.css',
         'nior-cinematic-scenarios' => 'assets/css/cinematic-scenarios.css',
         'nior-falling-logos'    => 'assets/css/falling-logos.css',
+        'nior-walkthrough-zoom' => 'assets/css/walkthrough-zoom.css',
         'nior-sections'         => 'assets/css/sections.css',
         'nior-pages'            => 'assets/css/pages.css',
     );
@@ -132,6 +133,9 @@ function nioratelier_enqueue_assets() {
             'walkthroughVideo'=> NIOR_THEME_URI . '/assets/img/walkthrough_master.mp4',
             'scrubVideo'      => NIOR_THEME_URI . '/assets/img/hero-scrub.mp4',
             'posterImage'     => NIOR_THEME_URI . '/assets/img/hero-poster.webp',
+            'walkthroughImages'=> array_map( function( $i ) {
+                return NIOR_THEME_URI . sprintf( '/assets/img/walkthrough/frame-%02d.jpg', $i );
+            }, range( 1, 11 ) ),
             'isFrontPage'     => is_front_page(),
         )
     );
@@ -191,6 +195,24 @@ function nioratelier_register_patterns() {
                 'nioratelier/cinematic-scenarios',
                 array(
                     'title'       => __( 'Cinematic Scenarios Showcase', 'nioratelier' ),
+                    'categories'  => array( 'nior-cinematic' ),
+                    'content'     => $rendered,
+                )
+            );
+        }
+    }
+
+    if ( ! WP_Block_Patterns_Registry::get_instance()->is_registered( 'nioratelier/hero-walkthrough-zoom' ) ) {
+        $file = NIOR_THEME_DIR . '/patterns/hero-walkthrough-zoom.php';
+        if ( file_exists( $file ) ) {
+            ob_start();
+            include $file;
+            $rendered = ob_get_clean();
+
+            register_block_pattern(
+                'nioratelier/hero-walkthrough-zoom',
+                array(
+                    'title'       => __( 'Cinematic Walkthrough Zoom Hero', 'nioratelier' ),
                     'categories'  => array( 'nior-cinematic' ),
                     'content'     => $rendered,
                 )
