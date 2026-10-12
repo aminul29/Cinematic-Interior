@@ -10,9 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'NIOR_VERSION', '1.4.3' );
+define( 'NIOR_VERSION', '1.5.0' );
 define( 'NIOR_THEME_DIR', get_template_directory() );
 define( 'NIOR_THEME_URI', get_template_directory_uri() );
+
+require_once NIOR_THEME_DIR . '/inc/projects-data.php';
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -64,17 +66,18 @@ function nioratelier_enqueue_assets() {
 
     // 2. Scoped CSS modules
     $css_modules = array(
-        'nior-variables'        => 'assets/css/variables.css',
-        'nior-base'             => 'assets/css/base.css',
-        'nior-preloader'        => 'assets/css/preloader.css',
-        'nior-header-footer'    => 'assets/css/header-footer.css',
-        'nior-cinematic-hero'   => 'assets/css/cinematic-hero.css',
-        'nior-video-scrub-hero' => 'assets/css/video-scrub-hero.css',
-        'nior-cinematic-scenarios' => 'assets/css/cinematic-scenarios.css',
-        'nior-falling-logos'    => 'assets/css/falling-logos.css',
-        'nior-walkthrough-zoom' => 'assets/css/walkthrough-zoom.css',
-        'nior-sections'         => 'assets/css/sections.css',
-        'nior-pages'            => 'assets/css/pages.css',
+        'nior-variables'          => 'assets/css/variables.css',
+        'nior-base'               => 'assets/css/base.css',
+        'nior-preloader'          => 'assets/css/preloader.css',
+        'nior-header-footer'      => 'assets/css/header-footer.css',
+        'nior-cinematic-hero'     => 'assets/css/cinematic-hero.css',
+        'nior-video-scrub-hero'   => 'assets/css/video-scrub-hero.css',
+        'nior-cinematic-scenarios'=> 'assets/css/cinematic-scenarios.css',
+        'nior-falling-logos'      => 'assets/css/falling-logos.css',
+        'nior-walkthrough-zoom'   => 'assets/css/walkthrough-zoom.css',
+        'nior-sections'           => 'assets/css/sections.css',
+        'nior-pages'              => 'assets/css/pages.css',
+        'nior-project-gallery'    => 'assets/css/project-gallery.css',
     );
 
     $prev_handle = 'nior-google-fonts';
@@ -219,8 +222,27 @@ function nioratelier_register_patterns() {
             );
         }
     }
+
+    $projects_file = NIOR_THEME_DIR . '/patterns/page-projects-content.php';
+    if ( file_exists( $projects_file ) ) {
+        if ( WP_Block_Patterns_Registry::get_instance()->is_registered( 'nioratelier/page-projects-content' ) ) {
+            unregister_block_pattern( 'nioratelier/page-projects-content' );
+        }
+        ob_start();
+        include $projects_file;
+        $projects_rendered = ob_get_clean();
+
+        register_block_pattern(
+            'nioratelier/page-projects-content',
+            array(
+                'title'       => __( 'Page Content — Projects Portfolio', 'nioratelier' ),
+                'categories'  => array( 'nior-pages' ),
+                'content'     => $projects_rendered,
+            )
+        );
+    }
 }
-add_action( 'init', 'nioratelier_register_patterns', 15 );
+add_action( 'init', 'nioratelier_register_patterns', 25 );
 
 /**
  * Dynamically resolves theme asset URLs inside template parts (e.g. Header logo)
