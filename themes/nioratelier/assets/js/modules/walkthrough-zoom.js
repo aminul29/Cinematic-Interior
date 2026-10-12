@@ -1,6 +1,6 @@
 /**
  * Cinematic Scroll-Driven Walkthrough Zoom Hero
- * Continuous Unbroken 3D Depth Camera Fly-Through with High-DPR Canvas & Floating HUD
+ * Magnetic 3D Camera Fly-Through with 65% Solid Framing & Velvety Auto-Snap
  */
 
 export function initWalkthroughZoom() {
@@ -125,17 +125,18 @@ export function initWalkthroughZoom() {
   }
 
   /**
-   * Continuous Unbroken 3D Flight Render Loop
-   * Constant forward velocity across all frame transitions with zero dead zones.
+   * 65% Solid Framing & 35% Fly-Through Window
+   * Eliminates lingering double-exposures: image is 100% solid for 65% of interval,
+   * then transitions dynamically in the final 35%.
    */
   function render(progress) {
     const clampedP = Math.max(0, Math.min(1, progress));
     const totalTransitions = totalFrames - 1; // 10 intervals
-    const u = clampedP * totalTransitions; // Continuous virtual coordinate [0.0 ... 10.0]
+    const u = clampedP * totalTransitions; // Continuous coordinate [0.0 ... 10.0]
 
     const currentIndex = Math.min(totalTransitions - 1, Math.floor(u));
     const nextIndex = Math.min(totalFrames - 1, currentIndex + 1);
-    const t = u - currentIndex; // Local continuous progress within interval [0.0 ... 1.0]
+    const t = u - currentIndex; // Progress within interval [0.0 ... 1.0]
 
     const currentImg = images[currentIndex];
     const nextImg = images[nextIndex];
@@ -145,31 +146,36 @@ export function initWalkthroughZoom() {
     context.fillStyle = '#0c0d0e';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    // 1. Draw Next Incoming Image (Depth Backdrop)
-    // Continuous growth from 0.84 to 1.00 throughout the entire interval
-    // Reaches exactly 1.00 at t = 1.0, seamlessly ready to become currentImg for the next interval
-    const nextScale = 0.84 + 0.16 * t;
-    drawCoverImage(nextImg, nextScale, 1.0);
+    const transitionStart = 0.65; // 65% solid display, 35% transition window
 
-    // 2. Draw Current Foreground Image (Camera Fly-Through)
-    // Continuously zooms past camera from 1.00 to 2.15 (constant positive velocity)
-    // Stays solid for initial zoom, then dissolves smoothly into the viewer
-    const currentScale = 1.0 + 1.15 * t;
-    const fadeStart = 0.20;
-    const currentAlpha = (t <= fadeStart)
-      ? 1.0
-      : Math.max(0, 1.0 - Math.pow((t - fadeStart) / (1.0 - fadeStart), 1.25));
+    if (t <= transitionStart) {
+      // 1. Pure Solid Frame (ZERO OVERLAPPING):
+      // Only the current room is drawn at 100% solid opacity with a gentle push
+      const solidProgress = t / transitionStart;
+      const currentScale = 1.0 + 0.28 * solidProgress;
+      drawCoverImage(currentImg, currentScale, 1.0);
+    } else {
+      // 2. Active 35% Fly-Through Transition:
+      const tau = (t - transitionStart) / (1.0 - transitionStart); // 0.0 ... 1.0
 
-    drawCoverImage(currentImg, currentScale, currentAlpha);
+      // Next Room emerging from background depth (Solid backdrop)
+      const nextScale = 0.85 + 0.15 * tau;
+      drawCoverImage(nextImg, nextScale, 1.0);
+
+      // Current Room zooming forward past the camera and dissolving
+      const currentScale = 1.28 + 0.92 * tau;
+      const currentAlpha = 1.0 - Math.pow(tau, 1.3);
+      drawCoverImage(currentImg, currentScale, currentAlpha);
+    }
 
     // Reset canvas globalAlpha
     context.globalAlpha = 1.0;
 
     // Update UI HUD & Staged Overlays
-    updateUI(clampedP, currentIndex, t);
+    updateUI(clampedP, currentIndex, t, transitionStart);
   }
 
-  function updateUI(p, activeIndex, t) {
+  function updateUI(p, activeIndex, t, transitionStart) {
     // 1. Staged reveal: Initial brand & headline fade out gracefully as scroll begins
     if (contentEl) {
       const contentAlpha = Math.max(0, 1 - p / 0.08);
@@ -198,8 +204,8 @@ export function initWalkthroughZoom() {
       }
     }
 
-    // Determine current display frame (switches midway through transition)
-    const displayIndex = (t > 0.5 && activeIndex < totalFrames - 1) ? activeIndex + 1 : activeIndex;
+    // Display frame advances when entering the active transition window
+    const displayIndex = (t > transitionStart && activeIndex < totalFrames - 1) ? activeIndex + 1 : activeIndex;
 
     if (frameNumEl) {
       const numStr = String(displayIndex + 1).padStart(2, '0');
@@ -220,18 +226,65 @@ export function initWalkthroughZoom() {
     }
   }
 
-  // Setup GSAP ScrollTrigger Scrub
-  // scrub: true tracks Lenis directly without secondary artificial lag
+  // Setup GSAP ScrollTrigger with Magnetic Auto-Snap
   const trigger = ScrollTrigger.create({
     trigger: track,
     start: 'top top',
     end: 'bottom bottom',
     scrub: true,
+    snap: {
+      snapTo: (value) => {
+        if (value <= 0.02) return 0;
+        if (value >= 0.98) return 1;
+
+        const totalTransitions = totalFrames - 1; // 10 intervals
+        const u = value * totalTransitions;
+        const index = Math.floor(u);
+        const t = u - index;
+
+        // If user stopped in or near the transition window (t >= 0.55), snap forward to next solid frame
+        // Otherwise snap back to the start of the current solid frame
+        const targetIndex = (t >= 0.55) ? Math.min(totalTransitions, index + 1) : index;
+        return targetIndex / totalTransitions;
+      },
+      duration: { min: 0.35, max: 0.50 },
+      delay: 0.1,
+      ease: 'power3.out',
+    },
     onUpdate: (self) => {
       state.progress = self.progress;
       render(state.progress);
     },
   });
+
+  // Velvety Lenis Magnetic Glide:
+  // Fallback safety lock ensures that if the user stops their wheel directly in the transition window,
+  // Lenis automatically glides smoothly into the nearest 100% solid room frame.
+  let settleTimer = null;
+  const onScrollActivity = () => {
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(() => {
+      if (!trigger || trigger.progress <= 0.02 || trigger.progress >= 0.98) return;
+
+      const totalTransitions = totalFrames - 1;
+      const u = trigger.progress * totalTransitions;
+      const index = Math.floor(u);
+      const t = u - index;
+
+      // If user stopped within the transition window (0.55 < t < 0.99)
+      if (t > 0.55 && t < 0.98) {
+        const targetP = (index + 1) / totalTransitions;
+        const targetScroll = trigger.start + targetP * (trigger.end - trigger.start);
+        if (window.niorLenis && typeof window.niorLenis.scrollTo === 'function') {
+          window.niorLenis.scrollTo(targetScroll, {
+            duration: 0.45,
+            easing: (x) => 1 - Math.pow(1 - x, 4), // Velvety easeOutQuart
+          });
+        }
+      }
+    }, 100);
+  };
+  window.addEventListener('scroll', onScrollActivity, { passive: true });
 
   // Debounced window resize handler
   let resizeTimer = null;

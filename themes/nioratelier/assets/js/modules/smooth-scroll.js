@@ -42,5 +42,6 @@ export function initSmoothScroll() {
     }
   }, 150);
 
+  window.niorLenis = lenis;
   return lenis;
 }
