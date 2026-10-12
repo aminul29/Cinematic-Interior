@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'NIOR_VERSION', '1.4.2' );
+define( 'NIOR_VERSION', '1.4.3' );
 define( 'NIOR_THEME_DIR', get_template_directory() );
 define( 'NIOR_THEME_URI', get_template_directory_uri() );
 

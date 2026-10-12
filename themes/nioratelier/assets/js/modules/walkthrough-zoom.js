@@ -146,24 +146,24 @@ export function initWalkthroughZoom() {
     context.fillStyle = '#0c0d0e';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    const transitionStart = 0.65; // 65% solid display, 35% transition window
+    const transitionStart = 0.72; // 72% solid display, 28% transition window
 
     if (t <= transitionStart) {
       // 1. Pure Solid Frame (ZERO OVERLAPPING):
       // Only the current room is drawn at 100% solid opacity with a gentle push
       const solidProgress = t / transitionStart;
-      const currentScale = 1.0 + 0.28 * solidProgress;
+      const currentScale = 1.0 + 0.22 * solidProgress;
       drawCoverImage(currentImg, currentScale, 1.0);
     } else {
-      // 2. Active 35% Fly-Through Transition:
+      // 2. Active 28% Fly-Through Transition:
       const tau = (t - transitionStart) / (1.0 - transitionStart); // 0.0 ... 1.0
 
       // Next Room emerging from background depth (Solid backdrop)
-      const nextScale = 0.85 + 0.15 * tau;
+      const nextScale = 0.86 + 0.14 * tau;
       drawCoverImage(nextImg, nextScale, 1.0);
 
       // Current Room zooming forward past the camera and dissolving
-      const currentScale = 1.28 + 0.92 * tau;
+      const currentScale = 1.22 + 0.98 * tau;
       const currentAlpha = 1.0 - Math.pow(tau, 1.3);
       drawCoverImage(currentImg, currentScale, currentAlpha);
     }
@@ -242,13 +242,12 @@ export function initWalkthroughZoom() {
         const index = Math.floor(u);
         const t = u - index;
 
-        // If user stopped in or near the transition window (t >= 0.55), snap forward to next solid frame
-        // Otherwise snap back to the start of the current solid frame
-        const targetIndex = (t >= 0.55) ? Math.min(totalTransitions, index + 1) : index;
+        // Snaps forward if user pushed past 60% of the room, otherwise settles to current room
+        const targetIndex = (t >= 0.60) ? Math.min(totalTransitions, index + 1) : index;
         return targetIndex / totalTransitions;
       },
-      duration: { min: 0.35, max: 0.50 },
-      delay: 0.1,
+      duration: { min: 0.45, max: 0.65 },
+      delay: 0.12,
       ease: 'power3.out',
     },
     onUpdate: (self) => {
@@ -271,18 +270,18 @@ export function initWalkthroughZoom() {
       const index = Math.floor(u);
       const t = u - index;
 
-      // If user stopped within the transition window (0.55 < t < 0.99)
-      if (t > 0.55 && t < 0.98) {
+      // If user stopped within the transition window (0.60 < t < 0.98)
+      if (t > 0.60 && t < 0.98) {
         const targetP = (index + 1) / totalTransitions;
         const targetScroll = trigger.start + targetP * (trigger.end - trigger.start);
         if (window.niorLenis && typeof window.niorLenis.scrollTo === 'function') {
           window.niorLenis.scrollTo(targetScroll, {
-            duration: 0.45,
+            duration: 0.55,
             easing: (x) => 1 - Math.pow(1 - x, 4), // Velvety easeOutQuart
           });
         }
       }
-    }, 100);
+    }, 120);
   };
   window.addEventListener('scroll', onScrollActivity, { passive: true });
 
