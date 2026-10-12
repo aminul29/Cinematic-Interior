@@ -1,6 +1,6 @@
 /**
  * Cinematic Scroll-Driven Walkthrough Zoom Hero
- * Continuous 3D Depth Camera Fly-Through with High-DPR Canvas & Floating HUD
+ * Continuous Unbroken 3D Depth Camera Fly-Through with High-DPR Canvas & Floating HUD
  */
 
 export function initWalkthroughZoom() {
@@ -39,10 +39,9 @@ export function initWalkthroughZoom() {
 
   const context = canvas.getContext('2d', { alpha: false, desynchronized: true });
   const images = [];
-  let loadedCount = 0;
   let isPrimed = false;
 
-  // Elements
+  // DOM Elements
   const brandEl = document.getElementById('niorWalkthroughBrand');
   const contentEl = document.getElementById('niorWalkthroughContent');
   const hudEl = document.getElementById('niorWalkthroughHUD');
@@ -56,98 +55,117 @@ export function initWalkthroughZoom() {
     progress: 0,
   };
 
-  // Preload walkthrough frames
+  /**
+   * Resize Canvas Buffer (called on mount and debounced resize only)
+   * Avoids expensive GPU texture reallocations during active scroll frames.
+   */
+  function resizeCanvas() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    const targetW = Math.floor(width * dpr);
+    const targetH = Math.floor(height * dpr);
+
+    if (canvas.width !== targetW || canvas.height !== targetH) {
+      canvas.width = targetW;
+      canvas.height = targetH;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+    }
+  }
+
+  // Preload and decode walkthrough frames in parallel
   imageSources.forEach((src, index) => {
     const img = new Image();
     img.src = src;
-    img.onload = () => {
-      loadedCount++;
+
+    const onReady = () => {
       if (index === 0 && !isPrimed) {
         isPrimed = true;
+        resizeCanvas();
         render(0);
       }
     };
+
+    img.onload = () => {
+      if (typeof img.decode === 'function') {
+        img.decode().then(onReady).catch(onReady);
+      } else {
+        onReady();
+      }
+    };
+
     images.push(img);
   });
 
   /**
-   * Cover-fit image calculation with center scaling
+   * High-Performance Cover-Fit Draw with Center Scaling
    */
   function drawCoverImage(img, scale = 1, alpha = 1) {
-    if (!img || !img.complete || img.naturalWidth === 0) return;
+    if (!img || !img.complete || img.naturalWidth === 0 || alpha <= 0.001) return;
 
     const cw = canvas.width;
     const ch = canvas.height;
     const iw = img.naturalWidth;
     const ih = img.naturalHeight;
 
-    // Calculate aspect ratio cover scale
+    // Cover aspect ratio multiplier
     const hRatio = cw / iw;
     const vRatio = ch / ih;
     const baseRatio = Math.max(hRatio, vRatio);
 
     const drawW = iw * baseRatio * scale;
     const drawH = ih * baseRatio * scale;
-    const dx = (cw - drawW) / 2;
-    const dy = (ch - drawH) / 2;
+    const dx = (cw - drawW) * 0.5;
+    const dy = (ch - drawH) * 0.5;
 
-    context.save();
     context.globalAlpha = Math.max(0, Math.min(1, alpha));
     context.drawImage(img, dx, dy, drawW, drawH);
-    context.restore();
   }
 
   /**
-   * Master Render Loop
+   * Continuous Unbroken 3D Flight Render Loop
+   * Constant forward velocity across all frame transitions with zero dead zones.
    */
   function render(progress) {
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-
-    if (canvas.width !== Math.floor(width * dpr) || canvas.height !== Math.floor(height * dpr)) {
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-    }
-
-    // Reset transform & background
-    context.fillStyle = '#0c0d0e';
-    context.fillRect(0, 0, canvas.width, canvas.height);
-
     const clampedP = Math.max(0, Math.min(1, progress));
     const totalTransitions = totalFrames - 1; // 10 intervals
-    const scaledP = clampedP * totalTransitions;
+    const u = clampedP * totalTransitions; // Continuous virtual coordinate [0.0 ... 10.0]
 
-    const currentIndex = Math.min(totalTransitions - 1, Math.floor(scaledP));
+    const currentIndex = Math.min(totalTransitions - 1, Math.floor(u));
     const nextIndex = Math.min(totalFrames - 1, currentIndex + 1);
-    const t = scaledP - currentIndex; // Local transition progress 0 -> 1
+    const t = u - currentIndex; // Local continuous progress within interval [0.0 ... 1.0]
 
     const currentImg = images[currentIndex];
     const nextImg = images[nextIndex];
 
-    // Smooth cubic easing for organic camera fly-through
-    const easeT = t * t * (3 - 2 * t);
+    // Reset canvas background
+    context.globalAlpha = 1.0;
+    context.fillStyle = '#0c0d0e';
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
-    if (t <= 0.001) {
-      // Resting on exact frame
-      drawCoverImage(currentImg, 1.0, 1.0);
-    } else {
-      // 1. Draw Next Image emerging from background depth
-      // Scales from 0.88 -> 1.0, Opacity from 0 -> 1
-      const nextScale = 0.88 + 0.12 * easeT;
-      const nextAlpha = Math.min(1, Math.max(0, (t - 0.15) / 0.8));
-      drawCoverImage(nextImg, nextScale, nextAlpha);
+    // 1. Draw Next Incoming Image (Depth Backdrop)
+    // Continuous growth from 0.84 to 1.00 throughout the entire interval
+    // Reaches exactly 1.00 at t = 1.0, seamlessly ready to become currentImg for the next interval
+    const nextScale = 0.84 + 0.16 * t;
+    drawCoverImage(nextImg, nextScale, 1.0);
 
-      // 2. Draw Current Image zooming forward into camera
-      // Scales from 1.0 -> 1.85, Opacity dissolves 1 -> 0 starting midway
-      const currentScale = 1.0 + 0.85 * easeT;
-      const currentAlpha = 1 - Math.min(1, Math.max(0, (t - 0.32) / 0.68));
-      drawCoverImage(currentImg, currentScale, currentAlpha);
-    }
+    // 2. Draw Current Foreground Image (Camera Fly-Through)
+    // Continuously zooms past camera from 1.00 to 2.15 (constant positive velocity)
+    // Stays solid for initial zoom, then dissolves smoothly into the viewer
+    const currentScale = 1.0 + 1.15 * t;
+    const fadeStart = 0.20;
+    const currentAlpha = (t <= fadeStart)
+      ? 1.0
+      : Math.max(0, 1.0 - Math.pow((t - fadeStart) / (1.0 - fadeStart), 1.25));
 
-    // Update UI Indicators
+    drawCoverImage(currentImg, currentScale, currentAlpha);
+
+    // Reset canvas globalAlpha
+    context.globalAlpha = 1.0;
+
+    // Update UI HUD & Staged Overlays
     updateUI(clampedP, currentIndex, t);
   }
 
@@ -171,7 +189,7 @@ export function initWalkthroughZoom() {
       scrollHintEl.style.opacity = p > 0.04 ? '0' : '1';
     }
 
-    // 2. Minimalist Gold HUD: Activates on scroll
+    // 2. Minimalist Gold HUD: Activates smoothly on scroll
     if (hudEl) {
       if (p > 0.04 && p < 0.995) {
         hudEl.classList.add('is-active');
@@ -203,31 +221,34 @@ export function initWalkthroughZoom() {
   }
 
   // Setup GSAP ScrollTrigger Scrub
+  // scrub: true tracks Lenis directly without secondary artificial lag
   const trigger = ScrollTrigger.create({
     trigger: track,
     start: 'top top',
     end: 'bottom bottom',
-    scrub: 0.85, // Smooth inertia matching Lenis
+    scrub: true,
     onUpdate: (self) => {
       state.progress = self.progress;
       render(state.progress);
     },
   });
 
-  // Window resize handler with DPR recalibration
+  // Debounced window resize handler
   let resizeTimer = null;
   const onResize = () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
+      resizeCanvas();
       render(state.progress);
       ScrollTrigger.refresh();
-    }, 150);
+    }, 120);
   };
   window.addEventListener('resize', onResize, { passive: true });
 
   // Initial trigger refresh once images load
   setTimeout(() => {
+    resizeCanvas();
     ScrollTrigger.refresh();
     render(0);
-  }, 200);
+  }, 180);
 }
