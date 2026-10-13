@@ -3,7 +3,7 @@
  * Title: Falling Client Logos Section
  * Slug: nioratelier/falling-logos
  * Categories: nior-cinematic
- * Description: 'Our Clients' section featuring 11 prestigious client logos with physics drop and luxury gold illumination.
+ * Description: 'Our Clients' section featuring 11 authentic client brand logos with physics drop and luxury card illumination.
  */
 ?>
 <!-- wp:html -->
