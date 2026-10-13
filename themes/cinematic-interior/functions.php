@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CINEMATIC_INTERIOR_VERSION', '1.7.2' );
+define( 'CINEMATIC_INTERIOR_VERSION', '1.7.3' );
 define( 'CINEMATIC_INTERIOR_THEME_DIR', get_template_directory() );
 define( 'CINEMATIC_INTERIOR_THEME_URI', get_template_directory_uri() );
 
@@ -187,8 +187,8 @@ function cinematic_interior_enqueue_assets() {
             'scrubVideo'      => CINEMATIC_INTERIOR_THEME_URI . '/assets/img/hero-scrub.mp4',
             'posterImage'     => CINEMATIC_INTERIOR_THEME_URI . '/assets/img/hero-poster.webp',
             'walkthroughImages'=> array_map( function( $i ) {
-                return CINEMATIC_INTERIOR_THEME_URI . sprintf( '/assets/img/walkthrough/frame-%02d.jpg', $i );
-            }, range( 1, 11 ) ),
+                return CINEMATIC_INTERIOR_THEME_URI . sprintf( '/assets/img/walkthrough/frame-%02d.jpg?v=%s', $i, CINEMATIC_INTERIOR_VERSION );
+            }, range( 1, 9 ) ),
             'isFrontPage'     => is_front_page(),
         )
     );

@@ -12,9 +12,9 @@ export function initWalkthroughZoom() {
   if (!gsap || !ScrollTrigger) return;
 
   const themeUri = (niorConfig && niorConfig.themeUri) ? niorConfig.themeUri : '';
-  const totalFrames = 11;
+  const totalFrames = 9;
 
-  // Spatial Zone Tags for the architectural HUD indicator
+  // Spatial Zone Tags for the architectural HUD indicator (9 curated zones)
   const zoneTags = [
     'ATRIUM PORTAL',
     'CENTRAL ROTUNDA',
@@ -23,13 +23,11 @@ export function initWalkthroughZoom() {
     'BRONZE ARCHWAY',
     'MEZZANINE GALLERY',
     'PRIVATE CELLAR',
-    'VIP COVE',
-    'BESPOKE JOINERY',
     'SALON FINALE',
     'ATRIUM PORTAL (CYCLE)',
   ];
 
-  // Resolve image paths (frame-01.jpg to frame-11.jpg)
+  // Resolve image paths (frame-01.jpg to frame-09.jpg)
   const imageSources = (niorConfig && niorConfig.walkthroughImages && niorConfig.walkthroughImages.length === totalFrames)
     ? niorConfig.walkthroughImages
     : Array.from({ length: totalFrames }, (_, i) => {
@@ -46,9 +44,15 @@ export function initWalkthroughZoom() {
   const contentEl = document.getElementById('niorWalkthroughContent');
   const hudEl = document.getElementById('niorWalkthroughHUD');
   const frameNumEl = document.getElementById('niorWalkthroughFrameNum');
+  const totalEl = hudEl ? hudEl.querySelector('.nior-walkthrough-hud__total') : null;
   const zoneTagEl = document.getElementById('niorWalkthroughZoneTag');
   const progressFillEl = document.getElementById('niorWalkthroughProgressFill');
   const scrollHintEl = document.getElementById('niorWalkthroughScrollHint');
+
+  // Synchronize HUD total frames display dynamically
+  if (totalEl) {
+    totalEl.textContent = String(totalFrames).padStart(2, '0');
+  }
 
   // Animation scrub state
   const state = {

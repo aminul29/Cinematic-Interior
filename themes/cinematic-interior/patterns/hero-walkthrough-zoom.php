@@ -3,7 +3,7 @@
  * Title: Cinematic Walkthrough Zoom Hero
  * Slug: cinematic-interior/hero-walkthrough-zoom
  * Categories: nior-cinematic
- * Description: Continuous 3D depth camera fly-through zooming through 11 architectural interior spaces on scroll with high-DPR Canvas and floating luxury HUD.
+ * Description: Continuous 3D depth camera fly-through zooming through 9 architectural interior spaces on scroll with high-DPR Canvas and floating luxury HUD.
  */
 ?>
 <!-- wp:html -->
@@ -63,7 +63,7 @@
         <div class="nior-walkthrough-hud__counter">
           <span id="niorWalkthroughFrameNum" class="nior-walkthrough-hud__current">01</span>
           <span class="nior-walkthrough-hud__divider">/</span>
-          <span class="nior-walkthrough-hud__total">11</span>
+          <span class="nior-walkthrough-hud__total">09</span>
         </div>
         <div class="nior-walkthrough-hud__sep"></div>
         <span id="niorWalkthroughZoneTag" class="nior-walkthrough-hud__tag">ATRIUM PORTAL</span>
