@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: CTA Let's Create Something Remembered
- * Slug: nioratelier/cta-handover
+ * Slug: cinematic-interior/cta-handover
  * Categories: nior-cinematic
  * Description: Grand call-to-action inviting clients to start a bespoke architectural collaboration.
  */

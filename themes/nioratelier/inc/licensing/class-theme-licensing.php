@@ -1,24 +1,24 @@
 <?php
-namespace NiorAtelier\Licensing;
+namespace CinematicInterior\Licensing;
 
 defined( 'ABSPATH' ) || exit;
 
 require_once __DIR__ . '/WebWizBD_License_Client.php';
 
 /**
- * Nior Atelier Theme Licensing Controller.
+ * Cinematic Interior Theme Licensing Controller.
  *
  * Integrates WebWizBD License Client SDK, enforces Site Editor lock when unlicensed,
  * registers the Appearance > Theme License admin page, and gates theme updates.
  *
- * @package NiorAtelier\Licensing
+ * @package CinematicInterior\Licensing
  * @since 1.6.0
  */
 class Theme_Licensing {
 
-	const PRODUCT_SLUG = 'nioratelier';
-	const OPTION_NAME  = 'nioratelier_license';
-	const LOG_OPTION   = 'nioratelier_license_log';
+	const PRODUCT_SLUG = 'cinematic-interior';
+	const OPTION_NAME  = 'cinematic_interior_license';
+	const LOG_OPTION   = 'cinematic_interior_license_log';
 
 	/**
 	 * Singleton instance.
@@ -50,18 +50,22 @@ class Theme_Licensing {
 	 * Constructor.
 	 */
 	private function __construct() {
-		$api_url = defined( 'NIOR_LICENSE_API_URL' )
-			? NIOR_LICENSE_API_URL
-			: 'https://license.webwizbd.com/wp-json/webwizbd-license/v1';
+		$api_url = defined( 'CINEMATIC_INTERIOR_LICENSE_API_URL' )
+			? CINEMATIC_INTERIOR_LICENSE_API_URL
+			: ( defined( 'NIOR_LICENSE_API_URL' ) ? NIOR_LICENSE_API_URL : 'https://license.webwizbd.com/wp-json/webwizbd-license/v1' );
+
+		$theme_version = defined( 'CINEMATIC_INTERIOR_VERSION' )
+			? CINEMATIC_INTERIOR_VERSION
+			: ( defined( 'NIOR_VERSION' ) ? NIOR_VERSION : '1.6.0' );
 
 		$config = apply_filters(
-			'nioratelier_license_config',
+			'cinematic_interior_license_config',
 			array(
 				'api_url'               => $api_url,
 				'product_slug'          => self::PRODUCT_SLUG,
 				'item_type'             => 'theme',
-				'theme_slug'            => 'nioratelier',
-				'version'               => defined( 'NIOR_VERSION' ) ? NIOR_VERSION : '1.6.0',
+				'theme_slug'            => 'cinematic-interior',
+				'version'               => $theme_version,
 				'verification_interval' => 12,
 				'grace_period_hours'    => 72,
 				'option_name'           => self::OPTION_NAME,
@@ -86,6 +90,7 @@ class Theme_Licensing {
 			add_action( 'admin_init', array( $this, 'enforce_editor_lock' ), 10 );
 			add_action( 'admin_notices', array( $this, 'render_admin_notices' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
+			add_filter( 'theme_action_links_cinematic-interior', array( $this, 'add_theme_action_links' ) );
 			add_filter( 'theme_action_links_nioratelier', array( $this, 'add_theme_action_links' ) );
 		}
 	}
@@ -133,10 +138,10 @@ class Theme_Licensing {
 	 */
 	public function register_admin_menu() {
 		add_theme_page(
-			__( 'Nior Atelier License', 'nioratelier' ),
-			__( 'Theme License', 'nioratelier' ),
+			__( 'Cinematic Interior License', 'cinematic-interior' ),
+			__( 'Theme License', 'cinematic-interior' ),
 			'manage_options',
-			'nioratelier-license',
+			'cinematic-interior-license',
 			array( $this, 'render_license_page' )
 		);
 	}
@@ -148,15 +153,18 @@ class Theme_Licensing {
 	 * @return void
 	 */
 	public function enqueue_admin_assets( $hook_suffix ) {
-		if ( 'appearance_page_nioratelier-license' !== $hook_suffix ) {
+		if ( 'appearance_page_cinematic-interior-license' !== $hook_suffix && 'appearance_page_nioratelier-license' !== $hook_suffix ) {
 			return;
 		}
 
+		$theme_uri     = defined( 'CINEMATIC_INTERIOR_THEME_URI' ) ? CINEMATIC_INTERIOR_THEME_URI : get_template_directory_uri();
+		$theme_version = defined( 'CINEMATIC_INTERIOR_VERSION' ) ? CINEMATIC_INTERIOR_VERSION : '1.6.0';
+
 		wp_enqueue_style(
-			'nior-admin-license',
-			NIOR_THEME_URI . '/assets/css/admin-license.css',
+			'cinematic-interior-admin-license',
+			$theme_uri . '/assets/css/admin-license.css',
 			array(),
-			NIOR_VERSION
+			$theme_version
 		);
 	}
 
@@ -171,7 +179,6 @@ class Theme_Licensing {
 			return;
 		}
 
-		// Only enforce for users attempting to customize templates
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
 			return;
 		}
@@ -193,7 +200,7 @@ class Theme_Licensing {
 			wp_safe_redirect(
 				add_query_arg(
 					array(
-						'page'           => 'nioratelier-license',
+						'page'           => 'cinematic-interior-license',
 						'license_notice' => 'editor_locked',
 					),
 					admin_url( 'themes.php' )
@@ -214,7 +221,7 @@ class Theme_Licensing {
 		}
 
 		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
-		if ( $screen && 'appearance_page_nioratelier-license' === $screen->id ) {
+		if ( $screen && in_array( $screen->id, array( 'appearance_page_cinematic-interior-license', 'appearance_page_nioratelier-license' ), true ) ) {
 			return;
 		}
 
@@ -223,23 +230,23 @@ class Theme_Licensing {
 			return;
 		}
 
-		$license_url = admin_url( 'themes.php?page=nioratelier-license' );
+		$license_url = admin_url( 'themes.php?page=cinematic-interior-license' );
 
 		if ( 'unlicensed' === $status ) {
-			$title   = __( 'Nior Atelier — License Required', 'nioratelier' );
-			$message = __( 'Please activate your license to unlock the Full Site Editor, architectural block patterns, and automatic updates.', 'nioratelier' );
+			$title   = __( 'Cinematic Interior — License Required', 'cinematic-interior' );
+			$message = __( 'Please activate your license to unlock the Full Site Editor, architectural block patterns, and automatic updates.', 'cinematic-interior' );
 			$class   = 'notice notice-warning is-dismissible';
 		} elseif ( 'expired' === $status ) {
-			$title   = __( 'Nior Atelier — License Expired', 'nioratelier' );
-			$message = __( 'Your license has expired. Site Editor customization and automatic updates are restricted until renewed.', 'nioratelier' );
+			$title   = __( 'Cinematic Interior — License Expired', 'cinematic-interior' );
+			$message = __( 'Your license has expired. Site Editor customization and automatic updates are restricted until renewed.', 'cinematic-interior' );
 			$class   = 'notice notice-error';
 		} elseif ( 'offline_grace' === $status ) {
-			$title   = __( 'Nior Atelier — Offline Grace Mode', 'nioratelier' );
-			$message = __( 'Unable to reach the license server. Running in offline grace period.', 'nioratelier' );
+			$title   = __( 'Cinematic Interior — Offline Grace Mode', 'cinematic-interior' );
+			$message = __( 'Unable to reach the license server. Running in offline grace period.', 'cinematic-interior' );
 			$class   = 'notice notice-info';
 		} else {
-			$title   = __( 'Nior Atelier — License Inactive', 'nioratelier' );
-			$message = __( 'Your license status requires attention. Site Editor customization and automatic updates are paused.', 'nioratelier' );
+			$title   = __( 'Cinematic Interior — License Inactive', 'cinematic-interior' );
+			$message = __( 'Your license status requires attention. Site Editor customization and automatic updates are paused.', 'cinematic-interior' );
 			$class   = 'notice notice-warning';
 		}
 
@@ -249,7 +256,7 @@ class Theme_Licensing {
 			esc_html( $title ),
 			esc_html( $message ),
 			esc_url( $license_url ),
-			esc_html__( 'Manage License', 'nioratelier' )
+			esc_html__( 'Manage License', 'cinematic-interior' )
 		);
 	}
 
@@ -259,20 +266,28 @@ class Theme_Licensing {
 	 * @return void
 	 */
 	public function handle_license_actions() {
-		if ( empty( $_POST['nioratelier_license_action'] ) ) {
+		$action_key = ! empty( $_POST['cinematic_interior_license_action'] )
+			? 'cinematic_interior_license_action'
+			: ( ! empty( $_POST['nioratelier_license_action'] ) ? 'nioratelier_license_action' : '' );
+
+		if ( empty( $action_key ) ) {
 			return;
 		}
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Unauthorized access.', 'nioratelier' ) );
+			wp_die( esc_html__( 'Unauthorized access.', 'cinematic-interior' ) );
 		}
 
-		check_admin_referer( 'nioratelier_license_action', 'nioratelier_license_nonce' );
+		if ( 'cinematic_interior_license_action' === $action_key ) {
+			check_admin_referer( 'cinematic_interior_license_action', 'cinematic_interior_license_nonce' );
+		} else {
+			check_admin_referer( 'nioratelier_license_action', 'nioratelier_license_nonce' );
+		}
 
-		$action   = sanitize_key( wp_unslash( $_POST['nioratelier_license_action'] ) );
+		$action   = sanitize_key( wp_unslash( $_POST[ $action_key ] ) );
 		$response = array(
 			'success' => false,
-			'message' => __( 'Unknown license action.', 'nioratelier' ),
+			'message' => __( 'Unknown license action.', 'cinematic-interior' ),
 		);
 
 		if ( 'activate' === $action ) {
@@ -290,7 +305,7 @@ class Theme_Licensing {
 			$this->client->clear_debug_data();
 			$response = array(
 				'success' => true,
-				'message' => __( 'License diagnostics cleared.', 'nioratelier' ),
+				'message' => __( 'License diagnostics cleared.', 'cinematic-interior' ),
 			);
 		} elseif ( 'download_latest' === $action ) {
 			$response = $this->client->get_latest_download_url();
@@ -306,8 +321,8 @@ class Theme_Licensing {
 		wp_safe_redirect(
 			add_query_arg(
 				array(
-					'page'            => 'nioratelier-license',
-					'license_message' => rawurlencode( $response['message'] ?? __( 'License action completed.', 'nioratelier' ) ),
+					'page'            => 'cinematic-interior-license',
+					'license_message' => rawurlencode( $response['message'] ?? __( 'License action completed.', 'cinematic-interior' ) ),
 					'license_type'    => $type,
 				),
 				admin_url( 'themes.php' )
@@ -323,7 +338,7 @@ class Theme_Licensing {
 	 * @return array
 	 */
 	public function add_theme_action_links( $links ) {
-		$links['license'] = '<a href="' . esc_url( admin_url( 'themes.php?page=nioratelier-license' ) ) . '">' . esc_html__( 'License', 'nioratelier' ) . '</a>';
+		$links['license'] = '<a href="' . esc_url( admin_url( 'themes.php?page=cinematic-interior-license' ) ) . '">' . esc_html__( 'License', 'cinematic-interior' ) . '</a>';
 		return $links;
 	}
 
@@ -334,7 +349,7 @@ class Theme_Licensing {
 	 */
 	public function render_license_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'nioratelier' ) );
+			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'cinematic-interior' ) );
 		}
 
 		$client     = $this->client;
@@ -376,4 +391,9 @@ class Theme_Licensing {
 		$logs = get_option( self::LOG_OPTION, array() );
 		return is_array( $logs ) ? $logs : array();
 	}
+}
+
+// Backward compatibility alias
+if ( ! class_exists( 'NiorAtelier\Licensing\Theme_Licensing' ) ) {
+	class_alias( __NAMESPACE__ . '\Theme_Licensing', 'NiorAtelier\Licensing\Theme_Licensing' );
 }

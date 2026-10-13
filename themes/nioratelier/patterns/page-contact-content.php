@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Page Content — Contact Us
- * Slug: nioratelier/page-contact-content
+ * Slug: cinematic-interior/page-contact-content
  * Categories: nior-pages
  * Description: Complete contact page layout with studio details, phone, and inquiry form.
  */

@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Cinematic Scenarios Showcase
- * Slug: nioratelier/cinematic-scenarios
+ * Slug: cinematic-interior/cinematic-scenarios
  * Categories: nior-cinematic
  * Description: Editorial visual showcase featuring real interior architecture scenarios in motion.
  */

@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Statement Rack-Focus Word Build
- * Slug: nioratelier/statement-rackfocus
+ * Slug: cinematic-interior/statement-rackfocus
  * Categories: nior-cinematic
  * Description: Apple-style pinned depth-of-field rack-focus word build typography.
  */

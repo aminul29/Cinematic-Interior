@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Signature Approach
- * Slug: nioratelier/signature-approach
+ * Slug: cinematic-interior/signature-approach
  * Categories: nior-cinematic
  * Description: 6 signature design disciplines that define the Nior Atelier spatial experience.
  */

@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Page Content — Projects Portfolio
- * Slug: nioratelier/page-projects-content
+ * Slug: cinematic-interior/page-projects-content
  * Categories: nior-pages
  * Description: Categorized multi-photo portfolio galleries and fullscreen lightbox for the Projects page.
  */
@@ -169,6 +169,6 @@ $portfolio_sections = nioratelier_get_portfolio_sections();
 </div>
 <!-- /wp:html -->
 
-<!-- wp:pattern {"slug":"nioratelier/sectors-grid"} /-->
-<!-- wp:pattern {"slug":"nioratelier/falling-logos"} /-->
-<!-- wp:pattern {"slug":"nioratelier/cta-handover"} /-->
+<!-- wp:pattern {"slug":"cinematic-interior/sectors-grid"} /-->
+<!-- wp:pattern {"slug":"cinematic-interior/falling-logos"} /-->
+<!-- wp:pattern {"slug":"cinematic-interior/cta-handover"} /-->

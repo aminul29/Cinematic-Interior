@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Commercial Sectors Grid
- * Slug: nioratelier/sectors-grid
+ * Slug: cinematic-interior/sectors-grid
  * Categories: nior-cinematic
  * Description: Four industry sectors: Commercial, F&B & Hospitality, Retail & Mall, and Luxury Residential.
  */

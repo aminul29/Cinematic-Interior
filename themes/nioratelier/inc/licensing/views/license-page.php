@@ -1,8 +1,8 @@
 <?php
 /**
- * Nior Atelier License Admin View.
+ * Cinematic Interior License Admin View.
  *
- * @package NiorAtelier\Licensing
+ * @package CinematicInterior\Licensing
  * @var \WebWizBD_License_Client $client
  * @var array                    $data
  * @var array                    $debug
@@ -30,24 +30,25 @@ if ( ! empty( $stored_key ) ) {
 $notice_code    = isset( $_GET['license_notice'] ) ? sanitize_key( wp_unslash( $_GET['license_notice'] ) ) : '';
 $notice_message = isset( $_GET['license_message'] ) ? sanitize_text_field( wp_unslash( rawurldecode( $_GET['license_message'] ) ) ) : '';
 $notice_type    = isset( $_GET['license_type'] ) && 'success' === $_GET['license_type'] ? 'success' : 'error';
+$theme_version  = defined( 'CINEMATIC_INTERIOR_VERSION' ) ? CINEMATIC_INTERIOR_VERSION : ( defined( 'NIOR_VERSION' ) ? NIOR_VERSION : '1.6.0' );
 ?>
 
 <div class="wrap nior-license-wrap">
 	<div class="nior-license-header">
 		<div class="nior-license-brand">
-			<span class="nior-license-eyebrow"><?php esc_html_e( 'Nior Atelier Studio', 'nioratelier' ); ?></span>
-			<h1><?php esc_html_e( 'Theme License & Entitlements', 'nioratelier' ); ?></h1>
+			<span class="nior-license-eyebrow"><?php esc_html_e( 'WebWizBD Studio', 'cinematic-interior' ); ?></span>
+			<h1><?php esc_html_e( 'Cinematic Interior — Theme License & Entitlements', 'cinematic-interior' ); ?></h1>
 		</div>
 		<div class="nior-license-badge-version">
-			<?php esc_html_e( 'v', 'nioratelier' ); ?><?php echo esc_html( defined( 'NIOR_VERSION' ) ? NIOR_VERSION : '1.6.0' ); ?>
+			<?php esc_html_e( 'v', 'cinematic-interior' ); ?><?php echo esc_html( $theme_version ); ?>
 		</div>
 	</div>
 
 	<?php if ( 'editor_locked' === $notice_code ) : ?>
 		<div class="notice notice-error nior-notice-locked">
 			<p>
-				<strong><?php esc_html_e( 'Site Editor Access Restricted:', 'nioratelier' ); ?></strong>
-				<?php esc_html_e( 'The Full Site Editor and architectural template controls require an active Nior Atelier license. Please activate your key below to unlock customization.', 'nioratelier' ); ?>
+				<strong><?php esc_html_e( 'Site Editor Access Restricted:', 'cinematic-interior' ); ?></strong>
+				<?php esc_html_e( 'The Full Site Editor and architectural template controls require an active Cinematic Interior license. Please activate your key below to unlock customization.', 'cinematic-interior' ); ?>
 			</p>
 		</div>
 	<?php endif; ?>
@@ -62,28 +63,28 @@ $notice_type    = isset( $_GET['license_type'] ) && 'success' === $_GET['license
 		<!-- Left Card: License Activation / Management -->
 		<div class="nior-card nior-card-primary">
 			<div class="nior-card-header">
-				<h2><?php esc_html_e( 'License Activation', 'nioratelier' ); ?></h2>
+				<h2><?php esc_html_e( 'License Activation', 'cinematic-interior' ); ?></h2>
 				<span class="nior-status-pill nior-status-<?php echo esc_attr( $status ); ?>">
 					<?php
 					switch ( $status ) {
 						case 'active':
-							esc_html_e( 'Active & Verified', 'nioratelier' );
+							esc_html_e( 'Active & Verified', 'cinematic-interior' );
 							break;
 						case 'grace':
 						case 'offline_grace':
-							esc_html_e( 'Grace Period', 'nioratelier' );
+							esc_html_e( 'Grace Period', 'cinematic-interior' );
 							break;
 						case 'expired':
-							esc_html_e( 'License Expired', 'nioratelier' );
+							esc_html_e( 'License Expired', 'cinematic-interior' );
 							break;
 						case 'wrong_domain':
-							esc_html_e( 'Unregistered Domain', 'nioratelier' );
+							esc_html_e( 'Unregistered Domain', 'cinematic-interior' );
 							break;
 						case 'activation_limit':
-							esc_html_e( 'Activation Limit Reached', 'nioratelier' );
+							esc_html_e( 'Activation Limit Reached', 'cinematic-interior' );
 							break;
 						default:
-							esc_html_e( 'Unlicensed', 'nioratelier' );
+							esc_html_e( 'Unlicensed', 'cinematic-interior' );
 							break;
 					}
 					?>
@@ -93,15 +94,15 @@ $notice_type    = isset( $_GET['license_type'] ) && 'success' === $_GET['license
 			<div class="nior-card-body">
 				<?php if ( ! $is_valid || empty( $stored_key ) ) : ?>
 					<p class="nior-card-lead">
-						<?php esc_html_e( 'Enter your license key below to unlock automatic updates, Full Site Editor customization, and premium design patterns.', 'nioratelier' ); ?>
+						<?php esc_html_e( 'Enter your license key below to unlock automatic updates, Full Site Editor customization, and premium design patterns.', 'cinematic-interior' ); ?>
 					</p>
 
-					<form method="post" action="<?php echo esc_url( admin_url( 'themes.php?page=nioratelier-license' ) ); ?>" class="nior-license-form">
-						<?php wp_nonce_field( 'nioratelier_license_action', 'nioratelier_license_nonce' ); ?>
-						<input type="hidden" name="nioratelier_license_action" value="activate" />
+					<form method="post" action="<?php echo esc_url( admin_url( 'themes.php?page=cinematic-interior-license' ) ); ?>" class="nior-license-form">
+						<?php wp_nonce_field( 'cinematic_interior_license_action', 'cinematic_interior_license_nonce' ); ?>
+						<input type="hidden" name="cinematic_interior_license_action" value="activate" />
 
 						<div class="nior-form-field">
-							<label for="nior-license-key"><?php esc_html_e( 'License Key', 'nioratelier' ); ?></label>
+							<label for="nior-license-key"><?php esc_html_e( 'License Key', 'cinematic-interior' ); ?></label>
 							<input
 								type="text"
 								id="nior-license-key"
@@ -114,52 +115,52 @@ $notice_type    = isset( $_GET['license_type'] ) && 'success' === $_GET['license
 								spellcheck="false"
 							/>
 							<span class="description">
-								<?php esc_html_e( 'Format: WWBD-XXXX-XXXX-XXXX-XXXX. Found in your purchase receipt or WebWizBD account.', 'nioratelier' ); ?>
+								<?php esc_html_e( 'Format: WWBD-XXXX-XXXX-XXXX-XXXX. Found in your purchase receipt or WebWizBD account.', 'cinematic-interior' ); ?>
 							</span>
 						</div>
 
 						<div class="nior-form-actions">
 							<button type="submit" class="button button-primary button-hero">
-								<?php esc_html_e( 'Activate License', 'nioratelier' ); ?>
+								<?php esc_html_e( 'Activate License', 'cinematic-interior' ); ?>
 							</button>
 						</div>
 					</form>
 				<?php else : ?>
 					<div class="nior-active-state">
 						<div class="nior-key-display">
-							<span class="nior-key-label"><?php esc_html_e( 'Activated Key:', 'nioratelier' ); ?></span>
+							<span class="nior-key-label"><?php esc_html_e( 'Activated Key:', 'cinematic-interior' ); ?></span>
 							<code class="nior-key-code"><?php echo esc_html( $masked_key ); ?></code>
 						</div>
 
 						<p class="nior-active-desc">
-							<?php esc_html_e( 'Your license is currently linked to this domain. Full Site Editor access and automated theme updates are enabled.', 'nioratelier' ); ?>
+							<?php esc_html_e( 'Your license is currently linked to this domain. Full Site Editor access and automated theme updates are enabled.', 'cinematic-interior' ); ?>
 						</p>
 
 						<div class="nior-actions-toolbar">
 							<!-- Refresh / Verify Action -->
-							<form method="post" action="<?php echo esc_url( admin_url( 'themes.php?page=nioratelier-license' ) ); ?>" class="inline-form">
-								<?php wp_nonce_field( 'nioratelier_license_action', 'nioratelier_license_nonce' ); ?>
-								<input type="hidden" name="nioratelier_license_action" value="refresh" />
+							<form method="post" action="<?php echo esc_url( admin_url( 'themes.php?page=cinematic-interior-license' ) ); ?>" class="inline-form">
+								<?php wp_nonce_field( 'cinematic_interior_license_action', 'cinematic_interior_license_nonce' ); ?>
+								<input type="hidden" name="cinematic_interior_license_action" value="refresh" />
 								<button type="submit" class="button button-secondary">
-									<?php esc_html_e( 'Check Now', 'nioratelier' ); ?>
+									<?php esc_html_e( 'Check Now', 'cinematic-interior' ); ?>
 								</button>
 							</form>
 
 							<!-- Direct Latest Download -->
-							<form method="post" action="<?php echo esc_url( admin_url( 'themes.php?page=nioratelier-license' ) ); ?>" class="inline-form">
-								<?php wp_nonce_field( 'nioratelier_license_action', 'nioratelier_license_nonce' ); ?>
-								<input type="hidden" name="nioratelier_license_action" value="download_latest" />
+							<form method="post" action="<?php echo esc_url( admin_url( 'themes.php?page=cinematic-interior-license' ) ); ?>" class="inline-form">
+								<?php wp_nonce_field( 'cinematic_interior_license_action', 'cinematic_interior_license_nonce' ); ?>
+								<input type="hidden" name="cinematic_interior_license_action" value="download_latest" />
 								<button type="submit" class="button button-secondary">
-									<?php esc_html_e( 'Download Latest ZIP', 'nioratelier' ); ?>
+									<?php esc_html_e( 'Download Latest ZIP', 'cinematic-interior' ); ?>
 								</button>
 							</form>
 
 							<!-- Deactivate Action -->
-							<form method="post" action="<?php echo esc_url( admin_url( 'themes.php?page=nioratelier-license' ) ); ?>" class="inline-form" onsubmit="return confirm('<?php echo esc_js( __( 'Are you sure you want to deactivate this license? Site Editor access will be locked.', 'nioratelier' ) ); ?>');">
-								<?php wp_nonce_field( 'nioratelier_license_action', 'nioratelier_license_nonce' ); ?>
-								<input type="hidden" name="nioratelier_license_action" value="deactivate" />
+							<form method="post" action="<?php echo esc_url( admin_url( 'themes.php?page=cinematic-interior-license' ) ); ?>" class="inline-form" onsubmit="return confirm('<?php echo esc_js( __( 'Are you sure you want to deactivate this license? Site Editor access will be locked.', 'cinematic-interior' ) ); ?>');">
+								<?php wp_nonce_field( 'cinematic_interior_license_action', 'cinematic_interior_license_nonce' ); ?>
+								<input type="hidden" name="cinematic_interior_license_action" value="deactivate" />
 								<button type="submit" class="button button-link-delete">
-									<?php esc_html_e( 'Deactivate', 'nioratelier' ); ?>
+									<?php esc_html_e( 'Deactivate', 'cinematic-interior' ); ?>
 								</button>
 							</form>
 						</div>
@@ -171,53 +172,53 @@ $notice_type    = isset( $_GET['license_type'] ) && 'success' === $_GET['license
 		<!-- Right Card: Entitlement & Domain Details -->
 		<div class="nior-card nior-card-secondary">
 			<div class="nior-card-header">
-				<h2><?php esc_html_e( 'Installation Details', 'nioratelier' ); ?></h2>
+				<h2><?php esc_html_e( 'Installation Details', 'cinematic-interior' ); ?></h2>
 			</div>
 
 			<div class="nior-card-body">
 				<table class="nior-details-table">
 					<tr>
-						<th><?php esc_html_e( 'Active Domain', 'nioratelier' ); ?></th>
+						<th><?php esc_html_e( 'Active Domain', 'cinematic-interior' ); ?></th>
 						<td><code><?php echo esc_html( $domain ); ?></code></td>
 					</tr>
 					<tr>
-						<th><?php esc_html_e( 'Site Editor Access', 'nioratelier' ); ?></th>
+						<th><?php esc_html_e( 'Site Editor Access', 'cinematic-interior' ); ?></th>
 						<td>
 							<?php if ( $is_valid ) : ?>
-								<span class="nior-pill-success"><?php esc_html_e( 'Unlocked', 'nioratelier' ); ?></span>
+								<span class="nior-pill-success"><?php esc_html_e( 'Unlocked', 'cinematic-interior' ); ?></span>
 							<?php else : ?>
-								<span class="nior-pill-danger"><?php esc_html_e( 'Restricted', 'nioratelier' ); ?></span>
+								<span class="nior-pill-danger"><?php esc_html_e( 'Restricted', 'cinematic-interior' ); ?></span>
 							<?php endif; ?>
 						</td>
 					</tr>
 					<tr>
-						<th><?php esc_html_e( 'Automatic Updates', 'nioratelier' ); ?></th>
+						<th><?php esc_html_e( 'Automatic Updates', 'cinematic-interior' ); ?></th>
 						<td>
 							<?php if ( $client->can_receive_updates() ) : ?>
-								<span class="nior-pill-success"><?php esc_html_e( 'Active', 'nioratelier' ); ?></span>
+								<span class="nior-pill-success"><?php esc_html_e( 'Active', 'cinematic-interior' ); ?></span>
 							<?php else : ?>
-								<span class="nior-pill-warning"><?php esc_html_e( 'Disabled', 'nioratelier' ); ?></span>
+								<span class="nior-pill-warning"><?php esc_html_e( 'Disabled', 'cinematic-interior' ); ?></span>
 							<?php endif; ?>
 						</td>
 					</tr>
 					<tr>
-						<th><?php esc_html_e( 'License Expiration', 'nioratelier' ); ?></th>
+						<th><?php esc_html_e( 'License Expiration', 'cinematic-interior' ); ?></th>
 						<td>
 							<?php
 							if ( ! empty( $data['expires_at'] ) ) {
 								echo esc_html( date_i18n( get_option( 'date_format' ), strtotime( $data['expires_at'] ) ) );
 							} else {
-								esc_html_e( 'Lifetime / No Expiry', 'nioratelier' );
+								esc_html_e( 'Lifetime / No Expiry', 'cinematic-interior' );
 							}
 							?>
 						</td>
 					</tr>
 					<tr>
-						<th><?php esc_html_e( 'Activations', 'nioratelier' ); ?></th>
+						<th><?php esc_html_e( 'Activations', 'cinematic-interior' ); ?></th>
 						<td>
 							<?php
 							if ( isset( $data['activations'] ) && isset( $data['activation_limit'] ) ) {
-								echo esc_html( sprintf( '%d / %s', $data['activations'], $data['activation_limit'] ?: __( 'Unlimited', 'nioratelier' ) ) );
+								echo esc_html( sprintf( '%d / %s', $data['activations'], $data['activation_limit'] ?: __( 'Unlimited', 'cinematic-interior' ) ) );
 							} else {
 								echo esc_html( '1 / 1' );
 							}
@@ -225,13 +226,13 @@ $notice_type    = isset( $_GET['license_type'] ) && 'success' === $_GET['license
 						</td>
 					</tr>
 					<tr>
-						<th><?php esc_html_e( 'Last Verification', 'nioratelier' ); ?></th>
+						<th><?php esc_html_e( 'Last Verification', 'cinematic-interior' ); ?></th>
 						<td>
 							<?php
 							if ( ! empty( $data['verified_at'] ) ) {
-								echo esc_html( human_time_diff( (int) $data['verified_at'], time() ) . ' ' . __( 'ago', 'nioratelier' ) );
+								echo esc_html( human_time_diff( (int) $data['verified_at'], time() ) . ' ' . __( 'ago', 'cinematic-interior' ) );
 							} else {
-								esc_html_e( 'Never', 'nioratelier' );
+								esc_html_e( 'Never', 'cinematic-interior' );
 							}
 							?>
 						</td>
@@ -244,20 +245,20 @@ $notice_type    = isset( $_GET['license_type'] ) && 'success' === $_GET['license
 	<!-- Diagnostics & Logs Collapsible -->
 	<div class="nior-diagnostics-box">
 		<details>
-			<summary><?php esc_html_e( 'Technical Diagnostics & Sync History', 'nioratelier' ); ?></summary>
+			<summary><?php esc_html_e( 'Technical Diagnostics & Sync History', 'cinematic-interior' ); ?></summary>
 			<div class="nior-diagnostics-inner">
 				<div class="nior-diagnostics-meta">
-					<p><strong><?php esc_html_e( 'Server Endpoint:', 'nioratelier' ); ?></strong> <code>https://license.webwizbd.com/wp-json/webwizbd-license/v1</code></p>
+					<p><strong><?php esc_html_e( 'Server Endpoint:', 'cinematic-interior' ); ?></strong> <code>https://license.webwizbd.com/wp-json/webwizbd-license/v1</code></p>
 					<?php if ( ! empty( $debug['client_request_id'] ) ) : ?>
-						<p><strong><?php esc_html_e( 'Last Request ID:', 'nioratelier' ); ?></strong> <code><?php echo esc_html( $debug['client_request_id'] ); ?></code></p>
+						<p><strong><?php esc_html_e( 'Last Request ID:', 'cinematic-interior' ); ?></strong> <code><?php echo esc_html( $debug['client_request_id'] ); ?></code></p>
 					<?php endif; ?>
 					<?php if ( ! empty( $data['last_error'] ) ) : ?>
-						<p class="nior-text-danger"><strong><?php esc_html_e( 'Last Reported Error:', 'nioratelier' ); ?></strong> <?php echo esc_html( $data['last_error'] ); ?> (<code><?php echo esc_html( $data['last_code'] ?? 'error' ); ?></code>)</p>
+						<p class="nior-text-danger"><strong><?php esc_html_e( 'Last Reported Error:', 'cinematic-interior' ); ?></strong> <?php echo esc_html( $data['last_error'] ); ?> (<code><?php echo esc_html( $data['last_code'] ?? 'error' ); ?></code>)</p>
 					<?php endif; ?>
 				</div>
 
 				<?php if ( ! empty( $logs ) ) : ?>
-					<h4><?php esc_html_e( 'Recent Activity Logs', 'nioratelier' ); ?></h4>
+					<h4><?php esc_html_e( 'Recent Activity Logs', 'cinematic-interior' ); ?></h4>
 					<ul class="nior-logs-list">
 						<?php foreach ( array_slice( $logs, 0, 10 ) as $log ) : ?>
 							<li>
@@ -268,11 +269,11 @@ $notice_type    = isset( $_GET['license_type'] ) && 'success' === $_GET['license
 					</ul>
 				<?php endif; ?>
 
-				<form method="post" action="<?php echo esc_url( admin_url( 'themes.php?page=nioratelier-license' ) ); ?>" style="margin-top: 15px;">
-					<?php wp_nonce_field( 'nioratelier_license_action', 'nioratelier_license_nonce' ); ?>
-					<input type="hidden" name="nioratelier_license_action" value="clear_debug" />
+				<form method="post" action="<?php echo esc_url( admin_url( 'themes.php?page=cinematic-interior-license' ) ); ?>" style="margin-top: 15px;">
+					<?php wp_nonce_field( 'cinematic_interior_license_action', 'cinematic_interior_license_nonce' ); ?>
+					<input type="hidden" name="cinematic_interior_license_action" value="clear_debug" />
 					<button type="submit" class="button button-small">
-						<?php esc_html_e( 'Clear Diagnostic Cache', 'nioratelier' ); ?>
+						<?php esc_html_e( 'Clear Diagnostic Cache', 'cinematic-interior' ); ?>
 					</button>
 				</form>
 			</div>

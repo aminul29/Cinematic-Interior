@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Falling Client Logos Section
- * Slug: nioratelier/falling-logos
+ * Slug: cinematic-interior/falling-logos
  * Categories: nior-cinematic
  * Description: 'Our Clients' section featuring 11 authentic client brand logos with physics drop and luxury card illumination.
  */

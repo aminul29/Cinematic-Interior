@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Cinematic Hero Walkthrough
- * Slug: nioratelier/hero-cinematic
+ * Slug: cinematic-interior/hero-cinematic
  * Categories: nior-cinematic
  * Description: Sticky 380vh canvas walkthrough scrubbing with staged luxury typography and preloader.
  */

@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Featured Project V Stage Lounge
- * Slug: nioratelier/featured-vstage
+ * Slug: cinematic-interior/featured-vstage
  * Categories: nior-cinematic
  * Description: In-depth showcase of V Stage Lounge nightlife and entertainment venue.
  */

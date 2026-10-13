@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Page Content — Services
- * Slug: nioratelier/page-services-content
+ * Slug: cinematic-interior/page-services-content
  * Categories: nior-pages
  * Description: Complete services page layout with all 8 core disciplines and signature approach.
  */
@@ -76,6 +76,6 @@
 </section>
 <!-- /wp:html -->
 
-<!-- wp:pattern {"slug":"nioratelier/signature-approach"} /-->
-<!-- wp:pattern {"slug":"nioratelier/integrated-process"} /-->
-<!-- wp:pattern {"slug":"nioratelier/cta-handover"} /-->
+<!-- wp:pattern {"slug":"cinematic-interior/signature-approach"} /-->
+<!-- wp:pattern {"slug":"cinematic-interior/integrated-process"} /-->
+<!-- wp:pattern {"slug":"cinematic-interior/cta-handover"} /-->

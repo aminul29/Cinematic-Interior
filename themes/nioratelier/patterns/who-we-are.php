@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Who We Are & In-House Facility
- * Slug: nioratelier/who-we-are
+ * Slug: cinematic-interior/who-we-are
  * Categories: nior-cinematic
  * Description: Studio introduction highlighting the 11,000 sq ft Johor Bahru headquarters and furniture factory.
  */

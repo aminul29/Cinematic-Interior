@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Why Nior Atelier
- * Slug: nioratelier/why-nior
+ * Slug: cinematic-interior/why-nior
  * Categories: nior-cinematic
  * Description: 4 key strategic differentiators of Nior Atelier.
  */

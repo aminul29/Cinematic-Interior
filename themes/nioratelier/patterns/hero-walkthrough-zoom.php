@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Cinematic Walkthrough Zoom Hero
- * Slug: nioratelier/hero-walkthrough-zoom
+ * Slug: cinematic-interior/hero-walkthrough-zoom
  * Categories: nior-cinematic
  * Description: Continuous 3D depth camera fly-through zooming through 11 architectural interior spaces on scroll with high-DPR Canvas and floating luxury HUD.
  */

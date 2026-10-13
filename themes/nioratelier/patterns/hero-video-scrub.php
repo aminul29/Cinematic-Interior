@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Cinematic Video Scrub Hero
- * Slug: nioratelier/hero-video-scrub
+ * Slug: cinematic-interior/hero-video-scrub
  * Categories: nior-cinematic
  * Description: Hardware-accelerated rAF video scrubbing hero with staged luxury typography and poster fallback.
  */

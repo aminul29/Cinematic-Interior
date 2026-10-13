@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: 4 Value Pillars
- * Slug: nioratelier/value-pillars
+ * Slug: cinematic-interior/value-pillars
  * Categories: nior-cinematic
  * Description: The four core pillars of Nior Atelier: Design, Emotion, Behavior, Value.
  */

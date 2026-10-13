@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Page Content — About Us
- * Slug: nioratelier/page-about-content
+ * Slug: cinematic-interior/page-about-content
  * Categories: nior-pages
  * Description: Complete editorial layout for the About Us page.
  */
@@ -65,8 +65,8 @@
 </section>
 <!-- /wp:html -->
 
-<!-- wp:pattern {"slug":"nioratelier/value-pillars"} /-->
-<!-- wp:pattern {"slug":"nioratelier/integrated-process"} /-->
-<!-- wp:pattern {"slug":"nioratelier/why-nior"} /-->
-<!-- wp:pattern {"slug":"nioratelier/cta-handover"} /-->
+<!-- wp:pattern {"slug":"cinematic-interior/value-pillars"} /-->
+<!-- wp:pattern {"slug":"cinematic-interior/integrated-process"} /-->
+<!-- wp:pattern {"slug":"cinematic-interior/why-nior"} /-->
+<!-- wp:pattern {"slug":"cinematic-interior/cta-handover"} /-->
 

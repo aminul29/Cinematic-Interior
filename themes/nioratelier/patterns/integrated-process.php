@@ -1,7 +1,7 @@
 <?php
 /**
  * Title: Integrated 5-Stage Process
- * Slug: nioratelier/integrated-process
+ * Slug: cinematic-interior/integrated-process
  * Categories: nior-cinematic
  * Description: One coordinated process from strategy to handover.
  */
