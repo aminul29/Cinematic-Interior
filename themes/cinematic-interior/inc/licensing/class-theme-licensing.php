@@ -230,7 +230,16 @@ class Theme_Licensing {
 			return;
 		}
 
-		$license_url = admin_url( 'themes.php?page=cinematic-interior-license' );
+		$license_url  = admin_url( 'themes.php?page=cinematic-interior-license' );
+		$contact_base = apply_filters( 'cinematic_interior_contact_url', 'https://webwizbd.com/contact' );
+		$contact_url  = add_query_arg(
+			array(
+				'theme'  => 'cinematic-interior',
+				'domain' => $this->client->get_domain(),
+				'ref'    => 'admin_notice',
+			),
+			$contact_base
+		);
 
 		if ( 'unlicensed' === $status ) {
 			$title   = __( 'Cinematic Interior — License Required', 'cinematic-interior' );
@@ -251,12 +260,14 @@ class Theme_Licensing {
 		}
 
 		printf(
-			'<div class="%1$s"><p><strong>%2$s:</strong> %3$s <a href="%4$s" class="button button-small" style="margin-left: 8px;">%5$s</a></p></div>',
+			'<div class="%1$s"><p><strong>%2$s:</strong> %3$s <a href="%4$s" class="button button-small" style="margin-left: 8px;">%5$s</a> <a href="%6$s" target="_blank" rel="noopener noreferrer" class="button button-small" style="margin-left: 4px;">%7$s &rarr;</a></p></div>',
 			esc_attr( $class ),
 			esc_html( $title ),
 			esc_html( $message ),
 			esc_url( $license_url ),
-			esc_html__( 'Manage License', 'cinematic-interior' )
+			esc_html__( 'Manage License', 'cinematic-interior' ),
+			esc_url( $contact_url ),
+			esc_html__( 'Get License Key', 'cinematic-interior' )
 		);
 	}
 

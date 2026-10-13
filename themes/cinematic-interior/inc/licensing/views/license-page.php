@@ -31,6 +31,18 @@ $notice_code    = isset( $_GET['license_notice'] ) ? sanitize_key( wp_unslash( $
 $notice_message = isset( $_GET['license_message'] ) ? sanitize_text_field( wp_unslash( rawurldecode( $_GET['license_message'] ) ) ) : '';
 $notice_type    = isset( $_GET['license_type'] ) && 'success' === $_GET['license_type'] ? 'success' : 'error';
 $theme_version  = defined( 'CINEMATIC_INTERIOR_VERSION' ) ? CINEMATIC_INTERIOR_VERSION : ( defined( 'NIOR_VERSION' ) ? NIOR_VERSION : '1.6.0' );
+
+// Contact URL for licensing inquiries
+$contact_base = apply_filters( 'cinematic_interior_contact_url', 'https://webwizbd.com/contact' );
+$contact_url  = add_query_arg(
+	array(
+		'theme'   => 'cinematic-interior',
+		'domain'  => $domain,
+		'version' => $theme_version,
+		'ref'     => 'theme_license',
+	),
+	$contact_base
+);
 ?>
 
 <div class="wrap nior-license-wrap">
@@ -125,6 +137,16 @@ $theme_version  = defined( 'CINEMATIC_INTERIOR_VERSION' ) ? CINEMATIC_INTERIOR_V
 							</button>
 						</div>
 					</form>
+
+					<div class="nior-card-contact-hint">
+						<div class="nior-hint-content">
+							<span class="nior-hint-badge"><?php esc_html_e( 'Need a License Key?', 'cinematic-interior' ); ?></span>
+							<p><?php esc_html_e( 'Don\'t have an active license key yet? Contact WebWizBD to purchase or request an entitlement for this domain.', 'cinematic-interior' ); ?></p>
+						</div>
+						<a href="<?php echo esc_url( $contact_url ); ?>" target="_blank" rel="noopener noreferrer" class="button button-secondary nior-btn-inline-contact">
+							<?php esc_html_e( 'Get License Key on webwizbd.com &rarr;', 'cinematic-interior' ); ?>
+						</a>
+					</div>
 				<?php else : ?>
 					<div class="nior-active-state">
 						<div class="nior-key-display">
@@ -155,6 +177,11 @@ $theme_version  = defined( 'CINEMATIC_INTERIOR_VERSION' ) ? CINEMATIC_INTERIOR_V
 								</button>
 							</form>
 
+							<!-- Contact WebWizBD Action -->
+							<a href="<?php echo esc_url( $contact_url ); ?>" target="_blank" rel="noopener noreferrer" class="button button-secondary">
+								<?php esc_html_e( 'Contact WebWizBD', 'cinematic-interior' ); ?>
+							</a>
+
 							<!-- Deactivate Action -->
 							<form method="post" action="<?php echo esc_url( admin_url( 'themes.php?page=cinematic-interior-license' ) ); ?>" class="inline-form" onsubmit="return confirm('<?php echo esc_js( __( 'Are you sure you want to deactivate this license? Site Editor access will be locked.', 'cinematic-interior' ) ); ?>');">
 								<?php wp_nonce_field( 'cinematic_interior_license_action', 'cinematic_interior_license_nonce' ); ?>
@@ -169,75 +196,116 @@ $theme_version  = defined( 'CINEMATIC_INTERIOR_VERSION' ) ? CINEMATIC_INTERIOR_V
 			</div>
 		</div>
 
-		<!-- Right Card: Entitlement & Domain Details -->
-		<div class="nior-card nior-card-secondary">
-			<div class="nior-card-header">
-				<h2><?php esc_html_e( 'Installation Details', 'cinematic-interior' ); ?></h2>
+		<!-- Right Column: Details & Contact -->
+		<div class="nior-license-sidebar">
+			<div class="nior-card nior-card-secondary">
+				<div class="nior-card-header">
+					<h2><?php esc_html_e( 'Installation Details', 'cinematic-interior' ); ?></h2>
+				</div>
+
+				<div class="nior-card-body">
+					<table class="nior-details-table">
+						<tr>
+							<th><?php esc_html_e( 'Active Domain', 'cinematic-interior' ); ?></th>
+							<td><code><?php echo esc_html( $domain ); ?></code></td>
+						</tr>
+						<tr>
+							<th><?php esc_html_e( 'Site Editor Access', 'cinematic-interior' ); ?></th>
+							<td>
+								<?php if ( $is_valid ) : ?>
+									<span class="nior-pill-success"><?php esc_html_e( 'Unlocked', 'cinematic-interior' ); ?></span>
+								<?php else : ?>
+									<span class="nior-pill-danger"><?php esc_html_e( 'Restricted', 'cinematic-interior' ); ?></span>
+								<?php endif; ?>
+							</td>
+						</tr>
+						<tr>
+							<th><?php esc_html_e( 'Automatic Updates', 'cinematic-interior' ); ?></th>
+							<td>
+								<?php if ( $client->can_receive_updates() ) : ?>
+									<span class="nior-pill-success"><?php esc_html_e( 'Active', 'cinematic-interior' ); ?></span>
+								<?php else : ?>
+									<span class="nior-pill-warning"><?php esc_html_e( 'Disabled', 'cinematic-interior' ); ?></span>
+								<?php endif; ?>
+							</td>
+						</tr>
+						<tr>
+							<th><?php esc_html_e( 'License Expiration', 'cinematic-interior' ); ?></th>
+							<td>
+								<?php
+								if ( ! empty( $data['expires_at'] ) ) {
+									echo esc_html( date_i18n( get_option( 'date_format' ), strtotime( $data['expires_at'] ) ) );
+								} else {
+									esc_html_e( 'Lifetime / No Expiry', 'cinematic-interior' );
+								}
+								?>
+							</td>
+						</tr>
+						<tr>
+							<th><?php esc_html_e( 'Activations', 'cinematic-interior' ); ?></th>
+							<td>
+								<?php
+								if ( isset( $data['activations'] ) && isset( $data['activation_limit'] ) ) {
+									echo esc_html( sprintf( '%d / %s', $data['activations'], $data['activation_limit'] ?: __( 'Unlimited', 'cinematic-interior' ) ) );
+								} else {
+									echo esc_html( '1 / 1' );
+								}
+								?>
+							</td>
+						</tr>
+						<tr>
+							<th><?php esc_html_e( 'Last Verification', 'cinematic-interior' ); ?></th>
+							<td>
+								<?php
+								if ( ! empty( $data['verified_at'] ) ) {
+									echo esc_html( human_time_diff( (int) $data['verified_at'], time() ) . ' ' . __( 'ago', 'cinematic-interior' ) );
+								} else {
+									esc_html_e( 'Never', 'cinematic-interior' );
+								}
+								?>
+							</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 
-			<div class="nior-card-body">
-				<table class="nior-details-table">
-					<tr>
-						<th><?php esc_html_e( 'Active Domain', 'cinematic-interior' ); ?></th>
-						<td><code><?php echo esc_html( $domain ); ?></code></td>
-					</tr>
-					<tr>
-						<th><?php esc_html_e( 'Site Editor Access', 'cinematic-interior' ); ?></th>
-						<td>
-							<?php if ( $is_valid ) : ?>
-								<span class="nior-pill-success"><?php esc_html_e( 'Unlocked', 'cinematic-interior' ); ?></span>
-							<?php else : ?>
-								<span class="nior-pill-danger"><?php esc_html_e( 'Restricted', 'cinematic-interior' ); ?></span>
-							<?php endif; ?>
-						</td>
-					</tr>
-					<tr>
-						<th><?php esc_html_e( 'Automatic Updates', 'cinematic-interior' ); ?></th>
-						<td>
-							<?php if ( $client->can_receive_updates() ) : ?>
-								<span class="nior-pill-success"><?php esc_html_e( 'Active', 'cinematic-interior' ); ?></span>
-							<?php else : ?>
-								<span class="nior-pill-warning"><?php esc_html_e( 'Disabled', 'cinematic-interior' ); ?></span>
-							<?php endif; ?>
-						</td>
-					</tr>
-					<tr>
-						<th><?php esc_html_e( 'License Expiration', 'cinematic-interior' ); ?></th>
-						<td>
-							<?php
-							if ( ! empty( $data['expires_at'] ) ) {
-								echo esc_html( date_i18n( get_option( 'date_format' ), strtotime( $data['expires_at'] ) ) );
-							} else {
-								esc_html_e( 'Lifetime / No Expiry', 'cinematic-interior' );
-							}
-							?>
-						</td>
-					</tr>
-					<tr>
-						<th><?php esc_html_e( 'Activations', 'cinematic-interior' ); ?></th>
-						<td>
-							<?php
-							if ( isset( $data['activations'] ) && isset( $data['activation_limit'] ) ) {
-								echo esc_html( sprintf( '%d / %s', $data['activations'], $data['activation_limit'] ?: __( 'Unlimited', 'cinematic-interior' ) ) );
-							} else {
-								echo esc_html( '1 / 1' );
-							}
-							?>
-						</td>
-					</tr>
-					<tr>
-						<th><?php esc_html_e( 'Last Verification', 'cinematic-interior' ); ?></th>
-						<td>
-							<?php
-							if ( ! empty( $data['verified_at'] ) ) {
-								echo esc_html( human_time_diff( (int) $data['verified_at'], time() ) . ' ' . __( 'ago', 'cinematic-interior' ) );
-							} else {
-								esc_html_e( 'Never', 'cinematic-interior' );
-							}
-							?>
-						</td>
-					</tr>
-				</table>
+			<!-- Dedicated Contact Card -->
+			<div class="nior-card nior-card-support">
+				<div class="nior-card-header">
+					<h2><?php esc_html_e( 'Need a License Key?', 'cinematic-interior' ); ?></h2>
+					<span class="nior-badge-webwiz"><?php esc_html_e( 'webwizbd.com', 'cinematic-interior' ); ?></span>
+				</div>
+
+				<div class="nior-card-body">
+					<p class="nior-card-lead">
+						<?php esc_html_e( 'To unlock Full Site Editor customization, architectural patterns, and automatic updates, contact WebWizBD to request or purchase a key for this domain.', 'cinematic-interior' ); ?>
+					</p>
+
+					<div class="nior-support-steps">
+						<div class="nior-step-item">
+							<span class="nior-step-num">1</span>
+							<span class="nior-step-txt"><?php esc_html_e( 'Click below to open the WebWizBD contact page.', 'cinematic-interior' ); ?></span>
+						</div>
+						<div class="nior-step-item">
+							<span class="nior-step-num">2</span>
+							<span class="nior-step-txt"><?php esc_html_e( 'Send your inquiry with domain details.', 'cinematic-interior' ); ?></span>
+						</div>
+						<div class="nior-step-item">
+							<span class="nior-step-num">3</span>
+							<span class="nior-step-txt"><?php esc_html_e( 'Receive your official WWBD license key to activate.', 'cinematic-interior' ); ?></span>
+						</div>
+					</div>
+
+					<div class="nior-support-actions">
+						<a href="<?php echo esc_url( $contact_url ); ?>" target="_blank" rel="noopener noreferrer" class="button button-primary button-hero nior-btn-contact-full">
+							<?php esc_html_e( 'Contact WebWizBD to Get Key &rarr;', 'cinematic-interior' ); ?>
+						</a>
+
+						<button type="button" class="button button-secondary nior-btn-copy-info" onclick="var self=this;navigator.clipboard.writeText('Domain: <?php echo esc_js( $domain ); ?>\nTheme: Cinematic Interior v<?php echo esc_js( $theme_version ); ?>\nSite URL: <?php echo esc_js( home_url() ); ?>').then(function(){self.innerText='<?php echo esc_js( __( 'Copied to Clipboard!', 'cinematic-interior' ) ); ?>';setTimeout(function(){self.innerText='<?php echo esc_js( __( 'Copy Domain & Details', 'cinematic-interior' ) ); ?>';},2500);});">
+							<?php esc_html_e( 'Copy Domain & Details', 'cinematic-interior' ); ?>
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
