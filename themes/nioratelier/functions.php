@@ -10,11 +10,24 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'NIOR_VERSION', '1.5.1' );
+define( 'NIOR_VERSION', '1.6.0' );
 define( 'NIOR_THEME_DIR', get_template_directory() );
 define( 'NIOR_THEME_URI', get_template_directory_uri() );
 
 require_once NIOR_THEME_DIR . '/inc/projects-data.php';
+require_once NIOR_THEME_DIR . '/inc/licensing/class-theme-licensing.php';
+
+// Initialize Theme Licensing subsystem.
+\NiorAtelier\Licensing\Theme_Licensing::get_instance()->init();
+
+/**
+ * Check if the theme has an active license.
+ *
+ * @return bool
+ */
+function nioratelier_is_licensed() {
+    return \NiorAtelier\Licensing\Theme_Licensing::get_instance()->is_licensed();
+}
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.

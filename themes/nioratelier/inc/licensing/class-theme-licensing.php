@@ -1,0 +1,379 @@
+<?php
+namespace NiorAtelier\Licensing;
+
+defined( 'ABSPATH' ) || exit;
+
+require_once __DIR__ . '/WebWizBD_License_Client.php';
+
+/**
+ * Nior Atelier Theme Licensing Controller.
+ *
+ * Integrates WebWizBD License Client SDK, enforces Site Editor lock when unlicensed,
+ * registers the Appearance > Theme License admin page, and gates theme updates.
+ *
+ * @package NiorAtelier\Licensing
+ * @since 1.6.0
+ */
+class Theme_Licensing {
+
+	const PRODUCT_SLUG = 'nioratelier';
+	const OPTION_NAME  = 'nioratelier_license';
+	const LOG_OPTION   = 'nioratelier_license_log';
+
+	/**
+	 * Singleton instance.
+	 *
+	 * @var Theme_Licensing|null
+	 */
+	private static $instance = null;
+
+	/**
+	 * WebWizBD License Client.
+	 *
+	 * @var \WebWizBD_License_Client
+	 */
+	private $client;
+
+	/**
+	 * Get singleton instance.
+	 *
+	 * @return Theme_Licensing
+	 */
+	public static function get_instance() {
+		if ( null === self::$instance ) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
+
+	/**
+	 * Constructor.
+	 */
+	private function __construct() {
+		$api_url = defined( 'NIOR_LICENSE_API_URL' )
+			? NIOR_LICENSE_API_URL
+			: 'https://license.webwizbd.com/wp-json/webwizbd-license/v1';
+
+		$config = apply_filters(
+			'nioratelier_license_config',
+			array(
+				'api_url'               => $api_url,
+				'product_slug'          => self::PRODUCT_SLUG,
+				'item_type'             => 'theme',
+				'theme_slug'            => 'nioratelier',
+				'version'               => defined( 'NIOR_VERSION' ) ? NIOR_VERSION : '1.6.0',
+				'verification_interval' => 12,
+				'grace_period_hours'    => 72,
+				'option_name'           => self::OPTION_NAME,
+				'logger'                => array( $this, 'log' ),
+			)
+		);
+
+		$this->client = new \WebWizBD_License_Client( $config );
+	}
+
+	/**
+	 * Register hooks.
+	 *
+	 * @return void
+	 */
+	public function init() {
+		$this->client->init();
+
+		if ( is_admin() ) {
+			add_action( 'admin_menu', array( $this, 'register_admin_menu' ) );
+			add_action( 'admin_init', array( $this, 'handle_license_actions' ), 5 );
+			add_action( 'admin_init', array( $this, 'enforce_editor_lock' ), 10 );
+			add_action( 'admin_notices', array( $this, 'render_admin_notices' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
+			add_filter( 'theme_action_links_nioratelier', array( $this, 'add_theme_action_links' ) );
+		}
+	}
+
+	/**
+	 * Access the underlying SDK client.
+	 *
+	 * @return \WebWizBD_License_Client
+	 */
+	public function client() {
+		return $this->client;
+	}
+
+	/**
+	 * Whether the theme has an active or grace-period license.
+	 *
+	 * @return bool
+	 */
+	public function is_licensed() {
+		return $this->client->is_valid();
+	}
+
+	/**
+	 * Whether the theme can receive updates and downloads.
+	 *
+	 * @return bool
+	 */
+	public function can_receive_updates() {
+		return $this->client->can_receive_updates();
+	}
+
+	/**
+	 * Get normalized status.
+	 *
+	 * @return string
+	 */
+	public function get_status() {
+		return $this->client->get_effective_status();
+	}
+
+	/**
+	 * Register Appearance > Theme License admin menu item.
+	 *
+	 * @return void
+	 */
+	public function register_admin_menu() {
+		add_theme_page(
+			__( 'Nior Atelier License', 'nioratelier' ),
+			__( 'Theme License', 'nioratelier' ),
+			'manage_options',
+			'nioratelier-license',
+			array( $this, 'render_license_page' )
+		);
+	}
+
+	/**
+	 * Enqueue scoped styles on the Theme License admin page.
+	 *
+	 * @param string $hook_suffix Admin hook suffix.
+	 * @return void
+	 */
+	public function enqueue_admin_assets( $hook_suffix ) {
+		if ( 'appearance_page_nioratelier-license' !== $hook_suffix ) {
+			return;
+		}
+
+		wp_enqueue_style(
+			'nior-admin-license',
+			NIOR_THEME_URI . '/assets/css/admin-license.css',
+			array(),
+			NIOR_VERSION
+		);
+	}
+
+	/**
+	 * Strict Lock: Enforces restriction on the Site Editor and Template screens
+	 * when the theme is unlicensed or expired.
+	 *
+	 * @return void
+	 */
+	public function enforce_editor_lock() {
+		if ( ! is_admin() || wp_doing_ajax() || wp_doing_cron() ) {
+			return;
+		}
+
+		// Only enforce for users attempting to customize templates
+		if ( ! current_user_can( 'edit_theme_options' ) ) {
+			return;
+		}
+
+		if ( $this->is_licensed() ) {
+			return;
+		}
+
+		global $pagenow;
+
+		$is_site_editor = 'site-editor.php' === $pagenow
+			|| ( isset( $_GET['page'] ) && 'site-editor' === sanitize_key( wp_unslash( $_GET['page'] ) ) );
+
+		$is_template_editor = ( 'edit.php' === $pagenow || 'post.php' === $pagenow || 'post-new.php' === $pagenow )
+			&& isset( $_GET['post_type'] )
+			&& in_array( sanitize_key( wp_unslash( $_GET['post_type'] ) ), array( 'wp_template', 'wp_template_part', 'wp_navigation' ), true );
+
+		if ( $is_site_editor || $is_template_editor ) {
+			wp_safe_redirect(
+				add_query_arg(
+					array(
+						'page'           => 'nioratelier-license',
+						'license_notice' => 'editor_locked',
+					),
+					admin_url( 'themes.php' )
+				)
+			);
+			exit;
+		}
+	}
+
+	/**
+	 * Render contextual admin notice across WP Admin when unlicensed.
+	 *
+	 * @return void
+	 */
+	public function render_admin_notices() {
+		if ( ! current_user_can( 'manage_options' ) || ! is_admin() ) {
+			return;
+		}
+
+		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+		if ( $screen && 'appearance_page_nioratelier-license' === $screen->id ) {
+			return;
+		}
+
+		$status = $this->get_status();
+		if ( 'active' === $status ) {
+			return;
+		}
+
+		$license_url = admin_url( 'themes.php?page=nioratelier-license' );
+
+		if ( 'unlicensed' === $status ) {
+			$title   = __( 'Nior Atelier — License Required', 'nioratelier' );
+			$message = __( 'Please activate your license to unlock the Full Site Editor, architectural block patterns, and automatic updates.', 'nioratelier' );
+			$class   = 'notice notice-warning is-dismissible';
+		} elseif ( 'expired' === $status ) {
+			$title   = __( 'Nior Atelier — License Expired', 'nioratelier' );
+			$message = __( 'Your license has expired. Site Editor customization and automatic updates are restricted until renewed.', 'nioratelier' );
+			$class   = 'notice notice-error';
+		} elseif ( 'offline_grace' === $status ) {
+			$title   = __( 'Nior Atelier — Offline Grace Mode', 'nioratelier' );
+			$message = __( 'Unable to reach the license server. Running in offline grace period.', 'nioratelier' );
+			$class   = 'notice notice-info';
+		} else {
+			$title   = __( 'Nior Atelier — License Inactive', 'nioratelier' );
+			$message = __( 'Your license status requires attention. Site Editor customization and automatic updates are paused.', 'nioratelier' );
+			$class   = 'notice notice-warning';
+		}
+
+		printf(
+			'<div class="%1$s"><p><strong>%2$s:</strong> %3$s <a href="%4$s" class="button button-small" style="margin-left: 8px;">%5$s</a></p></div>',
+			esc_attr( $class ),
+			esc_html( $title ),
+			esc_html( $message ),
+			esc_url( $license_url ),
+			esc_html__( 'Manage License', 'nioratelier' )
+		);
+	}
+
+	/**
+	 * Process form actions (activate, deactivate, refresh, clear diagnostics).
+	 *
+	 * @return void
+	 */
+	public function handle_license_actions() {
+		if ( empty( $_POST['nioratelier_license_action'] ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'Unauthorized access.', 'nioratelier' ) );
+		}
+
+		check_admin_referer( 'nioratelier_license_action', 'nioratelier_license_nonce' );
+
+		$action   = sanitize_key( wp_unslash( $_POST['nioratelier_license_action'] ) );
+		$response = array(
+			'success' => false,
+			'message' => __( 'Unknown license action.', 'nioratelier' ),
+		);
+
+		if ( 'activate' === $action ) {
+			$key      = isset( $_POST['license_key'] ) ? sanitize_text_field( wp_unslash( $_POST['license_key'] ) ) : '';
+			$response = $this->client->activate( $key );
+		} elseif ( 'reactivate_stored' === $action ) {
+			$data     = $this->client->get_license_data();
+			$key      = isset( $data['license_key'] ) ? sanitize_text_field( $data['license_key'] ) : '';
+			$response = $this->client->activate( $key );
+		} elseif ( 'deactivate' === $action ) {
+			$response = $this->client->deactivate();
+		} elseif ( 'refresh' === $action ) {
+			$response = $this->client->verify_license( true );
+		} elseif ( 'clear_debug' === $action ) {
+			$this->client->clear_debug_data();
+			$response = array(
+				'success' => true,
+				'message' => __( 'License diagnostics cleared.', 'nioratelier' ),
+			);
+		} elseif ( 'download_latest' === $action ) {
+			$response = $this->client->get_latest_download_url();
+			if ( ! empty( $response['success'] ) && ! empty( $response['data']['download_url'] ) ) {
+				$this->log( 'Direct theme package download requested.' );
+				wp_safe_redirect( esc_url_raw( $response['data']['download_url'] ) );
+				exit;
+			}
+		}
+
+		$type = ! empty( $response['success'] ) ? 'success' : 'error';
+
+		wp_safe_redirect(
+			add_query_arg(
+				array(
+					'page'            => 'nioratelier-license',
+					'license_message' => rawurlencode( $response['message'] ?? __( 'License action completed.', 'nioratelier' ) ),
+					'license_type'    => $type,
+				),
+				admin_url( 'themes.php' )
+			)
+		);
+		exit;
+	}
+
+	/**
+	 * Add "License" action link to theme list.
+	 *
+	 * @param array $links Action links.
+	 * @return array
+	 */
+	public function add_theme_action_links( $links ) {
+		$links['license'] = '<a href="' . esc_url( admin_url( 'themes.php?page=nioratelier-license' ) ) . '">' . esc_html__( 'License', 'nioratelier' ) . '</a>';
+		return $links;
+	}
+
+	/**
+	 * Render the Theme License view.
+	 *
+	 * @return void
+	 */
+	public function render_license_page() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'nioratelier' ) );
+		}
+
+		$client     = $this->client;
+		$data       = $client->get_license_data();
+		$debug      = $client->get_debug_data();
+		$status     = $client->get_effective_status();
+		$is_valid   = $client->is_valid();
+		$domain     = $client->get_domain();
+		$logs       = $this->get_logs();
+
+		require __DIR__ . '/views/license-page.php';
+	}
+
+	/**
+	 * Add an event to the local log buffer.
+	 *
+	 * @param string $message Log message.
+	 * @return void
+	 */
+	public function log( $message ) {
+		$logs = $this->get_logs();
+		array_unshift(
+			$logs,
+			array(
+				'time'    => time(),
+				'message' => sanitize_text_field( $message ),
+			)
+		);
+		$logs = array_slice( $logs, 0, 50 );
+		update_option( self::LOG_OPTION, $logs, false );
+	}
+
+	/**
+	 * Retrieve recent log entries.
+	 *
+	 * @return array
+	 */
+	public function get_logs() {
+		$logs = get_option( self::LOG_OPTION, array() );
+		return is_array( $logs ) ? $logs : array();
+	}
+}
