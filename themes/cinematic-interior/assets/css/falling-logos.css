@@ -85,6 +85,8 @@
     max-height: 44px;
     height: auto;
     object-fit: contain;
+    display: block;
+    margin: 0 auto;
     opacity: 0.95;
     transition: opacity 0.35s ease, transform 0.35s ease;
   }
