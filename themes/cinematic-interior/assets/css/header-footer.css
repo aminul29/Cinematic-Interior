@@ -8,20 +8,57 @@
   z-index: 1000;
   display: flex;
   align-items: center;
+  background: rgba(12, 13, 14, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--nior-border);
   transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease, height 0.4s ease;
-  border-bottom: 1px solid transparent;
 
   &.is-scrolled {
     height: 78px;
-    background: rgba(12, 13, 14, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--nior-border);
+    background: rgba(12, 13, 14, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--nior-border-strong);
 
     .nior-header__brand .nior-header__logo-img {
       height: 52px;
     }
   }
+}
+
+/* WordPress Logged-In Admin Bar Compatibility */
+body.admin-bar {
+  .nior-header {
+    top: 32px;
+  }
+
+  .nior-top-progress {
+    top: 32px;
+  }
+
+  .nior-mobile-menu {
+    top: 32px;
+    padding-top: calc(var(--header-height) + 40px + 32px);
+  }
+}
+
+@media screen and (max-width: 782px) {
+  body.admin-bar {
+    .nior-header {
+      top: 46px;
+    }
+
+    .nior-top-progress {
+      top: 46px;
+    }
+
+    .nior-mobile-menu {
+      top: 46px;
+      padding-top: calc(var(--header-height) + 40px + 46px);
+    }
+  }
+}
 
   .nior-header__inner {
     display: flex;
