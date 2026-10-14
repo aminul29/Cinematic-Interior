@@ -8,28 +8,32 @@ export function initPreloader(onComplete) {
   const fillEl = document.getElementById('niorPreloaderFill');
   const progressBar = document.getElementById('niorTopProgressBar');
 
-  let currentPercent = 0;
-  const targetPercent = 100;
-  const startTime = performance.now();
-  const duration = 1200; // 1.2s smooth minimum loading time
-
-  function update() {
-    const elapsed = performance.now() - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    currentPercent = Math.floor(progress * targetPercent);
-
-    if (counterEl) {
-      counterEl.textContent = `${String(currentPercent).padStart(2, '0')}%`;
+  if (!preloader) {
+    if (typeof onComplete === 'function') {
+      onComplete();
     }
+  } else {
+    let currentPercent = 0;
+    const targetPercent = 100;
+    const startTime = performance.now();
+    const duration = 1200; // 1.2s smooth minimum loading time
 
-    if (fillEl) {
-      fillEl.style.width = `${currentPercent}%`;
-    }
+    function update() {
+      const elapsed = performance.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      currentPercent = Math.floor(progress * targetPercent);
 
-    if (progress < 1) {
-      requestAnimationFrame(update);
-    } else {
-      if (preloader) {
+      if (counterEl) {
+        counterEl.textContent = `${String(currentPercent).padStart(2, '0')}%`;
+      }
+
+      if (fillEl) {
+        fillEl.style.width = `${currentPercent}%`;
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
         preloader.classList.add('is-revealing');
         setTimeout(() => {
           preloader.classList.add('is-loaded');
@@ -37,13 +41,11 @@ export function initPreloader(onComplete) {
             onComplete();
           }
         }, 600);
-      } else if (typeof onComplete === 'function') {
-        onComplete();
       }
     }
-  }
 
-  requestAnimationFrame(update);
+    requestAnimationFrame(update);
+  }
 
   // Global top scroll progress bar
   if (progressBar) {
