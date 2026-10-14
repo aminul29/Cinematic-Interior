@@ -20,15 +20,15 @@ export function initRackFocus() {
 
     const p = clamp(-rect.top / range, 0, 1);
 
-    // 1. Eyebrow "Our Philosophy" gracefully emerges onto the obsidian canvas
+    // 1. Eyebrow "Our Philosophy" gracefully emerges onto the white canvas
     const eyebrowProgress = clamp(p / 0.12, 0, 1);
     if (eyebrow) {
       eyebrow.style.opacity = eyebrowProgress.toFixed(3);
       eyebrow.style.transform = `translateY(${((1 - eyebrowProgress) * 18).toFixed(2)}px)`;
     }
 
-    // 2. Headline baseline emerges softly from pure obsidian
-    const baseWordOpacity = 0.12 * eyebrowProgress;
+    // 2. Headline baseline emerges softly from pure white
+    const baseWordOpacity = 0.14 * eyebrowProgress;
 
     // 3. Staggered rack-focus word transitions
     for (let k = 0; k < n; k++) {

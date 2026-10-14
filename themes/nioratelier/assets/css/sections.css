@@ -23,8 +23,8 @@
 .nior-rack-section {
   position: relative;
   height: 240vh;
-  background-color: var(--nior-obsidian);
-  color: var(--nior-white);
+  background-color: #ffffff;
+  color: #0c0d0e;
 }
 
 .nior-rack-stage {
@@ -42,7 +42,7 @@
 }
 
 .nior-rack-eyebrow {
-  color: var(--nior-gold);
+  color: #a8823e;
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 700;
@@ -61,27 +61,28 @@
   line-height: 1.1;
   max-width: 22ch;
   margin: 0 auto;
-  color: var(--nior-white);
+  color: #0c0d0e;
   letter-spacing: -0.015em;
 
   span.rack-word {
     display: inline-block;
-    opacity: 0.12;
+    opacity: 0.14;
     transform: translateY(0.25em);
     filter: blur(6px);
     will-change: opacity, transform, filter;
     margin-right: 0.18em;
     transition: color 0.3s ease;
+    color: #0c0d0e;
 
     &.em {
-      color: var(--nior-gold);
+      color: #a8823e;
       font-style: italic;
     }
   }
 }
 
 .nior-rack-sub {
-  color: var(--nior-muted);
+  color: #4a4d52;
   font-size: clamp(16px, 1.6vw, 20px);
   max-width: 54ch;
   margin: 36px auto 0;

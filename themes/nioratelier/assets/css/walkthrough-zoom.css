@@ -109,10 +109,10 @@
       .nior-hero-grow-dot {
         display: inline-block;
         position: relative;
-        color: var(--nior-gold, #c9a25e);
+        color: #ffffff;
         font-weight: 700;
         margin: 0 0.22em;
-        text-shadow: 0 0 10px rgba(201, 162, 94, 0.6);
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
       }
 
       .nior-hero-tagline-dot {
@@ -124,7 +124,7 @@
     }
   }
 
-  /* Expanding Solid Obsidian Disc (Swallows hero stage into Philosophy) */
+  /* Expanding Solid White Disc (Swallows hero stage into white Philosophy section) */
   .nior-hero-grow-disc {
     position: absolute;
     top: 0;
@@ -132,7 +132,7 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: var(--nior-obsidian, #0c0d0e);
+    background-color: #ffffff;
     pointer-events: none;
     z-index: 20; /* Above center brand (z-index 7) & HUD (z-index 10) */
     transform: translate(-50%, -50%) scale(0);
