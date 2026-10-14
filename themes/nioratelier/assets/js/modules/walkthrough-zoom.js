@@ -230,7 +230,7 @@ export function initWalkthroughZoom() {
     }
   }
 
-  // Setup GSAP ScrollTrigger with Magnetic Auto-Snap
+  // Setup GSAP ScrollTrigger with Magnetic Auto-Snap (Fast & Responsive)
   const trigger = ScrollTrigger.create({
     trigger: track,
     start: 'top top',
@@ -241,18 +241,18 @@ export function initWalkthroughZoom() {
         if (value <= 0.02) return 0;
         if (value >= 0.98) return 1;
 
-        const totalTransitions = totalFrames - 1; // 10 intervals
+        const totalTransitions = totalFrames - 1; // 8 intervals
         const u = value * totalTransitions;
         const index = Math.floor(u);
         const t = u - index;
 
-        // Snaps forward if user pushed past 60% of the room, otherwise settles to current room
-        const targetIndex = (t >= 0.60) ? Math.min(totalTransitions, index + 1) : index;
+        // Decisive magnetic threshold: pulls forward once 45% into transition
+        const targetIndex = (t >= 0.45) ? Math.min(totalTransitions, index + 1) : index;
         return targetIndex / totalTransitions;
       },
-      duration: { min: 0.45, max: 0.65 },
-      delay: 0.12,
-      ease: 'power3.out',
+      duration: { min: 0.18, max: 0.32 },
+      delay: 0.02,
+      ease: 'power2.out',
     },
     onUpdate: (self) => {
       state.progress = self.progress;
@@ -260,9 +260,9 @@ export function initWalkthroughZoom() {
     },
   });
 
-  // Velvety Lenis Magnetic Glide:
-  // Fallback safety lock ensures that if the user stops their wheel directly in the transition window,
-  // Lenis automatically glides smoothly into the nearest 100% solid room frame.
+  // Responsive Lenis Magnetic Glide:
+  // Fast fallback ensures that if the user stops wheel scrolling in a transition window,
+  // it promptly glides into the nearest solid room frame without sluggish delay.
   let settleTimer = null;
   const onScrollActivity = () => {
     clearTimeout(settleTimer);
@@ -274,18 +274,18 @@ export function initWalkthroughZoom() {
       const index = Math.floor(u);
       const t = u - index;
 
-      // If user stopped within the transition window (0.60 < t < 0.98)
-      if (t > 0.60 && t < 0.98) {
+      // If user stopped within the transition window (0.45 < t < 0.98)
+      if (t > 0.45 && t < 0.98) {
         const targetP = (index + 1) / totalTransitions;
         const targetScroll = trigger.start + targetP * (trigger.end - trigger.start);
         if (window.niorLenis && typeof window.niorLenis.scrollTo === 'function') {
           window.niorLenis.scrollTo(targetScroll, {
-            duration: 0.55,
-            easing: (x) => 1 - Math.pow(1 - x, 4), // Velvety easeOutQuart
+            duration: 0.28,
+            easing: (x) => 1 - Math.pow(1 - x, 3), // Responsive easeOutCubic
           });
         }
       }
-    }, 120);
+    }, 45);
   };
   window.addEventListener('scroll', onScrollActivity, { passive: true });
 
