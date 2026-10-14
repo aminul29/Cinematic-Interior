@@ -56,10 +56,12 @@ export function initWalkthroughZoom() {
   const growDiscEl = document.getElementById('niorHeroGrowDisc');
   const stageEl = track.querySelector('.nior-walkthrough-hero-stage');
 
-  let maxDiscScale = 40;
+  let discOriginX = 0;
+  let discOriginY = 0;
+  let maxDiscRadius = 1200;
 
   /**
-   * Calculate precise dot coordinates and maximum scale to engulf the stage
+   * Calculate precise dot coordinates and maximum radius to engulf the stage
    */
   function updateDiscOrigin() {
     if (!growDotEl || !growDiscEl || !stageEl) return;
@@ -75,22 +77,16 @@ export function initWalkthroughZoom() {
     const dotCenterX = dotRect.left + dotRect.width / 2;
     const dotCenterY = (dotRect.top + dotRect.height / 2) - currentBrandY;
 
-    const originX = dotCenterX - stageRect.left;
-    const originY = dotCenterY - stageRect.top;
-
-    growDiscEl.style.left = `${originX.toFixed(1)}px`;
-    growDiscEl.style.top = `${originY.toFixed(1)}px`;
+    discOriginX = dotCenterX - stageRect.left;
+    discOriginY = dotCenterY - stageRect.top;
 
     const stageW = stageRect.width || window.innerWidth;
     const stageH = stageRect.height || window.innerHeight;
-    const d1 = Math.hypot(originX, originY);
-    const d2 = Math.hypot(stageW - originX, originY);
-    const d3 = Math.hypot(originX, stageH - originY);
-    const d4 = Math.hypot(stageW - originX, stageH - originY);
-    const maxRadius = Math.max(d1, d2, d3, d4);
-
-    // Base diameter is 60px (base radius is 30px)
-    maxDiscScale = (maxRadius / 30) * 1.08;
+    const d1 = Math.hypot(discOriginX, discOriginY);
+    const d2 = Math.hypot(stageW - discOriginX, discOriginY);
+    const d3 = Math.hypot(discOriginX, stageH - discOriginY);
+    const d4 = Math.hypot(stageW - discOriginX, stageH - discOriginY);
+    maxDiscRadius = Math.max(d1, d2, d3, d4) * 1.06;
   }
 
   // Synchronize HUD total frames display dynamically
@@ -178,16 +174,16 @@ export function initWalkthroughZoom() {
   }
 
   // Cinematic scroll budget allocation:
-  // p: 0.00 -> 0.70 : Fluid spatial camera fly-through zooming through rooms 1-9
-  // p: 0.70 -> 0.78 : Solid hold on room 9 finale with brand emblem & tagline fully settled
-  // p: 0.78 -> 1.00 : Primary dot between "Architecture" and "Design" expands to engulf the stage
-  const walkthroughProgressEnd = 0.70;
-  const brandSettleEnd = 0.78;
+  // p: 0.00 -> 0.74 : High-static spatial walkthrough through rooms 1-9 (65% static hold per room)
+  // p: 0.74 -> 0.82 : Solid hold on room 9 finale with brand emblem & tagline fully settled
+  // p: 0.82 -> 1.00 : Primary dot between "Architecture" and "Design" expands to engulf the stage
+  const walkthroughProgressEnd = 0.74;
+  const brandSettleEnd = 0.82;
 
   /**
    * Continuous Scroll-Driven Walkthrough Spatial Transitions
    * Smoothly transitions images from one room to another as the user scrolls,
-   * with subtle cinematic depth and zero magnetic scroll-jacking.
+   * with generous static hold time per room for maximum architectural appreciation.
    */
   function render(progress) {
     const clampedP = Math.max(0, Math.min(1, progress));
@@ -216,20 +212,20 @@ export function initWalkthroughZoom() {
     const currentImg = images[currentIndex];
     const nextImg = images[nextIndex];
 
-    // Smooth transition window:
-    // t <= 0.12: Crisp initial room frame with gentle drift
-    // 0.12 < t < 0.88: Fluid crossfade and depth zoom
-    // t >= 0.88: Seamless arrival into the next solid room frame
-    const fadeStart = 0.12;
-    const fadeEnd = 0.88;
+    // Generous high-static viewing window:
+    // t <= 0.65 (65% of interval): Room image is 100% solid, static, razor-sharp with subtle micro-drift
+    // 0.65 < t < 0.95 (30% window): Swift, velvety spatial crossfade to the next room
+    // t >= 0.95: Next room arrives 100% solid
+    const fadeStart = 0.65;
+    const fadeEnd = 0.95;
 
     if (t <= fadeStart) {
       const solidProgress = t / fadeStart;
-      const currentScale = 1.0 + 0.015 * solidProgress;
+      const currentScale = 1.0 + 0.008 * solidProgress;
       drawCoverImage(currentImg, currentScale, 1.0);
     } else if (t >= fadeEnd) {
       const arrivalProgress = (t - fadeEnd) / (1.0 - fadeEnd);
-      const nextScale = 1.0 + 0.008 * arrivalProgress;
+      const nextScale = 1.0 + 0.004 * arrivalProgress;
       drawCoverImage(nextImg, nextScale, 1.0);
     } else {
       const tau = (t - fadeStart) / (fadeEnd - fadeStart); // 0.0 ... 1.0
@@ -237,11 +233,11 @@ export function initWalkthroughZoom() {
       const ease = tau * tau * (3 - 2 * tau);
 
       // Incoming room emerging from subtle depth
-      const nextScale = 0.94 + 0.06 * ease;
+      const nextScale = 0.96 + 0.04 * ease;
       drawCoverImage(nextImg, nextScale, 1.0);
 
-      // Current room pushing forward and dissolving smoothly
-      const currentScale = 1.015 + 0.10 * ease;
+      // Current room pushing forward subtly and dissolving
+      const currentScale = 1.008 + 0.04 * ease;
       const currentAlpha = 1.0 - ease;
       drawCoverImage(currentImg, currentScale, currentAlpha);
     }
@@ -274,12 +270,12 @@ export function initWalkthroughZoom() {
         const factor = p / 0.07;
         brandAlpha = Math.max(0, 1 - factor);
         brandY = -25 * factor;
-      } else if (p >= 0.62 && p <= 0.72) {
+      } else if (p >= (walkthroughProgressEnd - 0.08) && p <= walkthroughProgressEnd) {
         // Ending frame (frame 09) fade back in
-        const factor = Math.min(1, Math.max(0, (p - 0.62) / 0.10));
+        const factor = Math.min(1, Math.max(0, (p - (walkthroughProgressEnd - 0.08)) / 0.08));
         brandAlpha = factor;
         brandY = 25 * (1 - factor);
-      } else if (p > 0.72) {
+      } else if (p > walkthroughProgressEnd) {
         // Fully settled on frame 9, stays visible until the expanding disc covers it
         brandAlpha = 1;
         brandY = 0;
@@ -298,15 +294,15 @@ export function initWalkthroughZoom() {
 
     // 3. Minimalist Gold HUD: Activates smoothly on scroll, recedes on ending finale
     if (hudEl) {
-      if (p > 0.04 && p < 0.72) {
+      if (p > 0.04 && p < walkthroughProgressEnd) {
         hudEl.classList.add('is-active');
       } else {
         hudEl.classList.remove('is-active');
       }
     }
 
-    // Display frame advances when entering the second half of the transition
-    const displayIndex = (t >= 0.50 && activeIndex < totalFrames - 1) ? activeIndex + 1 : activeIndex;
+    // Display frame advances when entering the active crossfade window
+    const displayIndex = (t >= 0.78 && activeIndex < totalFrames - 1) ? activeIndex + 1 : activeIndex;
 
     if (frameNumEl) {
       const numStr = String(displayIndex + 1).padStart(2, '0');
@@ -327,13 +323,15 @@ export function initWalkthroughZoom() {
       progressFillEl.style.width = `${(spatialProgress * 100).toFixed(1)}%`;
     }
 
-    // 4. Growing Obsidian Disc: Expands from the dot between "Architecture" and "Design",
-    // swallowing the text and the entire hero stage into pure obsidian.
+    // 4. Growing White Vector Mask: Expands from the dot between "Architecture" and "Design",
+    // swallowing the text and the entire hero stage into pure white with silky vector edges & zero overflow.
     if (growDiscEl) {
       if (p <= brandSettleEnd) {
-        growDiscEl.style.transform = 'translate(-50%, -50%) scale(0)';
+        growDiscEl.style.clipPath = 'circle(0px at 50% 50%)';
+        growDiscEl.style.webkitClipPath = 'circle(0px at 50% 50%)';
         growDiscEl.style.opacity = '0';
         growDiscEl.style.visibility = 'hidden';
+        track.style.backgroundColor = '#0c0d0e';
       } else {
         // Dynamically ensure exact origin coordinates once brand text has settled
         if (!growDiscEl.dataset.aligned && p >= brandSettleEnd) {
@@ -344,11 +342,20 @@ export function initWalkthroughZoom() {
         const expandT = Math.min(1, (p - brandSettleEnd) / (1.0 - brandSettleEnd));
         // Exponential deceleration curve for organic fluid bloom
         const ease = Math.pow(expandT, 1.8);
-        const currentScale = ease * maxDiscScale;
+        const currentRadius = ease * maxDiscRadius;
 
         growDiscEl.style.visibility = 'visible';
         growDiscEl.style.opacity = '1';
-        growDiscEl.style.transform = `translate(-50%, -50%) scale(${currentScale.toFixed(3)})`;
+        const clipStr = `circle(${currentRadius.toFixed(1)}px at ${discOriginX.toFixed(1)}px ${discOriginY.toFixed(1)}px)`;
+        growDiscEl.style.clipPath = clipStr;
+        growDiscEl.style.webkitClipPath = clipStr;
+
+        // Transition track background to pure white as the circle captures the stage
+        if (expandT >= 0.85) {
+          track.style.backgroundColor = '#ffffff';
+        } else {
+          track.style.backgroundColor = '#0c0d0e';
+        }
       }
 
       // Reset alignment cache flag when scrolling back up above the finale

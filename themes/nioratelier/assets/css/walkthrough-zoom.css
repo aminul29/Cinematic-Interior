@@ -5,9 +5,16 @@
 
 .nior-walkthrough-hero-track {
   position: relative;
-  height: 600vh;
+  height: 750vh;
   background-color: var(--nior-obsidian, #0c0d0e);
   color: var(--nior-white, #ffffff);
+  overflow: hidden;
+  overflow-x: clip;
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: -100vh;
+  margin-block-end: -100vh;
+  z-index: 2;
 
   .nior-walkthrough-hero-stage {
     position: sticky;
@@ -124,22 +131,21 @@
     }
   }
 
-  /* Expanding Solid White Disc (Swallows hero stage into white Philosophy section) */
+  /* Expanding Solid White Mask (Swallows hero stage into Philosophy with silky vector edges & zero overflow) */
   .nior-hero-grow-disc {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     background-color: #ffffff;
     pointer-events: none;
     z-index: 20; /* Above center brand (z-index 7) & HUD (z-index 10) */
-    transform: translate(-50%, -50%) scale(0);
-    transform-origin: center center;
-    will-change: transform;
+    clip-path: circle(0px at 50% 50%);
+    -webkit-clip-path: circle(0px at 50% 50%);
+    will-change: clip-path;
     opacity: 0;
     visibility: hidden;
+    transform: none;
   }
 
   /* Staged Initial Content (Headline, Subtitle & CTAs) — Hidden to keep center brand emblem clean */
