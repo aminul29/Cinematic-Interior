@@ -25,40 +25,6 @@
       height: 52px;
     }
   }
-}
-
-/* WordPress Logged-In Admin Bar Compatibility */
-body.admin-bar {
-  .nior-header {
-    top: 32px;
-  }
-
-  .nior-top-progress {
-    top: 32px;
-  }
-
-  .nior-mobile-menu {
-    top: 32px;
-    padding-top: calc(var(--header-height) + 40px + 32px);
-  }
-}
-
-@media screen and (max-width: 782px) {
-  body.admin-bar {
-    .nior-header {
-      top: 46px;
-    }
-
-    .nior-top-progress {
-      top: 46px;
-    }
-
-    .nior-mobile-menu {
-      top: 46px;
-      padding-top: calc(var(--header-height) + 40px + 46px);
-    }
-  }
-}
 
   .nior-header__inner {
     display: flex;
@@ -212,21 +178,52 @@ body.admin-bar {
   }
 }
 
-/* Mobile Drawer */
+/* WordPress Logged-In Admin Bar Compatibility */
+body.admin-bar {
+  .nior-header {
+    top: 32px;
+  }
+
+  .nior-top-progress {
+    top: 32px;
+  }
+}
+
+@media screen and (max-width: 782px) {
+  body.admin-bar {
+    .nior-header {
+      top: 46px;
+    }
+
+    .nior-top-progress {
+      top: 46px;
+    }
+  }
+}
+
+/* Mobile Drawer — Strictly hidden on desktop, only active on mobile */
 .nior-mobile-menu {
+  display: none;
   position: fixed;
   inset: 0;
   z-index: 999;
   background: var(--nior-obsidian);
   padding: calc(var(--header-height) + 40px) 24px 40px;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   transform: translateY(-100%);
   transition: transform 0.5s var(--ease-out-luxury);
+  pointer-events: none;
+  visibility: hidden;
 
-  &.is-open {
-    transform: translateY(0);
+  @media (max-width: 900px) {
+    display: flex;
+
+    &.is-open {
+      transform: translateY(0);
+      pointer-events: auto;
+      visibility: visible;
+    }
   }
 
   .nior-mobile-menu__nav {
