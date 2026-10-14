@@ -152,6 +152,26 @@ export function initWalkthroughZoom() {
   });
 
   /**
+   * Safe loaded image resolver with fallback to nearest available frame
+   */
+  function getLoadedImage(targetIndex) {
+    if (images[targetIndex] && images[targetIndex].complete && images[targetIndex].naturalWidth > 0) {
+      return images[targetIndex];
+    }
+    for (let k = targetIndex - 1; k >= 0; k--) {
+      if (images[k] && images[k].complete && images[k].naturalWidth > 0) {
+        return images[k];
+      }
+    }
+    for (let k = targetIndex + 1; k < images.length; k++) {
+      if (images[k] && images[k].complete && images[k].naturalWidth > 0) {
+        return images[k];
+      }
+    }
+    return null;
+  }
+
+  /**
    * High-Performance Cover-Fit Draw with Center Scaling
    */
   function drawCoverImage(img, scale = 1, alpha = 1) {
@@ -202,7 +222,7 @@ export function initWalkthroughZoom() {
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     if (u >= totalTransitions) {
-      const lastImg = images[totalFrames - 1];
+      const lastImg = getLoadedImage(totalFrames - 1);
       drawCoverImage(lastImg, 1.0, 1.0);
       updateUI(clampedP, totalFrames - 1, 1.0);
       return;
@@ -212,8 +232,8 @@ export function initWalkthroughZoom() {
     const nextIndex = currentIndex + 1;
     const t = u - currentIndex; // Progress within interval [0.0 ... 1.0)
 
-    const currentImg = images[currentIndex];
-    const nextImg = images[nextIndex];
+    const currentImg = getLoadedImage(currentIndex);
+    const nextImg = getLoadedImage(nextIndex);
 
     // Generous high-static viewing window:
     // t <= 0.65 (65% of interval): Room image is 100% solid, static, razor-sharp with subtle micro-drift
@@ -393,6 +413,10 @@ export function initWalkthroughZoom() {
     end: 'bottom bottom',
     scrub: true,
     onUpdate: (self) => {
+      state.progress = self.progress;
+      render(state.progress);
+    },
+    onRefresh: (self) => {
       state.progress = self.progress;
       render(state.progress);
     },

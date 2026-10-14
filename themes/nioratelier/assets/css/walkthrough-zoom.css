@@ -8,7 +8,6 @@
   height: 750vh;
   background-color: var(--nior-obsidian, #0c0d0e);
   color: var(--nior-white, #ffffff);
-  overflow: hidden;
   overflow-x: clip;
   margin: 0;
   margin-top: 0;
