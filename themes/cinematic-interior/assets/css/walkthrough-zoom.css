@@ -86,18 +86,22 @@
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--nior-gold, #c9a25e), transparent);
       margin: 18px 0;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.95));
     }
 
     .nior-hero-center-brand__tagline {
       font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
       font-size: clamp(0.72rem, 1.1vw, 0.92rem);
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.42em;
       padding-left: 0.42em;
       color: var(--nior-champagne, #f4ebe1);
       text-transform: uppercase;
-      opacity: 0.92;
-      text-shadow: 0 2px 15px rgba(0, 0, 0, 0.85);
+      opacity: 1;
+      text-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.95),
+        0 3px 8px rgba(0, 0, 0, 0.95),
+        0 6px 20px rgba(0, 0, 0, 0.9);
     }
   }
 
