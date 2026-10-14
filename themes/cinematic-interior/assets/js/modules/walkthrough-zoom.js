@@ -12,23 +12,21 @@ export function initWalkthroughZoom() {
   if (!gsap || !ScrollTrigger) return;
 
   const themeUri = (niorConfig && niorConfig.themeUri) ? niorConfig.themeUri : '';
-  const totalFrames = 9;
+  const totalFrames = (niorConfig && Array.isArray(niorConfig.walkthroughImages) && niorConfig.walkthroughImages.length)
+    ? niorConfig.walkthroughImages.length
+    : ((niorConfig && niorConfig.walkthroughTotalFrames) ? niorConfig.walkthroughTotalFrames : 5);
 
-  // Spatial Zone Tags for the architectural HUD indicator (9 curated zones)
+  // Spatial Zone Tags for the architectural HUD indicator (5 curated zones)
   const zoneTags = [
     'ATRIUM PORTAL',
     'CENTRAL ROTUNDA',
     'VELVET LOUNGE',
     'LINEAR BAR & MILLWORK',
-    'BRONZE ARCHWAY',
-    'MEZZANINE GALLERY',
-    'PRIVATE CELLAR',
-    'SALON FINALE',
-    'V-STAGE FINALE',
+    'GRAND SALON FINALE',
   ];
 
-  // Resolve image paths (frame-01.jpg to frame-09.jpg) with robust cache-busting
-  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.8.16';
+  // Resolve image paths (frame-01.jpg to frame-05.jpg) with robust cache-busting
+  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.8.17';
   const hasConfigImages = niorConfig && Array.isArray(niorConfig.walkthroughImages) && niorConfig.walkthroughImages.length > 0;
   const imageSources = hasConfigImages
     ? niorConfig.walkthroughImages
@@ -198,8 +196,8 @@ export function initWalkthroughZoom() {
   }
 
   // Cinematic scroll budget allocation:
-  // p: 0.00 -> 0.74 : High-static spatial walkthrough through rooms 1-9 (65% static hold per room)
-  // p: 0.74 -> 0.82 : Solid hold on room 9 finale with brand emblem & tagline fully settled
+  // p: 0.00 -> 0.74 : High-static spatial walkthrough through rooms 1-5 (65% static hold per room)
+  // p: 0.74 -> 0.82 : Solid hold on room 5 finale with brand emblem & tagline fully settled
   // p: 0.82 -> 1.00 : Primary dot between "Architecture" and "Design" expands to engulf the stage
   const walkthroughProgressEnd = 0.74;
   const brandSettleEnd = 0.82;
@@ -211,7 +209,7 @@ export function initWalkthroughZoom() {
    */
   function render(progress) {
     const clampedP = Math.max(0, Math.min(1, progress));
-    const totalTransitions = totalFrames - 1; // 8 intervals for 9 frames
+    const totalTransitions = totalFrames - 1; // 4 intervals for 5 frames
 
     // Map progress to spatial transitions
     const spatialP = Math.min(1, clampedP / walkthroughProgressEnd);
@@ -295,12 +293,12 @@ export function initWalkthroughZoom() {
         brandAlpha = Math.max(0, 1 - factor);
         brandY = -25 * factor;
       } else if (p >= (walkthroughProgressEnd - 0.08) && p <= walkthroughProgressEnd) {
-        // Ending frame (frame 09) fade back in
+        // Ending frame (frame 05) fade back in
         const factor = Math.min(1, Math.max(0, (p - (walkthroughProgressEnd - 0.08)) / 0.08));
         brandAlpha = factor;
         brandY = 25 * (1 - factor);
       } else if (p > walkthroughProgressEnd) {
-        // Fully settled on frame 9, stays visible until the expanding disc covers it
+        // Fully settled on frame 5, stays visible until the expanding disc covers it
         brandAlpha = 1;
         brandY = 0;
       } else {

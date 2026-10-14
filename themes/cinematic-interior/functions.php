@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CINEMATIC_INTERIOR_VERSION', '1.8.16' );
+define( 'CINEMATIC_INTERIOR_VERSION', '1.8.17' );
 define( 'CINEMATIC_INTERIOR_THEME_DIR', get_template_directory() );
 define( 'CINEMATIC_INTERIOR_THEME_URI', get_template_directory_uri() );
 
@@ -184,13 +184,13 @@ function cinematic_interior_enqueue_assets() {
             'themeUri'        => CINEMATIC_INTERIOR_THEME_URI,
             'sequenceBase'    => CINEMATIC_INTERIOR_THEME_URI . '/assets/img/sequence/frame_',
             'totalFrames'     => 101,
-            'walkthroughTotalFrames' => 9,
+            'walkthroughTotalFrames' => 5,
             'walkthroughVideo'=> CINEMATIC_INTERIOR_THEME_URI . '/assets/img/walkthrough_master.mp4',
             'scrubVideo'      => CINEMATIC_INTERIOR_THEME_URI . '/assets/img/hero-scrub.mp4',
             'posterImage'     => CINEMATIC_INTERIOR_THEME_URI . '/assets/img/hero-poster.webp',
             'walkthroughImages'=> array_map( function( $i ) {
                 return CINEMATIC_INTERIOR_THEME_URI . sprintf( '/assets/img/walkthrough/frame-%02d.jpg?v=%s', $i, CINEMATIC_INTERIOR_VERSION );
-            }, range( 1, 9 ) ),
+            }, range( 1, 5 ) ),
             'isFrontPage'     => is_front_page(),
         )
     );

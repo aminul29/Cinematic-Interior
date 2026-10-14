@@ -5,7 +5,7 @@
 
 .nior-walkthrough-hero-track {
   position: relative;
-  height: 750vh;
+  height: 480vh;
   background-color: var(--nior-obsidian, #0c0d0e);
   color: var(--nior-white, #ffffff);
   overflow-x: clip;
