@@ -23,8 +23,15 @@
 .nior-rack-section {
   position: relative;
   height: 270vh;
-  background-color: #ffffff;
-  color: #0c0d0e;
+  background-color: #0c0d0e;
+  background-image:
+    linear-gradient(180deg, rgba(12, 13, 14, 0.72) 0%, rgba(12, 13, 14, 0.62) 50%, rgba(12, 13, 14, 0.80) 100%),
+    radial-gradient(circle at center, rgba(12, 13, 14, 0.40) 0%, rgba(12, 13, 14, 0.75) 100%),
+    url('../img/hq/factory-3.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: var(--nior-white, #ffffff);
   overflow-x: clip;
   margin: 0;
   margin-top: 0;
@@ -61,7 +68,14 @@ body .wp-site-blocks > .nior-rack-section,
   text-align: center;
   overflow: hidden;
   padding: 0 24px;
-  background-color: #ffffff;
+  background-color: #0c0d0e;
+  background-image:
+    linear-gradient(180deg, rgba(12, 13, 14, 0.72) 0%, rgba(12, 13, 14, 0.62) 50%, rgba(12, 13, 14, 0.80) 100%),
+    radial-gradient(circle at center, rgba(12, 13, 14, 0.40) 0%, rgba(12, 13, 14, 0.75) 100%),
+    url('../img/hq/factory-3.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   z-index: 12;
   box-sizing: border-box;
   visibility: hidden;
@@ -70,7 +84,7 @@ body .wp-site-blocks > .nior-rack-section,
 }
 
 .nior-rack-eyebrow {
-  color: #a8823e;
+  color: var(--nior-gold, #c9a25e);
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 700;
@@ -80,6 +94,7 @@ body .wp-site-blocks > .nior-rack-section,
   opacity: 1;
   transform: translateY(0);
   will-change: opacity, transform;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
 .nior-rack-headline {
@@ -89,8 +104,9 @@ body .wp-site-blocks > .nior-rack-section,
   line-height: 1.1;
   max-width: 22ch;
   margin: 0 auto;
-  color: #0c0d0e;
+  color: var(--nior-white, #ffffff);
   letter-spacing: -0.015em;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.95), 0 2px 10px rgba(0, 0, 0, 0.9);
 
   span.rack-word {
     display: inline-block;
@@ -100,23 +116,24 @@ body .wp-site-blocks > .nior-rack-section,
     will-change: opacity, transform, filter;
     margin-right: 0.18em;
     transition: color 0.3s ease;
-    color: #0c0d0e;
+    color: var(--nior-white, #ffffff);
 
     &.em {
-      color: #a8823e;
+      color: var(--nior-gold, #c9a25e);
       font-style: italic;
     }
   }
 }
 
 .nior-rack-sub {
-  color: #4a4d52;
+  color: var(--nior-champagne, rgba(244, 235, 225, 0.85));
   font-size: clamp(16px, 1.6vw, 20px);
   max-width: 54ch;
   margin: 36px auto 0;
   opacity: 0;
   will-change: opacity;
   line-height: 1.8;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
 }
 
 /* ==========================================================================

@@ -28,7 +28,7 @@ export function initWalkthroughZoom() {
   ];
 
   // Resolve image paths (frame-01.jpg to frame-09.jpg) with robust cache-busting
-  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.8.11';
+  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.8.12';
   const hasConfigImages = niorConfig && Array.isArray(niorConfig.walkthroughImages) && niorConfig.walkthroughImages.length > 0;
   const imageSources = hasConfigImages
     ? niorConfig.walkthroughImages
