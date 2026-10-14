@@ -28,7 +28,7 @@ export function initWalkthroughZoom() {
   ];
 
   // Resolve image paths (frame-01.jpg to frame-09.jpg) with robust cache-busting
-  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.8.7';
+  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.8.10';
   const hasConfigImages = niorConfig && Array.isArray(niorConfig.walkthroughImages) && niorConfig.walkthroughImages.length > 0;
   const imageSources = hasConfigImages
     ? niorConfig.walkthroughImages
@@ -58,6 +58,7 @@ export function initWalkthroughZoom() {
   const growDiscEl = document.getElementById('niorHeroGrowDisc');
   const stageEl = track.querySelector('.nior-walkthrough-hero-stage');
   const rackSection = document.getElementById('niorRackSection');
+  const rackStage = rackSection ? rackSection.querySelector('.nior-rack-stage') : null;
 
   let discOriginX = 0;
   let discOriginY = 0;
@@ -152,6 +153,26 @@ export function initWalkthroughZoom() {
   });
 
   /**
+   * Safe loaded image resolver with fallback to nearest available frame
+   */
+  function getLoadedImage(targetIndex) {
+    if (images[targetIndex] && images[targetIndex].complete && images[targetIndex].naturalWidth > 0) {
+      return images[targetIndex];
+    }
+    for (let k = targetIndex - 1; k >= 0; k--) {
+      if (images[k] && images[k].complete && images[k].naturalWidth > 0) {
+        return images[k];
+      }
+    }
+    for (let k = targetIndex + 1; k < images.length; k++) {
+      if (images[k] && images[k].complete && images[k].naturalWidth > 0) {
+        return images[k];
+      }
+    }
+    return null;
+  }
+
+  /**
    * High-Performance Cover-Fit Draw with Center Scaling
    */
   function drawCoverImage(img, scale = 1, alpha = 1) {
@@ -202,7 +223,7 @@ export function initWalkthroughZoom() {
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     if (u >= totalTransitions) {
-      const lastImg = images[totalFrames - 1];
+      const lastImg = getLoadedImage(totalFrames - 1);
       drawCoverImage(lastImg, 1.0, 1.0);
       updateUI(clampedP, totalFrames - 1, 1.0);
       return;
@@ -212,8 +233,8 @@ export function initWalkthroughZoom() {
     const nextIndex = currentIndex + 1;
     const t = u - currentIndex; // Progress within interval [0.0 ... 1.0)
 
-    const currentImg = images[currentIndex];
-    const nextImg = images[nextIndex];
+    const currentImg = getLoadedImage(currentIndex);
+    const nextImg = getLoadedImage(nextIndex);
 
     // Generous high-static viewing window:
     // t <= 0.65 (65% of interval): Room image is 100% solid, static, razor-sharp with subtle micro-drift
@@ -373,10 +394,24 @@ export function initWalkthroughZoom() {
     if (rackSection) {
       if (p >= 1.0) {
         rackSection.style.visibility = 'visible';
+        rackSection.style.opacity = '1';
+        rackSection.style.pointerEvents = 'auto';
+        if (rackStage) {
+          rackStage.style.visibility = 'visible';
+          rackStage.style.opacity = '1';
+          rackStage.style.pointerEvents = 'auto';
+        }
         if (stageEl) stageEl.style.visibility = 'hidden';
         track.style.pointerEvents = 'none';
       } else {
         rackSection.style.visibility = 'hidden';
+        rackSection.style.opacity = '0';
+        rackSection.style.pointerEvents = 'none';
+        if (rackStage) {
+          rackStage.style.visibility = 'hidden';
+          rackStage.style.opacity = '0';
+          rackStage.style.pointerEvents = 'none';
+        }
         if (stageEl) {
           stageEl.style.visibility = 'visible';
           stageEl.style.opacity = '1';
@@ -393,6 +428,10 @@ export function initWalkthroughZoom() {
     end: 'bottom bottom',
     scrub: true,
     onUpdate: (self) => {
+      state.progress = self.progress;
+      render(state.progress);
+    },
+    onRefresh: (self) => {
       state.progress = self.progress;
       render(state.progress);
     },

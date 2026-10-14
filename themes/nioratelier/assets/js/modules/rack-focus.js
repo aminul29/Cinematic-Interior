@@ -32,13 +32,28 @@ export function initRackFocus() {
       onToggle: (self) => {
         if (self.isActive) {
           section.style.visibility = 'visible';
+          section.style.opacity = '1';
+          section.style.pointerEvents = 'auto';
           stage.style.visibility = 'visible';
+          stage.style.opacity = '1';
+          stage.style.pointerEvents = 'auto';
+        } else if (self.scroll() < self.start) {
+          section.style.visibility = 'hidden';
+          section.style.opacity = '0';
+          section.style.pointerEvents = 'none';
+          stage.style.visibility = 'hidden';
+          stage.style.opacity = '0';
+          stage.style.pointerEvents = 'none';
         }
       },
       onUpdate: (self) => {
         if (self.isActive) {
           section.style.visibility = 'visible';
+          section.style.opacity = '1';
+          section.style.pointerEvents = 'auto';
           stage.style.visibility = 'visible';
+          stage.style.opacity = '1';
+          stage.style.pointerEvents = 'auto';
         }
       },
     });
@@ -110,10 +125,25 @@ export function initRackFocus() {
 
     const p = clamp(-rect.top / range, 0, 1);
 
-    // Guarantee section visibility when reached
+    // Guarantee section visibility when reached, and keep completely hidden when above (in hero)
     if (rect.top <= 0) {
       section.style.visibility = 'visible';
-      if (stage) stage.style.visibility = 'visible';
+      section.style.opacity = '1';
+      section.style.pointerEvents = 'auto';
+      if (stage) {
+        stage.style.visibility = 'visible';
+        stage.style.opacity = '1';
+        stage.style.pointerEvents = 'auto';
+      }
+    } else {
+      section.style.visibility = 'hidden';
+      section.style.opacity = '0';
+      section.style.pointerEvents = 'none';
+      if (stage) {
+        stage.style.visibility = 'hidden';
+        stage.style.opacity = '0';
+        stage.style.pointerEvents = 'none';
+      }
     }
 
     // 1. Eyebrow "Our Philosophy" appears immediately as soon as the circle consumes the hero section

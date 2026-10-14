@@ -22,10 +22,9 @@
    ========================================================================== */
 .nior-rack-section {
   position: relative;
-  height: 240vh;
+  height: 270vh;
   background-color: #ffffff;
   color: #0c0d0e;
-  overflow: hidden;
   overflow-x: clip;
   margin: 0;
   margin-top: 0;
@@ -34,6 +33,8 @@
   border: none;
   z-index: 12;
   visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Guarantee seamless zero-gap handover between Hero and Philosophy section */
@@ -47,8 +48,10 @@ body .wp-site-blocks > .nior-rack-section,
 }
 
 .nior-rack-stage {
-  position: sticky;
+  position: relative;
   top: 0;
+  left: 0;
+  width: 100%;
   height: 100vh;
   height: 100svh;
   display: flex;
@@ -58,6 +61,12 @@ body .wp-site-blocks > .nior-rack-section,
   text-align: center;
   overflow: hidden;
   padding: 0 24px;
+  background-color: #ffffff;
+  z-index: 12;
+  box-sizing: border-box;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .nior-rack-eyebrow {

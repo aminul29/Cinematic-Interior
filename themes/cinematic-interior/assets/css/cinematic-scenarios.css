@@ -1,10 +1,20 @@
 /* Scoped Styles for Cinematic Scenarios Showcase — Pure Scoped CSS Nesting */
 .nior-scenarios-section {
   position: relative;
+  z-index: 20;
   background-color: var(--nior-obsidian, #0c0d0e);
   color: var(--nior-white, #ffffff);
   padding: clamp(90px, 14vh, 160px) 0;
   overflow: hidden;
+  margin-left: clamp(16px, 4.5vw, 60px);
+  margin-right: clamp(16px, 4.5vw, 60px);
+  border-top-left-radius: clamp(28px, 4.5vw, 64px);
+  border-top-right-radius: clamp(28px, 4.5vw, 64px);
+  border-bottom-left-radius: clamp(28px, 4.5vw, 64px);
+  border-bottom-right-radius: clamp(28px, 4.5vw, 64px);
+  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  will-change: margin-left, margin-right, border-radius, box-shadow;
+  transform: translate3d(0, 0, 0);
 
   .nior-scenarios-header {
     text-align: center;

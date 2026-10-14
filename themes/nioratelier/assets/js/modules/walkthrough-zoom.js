@@ -28,7 +28,7 @@ export function initWalkthroughZoom() {
   ];
 
   // Resolve image paths (frame-01.jpg to frame-09.jpg) with robust cache-busting
-  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.8.7';
+  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.8.10';
   const hasConfigImages = niorConfig && Array.isArray(niorConfig.walkthroughImages) && niorConfig.walkthroughImages.length > 0;
   const imageSources = hasConfigImages
     ? niorConfig.walkthroughImages
@@ -58,6 +58,7 @@ export function initWalkthroughZoom() {
   const growDiscEl = document.getElementById('niorHeroGrowDisc');
   const stageEl = track.querySelector('.nior-walkthrough-hero-stage');
   const rackSection = document.getElementById('niorRackSection');
+  const rackStage = rackSection ? rackSection.querySelector('.nior-rack-stage') : null;
 
   let discOriginX = 0;
   let discOriginY = 0;
@@ -393,10 +394,24 @@ export function initWalkthroughZoom() {
     if (rackSection) {
       if (p >= 1.0) {
         rackSection.style.visibility = 'visible';
+        rackSection.style.opacity = '1';
+        rackSection.style.pointerEvents = 'auto';
+        if (rackStage) {
+          rackStage.style.visibility = 'visible';
+          rackStage.style.opacity = '1';
+          rackStage.style.pointerEvents = 'auto';
+        }
         if (stageEl) stageEl.style.visibility = 'hidden';
         track.style.pointerEvents = 'none';
       } else {
         rackSection.style.visibility = 'hidden';
+        rackSection.style.opacity = '0';
+        rackSection.style.pointerEvents = 'none';
+        if (rackStage) {
+          rackStage.style.visibility = 'hidden';
+          rackStage.style.opacity = '0';
+          rackStage.style.pointerEvents = 'none';
+        }
         if (stageEl) {
           stageEl.style.visibility = 'visible';
           stageEl.style.opacity = '1';
