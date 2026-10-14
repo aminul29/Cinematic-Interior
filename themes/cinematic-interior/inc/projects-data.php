@@ -70,13 +70,6 @@ function nioratelier_get_portfolio_sections() {
                     'count'       => 10,
                 ),
                 array(
-                    'slug'        => 'vsing-bar',
-                    'title'       => 'V Sing Bar & Reception',
-                    'category'    => 'Hospitality · Bar & Lounge',
-                    'description' => 'Fluted timber counter with ambient crimson kick-lighting, illuminated spirits display cabinetry, and geometric stone flooring.',
-                    'count'       => 10,
-                ),
-                array(
                     'slug'        => 'artisanal-cafe',
                     'title'       => 'Modern Artisanal Cafe',
                     'category'    => 'F&B · Japanese Concept',
