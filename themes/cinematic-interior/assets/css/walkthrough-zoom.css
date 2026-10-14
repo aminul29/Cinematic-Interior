@@ -5,9 +5,16 @@
 
 .nior-walkthrough-hero-track {
   position: relative;
-  height: 600vh;
+  height: 750vh;
   background-color: var(--nior-obsidian, #0c0d0e);
   color: var(--nior-white, #ffffff);
+  overflow: hidden;
+  overflow-x: clip;
+  margin: 0;
+  margin-top: 0;
+  margin-bottom: -100vh;
+  margin-block-end: -100vh;
+  z-index: 2;
 
   .nior-walkthrough-hero-stage {
     position: sticky;
@@ -89,6 +96,10 @@
     }
 
     .nior-hero-center-brand__tagline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
       font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
       font-size: clamp(0.72rem, 1.1vw, 0.92rem);
       font-weight: 600;
@@ -101,7 +112,40 @@
         0 1px 3px rgba(0, 0, 0, 0.95),
         0 3px 8px rgba(0, 0, 0, 0.95),
         0 6px 20px rgba(0, 0, 0, 0.9);
+
+      .nior-hero-grow-dot {
+        display: inline-block;
+        position: relative;
+        color: #ffffff;
+        font-weight: 700;
+        margin: 0 0.22em;
+        text-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+      }
+
+      .nior-hero-tagline-dot {
+        display: inline-block;
+        color: var(--nior-gold, #c9a25e);
+        margin: 0 0.22em;
+        opacity: 0.85;
+      }
     }
+  }
+
+  /* Expanding Solid White Mask (Swallows hero stage into Philosophy with silky vector edges & zero overflow) */
+  .nior-hero-grow-disc {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    pointer-events: none;
+    z-index: 20; /* Above center brand (z-index 7) & HUD (z-index 10) */
+    clip-path: circle(0px at 50% 50%);
+    -webkit-clip-path: circle(0px at 50% 50%);
+    will-change: clip-path;
+    opacity: 0;
+    visibility: hidden;
+    transform: none;
   }
 
   /* Staged Initial Content (Headline, Subtitle & CTAs) — Hidden to keep center brand emblem clean */
