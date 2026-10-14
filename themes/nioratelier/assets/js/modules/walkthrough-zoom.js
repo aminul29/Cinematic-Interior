@@ -1,6 +1,6 @@
 /**
  * Cinematic Scroll-Driven Walkthrough Zoom Hero
- * Magnetic 3D Camera Fly-Through with 65% Solid Framing & Velvety Auto-Snap
+ * Fluid Scroll-Linked Spatial Crossfade & 3D Depth Transitions
  */
 
 export function initWalkthroughZoom() {
@@ -129,46 +129,61 @@ export function initWalkthroughZoom() {
   }
 
   /**
-   * 65% Solid Framing & 35% Fly-Through Window
-   * Eliminates lingering double-exposures: image is 100% solid for 65% of interval,
-   * then transitions dynamically in the final 35%.
+   * Continuous Scroll-Driven Walkthrough Spatial Transitions
+   * Smoothly transitions images from one room to another as the user scrolls,
+   * with subtle cinematic depth and zero magnetic scroll-jacking.
    */
   function render(progress) {
     const clampedP = Math.max(0, Math.min(1, progress));
-    const totalTransitions = totalFrames - 1; // 10 intervals
-    const u = clampedP * totalTransitions; // Continuous coordinate [0.0 ... 10.0]
-
-    const currentIndex = Math.min(totalTransitions - 1, Math.floor(u));
-    const nextIndex = Math.min(totalFrames - 1, currentIndex + 1);
-    const t = u - currentIndex; // Progress within interval [0.0 ... 1.0]
-
-    const currentImg = images[currentIndex];
-    const nextImg = images[nextIndex];
+    const totalTransitions = totalFrames - 1; // 8 intervals for 9 frames
+    const u = clampedP * totalTransitions; // Continuous coordinate [0.0 ... 8.0]
 
     // Reset canvas background
     context.globalAlpha = 1.0;
     context.fillStyle = '#0c0d0e';
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    const transitionStart = 0.72; // 72% solid display, 28% transition window
+    if (u >= totalTransitions) {
+      const lastImg = images[totalFrames - 1];
+      drawCoverImage(lastImg, 1.0, 1.0);
+      updateUI(clampedP, totalFrames - 1, 1.0);
+      return;
+    }
 
-    if (t <= transitionStart) {
-      // 1. Pure Solid Frame (ZERO OVERLAPPING):
-      // Only the current room is drawn at 100% solid opacity with a gentle push
-      const solidProgress = t / transitionStart;
-      const currentScale = 1.0 + 0.22 * solidProgress;
+    const currentIndex = Math.floor(u);
+    const nextIndex = currentIndex + 1;
+    const t = u - currentIndex; // Progress within interval [0.0 ... 1.0)
+
+    const currentImg = images[currentIndex];
+    const nextImg = images[nextIndex];
+
+    // Smooth transition window:
+    // t <= 0.12: Crisp initial room frame with gentle drift
+    // 0.12 < t < 0.88: Fluid crossfade and depth zoom
+    // t >= 0.88: Seamless arrival into the next solid room frame
+    const fadeStart = 0.12;
+    const fadeEnd = 0.88;
+
+    if (t <= fadeStart) {
+      const solidProgress = t / fadeStart;
+      const currentScale = 1.0 + 0.015 * solidProgress;
       drawCoverImage(currentImg, currentScale, 1.0);
+    } else if (t >= fadeEnd) {
+      const arrivalProgress = (t - fadeEnd) / (1.0 - fadeEnd);
+      const nextScale = 1.0 + 0.008 * arrivalProgress;
+      drawCoverImage(nextImg, nextScale, 1.0);
     } else {
-      // 2. Active 28% Fly-Through Transition:
-      const tau = (t - transitionStart) / (1.0 - transitionStart); // 0.0 ... 1.0
+      const tau = (t - fadeStart) / (fadeEnd - fadeStart); // 0.0 ... 1.0
+      // Smooth cubic ease curve for velvety crossfade
+      const ease = tau * tau * (3 - 2 * tau);
 
-      // Next Room emerging from background depth (Solid backdrop)
-      const nextScale = 0.86 + 0.14 * tau;
+      // Incoming room emerging from subtle depth
+      const nextScale = 0.94 + 0.06 * ease;
       drawCoverImage(nextImg, nextScale, 1.0);
 
-      // Current Room zooming forward past the camera and dissolving
-      const currentScale = 1.22 + 0.98 * tau;
-      const currentAlpha = 1.0 - Math.pow(tau, 1.3);
+      // Current room pushing forward and dissolving smoothly
+      const currentScale = 1.015 + 0.10 * ease;
+      const currentAlpha = 1.0 - ease;
       drawCoverImage(currentImg, currentScale, currentAlpha);
     }
 
@@ -176,10 +191,10 @@ export function initWalkthroughZoom() {
     context.globalAlpha = 1.0;
 
     // Update UI HUD & Staged Overlays
-    updateUI(clampedP, currentIndex, t, transitionStart);
+    updateUI(clampedP, currentIndex, t);
   }
 
-  function updateUI(p, activeIndex, t, transitionStart) {
+  function updateUI(p, activeIndex, t) {
     // 1. Staged reveal: Initial brand & headline fade out gracefully as scroll begins
     if (contentEl) {
       const contentAlpha = Math.max(0, 1 - p / 0.08);
@@ -208,8 +223,8 @@ export function initWalkthroughZoom() {
       }
     }
 
-    // Display frame advances when entering the active transition window
-    const displayIndex = (t > transitionStart && activeIndex < totalFrames - 1) ? activeIndex + 1 : activeIndex;
+    // Display frame advances when entering the second half of the transition
+    const displayIndex = (t >= 0.50 && activeIndex < totalFrames - 1) ? activeIndex + 1 : activeIndex;
 
     if (frameNumEl) {
       const numStr = String(displayIndex + 1).padStart(2, '0');
@@ -230,64 +245,17 @@ export function initWalkthroughZoom() {
     }
   }
 
-  // Setup GSAP ScrollTrigger with Magnetic Auto-Snap (Fast & Responsive)
+  // Setup GSAP ScrollTrigger without magnetic auto-snap (Fluid natural scrub)
   const trigger = ScrollTrigger.create({
     trigger: track,
     start: 'top top',
     end: 'bottom bottom',
     scrub: true,
-    snap: {
-      snapTo: (value) => {
-        if (value <= 0.02) return 0;
-        if (value >= 0.98) return 1;
-
-        const totalTransitions = totalFrames - 1; // 8 intervals
-        const u = value * totalTransitions;
-        const index = Math.floor(u);
-        const t = u - index;
-
-        // Decisive magnetic threshold: pulls forward once 45% into transition
-        const targetIndex = (t >= 0.45) ? Math.min(totalTransitions, index + 1) : index;
-        return targetIndex / totalTransitions;
-      },
-      duration: { min: 0.18, max: 0.32 },
-      delay: 0.02,
-      ease: 'power2.out',
-    },
     onUpdate: (self) => {
       state.progress = self.progress;
       render(state.progress);
     },
   });
-
-  // Responsive Lenis Magnetic Glide:
-  // Fast fallback ensures that if the user stops wheel scrolling in a transition window,
-  // it promptly glides into the nearest solid room frame without sluggish delay.
-  let settleTimer = null;
-  const onScrollActivity = () => {
-    clearTimeout(settleTimer);
-    settleTimer = setTimeout(() => {
-      if (!trigger || trigger.progress <= 0.02 || trigger.progress >= 0.98) return;
-
-      const totalTransitions = totalFrames - 1;
-      const u = trigger.progress * totalTransitions;
-      const index = Math.floor(u);
-      const t = u - index;
-
-      // If user stopped within the transition window (0.45 < t < 0.98)
-      if (t > 0.45 && t < 0.98) {
-        const targetP = (index + 1) / totalTransitions;
-        const targetScroll = trigger.start + targetP * (trigger.end - trigger.start);
-        if (window.niorLenis && typeof window.niorLenis.scrollTo === 'function') {
-          window.niorLenis.scrollTo(targetScroll, {
-            duration: 0.28,
-            easing: (x) => 1 - Math.pow(1 - x, 3), // Responsive easeOutCubic
-          });
-        }
-      }
-    }, 45);
-  };
-  window.addEventListener('scroll', onScrollActivity, { passive: true });
 
   // Debounced window resize handler
   let resizeTimer = null;
