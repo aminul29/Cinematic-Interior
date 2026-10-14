@@ -118,12 +118,12 @@
     }
   }
 
-  /* Staged Initial Content (Headline, Subtitle & CTAs) */
+  /* Staged Initial Content (Headline, Subtitle & CTAs) — Hidden to keep center brand emblem clean */
   .nior-walkthrough-content {
+    display: none;
     position: absolute;
     inset: 0;
     z-index: 6;
-    display: flex;
     align-items: flex-end;
     padding-bottom: clamp(40px, 8vh, 85px);
     pointer-events: none;
