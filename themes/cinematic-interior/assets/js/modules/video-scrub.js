@@ -222,4 +222,7 @@ function initStagedIngress(heroTrack, isStatic) {
   // Stage 6: Clean Upward Glissando Before Next Section Arrives
   tl.to('.nior-video-hero-ui-container', { y: -70, opacity: 0, duration: 0.18, ease: 'power2.in' }, 0.82);
   tl.to('.nior-hero-floating-card', { y: -40, opacity: 0, duration: 0.15, ease: 'power2.in' }, 0.85);
+
+  // Stage 7: Finale Brand Reveal on ending frame
+  tl.to('#niorHeroCenterBrand', { opacity: 1, y: 0, scale: 1, duration: 0.15, ease: 'power2.out' }, 0.88);
 }

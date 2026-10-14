@@ -24,7 +24,7 @@ export function initWalkthroughZoom() {
     'MEZZANINE GALLERY',
     'PRIVATE CELLAR',
     'SALON FINALE',
-    'ATRIUM PORTAL (CYCLE)',
+    'V-STAGE FINALE',
   ];
 
   // Resolve image paths (frame-01.jpg to frame-09.jpg)
@@ -214,18 +214,35 @@ export function initWalkthroughZoom() {
     }
 
     if (brandEl) {
-      const brandAlpha = Math.max(0, 1 - p / 0.07);
+      let brandAlpha = 0;
+      let brandY = 0;
+
+      if (p <= 0.07) {
+        // Initial intro frame fade out
+        const factor = p / 0.07;
+        brandAlpha = Math.max(0, 1 - factor);
+        brandY = -25 * factor;
+      } else if (p >= 0.88) {
+        // Ending frame (frame 09) fade back in
+        const factor = Math.min(1, Math.max(0, (p - 0.88) / 0.08));
+        brandAlpha = factor;
+        brandY = 25 * (1 - factor);
+      } else {
+        brandAlpha = 0;
+        brandY = -25;
+      }
+
       brandEl.style.opacity = brandAlpha;
-      brandEl.style.transform = `translateY(${-25 * (p / 0.07)}px)`;
+      brandEl.style.transform = `translateY(${brandY}px)`;
     }
 
     if (scrollHintEl) {
       scrollHintEl.style.opacity = p > 0.04 ? '0' : '1';
     }
 
-    // 2. Minimalist Gold HUD: Activates smoothly on scroll
+    // 2. Minimalist Gold HUD: Activates smoothly on scroll, recedes on ending finale
     if (hudEl) {
-      if (p > 0.04 && p < 0.995) {
+      if (p > 0.04 && p < 0.90) {
         hudEl.classList.add('is-active');
       } else {
         hudEl.classList.remove('is-active');
