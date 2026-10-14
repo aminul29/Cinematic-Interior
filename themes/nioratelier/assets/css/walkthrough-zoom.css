@@ -89,6 +89,10 @@
     }
 
     .nior-hero-center-brand__tagline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
       font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
       font-size: clamp(0.72rem, 1.1vw, 0.92rem);
       font-weight: 600;
@@ -101,7 +105,41 @@
         0 1px 3px rgba(0, 0, 0, 0.95),
         0 3px 8px rgba(0, 0, 0, 0.95),
         0 6px 20px rgba(0, 0, 0, 0.9);
+
+      .nior-hero-grow-dot {
+        display: inline-block;
+        position: relative;
+        color: var(--nior-gold, #c9a25e);
+        font-weight: 700;
+        margin: 0 0.22em;
+        text-shadow: 0 0 10px rgba(201, 162, 94, 0.6);
+      }
+
+      .nior-hero-tagline-dot {
+        display: inline-block;
+        color: var(--nior-gold, #c9a25e);
+        margin: 0 0.22em;
+        opacity: 0.85;
+      }
     }
+  }
+
+  /* Expanding Solid Obsidian Disc (Swallows hero stage into Philosophy) */
+  .nior-hero-grow-disc {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--nior-obsidian, #0c0d0e);
+    pointer-events: none;
+    z-index: 20; /* Above center brand (z-index 7) & HUD (z-index 10) */
+    transform: translate(-50%, -50%) scale(0);
+    transform-origin: center center;
+    will-change: transform;
+    opacity: 0;
+    visibility: hidden;
   }
 
   /* Staged Initial Content (Headline, Subtitle & CTAs) — Hidden to keep center brand emblem clean */

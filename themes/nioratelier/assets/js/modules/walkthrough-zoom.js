@@ -52,6 +52,46 @@ export function initWalkthroughZoom() {
   const zoneTagEl = document.getElementById('niorWalkthroughZoneTag');
   const progressFillEl = document.getElementById('niorWalkthroughProgressFill');
   const scrollHintEl = document.getElementById('niorWalkthroughScrollHint');
+  const growDotEl = document.getElementById('niorHeroGrowDot');
+  const growDiscEl = document.getElementById('niorHeroGrowDisc');
+  const stageEl = track.querySelector('.nior-walkthrough-hero-stage');
+
+  let maxDiscScale = 40;
+
+  /**
+   * Calculate precise dot coordinates and maximum scale to engulf the stage
+   */
+  function updateDiscOrigin() {
+    if (!growDotEl || !growDiscEl || !stageEl) return;
+    const stageRect = stageEl.getBoundingClientRect();
+    const dotRect = growDotEl.getBoundingClientRect();
+
+    let currentBrandY = 0;
+    if (brandEl && brandEl.style.transform) {
+      const match = brandEl.style.transform.match(/translateY\(([-\d.]+)px\)/);
+      if (match) currentBrandY = parseFloat(match[1]) || 0;
+    }
+
+    const dotCenterX = dotRect.left + dotRect.width / 2;
+    const dotCenterY = (dotRect.top + dotRect.height / 2) - currentBrandY;
+
+    const originX = dotCenterX - stageRect.left;
+    const originY = dotCenterY - stageRect.top;
+
+    growDiscEl.style.left = `${originX.toFixed(1)}px`;
+    growDiscEl.style.top = `${originY.toFixed(1)}px`;
+
+    const stageW = stageRect.width || window.innerWidth;
+    const stageH = stageRect.height || window.innerHeight;
+    const d1 = Math.hypot(originX, originY);
+    const d2 = Math.hypot(stageW - originX, originY);
+    const d3 = Math.hypot(originX, stageH - originY);
+    const d4 = Math.hypot(stageW - originX, stageH - originY);
+    const maxRadius = Math.max(d1, d2, d3, d4);
+
+    // Base diameter is 60px (base radius is 30px)
+    maxDiscScale = (maxRadius / 30) * 1.08;
+  }
 
   // Synchronize HUD total frames display dynamically
   if (totalEl) {
@@ -137,6 +177,13 @@ export function initWalkthroughZoom() {
     context.drawImage(img, dx, dy, drawW, drawH);
   }
 
+  // Cinematic scroll budget allocation:
+  // p: 0.00 -> 0.70 : Fluid spatial camera fly-through zooming through rooms 1-9
+  // p: 0.70 -> 0.78 : Solid hold on room 9 finale with brand emblem & tagline fully settled
+  // p: 0.78 -> 1.00 : Primary dot between "Architecture" and "Design" expands to engulf the stage
+  const walkthroughProgressEnd = 0.70;
+  const brandSettleEnd = 0.78;
+
   /**
    * Continuous Scroll-Driven Walkthrough Spatial Transitions
    * Smoothly transitions images from one room to another as the user scrolls,
@@ -145,7 +192,10 @@ export function initWalkthroughZoom() {
   function render(progress) {
     const clampedP = Math.max(0, Math.min(1, progress));
     const totalTransitions = totalFrames - 1; // 8 intervals for 9 frames
-    const u = clampedP * totalTransitions; // Continuous coordinate [0.0 ... 8.0]
+
+    // Map progress to spatial transitions
+    const spatialP = Math.min(1, clampedP / walkthroughProgressEnd);
+    const u = spatialP * totalTransitions; // Continuous coordinate [0.0 ... 8.0]
 
     // Reset canvas background
     context.globalAlpha = 1.0;
@@ -213,6 +263,8 @@ export function initWalkthroughZoom() {
       contentEl.style.pointerEvents = contentAlpha <= 0.05 ? 'none' : 'auto';
     }
 
+    // 2. Center brand emblem: Fades out initially, fades back in on room 9 finale,
+    // and stays at 100% opacity while the expanding disc swallows it from the inside out!
     if (brandEl) {
       let brandAlpha = 0;
       let brandY = 0;
@@ -222,11 +274,15 @@ export function initWalkthroughZoom() {
         const factor = p / 0.07;
         brandAlpha = Math.max(0, 1 - factor);
         brandY = -25 * factor;
-      } else if (p >= 0.88) {
+      } else if (p >= 0.62 && p <= 0.72) {
         // Ending frame (frame 09) fade back in
-        const factor = Math.min(1, Math.max(0, (p - 0.88) / 0.08));
+        const factor = Math.min(1, Math.max(0, (p - 0.62) / 0.10));
         brandAlpha = factor;
         brandY = 25 * (1 - factor);
+      } else if (p > 0.72) {
+        // Fully settled on frame 9, stays visible until the expanding disc covers it
+        brandAlpha = 1;
+        brandY = 0;
       } else {
         brandAlpha = 0;
         brandY = -25;
@@ -240,9 +296,9 @@ export function initWalkthroughZoom() {
       scrollHintEl.style.opacity = p > 0.04 ? '0' : '1';
     }
 
-    // 2. Minimalist Gold HUD: Activates smoothly on scroll, recedes on ending finale
+    // 3. Minimalist Gold HUD: Activates smoothly on scroll, recedes on ending finale
     if (hudEl) {
-      if (p > 0.04 && p < 0.90) {
+      if (p > 0.04 && p < 0.72) {
         hudEl.classList.add('is-active');
       } else {
         hudEl.classList.remove('is-active');
@@ -267,7 +323,38 @@ export function initWalkthroughZoom() {
     }
 
     if (progressFillEl) {
-      progressFillEl.style.width = `${Math.min(100, p * 100).toFixed(1)}%`;
+      const spatialProgress = Math.min(1, p / walkthroughProgressEnd);
+      progressFillEl.style.width = `${(spatialProgress * 100).toFixed(1)}%`;
+    }
+
+    // 4. Growing Obsidian Disc: Expands from the dot between "Architecture" and "Design",
+    // swallowing the text and the entire hero stage into pure obsidian.
+    if (growDiscEl) {
+      if (p <= brandSettleEnd) {
+        growDiscEl.style.transform = 'translate(-50%, -50%) scale(0)';
+        growDiscEl.style.opacity = '0';
+        growDiscEl.style.visibility = 'hidden';
+      } else {
+        // Dynamically ensure exact origin coordinates once brand text has settled
+        if (!growDiscEl.dataset.aligned && p >= brandSettleEnd) {
+          updateDiscOrigin();
+          growDiscEl.dataset.aligned = 'true';
+        }
+
+        const expandT = Math.min(1, (p - brandSettleEnd) / (1.0 - brandSettleEnd));
+        // Exponential deceleration curve for organic fluid bloom
+        const ease = Math.pow(expandT, 1.8);
+        const currentScale = ease * maxDiscScale;
+
+        growDiscEl.style.visibility = 'visible';
+        growDiscEl.style.opacity = '1';
+        growDiscEl.style.transform = `translate(-50%, -50%) scale(${currentScale.toFixed(3)})`;
+      }
+
+      // Reset alignment cache flag when scrolling back up above the finale
+      if (p < 0.70 && growDiscEl.dataset.aligned) {
+        delete growDiscEl.dataset.aligned;
+      }
     }
   }
 
@@ -289,6 +376,7 @@ export function initWalkthroughZoom() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       resizeCanvas();
+      updateDiscOrigin();
       render(state.progress);
       ScrollTrigger.refresh();
     }, 120);
@@ -298,6 +386,7 @@ export function initWalkthroughZoom() {
   // Initial trigger refresh once images load
   setTimeout(() => {
     resizeCanvas();
+    updateDiscOrigin();
     ScrollTrigger.refresh();
     render(0);
   }, 180);

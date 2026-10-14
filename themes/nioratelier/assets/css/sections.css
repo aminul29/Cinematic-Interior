@@ -49,6 +49,9 @@
   letter-spacing: 0.28em;
   text-transform: uppercase;
   margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(18px);
+  will-change: opacity, transform;
 }
 
 .nior-rack-headline {

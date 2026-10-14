@@ -9,6 +9,7 @@ export function initRackFocus() {
   const sub = document.getElementById('niorRackSub');
   if (!section || !words.length) return;
 
+  const eyebrow = section.querySelector('.nior-rack-eyebrow');
   const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
   const n = words.length;
 
@@ -19,18 +20,29 @@ export function initRackFocus() {
 
     const p = clamp(-rect.top / range, 0, 1);
 
-    // Staggered rack-focus word transitions
+    // 1. Eyebrow "Our Philosophy" gracefully emerges onto the obsidian canvas
+    const eyebrowProgress = clamp(p / 0.12, 0, 1);
+    if (eyebrow) {
+      eyebrow.style.opacity = eyebrowProgress.toFixed(3);
+      eyebrow.style.transform = `translateY(${((1 - eyebrowProgress) * 18).toFixed(2)}px)`;
+    }
+
+    // 2. Headline baseline emerges softly from pure obsidian
+    const baseWordOpacity = 0.12 * eyebrowProgress;
+
+    // 3. Staggered rack-focus word transitions
     for (let k = 0; k < n; k++) {
-      const o = clamp((p - (k / n) * 0.72) / 0.08, 0, 1);
+      const wordStart = 0.10 + (k / n) * 0.68;
+      const o = clamp((p - wordStart) / 0.08, 0, 1);
       const word = words[k];
-      word.style.opacity = (0.12 + 0.88 * o).toFixed(3);
+      word.style.opacity = (baseWordOpacity + (1 - baseWordOpacity) * o).toFixed(3);
       word.style.transform = `translateY(${((1 - o) * 0.25).toFixed(3)}em)`;
       word.style.filter = `blur(${((1 - o) * 6).toFixed(2)}px)`;
     }
 
-    // Subtitle reveals as word sequence completes
+    // 4. Subtitle reveals as word sequence completes
     if (sub) {
-      sub.style.opacity = clamp((p - 0.80) / 0.15, 0, 1).toFixed(3);
+      sub.style.opacity = clamp((p - 0.82) / 0.15, 0, 1).toFixed(3);
     }
   }
 
