@@ -20,29 +20,41 @@ export function initRackFocus() {
 
     const p = clamp(-rect.top / range, 0, 1);
 
-    // 1. Eyebrow "Our Philosophy" gracefully emerges onto the white canvas
-    const eyebrowProgress = clamp(p / 0.12, 0, 1);
+    // Guarantee section visibility when reached
+    if (rect.top <= 0) {
+      section.style.visibility = 'visible';
+    }
+
+    // 1. Eyebrow "Our Philosophy" appears immediately as soon as the circle consumes the hero section
     if (eyebrow) {
-      eyebrow.style.opacity = eyebrowProgress.toFixed(3);
-      eyebrow.style.transform = `translateY(${((1 - eyebrowProgress) * 18).toFixed(2)}px)`;
+      eyebrow.style.opacity = '1';
+      eyebrow.style.transform = 'translateY(0px)';
     }
 
-    // 2. Headline baseline emerges softly from pure white
-    const baseWordOpacity = 0.14 * eyebrowProgress;
+    // 2. Headline baseline: Soft luxury rack blur with first word in crisp focus at p=0
+    const baseWordOpacity = 0.18;
 
-    // 3. Staggered rack-focus word transitions
+    // 3. Staggered rack-focus word transitions: unfolds smoothly from p = 0.00 to 0.70
     for (let k = 0; k < n; k++) {
-      const wordStart = 0.10 + (k / n) * 0.68;
-      const o = clamp((p - wordStart) / 0.08, 0, 1);
+      const wordStart = (k / (n - 1)) * 0.68;
       const word = words[k];
+
+      let o = 0;
+      if (k === 0) {
+        // First word "We" is 100% focused at the start of Philosophy section
+        o = 1.0;
+      } else {
+        o = clamp((p - wordStart) / 0.06, 0, 1);
+      }
+
       word.style.opacity = (baseWordOpacity + (1 - baseWordOpacity) * o).toFixed(3);
-      word.style.transform = `translateY(${((1 - o) * 0.25).toFixed(3)}em)`;
-      word.style.filter = `blur(${((1 - o) * 6).toFixed(2)}px)`;
+      word.style.transform = `translateY(${((1 - o) * 0.22).toFixed(3)}em)`;
+      word.style.filter = `blur(${((1 - o) * 5.5).toFixed(2)}px)`;
     }
 
-    // 4. Subtitle reveals as word sequence completes
+    // 4. Subtitle reveals gracefully as word sequence nears completion
     if (sub) {
-      sub.style.opacity = clamp((p - 0.82) / 0.15, 0, 1).toFixed(3);
+      sub.style.opacity = clamp((p - 0.70) / 0.18, 0, 1).toFixed(3);
     }
   }
 

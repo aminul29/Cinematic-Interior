@@ -27,12 +27,14 @@ export function initWalkthroughZoom() {
     'V-STAGE FINALE',
   ];
 
-  // Resolve image paths (frame-01.jpg to frame-09.jpg)
-  const imageSources = (niorConfig && niorConfig.walkthroughImages && niorConfig.walkthroughImages.length === totalFrames)
+  // Resolve image paths (frame-01.jpg to frame-09.jpg) with robust cache-busting
+  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.8.7';
+  const hasConfigImages = niorConfig && Array.isArray(niorConfig.walkthroughImages) && niorConfig.walkthroughImages.length > 0;
+  const imageSources = hasConfigImages
     ? niorConfig.walkthroughImages
     : Array.from({ length: totalFrames }, (_, i) => {
         const num = String(i + 1).padStart(2, '0');
-        return `${themeUri}/assets/img/walkthrough/frame-${num}.jpg`;
+        return `${themeUri}/assets/img/walkthrough/frame-${num}.jpg?v=${themeVersion}`;
       });
 
   const context = canvas.getContext('2d', { alpha: false, desynchronized: true });
@@ -55,6 +57,7 @@ export function initWalkthroughZoom() {
   const growDotEl = document.getElementById('niorHeroGrowDot');
   const growDiscEl = document.getElementById('niorHeroGrowDisc');
   const stageEl = track.querySelector('.nior-walkthrough-hero-stage');
+  const rackSection = document.getElementById('niorRackSection');
 
   let discOriginX = 0;
   let discOriginY = 0;
@@ -361,6 +364,24 @@ export function initWalkthroughZoom() {
       // Reset alignment cache flag when scrolling back up above the finale
       if (p < 0.70 && growDiscEl.dataset.aligned) {
         delete growDiscEl.dataset.aligned;
+      }
+    }
+
+    // 5. Seamless Handover to "Our Philosophy":
+    // As soon as the circle has consumed the whole hero section (p >= 1.0),
+    // immediately reveal the Our Philosophy section with zero scroll gap.
+    if (rackSection) {
+      if (p >= 1.0) {
+        rackSection.style.visibility = 'visible';
+        if (stageEl) stageEl.style.visibility = 'hidden';
+        track.style.pointerEvents = 'none';
+      } else {
+        rackSection.style.visibility = 'hidden';
+        if (stageEl) {
+          stageEl.style.visibility = 'visible';
+          stageEl.style.opacity = '1';
+        }
+        track.style.pointerEvents = 'auto';
       }
     }
   }

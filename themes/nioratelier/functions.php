@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CINEMATIC_INTERIOR_VERSION', '1.8.6' );
+define( 'CINEMATIC_INTERIOR_VERSION', '1.8.7' );
 define( 'CINEMATIC_INTERIOR_THEME_DIR', get_template_directory() );
 define( 'CINEMATIC_INTERIOR_THEME_URI', get_template_directory_uri() );
 
@@ -180,9 +180,11 @@ function cinematic_interior_enqueue_assets() {
         'nior-main',
         'niorConfig',
         array(
+            'version'         => CINEMATIC_INTERIOR_VERSION,
             'themeUri'        => CINEMATIC_INTERIOR_THEME_URI,
             'sequenceBase'    => CINEMATIC_INTERIOR_THEME_URI . '/assets/img/sequence/frame_',
             'totalFrames'     => 101,
+            'walkthroughTotalFrames' => 9,
             'walkthroughVideo'=> CINEMATIC_INTERIOR_THEME_URI . '/assets/img/walkthrough_master.mp4',
             'scrubVideo'      => CINEMATIC_INTERIOR_THEME_URI . '/assets/img/hero-scrub.mp4',
             'posterImage'     => CINEMATIC_INTERIOR_THEME_URI . '/assets/img/hero-poster.webp',

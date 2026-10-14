@@ -32,7 +32,8 @@
   margin-block-start: 0;
   margin-block-end: 0;
   border: none;
-  z-index: 3;
+  z-index: 12;
+  visibility: hidden;
 }
 
 /* Guarantee seamless zero-gap handover between Hero and Philosophy section */
@@ -67,8 +68,8 @@ body .wp-site-blocks > .nior-rack-section,
   letter-spacing: 0.28em;
   text-transform: uppercase;
   margin-bottom: 24px;
-  opacity: 0;
-  transform: translateY(18px);
+  opacity: 1;
+  transform: translateY(0);
   will-change: opacity, transform;
 }
 

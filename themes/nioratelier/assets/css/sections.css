@@ -25,11 +25,15 @@
   height: 240vh;
   background-color: #ffffff;
   color: #0c0d0e;
+  overflow: hidden;
+  overflow-x: clip;
   margin: 0;
   margin-top: 0;
   margin-block-start: 0;
   margin-block-end: 0;
   border: none;
+  z-index: 12;
+  visibility: hidden;
 }
 
 /* Guarantee seamless zero-gap handover between Hero and Philosophy section */
@@ -64,8 +68,8 @@ body .wp-site-blocks > .nior-rack-section,
   letter-spacing: 0.28em;
   text-transform: uppercase;
   margin-bottom: 24px;
-  opacity: 0;
-  transform: translateY(18px);
+  opacity: 1;
+  transform: translateY(0);
   will-change: opacity, transform;
 }
 
