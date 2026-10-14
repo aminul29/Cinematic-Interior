@@ -28,7 +28,7 @@ export function initWalkthroughZoom() {
   ];
 
   // Resolve image paths (frame-01.jpg to frame-09.jpg) with robust cache-busting
-  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.8.10';
+  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.8.11';
   const hasConfigImages = niorConfig && Array.isArray(niorConfig.walkthroughImages) && niorConfig.walkthroughImages.length > 0;
   const imageSources = hasConfigImages
     ? niorConfig.walkthroughImages
@@ -374,12 +374,8 @@ export function initWalkthroughZoom() {
         growDiscEl.style.clipPath = clipStr;
         growDiscEl.style.webkitClipPath = clipStr;
 
-        // Transition track background to pure white as the circle captures the stage
-        if (expandT >= 0.85) {
-          track.style.backgroundColor = '#ffffff';
-        } else {
-          track.style.backgroundColor = '#0c0d0e';
-        }
+        // Maintain consistent architectural background
+        track.style.backgroundColor = '#0c0d0e';
       }
 
       // Reset alignment cache flag when scrolling back up above the finale

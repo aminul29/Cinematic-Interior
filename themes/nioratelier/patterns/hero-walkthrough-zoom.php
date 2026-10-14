@@ -15,6 +15,9 @@
       <canvas id="niorWalkthroughCanvas" class="nior-walkthrough-canvas"></canvas>
     </div>
 
+    <!-- Expanding Factory Background Disc with Scrim Overlay -->
+    <div id="niorHeroGrowDisc" class="nior-hero-grow-disc" aria-hidden="true"></div>
+
     <!-- Center Brand Emblem (Fades smoothly on initial scroll) -->
     <div id="niorWalkthroughBrand" class="nior-hero-center-brand">
       <div class="nior-hero-center-brand__title">NIOR ATELIER</div>
@@ -27,9 +30,6 @@
         <span class="nior-brand-word">Build</span>
       </div>
     </div>
-
-    <!-- Expanding Solid Obsidian Disc (Swallows stage to transition into Philosophy) -->
-    <div id="niorHeroGrowDisc" class="nior-hero-grow-disc" aria-hidden="true"></div>
 
     <!-- Staged Initial Headline & CTAs (Fades gracefully on initial scroll) -->
     <div id="niorWalkthroughContent" class="nior-walkthrough-content">
