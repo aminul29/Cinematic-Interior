@@ -77,75 +77,77 @@
 }
 
 /* Hero Content Overlay Layer */
-.nior-hero-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  pointer-events: auto;
-  padding-top: clamp(40px, 8vh, 80px);
-}
-
-.nior-hero-ui-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 960px;
-  will-change: transform, opacity;
-}
-
-/* Staged Ingress Elements */
-.nior-hero-badge {
-  opacity: 0;
-  transform: translateY(30px);
-  will-change: transform, opacity;
-}
-
-.nior-hero-headline {
-  font-family: var(--font-serif);
-  font-size: clamp(2.8rem, 6.2vw, 5.8rem);
-  font-weight: 500;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--nior-white);
-  margin-top: 16px;
-  margin-bottom: 24px;
-  opacity: 0;
-  transform: translateY(50px) scale(0.96);
-  will-change: transform, opacity;
-
-  span.nior-text-gold {
-    color: var(--nior-gold);
-    font-style: italic;
-  }
-}
-
-.nior-hero-sub {
-  font-family: var(--font-sans);
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
-  line-height: 1.7;
-  color: var(--nior-muted);
-  max-width: 640px;
-  margin-bottom: 36px;
-  opacity: 0;
-  transform: translateY(35px);
-  will-change: transform, opacity;
-}
-
-.nior-hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  opacity: 0;
-  transform: translateY(30px);
-  will-change: transform, opacity;
-
-  @media (max-width: 576px) {
-    flex-direction: column;
-    align-items: flex-start;
+.nior-hero-track {
+  .nior-hero-content {
+    position: relative;
+    z-index: 2;
     width: 100%;
+    pointer-events: auto;
+    padding-top: clamp(40px, 8vh, 80px);
 
-    .nior-btn {
-      width: 100%;
+    .nior-hero-ui-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 960px;
+      will-change: transform, opacity;
+    }
+
+    /* Staged Ingress Elements */
+    .nior-hero-badge {
+      opacity: 0;
+      transform: translateY(30px);
+      will-change: transform, opacity;
+    }
+
+    .nior-hero-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 6.2vw, 5.8rem);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--nior-white);
+      margin-top: 16px;
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(50px) scale(0.96);
+      will-change: transform, opacity;
+
+      span.nior-text-gold {
+        color: var(--nior-gold);
+        font-style: italic;
+      }
+    }
+
+    .nior-hero-sub {
+      font-family: var(--font-sans);
+      font-size: clamp(1rem, 1.4vw, 1.25rem);
+      line-height: 1.7;
+      color: var(--nior-muted);
+      max-width: 640px;
+      margin-bottom: 36px;
+      opacity: 0;
+      transform: translateY(35px);
+      will-change: transform, opacity;
+    }
+
+    .nior-hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      will-change: transform, opacity;
+
+      @media (max-width: 576px) {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+
+        .nior-btn {
+          width: 100%;
+        }
+      }
     }
   }
 }

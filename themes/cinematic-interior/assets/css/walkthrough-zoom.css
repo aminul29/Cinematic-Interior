@@ -134,6 +134,14 @@
       pointer-events: auto;
     }
 
+    .nior-hero-badge,
+    .nior-hero-headline,
+    .nior-hero-sub,
+    .nior-hero-actions {
+      opacity: 1;
+      transform: none;
+    }
+
     .nior-hero-badge {
       display: inline-flex;
       align-items: center;
