@@ -13,9 +13,6 @@
     <!-- Hardware-Accelerated 3D Depth Canvas -->
     <div id="niorWalkthroughCanvasContainer" class="nior-walkthrough-canvas-container">
       <canvas id="niorWalkthroughCanvas" class="nior-walkthrough-canvas"></canvas>
-      <div class="nior-walkthrough-scrim-dark"></div>
-      <div class="nior-walkthrough-scrim-radial"></div>
-      <div class="nior-walkthrough-scrim-vignette"></div>
     </div>
 
     <!-- Center Brand Emblem (Fades smoothly on initial scroll) -->

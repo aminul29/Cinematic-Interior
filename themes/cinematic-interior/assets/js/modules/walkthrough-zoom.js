@@ -36,6 +36,10 @@ export function initWalkthroughZoom() {
       });
 
   const context = canvas.getContext('2d', { alpha: false, desynchronized: true });
+  if (context) {
+    context.imageSmoothingEnabled = true;
+    context.imageSmoothingQuality = 'high';
+  }
   const images = [];
   let isPrimed = false;
 
@@ -64,7 +68,7 @@ export function initWalkthroughZoom() {
    * Avoids expensive GPU texture reallocations during active scroll frames.
    */
   function resizeCanvas() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const width = window.innerWidth;
     const height = window.innerHeight;
 
@@ -76,6 +80,11 @@ export function initWalkthroughZoom() {
       canvas.height = targetH;
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
+    }
+
+    if (context) {
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = 'high';
     }
   }
 

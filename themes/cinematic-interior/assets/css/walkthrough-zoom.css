@@ -40,31 +40,14 @@
       will-change: transform;
       transform: translateZ(0);
       background-color: #0c0d0e;
+      image-rendering: -webkit-optimize-contrast;
     }
 
-    /* Cinematic Filmic Lighting Scrims */
-    .nior-walkthrough-scrim-dark {
-      position: absolute;
-      inset: 0;
-      background: rgba(12, 13, 14, 0.18);
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .nior-walkthrough-scrim-radial {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(12, 13, 14, 0) 10%, rgba(12, 13, 14, 0.45) 90%);
-      pointer-events: none;
-      z-index: 3;
-    }
-
+    /* Filmic Scrim Overlays — Completely Removed for 100% Full Brightness & Clarity */
+    .nior-walkthrough-scrim-dark,
+    .nior-walkthrough-scrim-radial,
     .nior-walkthrough-scrim-vignette {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(12, 13, 14, 0.55) 0%, rgba(12, 13, 14, 0.05) 50%, rgba(12, 13, 14, 0.65) 100%);
-      pointer-events: none;
-      z-index: 4;
+      display: none;
     }
   }
 

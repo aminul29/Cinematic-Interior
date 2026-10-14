@@ -53,26 +53,11 @@
     opacity: 0;
   }
 
-  /* Scrim Overlays for Cinematic Contrast - Lightened for maximum visual brilliance */
-  .nior-hero-scrim-dark {
-    position: absolute;
-    inset: 0;
-    background: rgba(12, 13, 14, 0.16);
-    pointer-events: none;
-  }
-
-  .nior-hero-scrim-radial {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(12, 13, 14, 0) 0%, rgba(12, 13, 14, 0.40) 90%);
-    pointer-events: none;
-  }
-
+  /* Scrim Overlays — Completely Removed for 100% Full Brightness & Clarity */
+  .nior-hero-scrim-dark,
+  .nior-hero-scrim-radial,
   .nior-hero-scrim-vignette {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(12, 13, 14, 0.42) 0%, rgba(12, 13, 14, 0.04) 45%, rgba(12, 13, 14, 0.48) 100%);
-    pointer-events: none;
+    display: none;
   }
 }
 

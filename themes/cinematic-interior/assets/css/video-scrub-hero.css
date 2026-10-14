@@ -69,29 +69,11 @@
       }
     }
 
-    /* Ambient Contrast Scrim Overlays - Lightened for maximum visual brilliance */
-    .nior-video-scrim-dark {
-      position: absolute;
-      inset: 0;
-      background: rgba(12, 13, 14, 0.16);
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .nior-video-scrim-radial {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(12, 13, 14, 0) 0%, rgba(12, 13, 14, 0.40) 90%);
-      pointer-events: none;
-      z-index: 4;
-    }
-
+    /* Ambient Contrast Scrim Overlays — Completely Removed for 100% Full Brightness & Clarity */
+    .nior-video-scrim-dark,
+    .nior-video-scrim-radial,
     .nior-video-scrim-vignette {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(12, 13, 14, 0.42) 0%, rgba(12, 13, 14, 0.04) 45%, rgba(12, 13, 14, 0.48) 100%);
-      pointer-events: none;
-      z-index: 5;
+      display: none;
     }
   }
 
