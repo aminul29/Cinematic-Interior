@@ -351,3 +351,45 @@
     }
   }
 }
+
+/* ==========================================================================
+   About Page - Fixed Viewport Video Sections (Window Parallax)
+   ========================================================================== */
+body:has(.nior-page-hero--about),
+body.page-template-page-about,
+body.page-id-6 {
+  .nior-process-video-section,
+  .nior-cta-video-section {
+    position: relative;
+    clip-path: inset(0);
+
+    .nior-process-video-bg,
+    .nior-cta-video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      pointer-events: none;
+      z-index: 1;
+      will-change: transform;
+    }
+
+    .nior-process-video-overlay,
+    .nior-cta-overlay {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .nior-container {
+      position: relative;
+      z-index: 3;
+    }
+  }
+}
+
