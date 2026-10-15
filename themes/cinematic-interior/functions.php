@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CINEMATIC_INTERIOR_VERSION', '1.8.20' );
+define( 'CINEMATIC_INTERIOR_VERSION', '1.8.21' );
 define( 'CINEMATIC_INTERIOR_THEME_DIR', get_template_directory() );
 define( 'CINEMATIC_INTERIOR_THEME_URI', get_template_directory_uri() );
 
@@ -59,9 +59,23 @@ function cinematic_interior_setup() {
     // Add support for core block visual styles.
     add_theme_support( 'wp-block-styles' );
 
-    // Enqueue editor styles.
+    // Enqueue comprehensive editor styles for 1:1 Site Editor fidelity.
     add_theme_support( 'editor-styles' );
-    add_editor_style( 'assets/css/base.css' );
+    add_editor_style( array(
+        'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap',
+        'assets/css/variables.css',
+        'assets/css/base.css',
+        'assets/css/header-footer.css',
+        'assets/css/cinematic-hero.css',
+        'assets/css/video-scrub-hero.css',
+        'assets/css/cinematic-scenarios.css',
+        'assets/css/falling-logos.css',
+        'assets/css/walkthrough-zoom.css',
+        'assets/css/sections.css',
+        'assets/css/pages.css',
+        'assets/css/project-gallery.css',
+        'assets/css/editor.css',
+    ) );
 
     // Enable post thumbnails.
     add_theme_support( 'post-thumbnails' );
@@ -207,6 +221,22 @@ function cinematic_interior_script_type_module( $tag, $handle, $src ) {
     return $tag;
 }
 add_filter( 'script_loader_tag', 'cinematic_interior_script_type_module', 10, 3 );
+
+/**
+ * Enqueue editor-specific assets to guarantee Site Editor iframe styling.
+ */
+function cinematic_interior_enqueue_editor_assets() {
+    if ( ! is_admin() ) {
+        return;
+    }
+    wp_enqueue_style(
+        'cinematic-interior-editor-overrides',
+        CINEMATIC_INTERIOR_THEME_URI . '/assets/css/editor.css',
+        array(),
+        CINEMATIC_INTERIOR_VERSION
+    );
+}
+add_action( 'enqueue_block_assets', 'cinematic_interior_enqueue_editor_assets' );
 
 /**
  * Automatically provisions core pages if they do not exist yet.
