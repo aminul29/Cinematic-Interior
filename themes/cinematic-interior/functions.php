@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CINEMATIC_INTERIOR_VERSION', '1.8.30' );
+define( 'CINEMATIC_INTERIOR_VERSION', '1.8.31' );
 define( 'CINEMATIC_INTERIOR_THEME_DIR', get_template_directory() );
 define( 'CINEMATIC_INTERIOR_THEME_URI', get_template_directory_uri() );
 
@@ -338,6 +338,25 @@ function cinematic_interior_register_patterns() {
                 'title'       => __( 'Page Content — Projects Portfolio', 'cinematic-interior' ),
                 'categories'  => array( 'cinematic-interior-pages', 'nior-pages' ),
                 'content'     => $projects_rendered,
+            )
+        );
+    }
+
+    $services_file = CINEMATIC_INTERIOR_THEME_DIR . '/patterns/page-services-content.php';
+    if ( file_exists( $services_file ) ) {
+        if ( WP_Block_Patterns_Registry::get_instance()->is_registered( 'cinematic-interior/page-services-content' ) ) {
+            unregister_block_pattern( 'cinematic-interior/page-services-content' );
+        }
+        ob_start();
+        include $services_file;
+        $services_rendered = ob_get_clean();
+
+        register_block_pattern(
+            'cinematic-interior/page-services-content',
+            array(
+                'title'       => __( 'Page Content — Services', 'cinematic-interior' ),
+                'categories'  => array( 'cinematic-interior-pages', 'nior-pages' ),
+                'content'     => $services_rendered,
             )
         );
     }

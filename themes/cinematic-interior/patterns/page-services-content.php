@@ -24,91 +24,135 @@
     <div class="nior-services-list">
       
       <div class="nior-service-item">
-        <div class="nior-service-item__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/showhouse.jpg' ) ); ?>" alt="Interior Architecture by Nior Atelier" loading="lazy" />
+        <div class="nior-service-item__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 6L40 15V33L24 42L8 33V15L24 6Z" />
+            <path d="M24 6V42" />
+            <path d="M8 15L24 24L40 15" />
+            <path d="M16 19.5V37.5" />
+            <path d="M32 19.5V37.5" />
+          </svg>
         </div>
-        <div class="nior-service-item__content">
-          <span class="nior-service-item__num">01 / ARCHITECTURE</span>
-          <h3>Interior Architecture</h3>
-          <p>Structural reconfiguration, spatial envelope engineering, and high-performance layout architecture.</p>
-        </div>
+        <span class="nior-service-item__num">01 / SERVICE</span>
+        <h3>Interior Architecture</h3>
+        <p>Architectural spatial planning, structural reconfigurations, ceiling landscapes, and material compositions that define core interior envelopes.</p>
       </div>
 
       <div class="nior-service-item">
-        <div class="nior-service-item__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/cosmetics.jpg' ) ); ?>" alt="Interior Design & Curation" loading="lazy" />
+        <div class="nior-service-item__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 14C14 10 18 8 24 8C30 8 34 10 34 14V26H14V14Z" />
+            <path d="M10 22C10 20 12 19 14 19H34C36 19 38 20 38 22V28C38 31 36 32 33 32H15C12 32 10 31 10 28V22Z" />
+            <path d="M14 32L11 40" />
+            <path d="M34 32L37 40" />
+            <path d="M20 32L19 40" />
+            <path d="M28 32L29 40" />
+            <line x1="18" y1="16" x2="30" y2="16" />
+          </svg>
         </div>
-        <div class="nior-service-item__content">
-          <span class="nior-service-item__num">02 / INTERIOR</span>
-          <h3>Interior Design</h3>
-          <p>Curated aesthetic palettes, tactile finishes, and bespoke furniture compositions.</p>
-        </div>
+        <span class="nior-service-item__num">02 / SERVICE</span>
+        <h3>Interior Design</h3>
+        <p>Curating refined visual narratives, finishes, custom fixtures, bespoke furniture selections, and curated aesthetic palettes.</p>
       </div>
 
       <div class="nior-service-item">
-        <div class="nior-service-item__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/bar.jpg' ) ); ?>" alt="Design & Build Execution" loading="lazy" />
+        <div class="nior-service-item__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 8H38V14H10V8Z" />
+            <line x1="16" y1="14" x2="16" y2="18" />
+            <line x1="22" y1="14" x2="22" y2="20" />
+            <line x1="28" y1="14" x2="28" y2="18" />
+            <line x1="34" y1="14" x2="34" y2="20" />
+            <path d="M24 14V40" />
+            <path d="M16 26L24 34L32 26" />
+            <circle cx="24" cy="40" r="2" />
+            <circle cx="10" cy="11" r="1.5" />
+          </svg>
         </div>
-        <div class="nior-service-item__content">
-          <span class="nior-service-item__num">03 / INTEGRATED</span>
-          <h3>Design & Build</h3>
-          <p>Seamless single-point accountability connecting concept design directly with engineering and execution.</p>
-        </div>
+        <span class="nior-service-item__num">03 / SERVICE</span>
+        <h3>Design & Build</h3>
+        <p>Seamless single-point accountability linking creative conceptualization directly with engineering, procurement, and execution.</p>
       </div>
 
       <div class="nior-service-item">
-        <div class="nior-service-item__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/fashion.jpg' ) ); ?>" alt="Commercial Fit-Out & Construction" loading="lazy" />
+        <div class="nior-service-item__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="8" y="10" width="32" height="28" rx="2" />
+            <line x1="8" y1="10" x2="40" y2="38" />
+            <line x1="40" y1="10" x2="8" y2="38" />
+            <line x1="24" y1="10" x2="24" y2="38" />
+            <line x1="8" y1="24" x2="40" y2="24" />
+          </svg>
         </div>
-        <div class="nior-service-item__content">
-          <span class="nior-service-item__num">04 / BUILD</span>
-          <h3>Renovation & Construction</h3>
-          <p>Commercial fit-outs, structural renovation, MEP coordination, and site quality control.</p>
-        </div>
+        <span class="nior-service-item__num">04 / SERVICE</span>
+        <h3>Renovation & Construction</h3>
+        <p>Full-scale commercial fit-outs, site project management, MEP coordination, and rigorous quality control at every construction milestone.</p>
       </div>
 
       <div class="nior-service-item">
-        <div class="nior-service-item__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/bar2.jpg' ) ); ?>" alt="Custom Joinery & Millwork Fabrication" loading="lazy" />
+        <div class="nior-service-item__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 12H20V20H14V28H20V36H8V12Z" />
+            <path d="M40 12H28V20H34V28H28V36H40V12Z" />
+            <line x1="20" y1="16" x2="28" y2="16" />
+            <line x1="20" y1="32" x2="28" y2="32" />
+            <circle cx="24" cy="24" r="3" />
+          </svg>
         </div>
-        <div class="nior-service-item__content">
-          <span class="nior-service-item__num">05 / CRAFTSMANSHIP</span>
-          <h3>Custom Fabrication</h3>
-          <p>Bespoke joinery, architectural metalwork, and signature fixtures tailored to each project.</p>
-        </div>
+        <span class="nior-service-item__num">05 / SERVICE</span>
+        <h3>Custom Fabrication</h3>
+        <p>Bespoke joinery, architectural metalwork, and signature statement furniture crafted inside our dedicated 11,000 sq ft Johor Bahru workshop.</p>
       </div>
 
       <div class="nior-service-item">
-        <div class="nior-service-item__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/jewelry.jpg' ) ); ?>" alt="Architectural Lighting Engineering" loading="lazy" />
+        <div class="nior-service-item__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="24" y1="6" x2="24" y2="16" />
+            <path d="M14 26C14 20.4772 18.4772 16 24 16C29.5228 16 34 20.4772 34 26H14Z" />
+            <line x1="12" y1="26" x2="36" y2="26" />
+            <line x1="24" y1="32" x2="24" y2="40" />
+            <line x1="17" y1="31" x2="13" y2="38" />
+            <line x1="31" y1="31" x2="35" y2="38" />
+            <line x1="8" y1="35" x2="5" y2="37" />
+            <line x1="40" y1="35" x2="43" y2="37" />
+          </svg>
         </div>
-        <div class="nior-service-item__content">
-          <span class="nior-service-item__num">06 / ILLUMINATION</span>
-          <h3>Lighting & Atmosphere</h3>
-          <p>Architectural lighting design, concealed perimeter washes, and atmospheric lighting scenes.</p>
-        </div>
+        <span class="nior-service-item__num">06 / SERVICE</span>
+        <h3>Lighting & Atmosphere Design</h3>
+        <p>Architectural illumination engineering, indirect cove wash, custom neon integration, and atmospheric mood scripting.</p>
       </div>
 
       <div class="nior-service-item">
-        <div class="nior-service-item__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/perfume.jpg' ) ); ?>" alt="Brand Experience Spatial Integration" loading="lazy" />
+        <div class="nior-service-item__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="8" y="8" width="32" height="32" rx="2" />
+            <rect x="15" y="15" width="18" height="18" rx="1" />
+            <line x1="8" y1="8" x2="15" y2="15" />
+            <line x1="40" y1="8" x2="33" y2="15" />
+            <line x1="40" y1="40" x2="33" y2="33" />
+            <line x1="8" y1="40" x2="15" y2="33" />
+            <circle cx="24" cy="24" r="2.5" />
+          </svg>
         </div>
-        <div class="nior-service-item__content">
-          <span class="nior-service-item__num">07 / BRAND</span>
-          <h3>Brand Experience</h3>
-          <p>Translating brand identity into immersive, tactile 3D customer environments.</p>
-        </div>
+        <span class="nior-service-item__num">07 / SERVICE</span>
+        <h3>Brand Experience Integration</h3>
+        <p>Translating brand DNA and values into three-dimensional customer interactions, photo-worthy destinations, and tactile moments.</p>
       </div>
 
       <div class="nior-service-item">
-        <div class="nior-service-item__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/fashion2.jpg' ) ); ?>" alt="Commercial Space Strategy" loading="lazy" />
+        <div class="nior-service-item__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 10H40V38H8V10Z" />
+            <path d="M8 24H22V38" />
+            <path d="M22 18H40" />
+            <path d="M30 18V38" />
+            <path d="M15 17L15 13M15 13L12 15M15 13L18 15" />
+            <circle cx="35" cy="28" r="2" />
+          </svg>
         </div>
-        <div class="nior-service-item__content">
-          <span class="nior-service-item__num">08 / STRATEGY</span>
-          <h3>Commercial Strategy</h3>
-          <p>Customer circulation modeling, retail dwell optimization, and operational floorplan ergonomics.</p>
-        </div>
+        <span class="nior-service-item__num">08 / SERVICE</span>
+        <h3>Commercial Space Strategy</h3>
+        <p>Optimizing floorplan revenue density, customer circulation dynamics, operational ergonomics, and retail dwell time.</p>
       </div>
 
     </div>
