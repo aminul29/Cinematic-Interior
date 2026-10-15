@@ -1,0 +1,276 @@
+/* ==========================================================================
+   Cinematic Interior — Site Editor Visual Fidelity & Normalization
+   Pure Scoped CSS Nesting (Zero !important Specificity)
+   Resolves Gutenberg canvas layout, hides overlays, and normalizes animations.
+   ========================================================================== */
+
+body.editor-styles-wrapper,
+.editor-styles-wrapper {
+  background-color: var(--nior-obsidian, #0c0d0e);
+  color: var(--nior-white, #f5f5f7);
+  font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
+
+  /* -------------------------------------------------------------------------
+     1. Preloader, Top Progress Bar & Mobile Navigation Drawer
+     Hidden exclusively inside the Site Editor canvas to avoid visual clutter.
+     ------------------------------------------------------------------------- */
+  .nior-preloader {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .nior-top-progress {
+    display: none;
+  }
+
+  .nior-mobile-menu {
+    display: none;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* -------------------------------------------------------------------------
+     2. Luxury Header In-Editor Normalization
+     Positioned relative in document flow to prevent block toolbar overlapping.
+     ------------------------------------------------------------------------- */
+  .nior-header {
+    position: relative;
+    top: 0;
+    left: auto;
+    right: auto;
+    width: 100%;
+    background: var(--nior-obsidian, #0c0d0e);
+    border-bottom: 1px solid var(--nior-border, rgba(201, 162, 94, 0.16));
+    z-index: 50;
+
+    .nior-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .nior-header__brand {
+      display: inline-flex;
+      align-items: center;
+
+      .nior-header__logo-img {
+        display: block;
+        height: 62px;
+        width: auto;
+        object-fit: contain;
+      }
+    }
+
+    .nior-header__nav {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nior-header__actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .nior-header__cta {
+        display: inline-flex;
+      }
+
+      .nior-header__toggle {
+        display: none;
+      }
+    }
+  }
+
+  /* -------------------------------------------------------------------------
+     3. Cinematic Walkthrough Hero In-Editor Normalization
+     Normalizes 480vh scroll track to a balanced 85vh stage with static frame 1.
+     ------------------------------------------------------------------------- */
+  .nior-walkthrough-hero-track {
+    position: relative;
+    height: 85vh;
+    min-height: 620px;
+    max-height: 860px;
+    margin: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-block-end: 0;
+    overflow: hidden;
+
+    .nior-walkthrough-hero-stage {
+      position: relative;
+      top: 0;
+      height: 100%;
+      min-height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nior-walkthrough-canvas-container {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--nior-obsidian, #0c0d0e);
+      background-image:
+        linear-gradient(180deg, rgba(12, 13, 14, 0.45) 0%, rgba(12, 13, 14, 0.3) 50%, rgba(12, 13, 14, 0.75) 100%),
+        url('../img/walkthrough/frame-01.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      opacity: 1;
+
+      canvas.nior-walkthrough-canvas {
+        display: none;
+      }
+    }
+
+    .nior-hero-center-brand {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    .nior-walkthrough-content {
+      display: none;
+    }
+
+    .nior-walkthrough-hud {
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    .nior-walkthrough-scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 40px;
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      z-index: 10;
+    }
+  }
+
+  /* -------------------------------------------------------------------------
+     4. Statement Rack Focus Section In-Editor Normalization
+     Reveals statement typography without waiting for JS ScrollTrigger.
+     ------------------------------------------------------------------------- */
+  .nior-rack-section {
+    position: relative;
+    height: auto;
+    min-height: 480px;
+    padding: clamp(80px, 12vh, 140px) 0;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    margin: 0;
+
+    .nior-rack-stage {
+      position: relative;
+      top: 0;
+      left: 0;
+      height: auto;
+      min-height: auto;
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      padding: 0;
+      background-color: transparent;
+      background-image: none;
+    }
+
+    .nior-rack-eyebrow {
+      opacity: 1;
+      transform: none;
+    }
+
+    .nior-rack-headline {
+      span.rack-word {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        color: var(--nior-white, #ffffff);
+
+        &.em {
+          color: var(--nior-gold, #c9a25e);
+          font-style: italic;
+        }
+      }
+    }
+
+    .nior-rack-sub {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* -------------------------------------------------------------------------
+     5. Falling Client Logos In-Editor Normalization
+     Renders all 11 client logos cleanly in a balanced grid.
+     ------------------------------------------------------------------------- */
+  .nior-falling-section {
+    position: relative;
+    padding: clamp(60px, 10vh, 120px) 0;
+
+    .nior-falling-arena {
+      min-height: auto;
+      padding: 20px 0;
+    }
+
+    .nior-logo-chip {
+      transform: none;
+      opacity: 1;
+      visibility: visible;
+
+      .nior-logo-chip__img {
+        opacity: 0.95;
+      }
+    }
+  }
+
+  /* -------------------------------------------------------------------------
+     6. Video Ambient Backgrounds
+     Ensures video containers display background poster cleanly in editor.
+     ------------------------------------------------------------------------- */
+  .nior-cta-video-section {
+    .nior-cta-video-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  /* -------------------------------------------------------------------------
+     7. General Block Container Polish
+     ------------------------------------------------------------------------- */
+  .nior-container {
+    width: 100%;
+    max-width: var(--container-max, 1360px);
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+}

@@ -4,14 +4,17 @@
   padding: var(--section-pad-y) 0;
   overflow: hidden;
 
+  &.nior-section--dark,
   &--dark {
     background-color: var(--nior-obsidian);
   }
 
+  &.nior-section--surface,
   &--surface {
     background-color: var(--nior-surface);
   }
 
+  &.nior-section--taupe,
   &--taupe {
     background-color: var(--nior-taupe);
   }
