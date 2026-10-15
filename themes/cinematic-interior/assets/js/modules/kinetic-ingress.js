@@ -1,7 +1,6 @@
 /**
- * Refined Luxury Architectural ScrollTrigger Ingress
- * Subtle, calm 2D micro-animations: gentle vertical elevations, soft opacity reveals,
- * and harmonious staggered pacing. Strictly no 3D tilt or gimmicky spring physics.
+ * Two-Way Bidirectional 3D Kinetic ScrollTrigger Ingress Recipes
+ * Spiraling 3D ingress, angular perspective convergence, and dynamic spring elevation.
  */
 
 export function initKineticIngress() {
@@ -12,111 +11,152 @@ export function initKineticIngress() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) return;
 
-  // 1. Value Pillar Cards: Clean Vertical Elevation
+  // 1. Value Pillar Cards: Spiraling 3D Ingress
   const pillarCards = document.querySelectorAll('.nior-pillar-card');
   if (pillarCards.length) {
+    const angles = [
+      { rotate: -8, rotateY: -15, y: 50 },
+      { rotate: 6, rotateY: 12, y: 50 },
+      { rotate: -6, rotateY: -12, y: 50 },
+      { rotate: 8, rotateY: 15, y: 50 },
+    ];
+
     pillarCards.forEach((card, index) => {
+      const conf = angles[index % angles.length];
       gsap.fromTo(
         card,
         {
-          y: 28,
+          rotate: conf.rotate,
+          rotateY: conf.rotateY,
+          y: conf.y,
+          scale: 0.85,
           opacity: 0,
         },
         {
+          rotate: 0,
+          rotateY: 0,
           y: 0,
+          scale: 1,
           opacity: 1,
-          duration: 0.8,
-          delay: (index % 4) * 0.08,
-          ease: 'power2.out',
+          duration: 1.0,
+          ease: 'back.out(1.4)',
           scrollTrigger: {
             trigger: card,
-            start: 'top 88%',
-            toggleActions: 'play none none reverse',
+            start: 'top 85%',
+            end: 'bottom 15%',
+            toggleActions: 'play reverse play reverse',
           },
         }
       );
     });
   }
 
-  // 2. Process Step Cards: Staggered Sequential Rise
+  // 2. Process Step Cards: Staggered 3D Ingress
   const processSteps = document.querySelectorAll('.nior-process-step');
   if (processSteps.length) {
-    processSteps.forEach((step, index) => {
+    processSteps.forEach((step, idx) => {
       gsap.fromTo(
         step,
-        {
-          y: 24,
-          opacity: 0,
-        },
+        { y: 60, opacity: 0, scale: 0.9 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.75,
-          delay: (index % 5) * 0.07,
-          ease: 'power2.out',
+          scale: 1,
+          duration: 0.9,
+          delay: idx * 0.08,
+          ease: 'back.out(1.3)',
           scrollTrigger: {
             trigger: step,
-            start: 'top 88%',
-            toggleActions: 'play none none reverse',
+            start: 'top 85%',
+            end: 'bottom 15%',
+            toggleActions: 'play reverse play reverse',
           },
         }
       );
     });
   }
 
-  // 3. Why Nior Advantage Cards: Architectural Elevation
+  // 3. Why Nior Advantage Cards: Dynamic 3D Tilt Ingress
   const advantageCards = document.querySelectorAll('.nior-advantage-card');
   if (advantageCards.length) {
+    const advAngles = [
+      { rotate: -5, rotateY: -12, y: 50 },
+      { rotate: 5, rotateY: 12, y: 50 },
+      { rotate: -4, rotateY: -10, y: 50 },
+      { rotate: 4, rotateY: 10, y: 50 },
+    ];
+
     advantageCards.forEach((card, index) => {
+      const conf = advAngles[index % advAngles.length];
       gsap.fromTo(
         card,
         {
-          y: 30,
+          rotate: conf.rotate,
+          rotateY: conf.rotateY,
+          y: conf.y,
+          scale: 0.88,
           opacity: 0,
         },
         {
+          rotate: 0,
+          rotateY: 0,
           y: 0,
+          scale: 1,
           opacity: 1,
-          duration: 0.85,
-          delay: (index % 2) * 0.12,
-          ease: 'power2.out',
+          duration: 1.0,
+          ease: 'back.out(1.4)',
           scrollTrigger: {
             trigger: card,
-            start: 'top 88%',
-            toggleActions: 'play none none reverse',
+            start: 'top 85%',
+            end: 'bottom 15%',
+            toggleActions: 'play reverse play reverse',
           },
         }
       );
     });
   }
 
-  // 4. Commercial Sectors Cards: Refined Ingress
+  // 4. Commercial Sectors Grid: Alternating 3D Ingress
   const sectorCards = document.querySelectorAll('.nior-sector-card');
   if (sectorCards.length) {
+    const sectorAngles = [
+      { rotate: -6, rotateY: -12, y: 50 },
+      { rotate: 6, rotateY: 12, y: 50 },
+      { rotate: -5, rotateY: -10, y: 50 },
+      { rotate: 5, rotateY: 10, y: 50 },
+    ];
+
     sectorCards.forEach((card, index) => {
+      const conf = sectorAngles[index % sectorAngles.length];
       gsap.fromTo(
         card,
         {
-          y: 26,
+          rotate: conf.rotate,
+          rotateY: conf.rotateY,
+          y: conf.y,
+          scale: 0.88,
           opacity: 0,
         },
         {
+          rotate: 0,
+          rotateY: 0,
           y: 0,
+          scale: 1,
           opacity: 1,
-          duration: 0.8,
-          delay: (index % 4) * 0.08,
-          ease: 'power2.out',
+          duration: 1.0,
+          ease: 'back.out(1.3)',
           scrollTrigger: {
             trigger: card,
-            start: 'top 88%',
-            toggleActions: 'play none none reverse',
+            start: 'top 85%',
+            end: 'bottom 15%',
+            toggleActions: 'play reverse play reverse',
           },
         }
       );
     });
   }
 
-  // 5. Featured Project & Split Content Grid Reveals
+  // 5. Featured Project & Split Grid 3D Convergence
   const splitSections = document.querySelectorAll(
     '.nior-vstage-grid, .nior-inhouse-grid, .nior-about-story, .nior-contact-grid'
   );
@@ -124,76 +164,68 @@ export function initKineticIngress() {
     const leftCol = section.children[0];
     const rightCol = section.children[1];
 
-    if (leftCol) {
+    if (leftCol && rightCol) {
       gsap.fromTo(
         leftCol,
+        { x: -70, opacity: 0, scale: 0.94 },
         {
-          y: 24,
-          opacity: 0,
-        },
-        {
-          y: 0,
+          x: 0,
           opacity: 1,
-          duration: 0.85,
-          ease: 'power2.out',
+          scale: 1,
+          duration: 1.1,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: section,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
+            start: 'top 80%',
+            end: 'bottom 15%',
+            toggleActions: 'play reverse play reverse',
           },
         }
       );
-    }
 
-    if (rightCol) {
       gsap.fromTo(
         rightCol,
+        { x: 70, opacity: 0, scale: 0.94 },
         {
-          y: 24,
-          opacity: 0,
-        },
-        {
-          y: 0,
+          x: 0,
           opacity: 1,
-          duration: 0.85,
-          delay: 0.12,
-          ease: 'power2.out',
+          scale: 1,
+          duration: 1.1,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: section,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
+            start: 'top 80%',
+            end: 'bottom 15%',
+            toggleActions: 'play reverse play reverse',
           },
         }
       );
     }
   });
 
-  // 6. CTA Box Calm Grand Focus
+  // 6. CTA Box Explosive Scale-Up
   const ctaBox = document.querySelector('.nior-cta-box');
   if (ctaBox) {
     gsap.fromTo(
       ctaBox,
+      { scale: 0.88, opacity: 0, y: 50 },
       {
-        y: 24,
-        scale: 0.98,
-        opacity: 0,
-      },
-      {
-        y: 0,
         scale: 1,
         opacity: 1,
-        duration: 0.9,
-        ease: 'power2.out',
+        y: 0,
+        duration: 1.1,
+        ease: 'back.out(1.4)',
         scrollTrigger: {
           trigger: ctaBox,
           start: 'top 85%',
-          toggleActions: 'play none none reverse',
+          end: 'bottom 15%',
+          toggleActions: 'play reverse play reverse',
         },
       }
     );
   }
 
-  // 7. Cinematic Scenario Cards: Media and Content Ingress
+  // 7. Cinematic Scenario Cards: Staggered Parallax Ingress
   const scenarioCards = document.querySelectorAll('.nior-scenario-card');
   scenarioCards.forEach((card) => {
     const media = card.querySelector('.nior-scenario-card__media');
@@ -202,39 +234,34 @@ export function initKineticIngress() {
     if (media && content) {
       gsap.fromTo(
         media,
-        {
-          opacity: 0,
-          y: 26,
-        },
+        { opacity: 0, y: 50, scale: 0.95 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.85,
-          ease: 'power2.out',
+          scale: 1,
+          duration: 1.1,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: card,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
+            start: 'top 82%',
+            toggleActions: 'play reverse play reverse',
           },
         }
       );
 
       gsap.fromTo(
         content,
-        {
-          opacity: 0,
-          y: 20,
-        },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.85,
-          delay: 0.1,
-          ease: 'power2.out',
+          duration: 1.0,
+          delay: 0.15,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: card,
-            start: 'top 85%',
-            toggleActions: 'play none none reverse',
+            start: 'top 82%',
+            toggleActions: 'play reverse play reverse',
           },
         }
       );
@@ -245,22 +272,23 @@ export function initKineticIngress() {
   const serviceItems = document.querySelectorAll('.nior-service-item');
   if (serviceItems.length) {
     serviceItems.forEach((item, index) => {
+      const rot = index % 2 === 0 ? -4 : 4;
       gsap.fromTo(
         item,
+        { rotate: rot, rotateY: rot * 1.5, y: 40, opacity: 0, scale: 0.9 },
         {
-          y: 24,
-          opacity: 0,
-        },
-        {
+          rotate: 0,
+          rotateY: 0,
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          delay: (index % 2) * 0.1,
-          ease: 'power2.out',
+          scale: 1,
+          duration: 0.95,
+          ease: 'back.out(1.3)',
           scrollTrigger: {
             trigger: item,
-            start: 'top 88%',
-            toggleActions: 'play none none reverse',
+            start: 'top 85%',
+            end: 'bottom 15%',
+            toggleActions: 'play reverse play reverse',
           },
         }
       );
@@ -270,22 +298,24 @@ export function initKineticIngress() {
   const portfolioCards = document.querySelectorAll('.nior-portfolio-card');
   if (portfolioCards.length) {
     portfolioCards.forEach((card, index) => {
+      const rot = index % 2 === 0 ? -4 : 4;
       gsap.fromTo(
         card,
+        { rotate: rot, rotateY: rot * 1.5, y: 45, opacity: 0, scale: 0.9 },
         {
-          y: 26,
-          opacity: 0,
-        },
-        {
+          rotate: 0,
+          rotateY: 0,
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          scale: 1,
+          duration: 0.95,
           delay: (index % 3) * 0.08,
-          ease: 'power2.out',
+          ease: 'back.out(1.3)',
           scrollTrigger: {
             trigger: card,
-            start: 'top 88%',
-            toggleActions: 'play none none reverse',
+            start: 'top 85%',
+            end: 'bottom 15%',
+            toggleActions: 'play reverse play reverse',
           },
         }
       );
