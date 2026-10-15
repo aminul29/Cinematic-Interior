@@ -302,6 +302,47 @@ body.editor-styles-wrapper,
     }
   }
 
+  .nior-process-video-section {
+    position: relative;
+    overflow: hidden;
+
+    .nior-process-video-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .nior-process-video-overlay {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(
+        ellipse 85% 75% at 50% 50%,
+        rgba(12, 13, 14, 0.76) 0%,
+        rgba(12, 13, 14, 0.88) 60%,
+        rgba(12, 13, 14, 0.95) 100%
+      );
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .nior-container {
+      position: relative;
+      z-index: 3;
+    }
+
+    .nior-process-step {
+      background: rgba(18, 19, 21, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  }
+
   /* -------------------------------------------------------------------------
      7. General Block Container Polish
      ------------------------------------------------------------------------- */
