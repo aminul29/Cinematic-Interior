@@ -690,6 +690,12 @@ body .wp-site-blocks > .nior-rack-section,
 .nior-cta-video-section {
   position: relative;
   overflow: hidden;
+  border-top: 1px solid var(--nior-border);
+  border-bottom: 1px solid var(--nior-border);
+  min-height: clamp(520px, 68vh, 780px);
+  display: flex;
+  align-items: center;
+  padding: clamp(90px, 14vh, 160px) 0;
 
   .nior-cta-video-bg {
     position: absolute;
@@ -697,20 +703,58 @@ body .wp-site-blocks > .nior-rack-section,
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.32;
+    opacity: 0.45;
     pointer-events: none;
     z-index: 1;
   }
 
-  .nior-container {
-    position: relative;
+  .nior-cta-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(12, 13, 14, 0.82) 0%,
+      rgba(12, 13, 14, 0.88) 50%,
+      rgba(12, 13, 14, 0.94) 100%
+    );
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    pointer-events: none;
     z-index: 2;
   }
 
+  .nior-container {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+  }
+
   .nior-cta-box {
-    background: rgba(20, 22, 24, 0.76);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    h2 {
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      max-width: 18ch;
+      margin: 0 auto 24px;
+      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.95);
+    }
+
+    p {
+      font-size: 16px;
+      max-width: 620px;
+      margin: 0 auto 36px;
+      color: var(--nior-white);
+      opacity: 0.9;
+      text-shadow: 0 1px 16px rgba(0, 0, 0, 0.9);
+    }
   }
 }
 

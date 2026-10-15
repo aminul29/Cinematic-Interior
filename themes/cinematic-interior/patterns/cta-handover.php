@@ -11,6 +11,7 @@
   <video class="nior-cta-video-bg" autoplay muted loop playsinline poster="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-3.jpg' ) ); ?>">
     <source src="<?php echo esc_url( get_theme_file_uri( '/assets/video/cta-ambient.mp4' ) ); ?>" type="video/mp4" />
   </video>
+  <div class="nior-cta-overlay" aria-hidden="true"></div>
   <div class="nior-container">
     <div class="nior-cta-box">
       <span class="nior-eyebrow" style="justify-content: center;">Start A Conversation</span>

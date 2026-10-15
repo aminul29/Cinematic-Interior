@@ -35,6 +35,12 @@ body.editor-styles-wrapper,
      2. Luxury Header In-Editor Normalization
      Positioned relative in document flow to prevent block toolbar overlapping.
      ------------------------------------------------------------------------- */
+  header.wp-block-template-part,
+  .wp-block-template-part[tagName="header"] {
+    margin-block-start: 0;
+    margin-top: 0;
+  }
+
   .nior-header {
     position: relative;
     top: 0;
@@ -254,12 +260,45 @@ body.editor-styles-wrapper,
      Ensures video containers display background poster cleanly in editor.
      ------------------------------------------------------------------------- */
   .nior-cta-video-section {
+    position: relative;
+    overflow: hidden;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+
     .nior-cta-video-bg {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    .nior-cta-overlay {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(12, 13, 14, 0.82) 0%,
+        rgba(12, 13, 14, 0.88) 50%,
+        rgba(12, 13, 14, 0.94) 100%
+      );
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .nior-container {
+      position: relative;
+      z-index: 3;
+    }
+
+    .nior-cta-box {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0;
     }
   }
 

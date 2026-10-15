@@ -137,6 +137,9 @@
     }
   },
   "styles": {
+    "spacing": {
+      "blockGap": "0"
+    },
     "color": {
       "background": "var(--wp--preset--color--obsidian)",
       "text": "var(--wp--preset--color--white)"

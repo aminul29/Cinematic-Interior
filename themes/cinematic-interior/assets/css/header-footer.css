@@ -1,4 +1,9 @@
 /* Luxury Minimalist Header */
+header.wp-block-template-part {
+  margin-block-start: 0;
+  margin-top: 0;
+}
+
 .nior-header {
   position: fixed;
   top: 0;
