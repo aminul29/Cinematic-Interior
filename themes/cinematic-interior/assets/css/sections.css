@@ -243,9 +243,9 @@ body .wp-site-blocks > .nior-rack-section,
   transition: transform 0.4s var(--ease-out-luxury), border-color 0.4s ease, box-shadow 0.4s ease;
 
   &:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
     border-color: var(--nior-gold);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35), 0 0 20px rgba(201, 162, 94, 0.08);
   }
 
   .nior-pillar-icon {
@@ -255,7 +255,7 @@ body .wp-site-blocks > .nior-rack-section,
     align-items: center;
     justify-content: center;
     line-height: 0;
-    transition: transform 0.4s var(--ease-out-luxury);
+    transition: transform 0.4s var(--ease-out-luxury), filter 0.4s ease, color 0.4s ease;
 
     svg {
       width: 44px;
@@ -264,7 +264,9 @@ body .wp-site-blocks > .nior-rack-section,
   }
 
   &:hover .nior-pillar-icon {
-    transform: scale(1.08);
+    transform: translateY(-2px) scale(1.04);
+    filter: drop-shadow(0 0 8px rgba(201, 162, 94, 0.45));
+    color: var(--nior-gold-light);
   }
 
   .nior-pillar-num {
@@ -274,12 +276,22 @@ body .wp-site-blocks > .nior-rack-section,
     letter-spacing: 0.2em;
     margin-bottom: 16px;
     display: block;
+    transition: color 0.3s ease;
+  }
+
+  &:hover .nior-pillar-num {
+    color: var(--nior-gold-light);
   }
 
   .nior-pillar-title {
     font-size: 22px;
     margin-bottom: 14px;
     color: var(--nior-white);
+    transition: color 0.3s ease;
+  }
+
+  &:hover .nior-pillar-title {
+    color: #ffffff;
   }
 
   .nior-pillar-desc {
@@ -314,10 +326,12 @@ body .wp-site-blocks > .nior-rack-section,
   border-radius: 4px;
   padding: 30px 24px;
   position: relative;
-  transition: border-color 0.3s ease;
+  transition: transform 0.4s var(--ease-out-luxury), border-color 0.3s ease, box-shadow 0.4s ease;
 
   &:hover {
+    transform: translateY(-3px);
     border-color: var(--nior-gold);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3), 0 0 16px rgba(201, 162, 94, 0.06);
   }
 
   .nior-step-icon {
@@ -327,7 +341,7 @@ body .wp-site-blocks > .nior-rack-section,
     align-items: center;
     justify-content: center;
     line-height: 0;
-    transition: transform 0.4s var(--ease-out-luxury);
+    transition: transform 0.4s var(--ease-out-luxury), filter 0.4s ease, color 0.4s ease;
 
     svg {
       width: 36px;
@@ -336,7 +350,9 @@ body .wp-site-blocks > .nior-rack-section,
   }
 
   &:hover .nior-step-icon {
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.04);
+    filter: drop-shadow(0 0 6px rgba(201, 162, 94, 0.4));
+    color: var(--nior-gold-light);
   }
 
   .nior-step-badge {
@@ -347,12 +363,22 @@ body .wp-site-blocks > .nior-rack-section,
     text-transform: uppercase;
     margin-bottom: 12px;
     display: block;
+    transition: color 0.3s ease;
+  }
+
+  &:hover .nior-step-badge {
+    color: var(--nior-gold-light);
   }
 
   .nior-step-title {
     font-size: 20px;
     margin-bottom: 12px;
     color: var(--nior-white);
+    transition: color 0.3s ease;
+  }
+
+  &:hover .nior-step-title {
+    color: #ffffff;
   }
 
   .nior-step-sub {
@@ -484,11 +510,12 @@ body .wp-site-blocks > .nior-rack-section,
   border: 1px solid var(--nior-border);
   border-radius: 4px;
   overflow: hidden;
-  transition: transform 0.4s var(--ease-out-luxury), border-color 0.4s ease;
+  transition: transform 0.4s var(--ease-out-luxury), border-color 0.4s ease, box-shadow 0.4s ease;
 
   &:hover {
-    transform: translateY(-8px);
+    transform: translateY(-4px);
     border-color: var(--nior-gold);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35), 0 0 18px rgba(201, 162, 94, 0.08);
   }
 
   .nior-sector-card__body {
@@ -503,12 +530,22 @@ body .wp-site-blocks > .nior-rack-section,
     text-transform: uppercase;
     margin-bottom: 10px;
     display: block;
+    transition: color 0.3s ease;
+  }
+
+  &:hover .nior-sector-card__tag {
+    color: var(--nior-gold-light);
   }
 
   .nior-sector-card__title {
     font-size: 22px;
     margin-bottom: 12px;
     color: var(--nior-white);
+    transition: color 0.3s ease;
+  }
+
+  &:hover .nior-sector-card__title {
+    color: #ffffff;
   }
 
   .nior-sector-card__desc {
@@ -579,12 +616,12 @@ body .wp-site-blocks > .nior-rack-section,
   transition: transform 0.5s var(--ease-out-luxury), border-color 0.4s ease, box-shadow 0.4s ease;
 
   &:hover {
-    transform: translateY(-6px);
+    transform: translateY(-4px);
     border-color: var(--nior-gold);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 20px rgba(201, 162, 94, 0.08);
 
     .nior-advantage-card__bg {
-      transform: scale(1.06);
+      transform: scale(1.04);
     }
   }
 
@@ -618,6 +655,11 @@ body .wp-site-blocks > .nior-rack-section,
     color: var(--nior-gold);
     display: block;
     margin-bottom: 12px;
+    transition: color 0.3s ease;
+  }
+
+  &:hover .nior-advantage-num {
+    color: var(--nior-gold-light);
   }
 
   .nior-advantage-title {
@@ -626,6 +668,11 @@ body .wp-site-blocks > .nior-rack-section,
     color: var(--nior-white);
     margin-bottom: 14px;
     line-height: 1.25;
+    transition: color 0.3s ease;
+  }
+
+  &:hover .nior-advantage-title {
+    color: #ffffff;
   }
 
   .nior-advantage-desc {

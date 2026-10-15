@@ -76,6 +76,12 @@
   border-radius: 4px;
   padding: clamp(30px, 4vw, 50px);
   border-left: 3px solid var(--nior-gold);
+  transition: transform 0.4s var(--ease-out-luxury), border-color 0.4s ease, box-shadow 0.4s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+  }
 
   blockquote {
     margin: 0;
@@ -116,11 +122,12 @@
   border-radius: 4px;
   padding: 36px 30px;
   position: relative;
-  transition: transform 0.4s var(--ease-out-luxury), border-color 0.4s ease;
+  transition: transform 0.4s var(--ease-out-luxury), border-color 0.4s ease, box-shadow 0.4s ease;
 
   &:hover {
-    transform: translateY(-6px);
+    transform: translateY(-4px);
     border-color: var(--nior-gold);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35), 0 0 20px rgba(201, 162, 94, 0.08);
   }
 
   .nior-service-item__num {
@@ -129,11 +136,21 @@
     color: var(--nior-gold);
     display: block;
     margin-bottom: 16px;
+    transition: color 0.3s ease;
+  }
+
+  &:hover .nior-service-item__num {
+    color: var(--nior-gold-light);
   }
 
   h3 {
     font-size: 24px;
     margin-bottom: 14px;
+    transition: color 0.3s ease;
+  }
+
+  &:hover h3 {
+    color: #ffffff;
   }
 
   p {
@@ -167,6 +184,13 @@
   border-radius: 4px;
   overflow: hidden;
   position: relative;
+  transition: transform 0.4s var(--ease-out-luxury), border-color 0.4s ease, box-shadow 0.4s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--nior-gold);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 20px rgba(201, 162, 94, 0.08);
+  }
 
   .nior-portfolio-card__img-wrap {
     position: relative;
@@ -182,7 +206,7 @@
   }
 
   &:hover .nior-portfolio-card__img-wrap img {
-    transform: scale(1.06);
+    transform: scale(1.04);
   }
 
   .nior-portfolio-card__body {
@@ -230,6 +254,13 @@
   border: 1px solid var(--nior-border);
   border-radius: 4px;
   padding: clamp(30px, 4vw, 50px);
+  transition: transform 0.4s var(--ease-out-luxury), border-color 0.4s ease, box-shadow 0.4s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--nior-border-strong);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+  }
 
   h3 {
     font-size: 26px;

@@ -1,145 +1,199 @@
 /**
- * Two-Way Bidirectional 3D Kinetic ScrollTrigger Ingress Recipes
- * Spiraling ingress, 3D convergence, and explosive center scale-up.
+ * Refined Luxury Architectural ScrollTrigger Ingress
+ * Subtle, calm 2D micro-animations: gentle vertical elevations, soft opacity reveals,
+ * and harmonious staggered pacing. Strictly no 3D tilt or gimmicky spring physics.
  */
 
 export function initKineticIngress() {
   const { gsap, ScrollTrigger } = window;
   if (!gsap || !ScrollTrigger) return;
 
-  // 1. Value Pillar Cards: Spiraling Ingress
+  // Honor user accessibility preferences
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  // 1. Value Pillar Cards: Clean Vertical Elevation
   const pillarCards = document.querySelectorAll('.nior-pillar-card');
   if (pillarCards.length) {
-    const angles = [
-      { rotate: -8, rotateY: -15, y: 50 },
-      { rotate: 6, rotateY: 12, y: 50 },
-      { rotate: -6, rotateY: -12, y: 50 },
-      { rotate: 8, rotateY: 15, y: 50 },
-    ];
-
     pillarCards.forEach((card, index) => {
-      const conf = angles[index % angles.length];
       gsap.fromTo(
         card,
         {
-          rotate: conf.rotate,
-          rotateY: conf.rotateY,
-          y: conf.y,
-          scale: 0.85,
+          y: 28,
           opacity: 0,
         },
         {
-          rotate: 0,
-          rotateY: 0,
           y: 0,
-          scale: 1,
           opacity: 1,
-          duration: 1.0,
-          ease: 'back.out(1.4)',
+          duration: 0.8,
+          delay: (index % 4) * 0.08,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: card,
-            start: 'top 85%',
-            end: 'bottom 15%',
-            toggleActions: 'play reverse play reverse',
+            start: 'top 88%',
+            toggleActions: 'play none none reverse',
           },
         }
       );
     });
   }
 
-  // 2. Process Step Cards: Staggered Ingress
+  // 2. Process Step Cards: Staggered Sequential Rise
   const processSteps = document.querySelectorAll('.nior-process-step');
   if (processSteps.length) {
-    processSteps.forEach((step, idx) => {
+    processSteps.forEach((step, index) => {
       gsap.fromTo(
         step,
-        { y: 60, opacity: 0, scale: 0.9 },
+        {
+          y: 24,
+          opacity: 0,
+        },
         {
           y: 0,
           opacity: 1,
-          scale: 1,
-          duration: 0.9,
-          delay: idx * 0.08,
-          ease: 'back.out(1.3)',
+          duration: 0.75,
+          delay: (index % 5) * 0.07,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: step,
-            start: 'top 85%',
-            end: 'bottom 15%',
-            toggleActions: 'play reverse play reverse',
+            start: 'top 88%',
+            toggleActions: 'play none none reverse',
           },
         }
       );
     });
   }
 
-  // 3. Featured Project & Split Grid 3D Convergence
-  const splitSections = document.querySelectorAll('.nior-vstage-grid, .nior-inhouse-grid');
+  // 3. Why Nior Advantage Cards: Architectural Elevation
+  const advantageCards = document.querySelectorAll('.nior-advantage-card');
+  if (advantageCards.length) {
+    advantageCards.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        {
+          y: 30,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.85,
+          delay: (index % 2) * 0.12,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 88%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    });
+  }
+
+  // 4. Commercial Sectors Cards: Refined Ingress
+  const sectorCards = document.querySelectorAll('.nior-sector-card');
+  if (sectorCards.length) {
+    sectorCards.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        {
+          y: 26,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          delay: (index % 4) * 0.08,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 88%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    });
+  }
+
+  // 5. Featured Project & Split Content Grid Reveals
+  const splitSections = document.querySelectorAll(
+    '.nior-vstage-grid, .nior-inhouse-grid, .nior-about-story, .nior-contact-grid'
+  );
   splitSections.forEach((section) => {
     const leftCol = section.children[0];
     const rightCol = section.children[1];
 
-    if (leftCol && rightCol) {
+    if (leftCol) {
       gsap.fromTo(
         leftCol,
-        { x: -70, opacity: 0, scale: 0.94 },
         {
-          x: 0,
+          y: 24,
+          opacity: 0,
+        },
+        {
+          y: 0,
           opacity: 1,
-          scale: 1,
-          duration: 1.1,
-          ease: 'power3.out',
+          duration: 0.85,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: section,
-            start: 'top 80%',
-            end: 'bottom 15%',
-            toggleActions: 'play reverse play reverse',
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
           },
         }
       );
+    }
 
+    if (rightCol) {
       gsap.fromTo(
         rightCol,
-        { x: 70, opacity: 0, scale: 0.94 },
         {
-          x: 0,
+          y: 24,
+          opacity: 0,
+        },
+        {
+          y: 0,
           opacity: 1,
-          scale: 1,
-          duration: 1.1,
-          ease: 'power3.out',
+          duration: 0.85,
+          delay: 0.12,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: section,
-            start: 'top 80%',
-            end: 'bottom 15%',
-            toggleActions: 'play reverse play reverse',
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
           },
         }
       );
     }
   });
 
-  // 4. CTA Box Explosive Scale-Up
+  // 6. CTA Box Calm Grand Focus
   const ctaBox = document.querySelector('.nior-cta-box');
   if (ctaBox) {
     gsap.fromTo(
       ctaBox,
-      { scale: 0.88, opacity: 0, y: 50 },
       {
+        y: 24,
+        scale: 0.98,
+        opacity: 0,
+      },
+      {
+        y: 0,
         scale: 1,
         opacity: 1,
-        y: 0,
-        duration: 1.1,
-        ease: 'back.out(1.4)',
+        duration: 0.9,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: ctaBox,
           start: 'top 85%',
-          end: 'bottom 15%',
-          toggleActions: 'play reverse play reverse',
+          toggleActions: 'play none none reverse',
         },
       }
     );
   }
 
-  // 5. Cinematic Scenario Cards: Staggered Parallax Ingress
+  // 7. Cinematic Scenario Cards: Media and Content Ingress
   const scenarioCards = document.querySelectorAll('.nior-scenario-card');
   scenarioCards.forEach((card) => {
     const media = card.querySelector('.nior-scenario-card__media');
@@ -148,37 +202,93 @@ export function initKineticIngress() {
     if (media && content) {
       gsap.fromTo(
         media,
-        { opacity: 0, y: 50, scale: 0.95 },
+        {
+          opacity: 0,
+          y: 26,
+        },
         {
           opacity: 1,
           y: 0,
-          scale: 1,
-          duration: 1.1,
-          ease: 'power3.out',
+          duration: 0.85,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: card,
-            start: 'top 82%',
-            toggleActions: 'play reverse play reverse',
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
           },
         }
       );
 
       gsap.fromTo(
         content,
-        { opacity: 0, y: 40 },
+        {
+          opacity: 0,
+          y: 20,
+        },
         {
           opacity: 1,
           y: 0,
-          duration: 1.0,
-          delay: 0.15,
-          ease: 'power3.out',
+          duration: 0.85,
+          delay: 0.1,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: card,
-            start: 'top 82%',
-            toggleActions: 'play reverse play reverse',
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
           },
         }
       );
     }
   });
+
+  // 8. Supporting Pages: Service Items & Portfolio Cards
+  const serviceItems = document.querySelectorAll('.nior-service-item');
+  if (serviceItems.length) {
+    serviceItems.forEach((item, index) => {
+      gsap.fromTo(
+        item,
+        {
+          y: 24,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          delay: (index % 2) * 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 88%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    });
+  }
+
+  const portfolioCards = document.querySelectorAll('.nior-portfolio-card');
+  if (portfolioCards.length) {
+    portfolioCards.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        {
+          y: 26,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          delay: (index % 3) * 0.08,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 88%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    });
+  }
 }
