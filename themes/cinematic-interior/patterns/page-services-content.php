@@ -3,7 +3,7 @@
  * Title: Page Content — Services
  * Slug: cinematic-interior/page-services-content
  * Categories: nior-pages
- * Description: Complete services page layout with all 8 core disciplines, craftsmanship gallery, and signature approach.
+ * Description: Complete services page layout with 8 core disciplines, sector typologies, and signature approach.
  */
 ?>
 <!-- wp:html -->
@@ -25,7 +25,7 @@
       
       <div class="nior-service-item">
         <div class="nior-service-item__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/showroom.jpg' ) ); ?>" alt="Interior Architecture by Nior Atelier" loading="lazy" />
+          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/showhouse.jpg' ) ); ?>" alt="Interior Architecture by Nior Atelier" loading="lazy" />
         </div>
         <div class="nior-service-item__content">
           <span class="nior-service-item__num">01 / ARCHITECTURE</span>
@@ -69,12 +69,12 @@
 
       <div class="nior-service-item">
         <div class="nior-service-item__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-2.jpg' ) ); ?>" alt="Custom Joinery & Fabrication" loading="lazy" />
+          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/bar2.jpg' ) ); ?>" alt="Custom Joinery & Millwork Fabrication" loading="lazy" />
         </div>
         <div class="nior-service-item__content">
           <span class="nior-service-item__num">05 / CRAFTSMANSHIP</span>
           <h3>Custom Fabrication</h3>
-          <p>Bespoke joinery, architectural metalwork, and signature fixtures built in our 11,000 sq ft JB factory.</p>
+          <p>Bespoke joinery, architectural metalwork, and signature fixtures tailored to each project.</p>
         </div>
       </div>
 
@@ -102,7 +102,7 @@
 
       <div class="nior-service-item">
         <div class="nior-service-item__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/showhouse.jpg' ) ); ?>" alt="Commercial Space Strategy" loading="lazy" />
+          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/fashion2.jpg' ) ); ?>" alt="Commercial Space Strategy" loading="lazy" />
         </div>
         <div class="nior-service-item__content">
           <span class="nior-service-item__num">08 / STRATEGY</span>
@@ -113,44 +113,56 @@
 
     </div>
 
-    <div class="nior-materials-showcase" style="margin-top: 80px; padding-top: 60px; border-top: 1px solid var(--nior-border);">
+    <div class="nior-sectors-showcase" style="margin-top: 80px; padding-top: 60px; border-top: 1px solid var(--nior-border);">
       <div style="text-align: center; max-width: 680px; margin: 0 auto 40px;">
-        <span class="nior-eyebrow" style="justify-content: center;">Materiality & Execution</span>
-        <h3 style="font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 2.8rem); margin-bottom: 14px; color: var(--nior-white);">Tactile Material Curation</h3>
-        <p style="font-size: 15px; color: var(--nior-muted);">Every surface is selected for authentic tactile weight, patina, and durability under active hospitality and commercial use.</p>
+        <span class="nior-eyebrow" style="justify-content: center;">Typologies & Sectors</span>
+        <h3 style="font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 2.8rem); margin-bottom: 14px; color: var(--nior-white);">Sector Expertise</h3>
+        <p style="font-size: 15px; color: var(--nior-muted);">Distinct spatial strategies engineered for each typology's operational demands and experiential goals.</p>
       </div>
 
-      <div class="nior-materials-grid">
-        <div class="nior-material-card">
-          <div class="nior-material-card__img">
-            <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-3.jpg' ) ); ?>" alt="Acoustic Fluted Timber" loading="lazy" />
+      <div class="nior-sectors-grid">
+        <div class="nior-sector-card">
+          <div class="nior-sector-card__img">
+            <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/dining.jpg' ) ); ?>" alt="Hospitality & Dining Architecture" loading="lazy" />
           </div>
-          <h4>Acoustic Fluted Timber</h4>
-          <p>Precision-milled hardwood slats and acoustic wall paneling.</p>
+          <div class="nior-sector-card__body">
+            <span class="nior-sector-card__tag">HOSPITALITY & F&B</span>
+            <h4>Dining & Social Lounges</h4>
+            <p>Atmospheric acoustics, mood illumination, and high-dwell hospitality spaces.</p>
+          </div>
         </div>
 
-        <div class="nior-material-card">
-          <div class="nior-material-card__img">
-            <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-1.jpg' ) ); ?>" alt="Patinated Architectural Metals" loading="lazy" />
+        <div class="nior-sector-card">
+          <div class="nior-sector-card__img">
+            <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/jewelry2.jpg' ) ); ?>" alt="Luxury Retail Flagship Boutiques" loading="lazy" />
           </div>
-          <h4>Patinated Metals</h4>
-          <p>Aged bronze, brushed steel, and structural metalwork.</p>
+          <div class="nior-sector-card__body">
+            <span class="nior-sector-card__tag">LUXURY RETAIL</span>
+            <h4>Flagship Boutiques</h4>
+            <p>Tactile material showcases, brand storytelling, and high-conversion circulation.</p>
+          </div>
         </div>
 
-        <div class="nior-material-card">
-          <div class="nior-material-card__img">
-            <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/dining.jpg' ) ); ?>" alt="Honed Natural Stone & Terrazzo" loading="lazy" />
+        <div class="nior-sector-card">
+          <div class="nior-sector-card__img">
+            <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/salon.jpg' ) ); ?>" alt="Corporate & Commercial Spaces" loading="lazy" />
           </div>
-          <h4>Honed Natural Stone</h4>
-          <p>Italian marble, quartz composites, and cast terrazzo counters.</p>
+          <div class="nior-sector-card__body">
+            <span class="nior-sector-card__tag">COMMERCIAL</span>
+            <h4>Executive & Studio Spaces</h4>
+            <p>Distinctive client reception areas, executive suites, and collaborative environments.</p>
+          </div>
         </div>
 
-        <div class="nior-material-card">
-          <div class="nior-material-card__img">
-            <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/bar2.jpg' ) ); ?>" alt="Concealed Architectural Illumination" loading="lazy" />
+        <div class="nior-sector-card">
+          <div class="nior-sector-card__img">
+            <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/showhouse2.jpg' ) ); ?>" alt="High-End Private Residential" loading="lazy" />
           </div>
-          <h4>Architectural Lighting</h4>
-          <p>Custom LED channels, warm coves, and signature fixtures.</p>
+          <div class="nior-sector-card__body">
+            <span class="nior-sector-card__tag">RESIDENTIAL</span>
+            <h4>Private Residences</h4>
+            <p>Bespoke interior architecture, integrated millwork, and private sanctuaries.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -160,5 +172,4 @@
 <!-- /wp:html -->
 
 <!-- wp:pattern {"slug":"cinematic-interior/signature-approach"} /-->
-<!-- wp:pattern {"slug":"cinematic-interior/integrated-process"} /-->
 <!-- wp:pattern {"slug":"cinematic-interior/cta-handover"} /-->

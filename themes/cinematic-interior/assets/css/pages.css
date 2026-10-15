@@ -177,6 +177,7 @@
   }
 }
 
+.nior-sectors-grid,
 .nior-materials-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -191,11 +192,12 @@
   }
 }
 
+.nior-sector-card,
 .nior-material-card {
   background: var(--nior-surface);
   border: 1px solid var(--nior-border);
-  border-radius: 4px;
-  padding: 16px;
+  border-radius: 6px;
+  overflow: hidden;
   transition: transform 0.4s var(--ease-out-luxury), border-color 0.4s ease, box-shadow 0.4s ease;
 
   &:hover {
@@ -203,17 +205,17 @@
     border-color: var(--nior-gold);
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
 
+    .nior-sector-card__img img,
     .nior-material-card__img img {
       transform: scale(1.06);
     }
   }
 
+  .nior-sector-card__img,
   .nior-material-card__img {
-    aspect-ratio: 4 / 3;
-    border-radius: 3px;
+    aspect-ratio: 16 / 10;
     overflow: hidden;
     background: var(--nior-obsidian);
-    margin-bottom: 16px;
 
     img {
       width: 100%;
@@ -222,6 +224,20 @@
       display: block;
       transition: transform 0.5s var(--ease-out-luxury);
     }
+  }
+
+  .nior-sector-card__body {
+    padding: 20px 18px 22px;
+  }
+
+  .nior-sector-card__tag {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--nior-gold);
+    display: block;
+    margin-bottom: 8px;
   }
 
   h4 {
