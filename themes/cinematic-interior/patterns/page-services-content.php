@@ -21,6 +21,12 @@
 
 <section class="nior-section nior-section--surface">
   <div class="nior-container">
+    <div class="nior-services-header">
+      <span class="nior-eyebrow">What We Do</span>
+      <h2>Our Services &amp; Disciplines</h2>
+      <p>Eight integrated disciplines delivering end-to-end precision from initial spatial strategy to custom fabrication and architectural handover.</p>
+    </div>
+
     <div class="nior-services-list">
       
       <div class="nior-service-item">
