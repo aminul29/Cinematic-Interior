@@ -244,21 +244,39 @@ add_action( 'enqueue_block_assets', 'cinematic_interior_enqueue_editor_assets' )
  */
 function cinematic_interior_ensure_default_pages() {
     $pages = array(
-        'about'    => 'About Us',
-        'services' => 'Services',
-        'projects' => 'Projects',
-        'contact'  => 'Contact',
+        'about'    => array(
+            'title'   => 'About Us',
+            'pattern' => '<!-- wp:pattern {"slug":"cinematic-interior/page-about-content"} /-->',
+        ),
+        'services' => array(
+            'title'   => 'Services',
+            'pattern' => '<!-- wp:pattern {"slug":"cinematic-interior/page-services-content"} /-->',
+        ),
+        'projects' => array(
+            'title'   => 'Projects',
+            'pattern' => '<!-- wp:pattern {"slug":"cinematic-interior/page-projects-content"} /-->',
+        ),
+        'contact'  => array(
+            'title'   => 'Contact',
+            'pattern' => '<!-- wp:pattern {"slug":"cinematic-interior/page-contact-content"} /-->',
+        ),
     );
 
-    foreach ( $pages as $slug => $title ) {
+    foreach ( $pages as $slug => $data ) {
         $existing = get_page_by_path( $slug );
         if ( ! $existing ) {
             wp_insert_post( array(
-                'post_title'     => $title,
+                'post_title'     => $data['title'],
                 'post_name'      => $slug,
                 'post_status'    => 'publish',
                 'post_type'      => 'page',
+                'post_content'   => $data['pattern'],
                 'comment_status' => 'closed',
+            ) );
+        } elseif ( empty( trim( $existing->post_content ) ) ) {
+            wp_update_post( array(
+                'ID'           => $existing->ID,
+                'post_content' => $data['pattern'],
             ) );
         }
     }
