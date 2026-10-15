@@ -25,7 +25,8 @@
     color: var(--nior-muted);
   }
 
-  &.nior-page-hero--about {
+  &.nior-page-hero--about,
+  &.nior-page-hero--services {
     min-height: 55vh;
     display: flex;
     align-items: center;
@@ -38,21 +39,6 @@
     h1, .nior-eyebrow, p.nior-lead {
       text-shadow: 0 2px 24px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.8);
     }
-  }
-}
-
-.nior-page-hero.nior-page-hero--about {
-  min-height: 55vh;
-  display: flex;
-  align-items: center;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  position: relative;
-  overflow: hidden;
-
-  h1, .nior-eyebrow, p.nior-lead {
-    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.8);
   }
 }
 
@@ -119,8 +105,10 @@
 .nior-service-item {
   background: var(--nior-surface);
   border: 1px solid var(--nior-border);
-  border-radius: 4px;
-  padding: 36px 30px;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   position: relative;
   transition: transform 0.4s var(--ease-out-luxury), border-color 0.4s ease, box-shadow 0.4s ease;
 
@@ -128,14 +116,42 @@
     transform: translateY(-4px);
     border-color: var(--nior-gold);
     box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35), 0 0 20px rgba(201, 162, 94, 0.08);
+
+    .nior-service-item__media img {
+      transform: scale(1.05);
+    }
+  }
+
+  .nior-service-item__media {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--nior-obsidian);
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s var(--ease-out-luxury);
+    }
+  }
+
+  .nior-service-item__content {
+    padding: 28px 24px 32px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .nior-service-item__num {
-    font-family: var(--font-serif);
-    font-size: 16px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     color: var(--nior-gold);
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     transition: color 0.3s ease;
   }
 
@@ -144,8 +160,8 @@
   }
 
   h3 {
-    font-size: 24px;
-    margin-bottom: 14px;
+    font-size: 22px;
+    margin-bottom: 10px;
     transition: color 0.3s ease;
   }
 
@@ -155,7 +171,69 @@
 
   p {
     font-size: 14px;
-    line-height: 1.8;
+    line-height: 1.7;
+    color: var(--nior-muted);
+    margin-bottom: 0;
+  }
+}
+
+.nior-materials-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 540px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nior-material-card {
+  background: var(--nior-surface);
+  border: 1px solid var(--nior-border);
+  border-radius: 4px;
+  padding: 16px;
+  transition: transform 0.4s var(--ease-out-luxury), border-color 0.4s ease, box-shadow 0.4s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--nior-gold);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+
+    .nior-material-card__img img {
+      transform: scale(1.06);
+    }
+  }
+
+  .nior-material-card__img {
+    aspect-ratio: 4 / 3;
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--nior-obsidian);
+    margin-bottom: 16px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s var(--ease-out-luxury);
+    }
+  }
+
+  h4 {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    color: var(--nior-white);
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 1.6;
     color: var(--nior-muted);
     margin-bottom: 0;
   }
@@ -353,11 +431,14 @@
 }
 
 /* ==========================================================================
-   About Page - Fixed Viewport Video Sections (Window Parallax)
+   Supporting Pages - Fixed Viewport Video Sections (Window Parallax)
    ========================================================================== */
 body:has(.nior-page-hero--about),
+body:has(.nior-page-hero--services),
 body.page-template-page-about,
-body.page-id-6 {
+body.page-template-page-services,
+body.page-id-6,
+body.page-id-7 {
   .nior-process-video-section,
   .nior-cta-video-section {
     position: relative;
