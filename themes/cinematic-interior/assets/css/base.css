@@ -3,6 +3,24 @@ body {
   overflow-x: clip;
 }
 
+/* Lenis Smooth Scroll Engine Invariants */
+html.lenis,
+html.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+html.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 body {
   margin: 0;
   padding: 0;

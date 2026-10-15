@@ -42,6 +42,34 @@ export function initSmoothScroll() {
     }
   }, 150);
 
+  // Recalculate layout geometries when late-loading fonts and images finish loading
+  window.addEventListener('load', () => {
+    if (ScrollTrigger) {
+      ScrollTrigger.refresh();
+    }
+  });
+
+  // Smoothly glide internal anchor links via Lenis
+  document.addEventListener('click', (e) => {
+    const anchor = e.target.closest('a[href*="#"]');
+    if (!anchor) return;
+    try {
+      const url = new URL(anchor.href, window.location.href);
+      if (url.pathname === window.location.pathname && url.hash && url.hash.length > 1) {
+        const targetEl = document.querySelector(url.hash);
+        if (targetEl) {
+          e.preventDefault();
+          lenis.scrollTo(targetEl, {
+            offset: -80,
+            duration: 1.4,
+          });
+        }
+      }
+    } catch {
+      // Fallback to default browser handling
+    }
+  });
+
   window.niorLenis = lenis;
   return lenis;
 }
