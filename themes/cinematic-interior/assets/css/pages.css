@@ -24,6 +24,30 @@
     line-height: 1.8;
     color: var(--nior-muted);
   }
+
+  &--about {
+    min-height: 55vh;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(12, 13, 14, 0.72) 0%, rgba(12, 13, 14, 0.88) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .nior-container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+  }
 }
 
 /* ==========================================================================

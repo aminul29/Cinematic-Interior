@@ -7,7 +7,7 @@
  */
 ?>
 <!-- wp:html -->
-<div class="nior-page-hero">
+<div class="nior-page-hero nior-page-hero--about" style="background-image: url('<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-4.jpg' ) ); ?>');">
   <div class="nior-container">
     <div class="nior-page-hero__inner">
       <span class="nior-eyebrow">Studio Profile</span>
@@ -26,13 +26,13 @@
         <span class="nior-eyebrow">Our Story</span>
         <h2 style="font-size: clamp(2.2rem, 3.8vw, 3.4rem); margin-bottom: 24px;">Transforming Ideas Into Living Environments</h2>
         <p>
-          We combine creative direction, spatial design and technical execution to transform ideas into environments that are visually compelling, commercially purposeful and built to last.
+          We combine design, fabrication, and build under one unified creative direction.
         </p>
         <p>
-          From concept development to final completion, we bring together design thinking, materiality, lighting, functionality and construction to create spaces that do more than look good — they create experiences people remember.
+          Every space we deliver is engineered to create experiences people remember.
         </p>
         <p>
-          Our 11,000 sq ft headquarters and furniture factory in Johor Bahru allows us to maintain direct oversight over custom millwork, metalwork, and bespoke architectural fixtures, ensuring our original artistic intent translates seamlessly into the physical realm.
+          Our 11,000 sq ft JB factory gives us direct oversight from concept to reality.
         </p>
       </div>
 
@@ -44,7 +44,6 @@
       </div>
     </div>
 
-    <!-- 11,000 SQ FT Production Facility Gallery -->
     <div style="margin-top: 60px;">
       <span class="nior-eyebrow">Production Infrastructure</span>
       <h3 style="font-family: var(--font-serif); font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 24px; color: var(--nior-white);">11,000 SQ FT Workshop & Joinery Factory</h3>
