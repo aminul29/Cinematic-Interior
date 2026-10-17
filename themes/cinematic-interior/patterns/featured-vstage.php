@@ -1,23 +1,23 @@
 <?php
 /**
- * Title: Featured Project V Stage Lounge
+ * Title: Featured Project The V Sing Bar
  * Slug: cinematic-interior/featured-vstage
  * Categories: nior-cinematic
- * Description: In-depth showcase of V Stage Lounge nightlife and entertainment venue.
+ * Description: In-depth showcase of The V Sing Bar nightlife and entertainment venue.
  */
 ?>
 <!-- wp:html -->
-<section id="vstage" class="nior-section nior-section--surface" aria-label="Featured Project V Stage Lounge">
+<section id="vstage" class="nior-section nior-section--surface" aria-label="Featured Project The V Sing Bar">
   <div class="nior-container">
     <div class="nior-vstage-grid">
       <div class="nior-vstage-media">
-        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/projects/bar.jpg' ); ?>" alt="V Stage Lounge Interior Design by Nior Atelier" loading="lazy" />
-        <div class="nior-vstage-tag">Featured Case Study</div>
+        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/projects/bar.jpg' ); ?>" alt="The V Sing Bar Interior Design by Nior Atelier" loading="lazy" />
+        <div class="nior-vstage-tag">Featured Project</div>
       </div>
 
       <div class="nior-vstage-details nior-content-block">
-        <span class="nior-eyebrow">Case Study</span>
-        <h2>V Stage Lounge</h2>
+        <span class="nior-eyebrow">Featured Project</span>
+        <h2>The V Sing Bar</h2>
         <span class="nior-vstage-cat">Nightlife · Entertainment · F&B</span>
         <p>
           <strong>The Challenge:</strong> How do you design an entertainment lounge that commands instant brand identity and magnetic energy the exact moment guests step across the threshold?

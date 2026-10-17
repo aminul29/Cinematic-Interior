@@ -64,7 +64,7 @@ function nioratelier_get_portfolio_sections() {
                 ),
                 array(
                     'slug'        => 'vstage-lounge',
-                    'title'       => 'V Stage Lounge',
+                    'title'       => 'The V Sing Bar',
                     'category'    => 'Entertainment Lounge',
                     'description' => 'Parametric acoustic soffits and central stage architecture.',
                     'count'       => 10,
