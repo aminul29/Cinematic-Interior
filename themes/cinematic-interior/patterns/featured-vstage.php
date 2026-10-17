@@ -15,7 +15,7 @@
         <div class="nior-vstage-tag">Featured Case Study</div>
       </div>
 
-      <div class="nior-vstage-details">
+      <div class="nior-vstage-details nior-content-block">
         <span class="nior-eyebrow">Case Study</span>
         <h2>V Stage Lounge</h2>
         <span class="nior-vstage-cat">Nightlife · Entertainment · F&B</span>

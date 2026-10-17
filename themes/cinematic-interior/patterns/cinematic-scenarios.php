@@ -10,7 +10,7 @@
 <section id="niorScenarios" class="nior-scenarios-section" aria-label="Spatial Scenarios in Motion">
   <div class="nior-container">
     
-    <div class="nior-scenarios-header">
+    <div class="nior-scenarios-header nior-section-header">
       <span class="nior-eyebrow">Portfolio Highlights</span>
       <h2>Spatial Scenarios in Motion.</h2>
       <p>

@@ -9,7 +9,7 @@
 <!-- wp:html -->
 <section class="nior-section nior-section--dark" aria-label="Where We Create Value">
   <div class="nior-container">
-    <div style="text-align: center; max-width: 680px; margin: 0 auto 50px;">
+    <div class="nior-section-header" style="text-align: center; max-width: 680px; margin: 0 auto 50px;">
       <span class="nior-eyebrow" style="justify-content: center;">Where We Create Value</span>
       <h2 style="font-size: clamp(2.4rem, 4.5vw, 3.8rem); margin-bottom: 0;">The 4 Pillars</h2>
     </div>

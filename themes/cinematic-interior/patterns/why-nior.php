@@ -9,7 +9,7 @@
 <!-- wp:html -->
 <section class="nior-section nior-section--surface" aria-label="Why Choose Nior Atelier">
   <div class="nior-container">
-    <div style="text-align: center; max-width: 680px; margin: 0 auto 50px;">
+    <div class="nior-section-header" style="text-align: center; max-width: 680px; margin: 0 auto 50px;">
       <span class="nior-eyebrow" style="justify-content: center;">Why Choose Us</span>
       <h2 style="font-size: clamp(2.4rem, 4.5vw, 3.8rem); margin-bottom: 0;">Enduring Distinction</h2>
     </div>

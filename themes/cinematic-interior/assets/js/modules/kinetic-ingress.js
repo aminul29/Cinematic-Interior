@@ -321,4 +321,240 @@ export function initKineticIngress() {
       );
     });
   }
+
+  // Helper: extract direct narrative children for staggered luxury ingress
+  function getNarrativeChildren(container) {
+    const excludedClasses = [
+      'nior-pillars-grid',
+      'nior-process-steps',
+      'nior-advantages-grid',
+      'nior-sectors-grid',
+      'nior-portfolio-grid',
+      'nior-scenarios-grid',
+      'nior-vstage-impact-grid',
+    ];
+    return Array.from(container.children).filter((child) => {
+      for (const cls of excludedClasses) {
+        if (child.classList.contains(cls)) return false;
+      }
+      return true;
+    });
+  }
+
+  // 9. Section Header & Introductory Content Blocks: Staggered Luxury Ingress
+  const sectionHeaders = document.querySelectorAll(
+    '.nior-section-header, .nior-scenarios-header, .nior-services-header, .nior-page-hero__inner'
+  );
+  sectionHeaders.forEach((header) => {
+    const targets = getNarrativeChildren(header);
+    if (!targets.length) return;
+
+    gsap.fromTo(
+      targets,
+      { y: 32, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.9,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: header,
+          start: 'top 88%',
+          end: 'bottom 15%',
+          toggleActions: 'play reverse play reverse',
+        },
+      }
+    );
+  });
+
+  // 10. Architectural Details & Secondary Content Blocks
+  // 10a. V-Stage Lounge Impact Items
+  const impactGrid = document.querySelector('.nior-vstage-impact-grid');
+  if (impactGrid) {
+    const items = impactGrid.querySelectorAll('.nior-impact-item');
+    if (items.length) {
+      gsap.fromTo(
+        items,
+        { y: 20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.06,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: impactGrid,
+            start: 'top 85%',
+            end: 'bottom 15%',
+            toggleActions: 'play reverse play reverse',
+          },
+        }
+      );
+    }
+  }
+
+  // 10b. Factory Infrastructure Showcase Cards
+  const factoryCards = document.querySelectorAll('.nior-factory-card');
+  if (factoryCards.length) {
+    gsap.fromTo(
+      factoryCards,
+      { y: 35, opacity: 0, scale: 0.95 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.9,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: factoryCards[0].parentElement,
+          start: 'top 85%',
+          end: 'bottom 15%',
+          toggleActions: 'play reverse play reverse',
+        },
+      }
+    );
+  }
+
+  // 10c. Scenarios Section Footer Button
+  const scenariosFooter = document.querySelector('.nior-scenarios-footer');
+  if (scenariosFooter) {
+    gsap.fromTo(
+      scenariosFooter,
+      { y: 28, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.85,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: scenariosFooter,
+          start: 'top 90%',
+          end: 'bottom 15%',
+          toggleActions: 'play reverse play reverse',
+        },
+      }
+    );
+  }
+
+  // 10d. Explicit Content Blocks (.nior-content-block)
+  const contentBlocks = document.querySelectorAll(
+    '.nior-content-block:not(.nior-vstage-details)'
+  );
+  contentBlocks.forEach((block) => {
+    if (block.classList.contains('nior-section-header')) return;
+    const targets = getNarrativeChildren(block);
+    if (!targets.length) return;
+
+    gsap.fromTo(
+      targets,
+      { y: 32, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.9,
+        stagger: targets.length > 1 ? 0.1 : 0,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: block,
+          start: 'top 85%',
+          end: 'bottom 15%',
+          toggleActions: 'play reverse play reverse',
+        },
+      }
+    );
+  });
+
+  // 11. WordPress Gutenberg Page Content Blocks
+  const postContentContainers = document.querySelectorAll(
+    '.wp-block-post-content, .entry-content, #main-content.wp-block-group'
+  );
+  postContentContainers.forEach((container) => {
+    const blocks = Array.from(container.children).filter((el) => {
+      const tag = el.tagName.toLowerCase();
+      if (tag === 'header' || tag === 'footer') return false;
+      if (
+        el.classList.contains('nior-section') ||
+        el.classList.contains('nior-page-hero') ||
+        el.classList.contains('nior-walkthrough-hero-track') ||
+        el.classList.contains('nior-rack-section') ||
+        el.classList.contains('nior-portfolio-unified')
+      ) {
+        return false;
+      }
+      return true;
+    });
+
+    blocks.forEach((block) => {
+      // Multi-column blocks: stagger each column
+      if (block.classList.contains('wp-block-columns')) {
+        const columns = block.querySelectorAll(':scope > .wp-block-column');
+        if (columns.length) {
+          gsap.fromTo(
+            columns,
+            { y: 36, opacity: 0, scale: 0.98 },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              duration: 0.95,
+              stagger: 0.12,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: block,
+                start: 'top 85%',
+                end: 'bottom 15%',
+                toggleActions: 'play reverse play reverse',
+              },
+            }
+          );
+          return;
+        }
+      }
+
+      // Group or nested container blocks: stagger narrative children if multiple
+      if (block.classList.contains('wp-block-group')) {
+        const innerItems = getNarrativeChildren(block);
+        if (innerItems.length > 1) {
+          gsap.fromTo(
+            innerItems,
+            { y: 32, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.9,
+              stagger: 0.1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: block,
+                start: 'top 85%',
+                end: 'bottom 15%',
+                toggleActions: 'play reverse play reverse',
+              },
+            }
+          );
+          return;
+        }
+      }
+
+      // Individual Gutenberg content blocks (headings, paragraphs, images, quotes, embeds, tables)
+      gsap.fromTo(
+        block,
+        { y: 32, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: block,
+            start: 'top 88%',
+            end: 'bottom 15%',
+            toggleActions: 'play reverse play reverse',
+          },
+        }
+      );
+    });
+  });
 }

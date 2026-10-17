@@ -9,7 +9,7 @@
 <!-- wp:html -->
 <section class="nior-section nior-section--dark" aria-label="Our Signature Approach">
   <div class="nior-container">
-    <div style="text-align: center; max-width: 680px; margin: 0 auto 50px;">
+    <div class="nior-section-header" style="text-align: center; max-width: 680px; margin: 0 auto 50px;">
       <span class="nior-eyebrow" style="justify-content: center;">Our Signature Approach</span>
       <h2 style="font-size: clamp(2.4rem, 4.5vw, 3.8rem); margin-bottom: 0;">Designing The Complete Experience</h2>
     </div>

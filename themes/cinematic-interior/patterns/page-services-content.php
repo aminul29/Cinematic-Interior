@@ -21,7 +21,7 @@
 
 <section class="nior-section nior-section--surface">
   <div class="nior-container">
-    <div class="nior-services-header">
+    <div class="nior-services-header nior-section-header">
       <span class="nior-eyebrow">What We Do</span>
       <h2>Our Services &amp; Disciplines</h2>
     </div>
@@ -163,7 +163,7 @@
     </div>
 
     <div class="nior-sectors-showcase" style="margin-top: 80px; padding-top: 60px; border-top: 1px solid var(--nior-border);">
-      <div style="text-align: center; max-width: 680px; margin: 0 auto 40px;">
+      <div class="nior-section-header" style="text-align: center; max-width: 680px; margin: 0 auto 40px;">
         <span class="nior-eyebrow" style="justify-content: center;">Typologies &amp; Sectors</span>
         <h3 style="font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 2.8rem); margin-bottom: 0; color: var(--nior-white);">Sector Expertise</h3>
       </div>
