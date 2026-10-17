@@ -442,6 +442,10 @@ body .wp-site-blocks > .nior-rack-section,
     color: var(--nior-gold-light);
     margin-bottom: 12px;
     text-transform: uppercase;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   .nior-step-desc {

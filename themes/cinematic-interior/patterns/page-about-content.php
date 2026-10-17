@@ -13,7 +13,7 @@
       <span class="nior-eyebrow">Studio Profile</span>
       <h1>Interior Architecture. Crafted In-House.</h1>
       <p class="nior-lead">
-        Nior Atelier is an interior architecture, design and build studio creating distinctive spaces for brands, businesses and private clients across Malaysia and internationally.
+        Interior architecture, design, and bespoke fabrication studio creating distinctive spaces across Malaysia and internationally.
       </p>
     </div>
   </div>
@@ -25,14 +25,8 @@
       <div>
         <span class="nior-eyebrow">Our Story</span>
         <h2 style="font-size: clamp(2.2rem, 3.8vw, 3.4rem); margin-bottom: 24px;">Transforming Ideas Into Living Environments</h2>
-        <p>
-          We combine design, fabrication, and build under one unified creative direction.
-        </p>
-        <p>
-          Every space we deliver is engineered to create experiences people remember.
-        </p>
-        <p>
-          Our 11,000 sq ft JB factory gives us direct oversight from concept to reality.
+        <p class="nior-lead" style="font-size: 16px; line-height: 1.8; color: var(--nior-muted);">
+          We unite architectural design, bespoke fabrication, and turnkey execution under one single creative direction — powered by our 11,000 sq ft factory in Johor Bahru to transform ambitious concepts into enduring spaces.
         </p>
       </div>
 
