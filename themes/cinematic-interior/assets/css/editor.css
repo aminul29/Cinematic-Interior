@@ -266,7 +266,8 @@ body.editor-styles-wrapper,
     display: flex;
     align-items: center;
 
-    .nior-cta-video-bg {
+    .nior-cta-video-bg,
+    .nior-cta-bg-img {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -307,7 +308,8 @@ body.editor-styles-wrapper,
     position: relative;
     overflow: hidden;
 
-    .nior-process-video-bg {
+    .nior-process-video-bg,
+    .nior-process-bg-img {
       position: absolute;
       inset: 0;
       width: 100%;

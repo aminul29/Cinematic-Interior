@@ -8,9 +8,7 @@
 ?>
 <!-- wp:html -->
 <section class="nior-section nior-section--dark nior-cta-video-section" aria-label="Start A Project">
-  <video class="nior-cta-video-bg" autoplay muted loop playsinline poster="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-3.jpg' ) ); ?>">
-    <source src="<?php echo esc_url( get_theme_file_uri( '/assets/video/cta-ambient.mp4' ) ); ?>" type="video/mp4" />
-  </video>
+  <img class="nior-cta-video-bg nior-cta-bg-img" src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-3.jpg' ) ); ?>" alt="Nior Atelier Bespoke Workshop & Joinery Facility" loading="lazy" />
   <div class="nior-cta-overlay" aria-hidden="true"></div>
   <div class="nior-container">
     <div class="nior-cta-box">

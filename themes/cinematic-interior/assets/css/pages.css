@@ -478,7 +478,9 @@ body.page-id-7 {
     clip-path: inset(0);
 
     .nior-process-video-bg,
-    .nior-cta-video-bg {
+    .nior-process-bg-img,
+    .nior-cta-video-bg,
+    .nior-cta-bg-img {
       position: fixed;
       top: 0;
       left: 0;
