@@ -351,16 +351,21 @@ export function initKineticIngress() {
 
     gsap.fromTo(
       targets,
-      { y: 32, opacity: 0 },
+      {
+        y: 48,
+        opacity: 0,
+        scale: 0.94,
+      },
       {
         y: 0,
         opacity: 1,
-        duration: 0.9,
-        stagger: 0.1,
-        ease: 'power3.out',
+        scale: 1,
+        duration: 1.0,
+        stagger: 0.14,
+        ease: 'back.out(1.2)',
         scrollTrigger: {
           trigger: header,
-          start: 'top 88%',
+          start: 'top 86%',
           end: 'bottom 15%',
           toggleActions: 'play reverse play reverse',
         },
@@ -376,13 +381,14 @@ export function initKineticIngress() {
     if (items.length) {
       gsap.fromTo(
         items,
-        { y: 20, opacity: 0 },
+        { y: 28, opacity: 0, scale: 0.92 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.06,
-          ease: 'power3.out',
+          scale: 1,
+          duration: 0.75,
+          stagger: 0.08,
+          ease: 'back.out(1.3)',
           scrollTrigger: {
             trigger: impactGrid,
             start: 'top 85%',
@@ -399,14 +405,15 @@ export function initKineticIngress() {
   if (factoryCards.length) {
     gsap.fromTo(
       factoryCards,
-      { y: 35, opacity: 0, scale: 0.95 },
+      { y: 55, opacity: 0, scale: 0.88, rotate: -2 },
       {
         y: 0,
         opacity: 1,
         scale: 1,
-        duration: 0.9,
-        stagger: 0.1,
-        ease: 'power3.out',
+        rotate: 0,
+        duration: 1.0,
+        stagger: 0.12,
+        ease: 'back.out(1.3)',
         scrollTrigger: {
           trigger: factoryCards[0].parentElement,
           start: 'top 85%',
@@ -422,15 +429,16 @@ export function initKineticIngress() {
   if (scenariosFooter) {
     gsap.fromTo(
       scenariosFooter,
-      { y: 28, opacity: 0 },
+      { y: 40, opacity: 0, scale: 0.92 },
       {
         y: 0,
         opacity: 1,
-        duration: 0.85,
-        ease: 'power3.out',
+        scale: 1,
+        duration: 0.95,
+        ease: 'back.out(1.3)',
         scrollTrigger: {
           trigger: scenariosFooter,
-          start: 'top 90%',
+          start: 'top 88%',
           end: 'bottom 15%',
           toggleActions: 'play reverse play reverse',
         },
@@ -449,13 +457,14 @@ export function initKineticIngress() {
 
     gsap.fromTo(
       targets,
-      { y: 32, opacity: 0 },
+      { y: 48, opacity: 0, scale: 0.95 },
       {
         y: 0,
         opacity: 1,
-        duration: 0.9,
-        stagger: targets.length > 1 ? 0.1 : 0,
-        ease: 'power3.out',
+        scale: 1,
+        duration: 1.0,
+        stagger: targets.length > 1 ? 0.14 : 0,
+        ease: 'back.out(1.2)',
         scrollTrigger: {
           trigger: block,
           start: 'top 85%',
@@ -493,14 +502,14 @@ export function initKineticIngress() {
         if (columns.length) {
           gsap.fromTo(
             columns,
-            { y: 36, opacity: 0, scale: 0.98 },
+            { y: 50, opacity: 0, scale: 0.90 },
             {
               y: 0,
               opacity: 1,
               scale: 1,
-              duration: 0.95,
-              stagger: 0.12,
-              ease: 'power3.out',
+              duration: 1.0,
+              stagger: 0.14,
+              ease: 'back.out(1.3)',
               scrollTrigger: {
                 trigger: block,
                 start: 'top 85%',
@@ -519,13 +528,14 @@ export function initKineticIngress() {
         if (innerItems.length > 1) {
           gsap.fromTo(
             innerItems,
-            { y: 32, opacity: 0 },
+            { y: 48, opacity: 0, scale: 0.95 },
             {
               y: 0,
               opacity: 1,
-              duration: 0.9,
-              stagger: 0.1,
-              ease: 'power3.out',
+              scale: 1,
+              duration: 1.0,
+              stagger: 0.14,
+              ease: 'back.out(1.2)',
               scrollTrigger: {
                 trigger: block,
                 start: 'top 85%',
@@ -541,15 +551,16 @@ export function initKineticIngress() {
       // Individual Gutenberg content blocks (headings, paragraphs, images, quotes, embeds, tables)
       gsap.fromTo(
         block,
-        { y: 32, opacity: 0 },
+        { y: 46, opacity: 0, scale: 0.96 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.9,
-          ease: 'power3.out',
+          scale: 1,
+          duration: 1.0,
+          ease: 'back.out(1.2)',
           scrollTrigger: {
             trigger: block,
-            start: 'top 88%',
+            start: 'top 86%',
             end: 'bottom 15%',
             toggleActions: 'play reverse play reverse',
           },
