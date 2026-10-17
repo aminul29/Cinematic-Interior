@@ -13,7 +13,7 @@
   <div class="nior-container">
     <div style="text-align: center; max-width: 720px; margin: 0 auto 50px;">
       <span class="nior-eyebrow" style="justify-content: center;">From Concept To Completion</span>
-      <h2 style="font-size: clamp(2.4rem, 4.5vw, 3.8rem); margin-bottom: 0;">One Direction. One Accountable Team.</h2>
+      <h2 style="font-size: clamp(2.4rem, 4.5vw, 3.8rem); margin-bottom: 0;">One Accountable Team</h2>
     </div>
 
     <div class="nior-process-steps">

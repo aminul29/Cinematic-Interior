@@ -16,10 +16,10 @@ $portfolio_sections = nioratelier_get_portfolio_sections();
 <div class="nior-page-hero nior-projects-hero">
   <div class="nior-container">
     <div class="nior-page-hero__inner">
-      <span class="nior-eyebrow">Selected Works &amp; Spatial Archives</span>
+      <span class="nior-eyebrow">Selected Works</span>
       <h1>Spaces That Perform.</h1>
       <p class="nior-lead">
-        Explore our curated portfolio spanning flagship luxury retail, botanical apothecaries, Michelin-tier culinary destinations, high-energy entertainment lounges, and private estates. Select any project to inspect the full architectural gallery.
+        Curated spatial portfolio spanning flagship retail, hospitality, and private estates.
       </p>
       <nav class="nior-category-nav" aria-label="Project Sectors">
         <?php foreach ( $portfolio_sections as $sec ) : ?>
@@ -43,7 +43,9 @@ $portfolio_sections = nioratelier_get_portfolio_sections();
       </div>
       <div class="nior-category-header__main">
         <h2><?php echo esc_html( $section['title'] ); ?></h2>
-        <p><?php echo esc_html( $section['description'] ); ?></p>
+        <?php if ( ! empty( $section['description'] ) ) : ?>
+          <p><?php echo esc_html( $section['description'] ); ?></p>
+        <?php endif; ?>
       </div>
     </header>
 
@@ -88,7 +90,6 @@ $portfolio_sections = nioratelier_get_portfolio_sections();
             <div class="nior-portfolio-card__body">
               <span class="nior-portfolio-card__category"><?php echo esc_html( $project['category'] ); ?></span>
               <h3><?php echo esc_html( $project['title'] ); ?></h3>
-              <p><?php echo esc_html( $project['description'] ); ?></p>
 
               <?php if ( $total_photos > 1 ) : ?>
                 <div class="nior-portfolio-card__thumbs" aria-label="Gallery preview thumbnails">

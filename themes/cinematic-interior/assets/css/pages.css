@@ -335,13 +335,14 @@
 
     h3 {
       font-size: 20px;
-      margin-bottom: 8px;
+      margin-bottom: 0;
     }
 
     p {
       font-size: 13px;
       line-height: 1.7;
       color: var(--nior-muted);
+      margin-top: 8px;
       margin-bottom: 0;
     }
   }
