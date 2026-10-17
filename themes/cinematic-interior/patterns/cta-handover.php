@@ -13,9 +13,9 @@
   <div class="nior-container">
     <div class="nior-cta-box">
       <span class="nior-eyebrow" style="justify-content: center;">Start A Conversation</span>
-      <h2>Let’s Create Something People Remember.</h2>
+      <h2>Let’s Create Something Memorable.</h2>
       <p>
-        Whether you are conceiving a flagship hospitality concept, an entertainment lounge, or a distinctive commercial space, our team brings ideas into striking physical form.
+        From flagship hospitality to distinctive commercial spaces, we bring ideas into striking physical form.
       </p>
       <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
         <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="nior-btn">

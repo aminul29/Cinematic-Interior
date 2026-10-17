@@ -11,47 +11,65 @@ if ( ! function_exists( 'nioratelier_get_portfolio_sections' ) ) {
 }
 
 $portfolio_sections = nioratelier_get_portfolio_sections();
+$all_projects       = nioratelier_get_all_portfolio_projects();
+$total_all_projects = count( $all_projects );
 ?>
 <!-- wp:html -->
 <div class="nior-page-hero nior-projects-hero">
   <div class="nior-container">
     <div class="nior-page-hero__inner">
-      <span class="nior-eyebrow">Selected Works</span>
+      <span class="nior-eyebrow">Selected Works &amp; Spatial Archives</span>
       <h1>Spaces That Perform.</h1>
       <p class="nior-lead">
-        Curated spatial portfolio spanning flagship retail, hospitality, and private estates.
+        Explore our curated portfolio spanning flagship luxury retail, botanical apothecaries, Michelin-tier culinary destinations, high-energy entertainment lounges, and private estates. Select any project to inspect the full architectural gallery.
       </p>
-      <nav class="nior-category-nav" aria-label="Project Sectors">
-        <?php foreach ( $portfolio_sections as $sec ) : ?>
-          <a href="#sector-<?php echo esc_attr( $sec['id'] ); ?>" class="nior-category-nav__pill">
-            <span class="nior-category-nav__num"><?php echo esc_html( $sec['number'] ); ?></span>
-            <span class="nior-category-nav__label"><?php echo esc_html( $sec['title'] ); ?></span>
-          </a>
-        <?php endforeach; ?>
-      </nav>
     </div>
   </div>
 </div>
 
-<?php foreach ( $portfolio_sections as $sec_index => $section ) : ?>
-<section id="sector-<?php echo esc_attr( $section['id'] ); ?>" class="nior-section nior-project-category-section <?php echo ( 0 === $sec_index % 2 ) ? 'nior-section--surface' : 'nior-section--obsidian'; ?>">
+<section id="portfolio-archive" class="nior-section nior-section--surface nior-portfolio-unified">
   <div class="nior-container">
-    <header class="nior-category-header">
-      <div class="nior-category-header__meta">
-        <span class="nior-category-header__index"><?php echo esc_html( $section['number'] ); ?></span>
-        <span class="nior-eyebrow"><?php echo esc_html( $section['eyebrow'] ); ?></span>
+    <div class="nior-portfolio-filter-bar" role="toolbar" aria-label="Portfolio Sector Filters">
+      <div class="nior-portfolio-filter-tabs" role="tablist" aria-label="Project Categories">
+        <button
+          type="button"
+          class="nior-filter-btn is-active"
+          role="tab"
+          aria-selected="true"
+          data-filter="all"
+          id="tab-all"
+        >
+          <span class="nior-filter-btn__label">All</span>
+          <span class="nior-filter-btn__count">(<?php echo esc_html( $total_all_projects ); ?>)</span>
+        </button>
+        <?php foreach ( $portfolio_sections as $sec ) :
+          $sec_count = count( $sec['projects'] );
+        ?>
+          <button
+            type="button"
+            class="nior-filter-btn"
+            role="tab"
+            aria-selected="false"
+            data-filter="<?php echo esc_attr( $sec['id'] ); ?>"
+            id="tab-<?php echo esc_attr( $sec['id'] ); ?>"
+          >
+            <span class="nior-filter-btn__num"><?php echo esc_html( $sec['number'] ); ?></span>
+            <span class="nior-filter-btn__label"><?php echo esc_html( $sec['title'] ); ?></span>
+            <span class="nior-filter-btn__count">(<?php echo esc_html( $sec_count ); ?>)</span>
+          </button>
+        <?php endforeach; ?>
       </div>
-      <div class="nior-category-header__main">
-        <h2><?php echo esc_html( $section['title'] ); ?></h2>
-        <?php if ( ! empty( $section['description'] ) ) : ?>
-          <p><?php echo esc_html( $section['description'] ); ?></p>
-        <?php endif; ?>
-      </div>
-    </header>
 
-    <div class="nior-portfolio-grid">
+      <div class="nior-portfolio-filter-status" aria-live="polite">
+        <span class="nior-portfolio-filter-counter">
+          Showing <strong class="nior-filter-count-current"><?php echo esc_html( $total_all_projects ); ?></strong> of <?php echo esc_html( $total_all_projects ); ?> Projects
+        </span>
+      </div>
+    </div>
+
+    <div class="nior-portfolio-grid" id="portfolio-grid">
       <?php
-      foreach ( $section['projects'] as $project ) :
+      foreach ( $all_projects as $project ) :
           $gallery_urls = nioratelier_get_project_gallery_urls( $project['slug'], $project['count'] );
           $cover_url    = ! empty( $gallery_urls[0] ) ? $gallery_urls[0] : '';
           $total_photos = count( $gallery_urls );
@@ -64,6 +82,7 @@ $portfolio_sections = nioratelier_get_portfolio_sections();
             tabindex="0"
             role="button"
             aria-label="<?php echo esc_attr( sprintf( 'Open %s gallery (%d photos)', $project['title'], $total_photos ) ); ?>"
+            data-sector="<?php echo esc_attr( $project['sector_id'] ); ?>"
             data-project-slug="<?php echo esc_attr( $project['slug'] ); ?>"
             data-project-title="<?php echo esc_attr( $project['title'] ); ?>"
             data-project-category="<?php echo esc_attr( $project['category'] ); ?>"
@@ -88,8 +107,14 @@ $portfolio_sections = nioratelier_get_portfolio_sections();
             </div>
 
             <div class="nior-portfolio-card__body">
-              <span class="nior-portfolio-card__category"><?php echo esc_html( $project['category'] ); ?></span>
+              <div class="nior-portfolio-card__meta">
+                <span class="nior-portfolio-card__sector-tag"><?php echo esc_html( $project['sector_title'] ); ?></span>
+                <span class="nior-portfolio-card__category"><?php echo esc_html( $project['category'] ); ?></span>
+              </div>
               <h3><?php echo esc_html( $project['title'] ); ?></h3>
+              <?php if ( ! empty( $project['description'] ) ) : ?>
+                <p><?php echo esc_html( $project['description'] ); ?></p>
+              <?php endif; ?>
 
               <?php if ( $total_photos > 1 ) : ?>
                 <div class="nior-portfolio-card__thumbs" aria-label="Gallery preview thumbnails">
@@ -123,7 +148,7 @@ $portfolio_sections = nioratelier_get_portfolio_sections();
     </div>
   </div>
 </section>
-<?php endforeach; ?>
+
 
 <div id="nior-project-lightbox" class="nior-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Project Image Gallery">
   <div class="nior-lightbox__backdrop" data-lightbox-close></div>

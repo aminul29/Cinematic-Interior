@@ -7,13 +7,13 @@
  */
 ?>
 <!-- wp:html -->
-<div class="nior-page-hero nior-page-hero--services" style="background-image: linear-gradient(180deg, rgba(12, 13, 14, 0.46) 0%, rgba(12, 13, 14, 0.78) 100%), url('<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/showroom.jpg' ) ); ?>');">
+<div class="nior-page-hero nior-page-hero--services" style="background-image: linear-gradient(180deg, rgba(12, 13, 14, 0.20) 0%, rgba(12, 13, 14, 0.34) 100%), url('<?php echo esc_url( get_theme_file_uri( '/assets/img/walkthrough/frame-01.jpg' ) ); ?>');">
   <div class="nior-container">
     <div class="nior-page-hero__inner">
-      <span class="nior-eyebrow">Disciplines & Expertise</span>
-      <h1>Comprehensive Spatial Solutions.</h1>
+      <span class="nior-eyebrow">Disciplines &amp; Expertise</span>
+      <h1>Spatial Disciplines</h1>
       <p class="nior-lead">
-        From initial conceptual vision to in-house fabrication and turnkey architectural handover.
+        From conceptual vision to in-house fabrication and turnkey architectural handover.
       </p>
     </div>
   </div>
@@ -24,7 +24,6 @@
     <div class="nior-services-header">
       <span class="nior-eyebrow">What We Do</span>
       <h2>Our Services &amp; Disciplines</h2>
-      <p>Eight integrated disciplines delivering end-to-end precision from initial spatial strategy to custom fabrication and architectural handover.</p>
     </div>
 
     <div class="nior-services-list">
@@ -41,7 +40,7 @@
         </div>
         <span class="nior-service-item__num">01 / SERVICE</span>
         <h3>Interior Architecture</h3>
-        <p>Architectural spatial planning, structural reconfigurations, ceiling landscapes, and material compositions that define core interior envelopes.</p>
+        <p>Spatial planning, structural layouts, and architectural envelopes.</p>
       </div>
 
       <div class="nior-service-item">
@@ -58,7 +57,7 @@
         </div>
         <span class="nior-service-item__num">02 / SERVICE</span>
         <h3>Interior Design</h3>
-        <p>Curating refined visual narratives, finishes, custom fixtures, bespoke furniture selections, and curated aesthetic palettes.</p>
+        <p>Curated visual narratives, bespoke fixtures, and material palettes.</p>
       </div>
 
       <div class="nior-service-item">
@@ -77,7 +76,7 @@
         </div>
         <span class="nior-service-item__num">03 / SERVICE</span>
         <h3>Design & Build</h3>
-        <p>Seamless single-point accountability linking creative conceptualization directly with engineering, procurement, and execution.</p>
+        <p>Single-point accountability linking concept design directly with execution.</p>
       </div>
 
       <div class="nior-service-item">
@@ -92,7 +91,7 @@
         </div>
         <span class="nior-service-item__num">04 / SERVICE</span>
         <h3>Renovation & Construction</h3>
-        <p>Full-scale commercial fit-outs, site project management, MEP coordination, and rigorous quality control at every construction milestone.</p>
+        <p>Commercial fit-outs, MEP coordination, and site quality control.</p>
       </div>
 
       <div class="nior-service-item">
@@ -107,7 +106,7 @@
         </div>
         <span class="nior-service-item__num">05 / SERVICE</span>
         <h3>Custom Fabrication</h3>
-        <p>Bespoke joinery, architectural metalwork, and signature statement furniture crafted inside our dedicated 11,000 sq ft Johor Bahru workshop.</p>
+        <p>Bespoke joinery, architectural metalwork, and factory-built fixtures.</p>
       </div>
 
       <div class="nior-service-item">
@@ -125,7 +124,7 @@
         </div>
         <span class="nior-service-item__num">06 / SERVICE</span>
         <h3>Lighting & Atmosphere Design</h3>
-        <p>Architectural illumination engineering, indirect cove wash, custom neon integration, and atmospheric mood scripting.</p>
+        <p>Architectural illumination engineering and atmospheric mood scripting.</p>
       </div>
 
       <div class="nior-service-item">
@@ -142,7 +141,7 @@
         </div>
         <span class="nior-service-item__num">07 / SERVICE</span>
         <h3>Brand Experience Integration</h3>
-        <p>Translating brand DNA and values into three-dimensional customer interactions, photo-worthy destinations, and tactile moments.</p>
+        <p>Translating brand DNA into immersive, tactile customer environments.</p>
       </div>
 
       <div class="nior-service-item">
@@ -158,16 +157,15 @@
         </div>
         <span class="nior-service-item__num">08 / SERVICE</span>
         <h3>Commercial Space Strategy</h3>
-        <p>Optimizing floorplan revenue density, customer circulation dynamics, operational ergonomics, and retail dwell time.</p>
+        <p>Customer circulation, retail dwell time, and operational ergonomics.</p>
       </div>
 
     </div>
 
     <div class="nior-sectors-showcase" style="margin-top: 80px; padding-top: 60px; border-top: 1px solid var(--nior-border);">
       <div style="text-align: center; max-width: 680px; margin: 0 auto 40px;">
-        <span class="nior-eyebrow" style="justify-content: center;">Typologies & Sectors</span>
-        <h3 style="font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 2.8rem); margin-bottom: 14px; color: var(--nior-white);">Sector Expertise</h3>
-        <p style="font-size: 15px; color: var(--nior-muted);">Distinct spatial strategies engineered for each typology's operational demands and experiential goals.</p>
+        <span class="nior-eyebrow" style="justify-content: center;">Typologies &amp; Sectors</span>
+        <h3 style="font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 2.8rem); margin-bottom: 0; color: var(--nior-white);">Sector Expertise</h3>
       </div>
 
       <div class="nior-sectors-grid">
@@ -178,7 +176,7 @@
           <div class="nior-sector-card__body">
             <span class="nior-sector-card__tag">HOSPITALITY & F&B</span>
             <h4>Dining & Social Lounges</h4>
-            <p>Atmospheric acoustics, mood illumination, and high-dwell hospitality spaces.</p>
+            <p>Atmospheric acoustics and mood illumination.</p>
           </div>
         </div>
 
@@ -189,7 +187,7 @@
           <div class="nior-sector-card__body">
             <span class="nior-sector-card__tag">LUXURY RETAIL</span>
             <h4>Flagship Boutiques</h4>
-            <p>Tactile material showcases, brand storytelling, and high-conversion circulation.</p>
+            <p>Tactile material showcases and brand storytelling.</p>
           </div>
         </div>
 
@@ -200,7 +198,7 @@
           <div class="nior-sector-card__body">
             <span class="nior-sector-card__tag">COMMERCIAL</span>
             <h4>Executive & Studio Spaces</h4>
-            <p>Distinctive client reception areas, executive suites, and collaborative environments.</p>
+            <p>Distinctive client reception and collaborative suites.</p>
           </div>
         </div>
 
@@ -211,7 +209,7 @@
           <div class="nior-sector-card__body">
             <span class="nior-sector-card__tag">RESIDENTIAL</span>
             <h4>Private Residences</h4>
-            <p>Bespoke interior architecture, integrated millwork, and private sanctuaries.</p>
+            <p>Bespoke interior architecture and private sanctuaries.</p>
           </div>
         </div>
       </div>

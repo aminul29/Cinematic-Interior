@@ -242,7 +242,7 @@ export function initProjectGallery() {
     { passive: true }
   );
 
-  // Smooth scroll for sector anchor pills
+  // Backward-compatible smooth scroll for any remaining category anchor pills
   const anchorPills = document.querySelectorAll('.nior-category-nav__pill');
   anchorPills.forEach((pill) => {
     pill.addEventListener('click', (e) => {
@@ -256,4 +256,186 @@ export function initProjectGallery() {
       }
     });
   });
+
+  // Initialize interactive project category filtering
+  initProjectFilter();
+}
+
+/**
+ * Interactive Project Category Filter Controller
+ * Handles animated category switching, counter updates, and URL hash sync.
+ */
+function initProjectFilter() {
+  const filterBar = document.querySelector('.nior-portfolio-filter-bar');
+  const cards = Array.from(document.querySelectorAll('.nior-portfolio-card[data-sector]'));
+  if (!filterBar || !cards.length) return;
+
+  const filterBtns = Array.from(filterBar.querySelectorAll('.nior-filter-btn'));
+  const counterCurrent = filterBar.querySelector('.nior-filter-count-current');
+
+  let activeFilter = 'all';
+  let isAnimating = false;
+
+  const getValidFilterFromHash = () => {
+    const rawHash = (window.location.hash || '').replace(/^#/, '').trim();
+    if (!rawHash) return 'all';
+    const match = filterBtns.find((btn) => btn.dataset.filter === rawHash);
+    return match ? rawHash : 'all';
+  };
+
+  const setFilterUI = (targetFilter) => {
+    filterBtns.forEach((btn) => {
+      const isSelected = btn.dataset.filter === targetFilter;
+      btn.classList.toggle('is-active', isSelected);
+      btn.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+      btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+    });
+  };
+
+  const applyFilter = (targetFilter, animate = true) => {
+    activeFilter = targetFilter;
+    setFilterUI(targetFilter);
+
+    const matchingCards = [];
+    const unmatchingCards = [];
+
+    cards.forEach((card) => {
+      const cardSector = card.dataset.sector;
+      if (targetFilter === 'all' || cardSector === targetFilter) {
+        matchingCards.push(card);
+      } else {
+        unmatchingCards.push(card);
+      }
+    });
+
+    if (counterCurrent) {
+      counterCurrent.textContent = matchingCards.length;
+    }
+
+    const { gsap, ScrollTrigger } = window;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!animate || !gsap || prefersReducedMotion) {
+      unmatchingCards.forEach((c) => {
+        c.style.display = 'none';
+        c.setAttribute('aria-hidden', 'true');
+        c.setAttribute('tabindex', '-1');
+      });
+      matchingCards.forEach((c) => {
+        c.style.display = '';
+        c.setAttribute('aria-hidden', 'false');
+        c.setAttribute('tabindex', '0');
+        c.style.opacity = '1';
+        c.style.transform = '';
+      });
+      if (ScrollTrigger) ScrollTrigger.refresh();
+      return;
+    }
+
+    // GSAP Animated transition
+    isAnimating = true;
+    gsap.killTweensOf(cards);
+
+    const revealMatchingCards = () => {
+      matchingCards.forEach((c) => {
+        c.style.display = '';
+        c.setAttribute('aria-hidden', 'false');
+        c.setAttribute('tabindex', '0');
+      });
+
+      gsap.fromTo(
+        matchingCards,
+        { opacity: 0, scale: 0.96, y: 16 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.38,
+          stagger: {
+            each: 0.04,
+            from: 'start',
+          },
+          ease: 'power2.out',
+          onComplete: () => {
+            isAnimating = false;
+            matchingCards.forEach((c) => {
+              c.style.transform = '';
+            });
+            if (ScrollTrigger) ScrollTrigger.refresh();
+          },
+        }
+      );
+    };
+
+    if (unmatchingCards.length) {
+      gsap.to(unmatchingCards, {
+        opacity: 0,
+        scale: 0.94,
+        y: 8,
+        duration: 0.22,
+        ease: 'power2.in',
+        onComplete: () => {
+          unmatchingCards.forEach((c) => {
+            c.style.display = 'none';
+            c.setAttribute('aria-hidden', 'true');
+            c.setAttribute('tabindex', '-1');
+          });
+          revealMatchingCards();
+        },
+      });
+    } else {
+      revealMatchingCards();
+    }
+  };
+
+  // Click & keyboard handlers for filter buttons
+  filterBtns.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+      const targetFilter = btn.dataset.filter || 'all';
+      if (targetFilter === activeFilter && !isAnimating) return;
+
+      if (targetFilter === 'all') {
+        if (window.location.hash) {
+          history.pushState(null, '', window.location.pathname + window.location.search);
+        }
+      } else {
+        if (window.location.hash !== `#${targetFilter}`) {
+          history.pushState(null, '', `#${targetFilter}`);
+        }
+      }
+
+      applyFilter(targetFilter, true);
+    });
+
+    btn.addEventListener('keydown', (e) => {
+      let nextIndex = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        nextIndex = (index + 1) % filterBtns.length;
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        nextIndex = (index - 1 + filterBtns.length) % filterBtns.length;
+      } else if (e.key === 'Home') {
+        nextIndex = 0;
+      } else if (e.key === 'End') {
+        nextIndex = filterBtns.length - 1;
+      }
+
+      if (nextIndex !== null) {
+        e.preventDefault();
+        filterBtns[nextIndex].focus();
+        filterBtns[nextIndex].click();
+      }
+    });
+  });
+
+  // Listen to browser forward/back hash navigation
+  window.addEventListener('hashchange', () => {
+    const hashFilter = getValidFilterFromHash();
+    if (hashFilter !== activeFilter) {
+      applyFilter(hashFilter, true);
+    }
+  });
+
+  // Initial state on page load based on URL hash
+  const initialFilter = getValidFilterFromHash();
+  applyFilter(initialFilter, false);
 }

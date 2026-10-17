@@ -2,27 +2,69 @@
    Projects Portfolio Categorized Galleries & Fullscreen Lightbox
    ========================================================================== */
 
-/* Hero Sector Anchor Pills */
-.nior-category-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 32px;
+/* Unified Portfolio Section */
+.nior-portfolio-unified {
+  scroll-margin-top: var(--header-height);
+  border-bottom: 1px solid var(--nior-border);
+}
 
-  .nior-category-nav__pill {
-    display: inline-flex;
+/* Portfolio Filter Bar */
+.nior-portfolio-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: clamp(24px, 3.5vh, 36px);
+  margin-bottom: clamp(32px, 4.5vh, 48px);
+  border-bottom: 1px solid var(--nior-border);
+
+  @media (max-width: 960px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .nior-portfolio-filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 10px;
+
+    @media (max-width: 768px) {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      max-width: 100%;
+      padding-bottom: 8px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--nior-border) transparent;
+
+      &::-webkit-scrollbar {
+        height: 3px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--nior-border);
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .nior-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 10px 18px;
     background: rgba(20, 22, 24, 0.78);
     border: 1px solid var(--nior-border);
     border-radius: 999px;
     color: var(--nior-white);
-    text-decoration: none;
     font-family: var(--font-sans);
     font-size: 12px;
-    letter-spacing: 0.06em;
-    transition: border-color 0.35s var(--ease-out-luxury), background-color 0.35s ease, transform 0.35s var(--ease-out-luxury);
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color 0.35s var(--ease-out-luxury), background-color 0.35s ease, color 0.35s ease, transform 0.35s var(--ease-out-luxury), box-shadow 0.35s ease;
 
     &:hover,
     &:focus-visible {
@@ -32,79 +74,75 @@
       outline: none;
     }
 
-    .nior-category-nav__num {
+    &.is-active,
+    &[aria-selected="true"] {
+      background: var(--nior-gold);
+      color: var(--nior-obsidian);
+      border-color: var(--nior-gold);
+      box-shadow: 0 4px 18px rgba(201, 162, 94, 0.28);
+      transform: translateY(-1px);
+
+      .nior-filter-btn__num {
+        color: rgba(12, 13, 14, 0.75);
+      }
+
+      .nior-filter-btn__label {
+        font-weight: 600;
+        color: var(--nior-obsidian);
+      }
+
+      .nior-filter-btn__count {
+        color: rgba(12, 13, 14, 0.65);
+      }
+    }
+
+    .nior-filter-btn__num {
       font-family: var(--font-serif);
       font-style: italic;
       font-size: 13px;
       color: var(--nior-gold);
+      transition: color 0.3s ease;
     }
 
-    .nior-category-nav__label {
+    .nior-filter-btn__label {
       font-weight: 500;
-    }
-  }
-}
-
-/* Category Section Alternating Backgrounds & Spacing */
-.nior-project-category-section {
-  scroll-margin-top: var(--header-height);
-  border-bottom: 1px solid var(--nior-border);
-
-  &.nior-section--obsidian {
-    background: var(--nior-obsidian);
-  }
-}
-
-/* Architectural Category Header */
-.nior-category-header {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: clamp(24px, 4vw, 60px);
-  align-items: end;
-  padding-bottom: clamp(32px, 4vh, 48px);
-  margin-bottom: clamp(36px, 5vh, 56px);
-  border-bottom: 1px solid var(--nior-border);
-
-  @media (max-width: 860px) {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .nior-category-header__meta {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-
-    .nior-category-header__index {
-      font-family: var(--font-serif);
-      font-size: clamp(2.4rem, 4vw, 3.6rem);
-      line-height: 1;
-      color: var(--nior-gold);
-      opacity: 0.85;
+      transition: color 0.3s ease;
     }
 
-    .nior-eyebrow {
-      margin-bottom: 0;
-    }
-  }
-
-  .nior-category-header__main {
-    h2 {
-      font-size: clamp(1.85rem, 3.2vw, 2.75rem);
-      margin-bottom: 0;
-      color: var(--nior-white);
-    }
-
-    p {
-      font-size: 15px;
-      line-height: 1.75;
+    .nior-filter-btn__count {
+      font-size: 11px;
       color: var(--nior-muted);
-      max-width: 720px;
-      margin-top: 12px;
-      margin-bottom: 0;
+      opacity: 0.85;
+      transition: color 0.3s ease;
+    }
+  }
+
+  .nior-portfolio-filter-status {
+    flex-shrink: 0;
+
+    .nior-portfolio-filter-counter {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--nior-muted);
+
+      strong.nior-filter-count-current {
+        color: var(--nior-gold);
+        font-weight: 700;
+      }
     }
   }
 }
+
+/* Backward-compatible category nav & headers if needed */
+.nior-category-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
 
 /* Interactive Portfolio Card Enhancements */
 .nior-portfolio-card {
@@ -167,6 +205,31 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+
+    .nior-portfolio-card__meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+
+      .nior-portfolio-card__sector-tag {
+        font-family: var(--font-sans);
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--nior-gold);
+      }
+
+      .nior-portfolio-card__category {
+        font-family: var(--font-sans);
+        font-size: 11px;
+        color: var(--nior-muted);
+        letter-spacing: 0.04em;
+      }
+    }
 
     h3 {
       font-size: 20px;

@@ -8,7 +8,7 @@
 ?>
 <!-- wp:html -->
 <section class="nior-section nior-section--surface nior-process-video-section" aria-label="Our Integrated Process">
-  <img class="nior-process-video-bg nior-process-bg-img" src="<?php echo esc_url( get_theme_file_uri( '/assets/img/process-poster.jpg' ) ); ?>" alt="Nior Atelier Integrated Architecture and Construction Process" loading="lazy" />
+  <img class="nior-process-video-bg nior-process-bg-img" src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-2.jpg' ) ); ?>" alt="Nior Atelier Integrated Architecture and Construction Process" loading="lazy" />
   <div class="nior-process-video-overlay" aria-hidden="true"></div>
   <div class="nior-container">
     <div style="text-align: center; max-width: 720px; margin: 0 auto 50px;">

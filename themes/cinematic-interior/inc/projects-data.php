@@ -198,3 +198,25 @@ function nioratelier_get_portfolio_sections() {
         ),
     );
 }
+
+/**
+ * Returns all portfolio projects across all sectors in a flattened array,
+ * enriched with sector ID, sector number, and sector title.
+ *
+ * @return array
+ */
+function nioratelier_get_all_portfolio_projects() {
+    $sections = nioratelier_get_portfolio_sections();
+    $all      = array();
+
+    foreach ( $sections as $section ) {
+        foreach ( $section['projects'] as $project ) {
+            $project['sector_id']     = $section['id'];
+            $project['sector_number'] = $section['number'];
+            $project['sector_title']  = $section['title'];
+            $all[]                    = $project;
+        }
+    }
+
+    return $all;
+}
