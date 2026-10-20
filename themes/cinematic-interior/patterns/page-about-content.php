@@ -91,15 +91,18 @@
       <p style="color: var(--nior-muted); max-width: 760px; margin-bottom: 30px; font-size: 15px; line-height: 1.8;">
         Located in Johor Bahru, our headquarters and furniture factory occupy approximately 11,000 sq ft, bringing our operational workspace and furniture production capabilities together. This integrated setup supports closer coordination between design development, fabrication and project execution, helping us carry the original design intent through to the finished space.
       </p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-        <div class="nior-factory-card" style="border-radius: 8px; overflow: hidden; aspect-ratio: 16/10; background: var(--nior-surface);">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-1.jpg' ) ); ?>" alt="Nior Atelier Joinery & Fabrication Machinery" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy" />
+      <div class="nior-factory-grid">
+        <div class="nior-factory-card nior-factory-card--featured">
+          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-1.jpg' ) ); ?>" alt="Nior Atelier Joinery &amp; Fabrication Machinery" loading="lazy" />
+          <div class="nior-factory-card__tag">Joinery &amp; High-Precision Machinery</div>
         </div>
-        <div class="nior-factory-card" style="border-radius: 8px; overflow: hidden; aspect-ratio: 16/10; background: var(--nior-surface);">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-2.jpg' ) ); ?>" alt="Bespoke Metalwork & Millwork Assembly" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy" />
+        <div class="nior-factory-card">
+          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-2.jpg' ) ); ?>" alt="Bespoke Metalwork &amp; Millwork Assembly" loading="lazy" />
+          <div class="nior-factory-card__tag">Bespoke Metalwork &amp; Millwork Assembly</div>
         </div>
-        <div class="nior-factory-card" style="border-radius: 8px; overflow: hidden; aspect-ratio: 16/10; background: var(--nior-surface);">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-3.jpg' ) ); ?>" alt="Direct Material Procurement & Custom Finishing" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy" />
+        <div class="nior-factory-card">
+          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/hq/factory-3.jpg' ) ); ?>" alt="Direct Material Procurement &amp; Custom Finishing" loading="lazy" />
+          <div class="nior-factory-card__tag">Material Procurement &amp; Custom Finishing</div>
         </div>
       </div>
     </div>
