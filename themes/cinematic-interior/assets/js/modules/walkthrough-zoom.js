@@ -17,7 +17,7 @@ export function initWalkthroughZoom() {
     : ((niorConfig && niorConfig.walkthroughTotalFrames) ? niorConfig.walkthroughTotalFrames : 5);
 
   // Resolve image paths (frame-01.jpg to frame-05.jpg) with robust cache-busting
-  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.9.14';
+  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.9.15';
   const hasConfigImages = niorConfig && Array.isArray(niorConfig.walkthroughImages) && niorConfig.walkthroughImages.length > 0;
   const imageSources = hasConfigImages
     ? niorConfig.walkthroughImages
@@ -326,19 +326,19 @@ export function initWalkthroughZoom() {
         }
 
         // Staggered rack-focus depth-of-field word reveal across Rooms 2, 3, and 4
-        // Identical optical curve to the "Design Beyond Aesthetics" rack-focus section
+        // Unrevealed words maintain a noticeable, high-contrast shadowed silhouette
         const s = Math.max(0, Math.min(1, (u - 0.95) / (3.35 - 0.95)));
         const wordStarts = [0.00, 0.18, 0.38, 0.56, 0.76];
         const wordDuration = 0.16;
-        const baseOpacity = 0.14;
+        const baseOpacity = 0.38;
 
         heroWords.forEach((word, k) => {
           const start = wordStarts[k] !== undefined ? wordStarts[k] : (k / (heroWords.length - 1)) * 0.8;
           const o = Math.max(0, Math.min(1, (s - start) / wordDuration));
 
           word.style.opacity = (baseOpacity + (1 - baseOpacity) * o).toFixed(3);
-          word.style.transform = `translate3d(0, ${((1 - o) * 0.22).toFixed(3)}em, 0)`;
-          word.style.filter = `blur(${((1 - o) * 5.5).toFixed(2)}px)`;
+          word.style.transform = `translate3d(0, ${((1 - o) * 0.18).toFixed(3)}em, 0)`;
+          word.style.filter = `blur(${((1 - o) * 2.2).toFixed(2)}px)`;
         });
       } else {
         cardAlpha = 0;
