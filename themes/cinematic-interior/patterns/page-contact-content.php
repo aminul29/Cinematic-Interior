@@ -7,7 +7,7 @@
  */
 ?>
 <!-- wp:html -->
-<div class="nior-page-hero nior-page-hero--contact" style="background-image: linear-gradient(180deg, rgba(12, 13, 14, 0.20) 0%, rgba(12, 13, 14, 0.35) 100%), url('<?php echo esc_url( get_theme_file_uri( '/assets/img/contact-us-banner-bg.png' ) ); ?>');">
+<div class="nior-page-hero nior-page-hero--contact" style="background-image: linear-gradient(180deg, rgba(12, 13, 14, 0.60) 0%, rgba(12, 13, 14, 0.78) 100%), url('<?php echo esc_url( get_theme_file_uri( '/assets/img/contact-us-banner-bg.jpg' ) ); ?>');">
   <div class="nior-container">
     <div class="nior-page-hero__inner">
       <span class="nior-eyebrow">Let's Create Something People Remember</span>

@@ -10,7 +10,7 @@ export function initPreloader(onComplete) {
   const progressBar = document.getElementById('niorTopProgressBar');
 
   // Pre-calculate circular loader circumference
-  const circleRadius = circleFillEl ? (parseFloat(circleFillEl.getAttribute('r')) || 35) : 35;
+  const circleRadius = circleFillEl ? (parseFloat(circleFillEl.getAttribute('r')) || 116) : 116;
   const circleCircumference = 2 * Math.PI * circleRadius;
   if (circleFillEl) {
     circleFillEl.style.strokeDasharray = `${circleCircumference}`;

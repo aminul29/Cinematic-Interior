@@ -29,47 +29,11 @@
     transition: opacity 0.5s ease, transform 0.6s var(--ease-out-luxury);
   }
 
-  .nior-preloader__logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 28px;
-  }
-
-  .nior-preloader__logo-img {
-    display: block;
-    width: clamp(160px, 20vw, 210px);
-    height: auto;
-    object-fit: contain;
-    mix-blend-mode: screen;
-    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
-  }
-
-  /* Legacy typography fallbacks */
-  .nior-preloader__monogram {
-    font-family: var(--font-serif);
-    font-size: 38px;
-    letter-spacing: 0.25em;
-    color: var(--nior-gold);
-    line-height: 1;
-    margin-bottom: 12px;
-  }
-
-  .nior-preloader__sub {
-    font-family: var(--font-sans);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--nior-subtle);
-  }
-
-  /* Circular luxury progress loader */
-  .nior-preloader__circle-wrap {
+  /* Encompassing circular logo container */
+  .nior-preloader__logo-circle {
     position: relative;
-    width: 76px;
-    height: 76px;
+    width: clamp(210px, 28vw, 260px);
+    height: clamp(210px, 28vw, 260px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,22 +58,50 @@
     stroke: var(--nior-gold);
     stroke-width: 1.5px;
     stroke-linecap: round;
-    stroke-dasharray: 219.91;
-    stroke-dashoffset: 219.91;
+    stroke-dasharray: 728.85;
+    stroke-dashoffset: 728.85;
     transition: stroke-dashoffset 0.08s linear;
-    filter: drop-shadow(0 0 6px rgba(201, 162, 94, 0.4));
+    filter: drop-shadow(0 0 8px rgba(201, 162, 94, 0.45));
+  }
+
+  .nior-preloader__logo-img {
+    display: block;
+    width: clamp(140px, 19vw, 180px);
+    height: auto;
+    object-fit: contain;
+    mix-blend-mode: screen;
+    filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
+    position: relative;
+    z-index: 2;
   }
 
   .nior-preloader__counter {
-    position: relative;
+    margin-top: 24px;
     font-family: var(--font-sans);
     font-size: 13px;
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     color: var(--nior-gold-light);
     line-height: 1;
     text-align: center;
-    padding-left: 0.1em;
+    padding-left: 0.15em;
+  }
+
+  /* Backward compatibility fallback classes */
+  .nior-preloader__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nior-preloader__circle-wrap {
+    position: relative;
+    width: 76px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   /* Legacy horizontal line track fallback */
