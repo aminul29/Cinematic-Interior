@@ -18,7 +18,7 @@
     <!-- Expanding Factory Background Disc with Scrim Overlay -->
     <div id="niorHeroGrowDisc" class="nior-hero-grow-disc" aria-hidden="true"></div>
 
-    <!-- Center Brand Emblem (Fades smoothly on initial scroll) -->
+    <!-- Center Brand Emblem (Fades smoothly on initial scroll & returns on Frame 05 finale) -->
     <div id="niorWalkthroughBrand" class="nior-hero-center-brand">
       <div class="nior-hero-center-brand__title">NIOR ATELIER</div>
       <div class="nior-hero-center-brand__divider"></div>
@@ -28,6 +28,25 @@
         <span class="nior-brand-word">Design</span>
         <span class="nior-hero-tagline-dot">·</span>
         <span class="nior-brand-word">Build</span>
+      </div>
+    </div>
+
+    <!-- Center-Stage Cinematic Titles for Sequential Walkthrough Rooms (Frames 02, 03, 04) -->
+    <div id="niorWalkthroughTitles" class="nior-walkthrough-titles" aria-hidden="true">
+      <div class="nior-walkthrough-title-card" data-frame="2">
+        <h2 class="nior-walkthrough-title">
+          Crafting <span class="nior-text-gold">Cinematic Spaces</span><br />That Perform.
+        </h2>
+      </div>
+      <div class="nior-walkthrough-title-card" data-frame="3">
+        <h2 class="nior-walkthrough-title">
+          Designing Environments<br />That <span class="nior-text-gold">Inspire &amp; Connect.</span>
+        </h2>
+      </div>
+      <div class="nior-walkthrough-title-card" data-frame="4">
+        <h2 class="nior-walkthrough-title">
+          End-to-End<br /><span class="nior-text-gold">Architectural Mastery.</span>
+        </h2>
       </div>
     </div>
 

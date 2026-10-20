@@ -17,7 +17,7 @@ export function initWalkthroughZoom() {
     : ((niorConfig && niorConfig.walkthroughTotalFrames) ? niorConfig.walkthroughTotalFrames : 5);
 
   // Resolve image paths (frame-01.jpg to frame-05.jpg) with robust cache-busting
-  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.9.5';
+  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.9.12';
   const hasConfigImages = niorConfig && Array.isArray(niorConfig.walkthroughImages) && niorConfig.walkthroughImages.length > 0;
   const imageSources = hasConfigImages
     ? niorConfig.walkthroughImages
@@ -37,6 +37,7 @@ export function initWalkthroughZoom() {
   // DOM Elements
   const brandEl = document.getElementById('niorWalkthroughBrand');
   const contentEl = document.getElementById('niorWalkthroughContent');
+  const titleCards = track.querySelectorAll('.nior-walkthrough-title-card');
   const hudEl = document.getElementById('niorWalkthroughHUD');
   const frameNumEl = document.getElementById('niorWalkthroughFrameNum');
   const totalEl = hudEl ? hudEl.querySelector('.nior-walkthrough-hud__total') : null;
@@ -298,6 +299,46 @@ export function initWalkthroughZoom() {
 
       brandEl.style.opacity = brandAlpha;
       brandEl.style.transform = `translateY(${brandY}px)`;
+    }
+
+    // 2b. Center-Stage Sequential Room Titles (Frames 02, 03, 04)
+    if (titleCards && titleCards.length > 0) {
+      titleCards.forEach((card) => {
+        const frameIdx = parseInt(card.dataset.frame, 10) - 1; // data-frame="2" -> index 1
+        let cardAlpha = 0;
+        let cardY = 20;
+
+        if (activeIndex === frameIdx && p < walkthroughProgressEnd) {
+          if (t < 0.15) {
+            // Emerge & float up as spatial room arrives
+            const factor = Math.min(1, Math.max(0, t / 0.15));
+            cardAlpha = factor;
+            cardY = 20 * (1 - factor);
+          } else if (t <= 0.65) {
+            // Rock-solid static hold during high-clarity viewing window
+            cardAlpha = 1;
+            cardY = 0;
+          } else if (t < 0.85) {
+            // Velvety dissolution float up as room begins spatial crossfade
+            const factor = Math.min(1, Math.max(0, (t - 0.65) / 0.20));
+            cardAlpha = 1 - factor;
+            cardY = -20 * factor;
+          } else {
+            cardAlpha = 0;
+            cardY = -20;
+          }
+        } else if (activeIndex > frameIdx) {
+          cardAlpha = 0;
+          cardY = -20;
+        } else {
+          cardAlpha = 0;
+          cardY = 20;
+        }
+
+        card.style.opacity = cardAlpha.toFixed(3);
+        card.style.transform = `translate3d(0, ${cardY.toFixed(1)}px, 0)`;
+        card.style.visibility = cardAlpha > 0.005 ? 'visible' : 'hidden';
+      });
     }
 
     if (scrollHintEl) {

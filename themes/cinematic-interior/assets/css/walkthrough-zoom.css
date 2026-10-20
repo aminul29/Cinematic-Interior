@@ -131,6 +131,56 @@
     }
   }
 
+  /* Center-Stage Cinematic Room Titles (Frames 02, 03, 04) */
+  .nior-walkthrough-titles {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: min(92vw, 920px);
+    height: fit-content;
+    z-index: 10;
+    pointer-events: none;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .nior-walkthrough-title-card {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+      will-change: transform, opacity;
+      pointer-events: none;
+
+      .nior-walkthrough-title {
+        font-family: var(--font-serif, "Playfair Display", Georgia, serif);
+        font-size: clamp(2.2rem, 4.4vw, 4.2rem);
+        font-weight: 500;
+        line-height: 1.18;
+        letter-spacing: -0.012em;
+        color: var(--nior-white, #ffffff);
+        margin: 0;
+        text-shadow:
+          0 2px 10px rgba(0, 0, 0, 0.95),
+          0 6px 30px rgba(0, 0, 0, 0.92),
+          0 12px 50px rgba(0, 0, 0, 0.85);
+
+        .nior-text-gold {
+          color: var(--nior-gold, #c9a25e);
+          font-style: italic;
+        }
+      }
+    }
+  }
+
   /* Expanding Factory Background Disc with Scrim Overlay (Blooms behind center brand text) */
   .nior-hero-grow-disc {
     position: absolute;
