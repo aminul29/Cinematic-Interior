@@ -26,7 +26,10 @@
   }
 
   &.nior-page-hero--about,
-  &.nior-page-hero--services {
+  &.nior-page-hero--services,
+  &.nior-page-hero--projects,
+  &.nior-page-hero--contact,
+  &.nior-projects-hero {
     min-height: 55vh;
     display: flex;
     align-items: center;
@@ -137,12 +140,23 @@
   border-radius: 4px;
   padding: clamp(32px, 3.5vw, 42px) clamp(28px, 3vw, 36px);
   position: relative;
+  overflow: hidden;
   transition: transform 0.4s var(--ease-out-luxury), border-color 0.4s ease, box-shadow 0.4s ease;
 
   &:hover {
     transform: translateY(-4px);
     border-color: var(--nior-gold);
-    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35), 0 0 20px rgba(201, 162, 94, 0.08);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 24px rgba(201, 162, 94, 0.1);
+
+    .nior-service-item__bg {
+      transform: scale(1.06);
+      opacity: 0.36;
+    }
+
+    .nior-service-item__overlay {
+      background: radial-gradient(circle at 85% 15%, rgba(201, 162, 94, 0.12) 0%, transparent 55%),
+                  linear-gradient(180deg, rgba(12, 13, 14, 0.65) 0%, rgba(12, 13, 14, 0.88) 60%, rgba(12, 13, 14, 0.97) 100%);
+    }
 
     .nior-service-item__icon {
       transform: translateY(-2px) scale(1.04);
@@ -157,6 +171,45 @@
     h3 {
       color: #ffffff;
     }
+  }
+
+  .nior-service-item__picture {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .nior-service-item__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.22;
+    transition: transform 0.8s var(--ease-out-luxury), opacity 0.6s ease;
+  }
+
+  .nior-service-item__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(circle at 85% 15%, rgba(201, 162, 94, 0.05) 0%, transparent 55%),
+                linear-gradient(180deg, rgba(12, 13, 14, 0.72) 0%, rgba(12, 13, 14, 0.90) 60%, rgba(12, 13, 14, 0.98) 100%);
+    transition: background 0.6s ease;
+  }
+
+  .nior-service-item__content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   .nior-service-item__icon {
@@ -499,8 +552,11 @@
    ========================================================================== */
 body:has(.nior-page-hero--about),
 body:has(.nior-page-hero--services),
+body:has(.nior-page-hero--projects),
+body:has(.nior-projects-hero),
 body.page-template-page-about,
 body.page-template-page-services,
+body.page-template-page-projects,
 body.page-id-6,
 body.page-id-7 {
   .nior-process-video-section,
