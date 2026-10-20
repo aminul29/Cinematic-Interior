@@ -6,7 +6,16 @@ export function initPreloader(onComplete) {
   const preloader = document.getElementById('niorPreloader');
   const counterEl = document.getElementById('niorPreloaderCount');
   const fillEl = document.getElementById('niorPreloaderFill');
+  const circleFillEl = document.getElementById('niorPreloaderCircleFill');
   const progressBar = document.getElementById('niorTopProgressBar');
+
+  // Pre-calculate circular loader circumference
+  const circleRadius = circleFillEl ? (parseFloat(circleFillEl.getAttribute('r')) || 35) : 35;
+  const circleCircumference = 2 * Math.PI * circleRadius;
+  if (circleFillEl) {
+    circleFillEl.style.strokeDasharray = `${circleCircumference}`;
+    circleFillEl.style.strokeDashoffset = `${circleCircumference}`;
+  }
 
   if (!preloader) {
     if (typeof onComplete === 'function') {
@@ -27,8 +36,15 @@ export function initPreloader(onComplete) {
         counterEl.textContent = `${String(currentPercent).padStart(2, '0')}%`;
       }
 
+      // Legacy horizontal bar fallback
       if (fillEl) {
         fillEl.style.width = `${currentPercent}%`;
+      }
+
+      // Circular progress stroke offset
+      if (circleFillEl) {
+        const offset = circleCircumference * (1 - progress);
+        circleFillEl.style.strokeDashoffset = offset;
       }
 
       if (progress < 1) {
@@ -45,6 +61,17 @@ export function initPreloader(onComplete) {
     }
 
     requestAnimationFrame(update);
+  }
+
+  // Preloader logo recovery fallback for cross-environment directory discrepancies
+  const preloaderLogo = document.querySelector('.nior-preloader__logo-img');
+  if (preloaderLogo && window.niorConfig?.themeUri) {
+    preloaderLogo.addEventListener('error', () => {
+      const targetSrc = `${window.niorConfig.themeUri}/assets/img/logo-cropped.webp`;
+      if (preloaderLogo.src !== targetSrc) {
+        preloaderLogo.src = targetSrc;
+      }
+    }, { once: true });
   }
 
   // Global top scroll progress bar

@@ -15,13 +15,23 @@
   </div>
   <div class="nior-preloader__inner">
     <div class="nior-preloader__logo">
-      <div class="nior-preloader__monogram">NIOR ATELIER</div>
-      <div class="nior-preloader__sub">Interior Architecture · Design · Build</div>
+      <img
+        class="nior-preloader__logo-img"
+        src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/logo-cropped.webp' ); ?>"
+        alt="Nior Atelier"
+        width="190"
+        height="117"
+        loading="eager"
+        decoding="sync"
+      />
     </div>
-    <div class="nior-preloader__track">
-      <div id="niorPreloaderFill" class="nior-preloader__fill"></div>
+    <div class="nior-preloader__circle-wrap">
+      <svg class="nior-preloader__circle-svg" viewBox="0 0 80 80" aria-hidden="true">
+        <circle class="nior-preloader__circle-track" cx="40" cy="40" r="35" />
+        <circle id="niorPreloaderCircleFill" class="nior-preloader__circle-fill" cx="40" cy="40" r="35" />
+      </svg>
+      <div id="niorPreloaderCount" class="nior-preloader__counter">00%</div>
     </div>
-    <div id="niorPreloaderCount" class="nior-preloader__counter">00%</div>
   </div>
 </div>
 
