@@ -35,7 +35,7 @@
     <div id="niorWalkthroughTitles" class="nior-walkthrough-titles" aria-hidden="true">
       <div class="nior-walkthrough-title-card" data-frame="2">
         <h2 class="nior-walkthrough-title">
-          Crafting <span class="nior-text-gold">Cinematic Spaces</span><br />That Perform.
+          Crafting <span class="nior-text-gold">Cinematic</span> Spaces<br />That <span class="nior-text-gold">Perform.</span>
         </h2>
       </div>
       <div class="nior-walkthrough-title-card" data-frame="3">
