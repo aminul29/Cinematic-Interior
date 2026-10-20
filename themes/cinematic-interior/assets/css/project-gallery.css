@@ -341,8 +341,9 @@
   .nior-lightbox__dialog {
     position: relative;
     z-index: 1;
-    width: min(1400px, 95vw);
-    height: min(92vh, 940px);
+    box-sizing: border-box;
+    width: min(1060px, 94vw);
+    height: min(90vh, 880px);
     display: grid;
     grid-template-rows: auto 1fr auto;
     gap: 16px;
@@ -352,7 +353,13 @@
     border-radius: 6px;
     box-shadow: 0 32px 80px rgba(0, 0, 0, 0.75);
     transform: scale(0.96) translateY(12px);
-    transition: transform 0.42s var(--ease-out-luxury);
+    transition: transform 0.42s var(--ease-out-luxury), width 0.35s var(--ease-out-luxury);
+  }
+
+  &.is-compact-aspect {
+    .nior-lightbox__dialog {
+      width: min(880px, 94vw);
+    }
   }
 
   .nior-lightbox__header {
@@ -429,15 +436,16 @@
       margin: 0;
       width: 100%;
       height: 100%;
+      min-height: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
 
       .nior-lightbox__img {
         max-width: calc(100% - 110px);
-        max-height: calc(100% - 34px);
+        max-height: calc(100% - 28px);
         width: auto;
         height: auto;
         object-fit: contain;

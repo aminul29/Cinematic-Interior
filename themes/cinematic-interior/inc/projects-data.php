@@ -20,9 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function nioratelier_get_project_gallery_urls( $slug, $count ) {
     $base_uri = get_template_directory_uri() . '/assets/img/projects/galleries/' . $slug;
+    $version  = defined( 'CINEMATIC_INTERIOR_VERSION' ) ? CINEMATIC_INTERIOR_VERSION : '1.0.0';
     $urls     = array();
     for ( $i = 1; $i <= $count; $i++ ) {
-        $urls[] = sprintf( '%s/%02d.jpg', $base_uri, $i );
+        $urls[] = sprintf( '%s/%02d.jpg?v=%s', $base_uri, $i, rawurlencode( $version ) );
     }
     return $urls;
 }

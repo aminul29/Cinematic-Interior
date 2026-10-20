@@ -64,6 +64,11 @@ export function initProjectGallery() {
       els.img.src = targetUrl;
       els.img.alt = `${state.title} — Photo ${normalizedIndex + 1} of ${total}`;
       els.img.classList.remove('is-switching');
+
+      if (loader.naturalWidth && loader.naturalHeight) {
+        const aspect = loader.naturalWidth / loader.naturalHeight;
+        lightbox.classList.toggle('is-compact-aspect', aspect < 1.15);
+      }
     };
     loader.src = targetUrl;
 
