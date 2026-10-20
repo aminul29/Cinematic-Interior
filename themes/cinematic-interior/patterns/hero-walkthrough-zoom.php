@@ -40,23 +40,22 @@
           </div>
 
           <h1 class="nior-hero-headline">
-            Crafting <span class="nior-text-gold">Cinematic Spaces</span><br />
-            That Perform.
+            Where Art <span class="nior-text-gold">Shapes Space.</span>
           </h1>
 
           <p class="nior-hero-sub">
-            Uniting architecture, custom fabrication, and spatial performance to craft unforgettable environments.
+            We create distinctive spaces where architecture, atmosphere and functionality come together — transforming ideas into environments that inspire, connect and perform.
           </p>
 
           <div class="nior-hero-actions">
-            <a href="#statement" class="nior-btn">
-              <span>Explore Spaces</span>
+            <a href="<?php echo esc_url( home_url( '/projects' ) ); ?>" class="nior-btn">
+              <span>Explore Our Projects</span>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </a>
             <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="nior-btn nior-btn--outline">
-              <span>Start A Consultation</span>
+              <span>Start A Project</span>
             </a>
           </div>
         </div>

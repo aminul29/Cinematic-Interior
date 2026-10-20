@@ -10,10 +10,10 @@
 <div class="nior-page-hero">
   <div class="nior-container">
     <div class="nior-page-hero__inner">
-      <span class="nior-eyebrow">Connect With Us</span>
-      <h1>Start Your Project.</h1>
+      <span class="nior-eyebrow">Let's Create Something People Remember</span>
+      <h1>Start A Project</h1>
       <p class="nior-lead">
-        Discuss your forthcoming spatial concept, commercial development, or bespoke residence with our architecture and design directors.
+        Every great space begins with a conversation. Tell us about your project, your vision and what you hope to achieve. Our team looks forward to exploring the possibilities with you.
       </p>
     </div>
   </div>
@@ -25,24 +25,25 @@
       
       <!-- Studio Details Card -->
       <div class="nior-contact-info-card">
-        <span class="nior-eyebrow">Studio & Headquarters</span>
-        <h3>Nior Atelier Malaysia</h3>
+        <span class="nior-eyebrow">Get In Touch</span>
+        <h3>NIOR ATELIER</h3>
         <p>Our multidisciplinary practice bridges strategic design with complete in-house construction and bespoke joinery fabrication.</p>
         
         <div class="nior-contact-detail-row">
           <div class="item">
             <span class="label">Headquarters Office</span>
             <div class="val">
-              S-03-03A, Empire Kota Damansara<br />
-              Petaling Jaya, Selangor, Malaysia
+              S-03-03A, Empire Kota Damansara,<br />
+              Persiaran Surian, 47810 Petaling Jaya,<br />
+              Selangor, Malaysia.
             </div>
           </div>
 
           <div class="item">
-            <span class="label">Factory & Fabrication</span>
+            <span class="label">Factory &amp; Fabrication</span>
             <div class="val">
-              11,000 SQ FT Production Facility<br />
-              Johor Bahru, Malaysia
+              11,000 SQ FT Headquarters + Furniture Factory<br />
+              Johor Bahru, Malaysia.
             </div>
           </div>
 
@@ -54,17 +55,25 @@
           </div>
 
           <div class="item">
-            <span class="label">General Inquiries</span>
+            <span class="label">Email Address</span>
             <div class="val">
               <a href="mailto:info@nioratelier.com">info@nioratelier.com</a>
+            </div>
+          </div>
+
+          <div class="item">
+            <span class="label">Official Website</span>
+            <div class="val">
+              <a href="https://www.nioratelier.com" target="_blank" rel="noopener">www.nioratelier.com</a>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Architectural Consultation Form -->
-      <form class="nior-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you for reaching out to Nior Atelier. Our design directors will review your inquiry promptly.');">
-        <h3 style="font-size: 24px; margin-bottom: 24px; color: var(--nior-white);">Project Consultation Request</h3>
+      <form class="nior-form" action="#" method="POST" onsubmit="event.preventDefault(); document.getElementById('niorFormSuccess').style.display='block'; this.reset();">
+        <h3 style="font-size: 24px; margin-bottom: 8px; color: var(--nior-white);">Start A Project</h3>
+        <p style="font-size: 14px; color: var(--nior-muted); margin-bottom: 24px;">Tell us a little about your project so we can better understand your requirements.</p>
         
         <div class="nior-form__row">
           <div class="nior-form__group">
@@ -72,45 +81,66 @@
             <input type="text" id="niorName" name="name" required placeholder="Your Name" />
           </div>
           <div class="nior-form__group">
-            <label for="niorEmail">Email Address *</label>
-            <input type="email" id="niorEmail" name="email" required placeholder="name@company.com" />
+            <label for="niorCompany">Company Name</label>
+            <input type="text" id="niorCompany" name="company" placeholder="Your Business / Brand" />
           </div>
         </div>
 
         <div class="nior-form__row">
           <div class="nior-form__group">
-            <label for="niorPhone">Phone / WhatsApp</label>
-            <input type="tel" id="niorPhone" name="phone" placeholder="+60 12 345 6789" />
+            <label for="niorEmail">Email Address *</label>
+            <input type="email" id="niorEmail" name="email" required placeholder="name@company.com" />
           </div>
           <div class="nior-form__group">
-            <label for="niorType">Project Typology *</label>
+            <label for="niorPhone">Contact Number *</label>
+            <input type="tel" id="niorPhone" name="phone" required placeholder="+60 12 345 6789" />
+          </div>
+        </div>
+
+        <div class="nior-form__row">
+          <div class="nior-form__group">
+            <label for="niorType">Project Type *</label>
             <select id="niorType" name="type" required>
-              <option value="">Select Project Typology</option>
-              <option value="commercial">Commercial / Workplace</option>
-              <option value="hospitality">F&B / Hospitality / Lounge</option>
-              <option value="retail">Retail / Flagship Store</option>
-              <option value="residential">Luxury Residential / Villa</option>
-              <option value="custom">Custom Fabrication / Build</option>
+              <option value="">Select Project Type</option>
+              <option value="commercial">Commercial Interiors</option>
+              <option value="retail">Retail &amp; Shopping Malls</option>
+              <option value="hospitality">F&amp;B &amp; Hospitality</option>
+              <option value="residential">Residential &amp; Villas</option>
+              <option value="custom">Custom Fabrication &amp; Build</option>
+            </select>
+          </div>
+          <div class="nior-form__group">
+            <label for="niorBudget">Estimated Budget</label>
+            <select id="niorBudget" name="budget">
+              <option value="">Select Estimated Budget</option>
+              <option value="under-200k">Under RM 200,000</option>
+              <option value="200k-500k">RM 200,000 – RM 500,000</option>
+              <option value="500k-1m">RM 500,000 – RM 1,000,000</option>
+              <option value="above-1m">Above RM 1,000,000</option>
             </select>
           </div>
         </div>
 
         <div class="nior-form__group">
-          <label for="niorLocation">Project Location & Estimated SQ FT</label>
-          <input type="text" id="niorLocation" name="location" placeholder="e.g. Kuala Lumpur, 4,500 sq ft" />
+          <label for="niorLocation">Project Location</label>
+          <input type="text" id="niorLocation" name="location" placeholder="e.g. Kuala Lumpur, Johor Bahru, Petaling Jaya" />
         </div>
 
         <div class="nior-form__group">
-          <label for="niorMessage">Project Vision & Brief *</label>
+          <label for="niorMessage">Tell Us About Your Project *</label>
           <textarea id="niorMessage" name="message" required placeholder="Tell us about the space, concept, timeline, and key goals..."></textarea>
         </div>
 
         <button type="submit" class="nior-btn" style="width: 100%; border: none;">
-          <span>Submit Project Inquiry</span>
+          <span>Submit Project Enquiry</span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
+
+        <div id="niorFormSuccess" style="display:none; padding:16px 20px; margin-top:20px; background:rgba(201,162,94,0.12); border:1px solid var(--nior-gold); border-radius:4px; color:var(--nior-gold-light); font-size:14px; text-align:center; line-height: 1.6;">
+          Thank you for your enquiry. Our team will be in touch to discuss your project.
+        </div>
       </form>
 
     </div>

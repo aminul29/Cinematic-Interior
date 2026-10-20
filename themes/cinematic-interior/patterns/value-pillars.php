@@ -30,7 +30,7 @@
         <span class="nior-pillar-num">01 / PILLAR</span>
         <h3 class="nior-pillar-title">Design</h3>
         <p class="nior-pillar-desc">
-          Distinctive spatial identities that define and elevate your brand.
+          We create distinctive environments with a strong visual identity.
         </p>
       </div>
 
@@ -47,7 +47,7 @@
         <span class="nior-pillar-num">02 / PILLAR</span>
         <h3 class="nior-pillar-title">Emotion</h3>
         <p class="nior-pillar-desc">
-          Atmosphere, lighting, and materiality crafted to evoke immediate feeling.
+          We use material, lighting, proportion and atmosphere to create feeling.
         </p>
       </div>
 
@@ -65,7 +65,7 @@
         <span class="nior-pillar-num">03 / PILLAR</span>
         <h3 class="nior-pillar-title">Behavior</h3>
         <p class="nior-pillar-desc">
-          Intuitive spatial flow engineered for natural engagement and movement.
+          We consider how people move, interact and experience the space.
         </p>
       </div>
 
@@ -81,7 +81,7 @@
         <span class="nior-pillar-num">04 / PILLAR</span>
         <h3 class="nior-pillar-title">Value</h3>
         <p class="nior-pillar-desc">
-          Commercial longevity, operational performance, and enduring equity.
+          We create environments that strengthen brands, customer experiences and long-term commercial potential.
         </p>
       </div>
     </div>

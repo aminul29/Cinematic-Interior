@@ -13,13 +13,13 @@
   <div class="nior-container">
     <div class="nior-cta-box">
       <span class="nior-eyebrow" style="justify-content: center;">Start A Conversation</span>
-      <h2>Let’s Create Something Memorable.</h2>
+      <h2>Let’s Create Something People Remember.</h2>
       <p>
-        From flagship hospitality to distinctive commercial spaces, we bring ideas into striking physical form.
+        Have a commercial space, retail concept, hospitality venue or residential project in mind? Let's discuss your vision and explore how we can bring it to life.
       </p>
       <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
         <a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="nior-btn">
-          <span>Inquire About A Project</span>
+          <span>Start A Project</span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>

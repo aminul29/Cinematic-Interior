@@ -196,6 +196,32 @@
     color: var(--nior-muted);
     margin-bottom: 0;
   }
+
+  .nior-service-capabilities {
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 16px 0 0;
+    border-top: 1px solid var(--nior-border);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 8px 16px;
+
+    li {
+      font-size: 13px;
+      color: var(--nior-muted);
+      position: relative;
+      padding-left: 14px;
+      line-height: 1.5;
+
+      &::before {
+        content: '•';
+        color: var(--nior-gold);
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+  }
 }
 
 .nior-sectors-grid,

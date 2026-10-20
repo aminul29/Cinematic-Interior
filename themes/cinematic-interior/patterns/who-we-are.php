@@ -7,24 +7,21 @@
  */
 ?>
 <!-- wp:html -->
-<section id="about" class="nior-section nior-section--surface" aria-label="Who We Are">
+<section id="factory" class="nior-section nior-section--surface" aria-label="Beyond Interior Design">
   <div class="nior-container">
     <div class="nior-inhouse-grid">
       <div class="nior-inhouse-content">
-        <span class="nior-eyebrow">Who We Are</span>
-        <h2>Crafted In-House.<br />From Concept To Reality.</h2>
+        <span class="nior-eyebrow">Beyond Interior Design</span>
+        <h2>Crafted In-House.<br />Designed With Purpose.</h2>
         <p>
-          Nior Atelier is an interior architecture, design and build studio creating distinctive spaces for brands, businesses and private clients.
+          Our headquarters and furniture factory bring our operational workspace and furniture production capabilities together.
         </p>
         <p>
-          We combine creative direction, spatial design and technical execution to transform ideas into environments that are visually compelling, commercially purposeful and built to last.
-        </p>
-        <p>
-          From concept development to final completion, we bring together design thinking, materiality, lighting, functionality and construction to create spaces that do more than look good — they create experiences people remember.
+          This integrated setup supports closer coordination between design development, fabrication and project execution, helping us translate concepts into physical environments.
         </p>
         <div style="margin-top: 32px;">
           <a href="<?php echo esc_url( home_url( '/about' ) ); ?>" class="nior-btn nior-btn--outline">
-            <span>Discover Our Story</span>
+            <span>Discover Our Approach</span>
           </a>
         </div>
       </div>
@@ -34,16 +31,16 @@
         <div class="nior-statbox-big">11,000<span>SQ FT</span></div>
         <h3 style="font-size: 22px; margin-bottom: 12px; color: var(--nior-white);">Headquarters & Furniture Factory</h3>
         <p class="nior-statbox-desc">
-          Our dedicated facility allows us to bring design concepts from drawing board to physical reality — combining creative direction, custom fabrication and skilled craftsmanship under one roof.
+          With approximately 11,000 sq ft of combined space, our dedicated facility connects design development, custom fabrication and skilled craftsmanship under one roof.
         </p>
         <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--nior-border); display: flex; gap: 30px;">
           <div>
-            <span style="font-size: 11px; letter-spacing: 0.15em; color: var(--nior-gold); text-transform: uppercase; font-weight: 700; display: block;">Execution</span>
+            <span style="font-size: 11px; letter-spacing: 0.15em; color: var(--nior-gold); text-transform: uppercase; font-weight: 700; display: block;">Fabrication</span>
             <span style="font-size: 13px; color: var(--nior-muted);">100% In-House</span>
           </div>
           <div>
-            <span style="font-size: 11px; letter-spacing: 0.15em; color: var(--nior-gold); text-transform: uppercase; font-weight: 700; display: block;">Coverage</span>
-            <span style="font-size: 13px; color: var(--nior-muted);">Malaysia & Global</span>
+            <span style="font-size: 11px; letter-spacing: 0.15em; color: var(--nior-gold); text-transform: uppercase; font-weight: 700; display: block;">Facility</span>
+            <span style="font-size: 13px; color: var(--nior-muted);">Johor Bahru</span>
           </div>
         </div>
       </div>

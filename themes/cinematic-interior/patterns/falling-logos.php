@@ -17,7 +17,7 @@ $logo_ver = defined( 'CINEMATIC_INTERIOR_VERSION' ) ? CINEMATIC_INTERIOR_VERSION
     <div class="nior-falling-header">
       <span class="nior-eyebrow">Our Clients</span>
       <h2>Trusted By Brands Across Industries</h2>
-      <p>From Michelin-inspired dining concepts and entertainment venues to corporate headquarters and luxury retail destinations.</p>
+      <p>From dining and nightlife venues to commercial headquarters and luxury retail destinations.</p>
     </div>
 
     <div id="niorFallingArena" class="nior-falling-arena">

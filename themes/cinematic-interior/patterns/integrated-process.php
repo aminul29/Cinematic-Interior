@@ -12,8 +12,11 @@
   <div class="nior-process-video-overlay" aria-hidden="true"></div>
   <div class="nior-container">
     <div class="nior-section-header" style="text-align: center; max-width: 720px; margin: 0 auto 50px;">
-      <span class="nior-eyebrow" style="justify-content: center;">From Concept To Completion</span>
-      <h2 style="font-size: clamp(2.4rem, 4.5vw, 3.8rem); margin-bottom: 0;">One Accountable Team</h2>
+      <span class="nior-eyebrow" style="justify-content: center;">Our Process</span>
+      <h2 style="font-size: clamp(2.4rem, 4.5vw, 3.8rem); margin-bottom: 12px;">From Concept To Completion</h2>
+      <p style="color: var(--nior-gold-light); font-size: 15px; letter-spacing: 0.05em; margin: 0;">
+        One creative direction. One coordinated process. One accountable team.
+      </p>
     </div>
 
     <div class="nior-process-steps">
@@ -30,8 +33,10 @@
           </svg>
         </div>
         <span class="nior-step-badge">Stage 01</span>
-        <h3 class="nior-step-title">Strategy</h3>
-        <div class="nior-step-sub">Brand · Concept · Positioning</div>
+        <h3 class="nior-step-title">Discover</h3>
+        <p class="nior-step-desc" style="font-size: 13px; line-height: 1.6; color: var(--nior-muted); margin: 0;">
+          We understand your business, brand, audience, site and objectives before the design journey begins.
+        </p>
       </div>
 
       <div class="nior-process-step">
@@ -44,8 +49,10 @@
           </svg>
         </div>
         <span class="nior-step-badge">Stage 02</span>
-        <h3 class="nior-step-title">Design</h3>
-        <div class="nior-step-sub">Architecture · 3D Visualisation</div>
+        <h3 class="nior-step-title">Define</h3>
+        <p class="nior-step-desc" style="font-size: 13px; line-height: 1.6; color: var(--nior-muted); margin: 0;">
+          We establish the creative direction, spatial strategy and project priorities to provide a clear foundation.
+        </p>
       </div>
 
       <div class="nior-process-step">
@@ -59,8 +66,10 @@
           </svg>
         </div>
         <span class="nior-step-badge">Stage 03</span>
-        <h3 class="nior-step-title">Technical</h3>
-        <div class="nior-step-sub">Planning · M&E Coordination</div>
+        <h3 class="nior-step-title">Design</h3>
+        <p class="nior-step-desc" style="font-size: 13px; line-height: 1.6; color: var(--nior-muted); margin: 0;">
+          We develop the concept, spatial planning, materials, lighting and visual identity into a cohesive direction.
+        </p>
       </div>
 
       <div class="nior-process-step">
@@ -73,8 +82,10 @@
           </svg>
         </div>
         <span class="nior-step-badge">Stage 04</span>
-        <h3 class="nior-step-title">Build</h3>
-        <div class="nior-step-sub">Fabrication · Site Execution</div>
+        <h3 class="nior-step-title">Deliver</h3>
+        <p class="nior-step-desc" style="font-size: 13px; line-height: 1.6; color: var(--nior-muted); margin: 0;">
+          We coordinate technical development, construction, fabrication and on-site execution into reality.
+        </p>
       </div>
 
       <div class="nior-process-step">
@@ -89,7 +100,9 @@
         </div>
         <span class="nior-step-badge">Stage 05</span>
         <h3 class="nior-step-title">Handover</h3>
-        <div class="nior-step-sub">Styling · Final Touches</div>
+        <p class="nior-step-desc" style="font-size: 13px; line-height: 1.6; color: var(--nior-muted); margin: 0;">
+          We refine the final details and bring the project to completion, delivering a finished space ready for use.
+        </p>
       </div>
     </div>
   </div>

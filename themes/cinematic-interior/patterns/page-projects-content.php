@@ -18,10 +18,10 @@ $total_all_projects = count( $all_projects );
 <div class="nior-page-hero nior-projects-hero">
   <div class="nior-container">
     <div class="nior-page-hero__inner">
-      <span class="nior-eyebrow">Selected Works &amp; Spatial Archives</span>
-      <h1>Spaces That Perform.</h1>
+      <span class="nior-eyebrow">Selected Works</span>
+      <h1>Every Space Begins With A Purpose.</h1>
       <p class="nior-lead">
-        Explore our curated portfolio spanning flagship luxury retail, botanical apothecaries, Michelin-tier culinary destinations, high-energy entertainment lounges, and private estates. Select any project to inspect the full architectural gallery.
+        Our projects explore how design, materials, lighting and spatial planning come together to shape environments that connect with people and communicate identity. Explore our work across commercial, retail, F&amp;B, hospitality and residential spaces.
       </p>
     </div>
   </div>

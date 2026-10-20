@@ -35,12 +35,35 @@ function nioratelier_get_project_gallery_urls( $slug, $count ) {
 function nioratelier_get_portfolio_sections() {
     return array(
         array(
-            'id'          => 'fnb-hospitality',
+            'id'          => 'commercial',
             'number'      => '01',
+            'eyebrow'     => 'Corporate & Exhibition',
+            'title'       => 'Commercial Projects',
+            'description' => 'Professional environments that express brand identity, support business operations and elevate the experience of every space.',
+            'projects'    => array(
+                array(
+                    'slug'        => 'corporate-showroom',
+                    'title'       => 'FinTech & Sports Pavilion',
+                    'category'    => 'Exhibition Center',
+                    'description' => 'Cobalt LED ribbons and biophilic executive lounge zones.',
+                    'count'       => 12,
+                ),
+            ),
+        ),
+        array(
+            'id'          => 'fnb-hospitality',
+            'number'      => '02',
             'eyebrow'     => 'Dining · Nightlife',
             'title'       => 'F&B & Hospitality',
-            'description' => '',
+            'description' => 'Inviting destinations that bring together atmosphere, spatial planning and brand identity to create meaningful customer experiences.',
             'projects'    => array(
+                array(
+                    'slug'        => 'vstage-lounge',
+                    'title'       => 'V Stage Lounge',
+                    'category'    => 'Entertainment Lounge',
+                    'description' => 'Immersive nightlife environment built around a commanding central stage and layered lighting.',
+                    'count'       => 10,
+                ),
                 array(
                     'slug'        => 'genki-sushi',
                     'title'       => 'Genki Sushi',
@@ -63,13 +86,6 @@ function nioratelier_get_portfolio_sections() {
                     'count'       => 9,
                 ),
                 array(
-                    'slug'        => 'vstage-lounge',
-                    'title'       => 'The V Sing Bar',
-                    'category'    => 'Entertainment Lounge',
-                    'description' => 'Parametric acoustic soffits and central stage architecture.',
-                    'count'       => 10,
-                ),
-                array(
                     'slug'        => 'artisanal-cafe',
                     'title'       => 'Artisanal Cafe',
                     'category'    => 'Japanese Cafe',
@@ -86,11 +102,11 @@ function nioratelier_get_portfolio_sections() {
             ),
         ),
         array(
-            'id'          => 'beauty-cosmetics',
-            'number'      => '02',
-            'eyebrow'     => 'Beauty & Wellness',
-            'title'       => 'Beauty & Fragrance',
-            'description' => '',
+            'id'          => 'retail-mall',
+            'number'      => '03',
+            'eyebrow'     => 'Retail & Flagships',
+            'title'       => 'Retail & Shopping Mall',
+            'description' => 'Distinctive retail environments designed around visual identity, customer journeys and memorable shopping experiences.',
             'projects'    => array(
                 array(
                     'slug'        => 'cle-de-peau',
@@ -127,15 +143,6 @@ function nioratelier_get_portfolio_sections() {
                     'description' => 'LED-framed styling mirrors and cognac leather chairs.',
                     'count'       => 7,
                 ),
-            ),
-        ),
-        array(
-            'id'          => 'fashion-luxury-retail',
-            'number'      => '03',
-            'eyebrow'     => 'Fashion & Fine Jewelry',
-            'title'       => 'Fashion & Retail',
-            'description' => '',
-            'projects'    => array(
                 array(
                     'slug'        => 'haute-menswear',
                     'title'       => 'Haute Menswear',
@@ -167,19 +174,12 @@ function nioratelier_get_portfolio_sections() {
             ),
         ),
         array(
-            'id'          => 'showroom-residential',
+            'id'          => 'residential',
             'number'      => '04',
-            'eyebrow'     => 'Private & Corporate',
-            'title'       => 'Corporate & Living',
-            'description' => '',
+            'eyebrow'     => 'Living & Estates',
+            'title'       => 'Residential & Villas',
+            'description' => 'Thoughtfully designed living spaces that balance comfort, character, materiality and functionality.',
             'projects'    => array(
-                array(
-                    'slug'        => 'corporate-showroom',
-                    'title'       => 'FinTech & Sports Pavilion',
-                    'category'    => 'Exhibition Center',
-                    'description' => 'Cobalt LED ribbons and biophilic executive lounge zones.',
-                    'count'       => 12,
-                ),
                 array(
                     'slug'        => 'pavilion-showhouse',
                     'title'       => 'Pavilion Showhouse',
