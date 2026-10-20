@@ -31,21 +31,16 @@
       </div>
     </div>
 
-    <!-- Center-Stage Cinematic Titles for Sequential Walkthrough Rooms (Frames 02, 03, 04) -->
+    <!-- Persistent Center-Stage Cinematic Title with Optical Rack-Focus Shadow Reveal (Spans Frames 02 to 04) -->
     <div id="niorWalkthroughTitles" class="nior-walkthrough-titles" aria-hidden="true">
-      <div class="nior-walkthrough-title-card" data-frame="2">
-        <h2 class="nior-walkthrough-title">
-          Crafting <span class="nior-text-gold">Cinematic</span> Spaces<br />That <span class="nior-text-gold">Perform.</span>
-        </h2>
-      </div>
-      <div class="nior-walkthrough-title-card" data-frame="3">
-        <h2 class="nior-walkthrough-title">
-          Designing Environments<br />That <span class="nior-text-gold">Inspire &amp; Connect.</span>
-        </h2>
-      </div>
-      <div class="nior-walkthrough-title-card" data-frame="4">
-        <h2 class="nior-walkthrough-title">
-          End-to-End<br /><span class="nior-text-gold">Architectural Mastery.</span>
+      <div id="niorWalkthroughTitleCard" class="nior-walkthrough-title-card">
+        <h2 id="niorWalkthroughHeadline" class="nior-walkthrough-title">
+          <span class="nior-hero-word">Crafting</span>
+          <span class="nior-hero-word em">Cinematic</span>
+          <span class="nior-hero-word">Spaces</span>
+          <br />
+          <span class="nior-hero-word">That</span>
+          <span class="nior-hero-word em">Perform.</span>
         </h2>
       </div>
     </div>

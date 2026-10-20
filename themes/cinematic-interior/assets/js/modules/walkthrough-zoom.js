@@ -17,7 +17,7 @@ export function initWalkthroughZoom() {
     : ((niorConfig && niorConfig.walkthroughTotalFrames) ? niorConfig.walkthroughTotalFrames : 5);
 
   // Resolve image paths (frame-01.jpg to frame-05.jpg) with robust cache-busting
-  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.9.13';
+  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.9.14';
   const hasConfigImages = niorConfig && Array.isArray(niorConfig.walkthroughImages) && niorConfig.walkthroughImages.length > 0;
   const imageSources = hasConfigImages
     ? niorConfig.walkthroughImages
@@ -37,7 +37,8 @@ export function initWalkthroughZoom() {
   // DOM Elements
   const brandEl = document.getElementById('niorWalkthroughBrand');
   const contentEl = document.getElementById('niorWalkthroughContent');
-  const titleCards = track.querySelectorAll('.nior-walkthrough-title-card');
+  const titleCard = document.getElementById('niorWalkthroughTitleCard');
+  const heroWords = titleCard ? Array.from(titleCard.querySelectorAll('.nior-hero-word')) : [];
   const hudEl = document.getElementById('niorWalkthroughHUD');
   const frameNumEl = document.getElementById('niorWalkthroughFrameNum');
   const totalEl = hudEl ? hudEl.querySelector('.nior-walkthrough-hud__total') : null;
@@ -301,44 +302,52 @@ export function initWalkthroughZoom() {
       brandEl.style.transform = `translateY(${brandY}px)`;
     }
 
-    // 2b. Center-Stage Sequential Room Titles (Frames 02, 03, 04)
-    if (titleCards && titleCards.length > 0) {
-      titleCards.forEach((card) => {
-        const frameIdx = parseInt(card.dataset.frame, 10) - 1; // data-frame="2" -> index 1
-        let cardAlpha = 0;
-        let cardY = 20;
+    // 2b. Persistent Center-Stage Cinematic Title with Optical Rack-Focus Word Reveal (Frames 02-04)
+    if (titleCard && heroWords.length > 0) {
+      const u = activeIndex + t; // Continuous transition coordinate [0.0 ... 4.0]
+      let cardAlpha = 0;
+      let cardY = 20;
 
-        if (activeIndex === frameIdx && p < walkthroughProgressEnd) {
-          if (t < 0.15) {
-            // Emerge & float up as spatial room arrives
-            const factor = Math.min(1, Math.max(0, t / 0.15));
-            cardAlpha = factor;
-            cardY = 20 * (1 - factor);
-          } else if (t <= 0.65) {
-            // Rock-solid static hold during high-clarity viewing window
-            cardAlpha = 1;
-            cardY = 0;
-          } else if (t < 0.85) {
-            // Velvety dissolution float up as room begins spatial crossfade
-            const factor = Math.min(1, Math.max(0, (t - 0.65) / 0.20));
-            cardAlpha = 1 - factor;
-            cardY = -20 * factor;
-          } else {
-            cardAlpha = 0;
-            cardY = -20;
-          }
-        } else if (activeIndex > frameIdx) {
-          cardAlpha = 0;
-          cardY = -20;
+      if (u >= 0.72 && u <= 3.65) {
+        if (u < 0.95) {
+          // Emerge and float up as Room 2 arrives
+          const factor = (u - 0.72) / (0.95 - 0.72);
+          cardAlpha = Math.min(1, Math.max(0, factor));
+          cardY = 20 * (1 - cardAlpha);
+        } else if (u <= 3.40) {
+          // Perfectly pinned and 100% visible across Rooms 2, 3, and 4
+          cardAlpha = 1;
+          cardY = 0;
         } else {
-          cardAlpha = 0;
-          cardY = 20;
+          // Dissolve smoothly and float up before Room 5 brand emblem returns
+          const factor = (u - 3.40) / (3.65 - 3.40);
+          cardAlpha = Math.max(0, 1 - factor);
+          cardY = -20 * factor;
         }
 
-        card.style.opacity = cardAlpha.toFixed(3);
-        card.style.transform = `translate3d(0, ${cardY.toFixed(1)}px, 0)`;
-        card.style.visibility = cardAlpha > 0.005 ? 'visible' : 'hidden';
-      });
+        // Staggered rack-focus depth-of-field word reveal across Rooms 2, 3, and 4
+        // Identical optical curve to the "Design Beyond Aesthetics" rack-focus section
+        const s = Math.max(0, Math.min(1, (u - 0.95) / (3.35 - 0.95)));
+        const wordStarts = [0.00, 0.18, 0.38, 0.56, 0.76];
+        const wordDuration = 0.16;
+        const baseOpacity = 0.14;
+
+        heroWords.forEach((word, k) => {
+          const start = wordStarts[k] !== undefined ? wordStarts[k] : (k / (heroWords.length - 1)) * 0.8;
+          const o = Math.max(0, Math.min(1, (s - start) / wordDuration));
+
+          word.style.opacity = (baseOpacity + (1 - baseOpacity) * o).toFixed(3);
+          word.style.transform = `translate3d(0, ${((1 - o) * 0.22).toFixed(3)}em, 0)`;
+          word.style.filter = `blur(${((1 - o) * 5.5).toFixed(2)}px)`;
+        });
+      } else {
+        cardAlpha = 0;
+        cardY = u < 0.72 ? 20 : -20;
+      }
+
+      titleCard.style.opacity = cardAlpha.toFixed(3);
+      titleCard.style.transform = `translate3d(0, ${cardY.toFixed(1)}px, 0)`;
+      titleCard.style.visibility = cardAlpha > 0.005 ? 'visible' : 'hidden';
     }
 
     if (scrollHintEl) {

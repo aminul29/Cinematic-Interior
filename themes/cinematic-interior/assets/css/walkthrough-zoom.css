@@ -131,12 +131,12 @@
     }
   }
 
-  /* Center-Stage Cinematic Room Titles (Frames 02, 03, 04) */
+  /* Center-Stage Cinematic Room Title with Optical Rack-Focus Reveal (Frames 02-04) */
   .nior-walkthrough-titles {
     position: absolute;
     inset: 0;
     margin: auto;
-    width: min(92vw, 920px);
+    width: min(92vw, 960px);
     height: fit-content;
     z-index: 10;
     pointer-events: none;
@@ -156,15 +156,15 @@
       align-items: center;
       justify-content: center;
       opacity: 0;
-      transform: translate3d(0, 20px, 0);
+      transform: translate3d(0, 0, 0);
       will-change: transform, opacity;
       pointer-events: none;
 
       .nior-walkthrough-title {
         font-family: var(--font-serif, "Playfair Display", Georgia, serif);
-        font-size: clamp(2.2rem, 4.4vw, 4.2rem);
+        font-size: clamp(2.3rem, 4.8vw, 4.4rem);
         font-weight: 500;
-        line-height: 1.18;
+        line-height: 1.2;
         letter-spacing: -0.012em;
         color: var(--nior-white, #ffffff);
         margin: 0;
@@ -173,9 +173,20 @@
           0 6px 30px rgba(0, 0, 0, 0.92),
           0 12px 50px rgba(0, 0, 0, 0.85);
 
-        .nior-text-gold {
-          color: var(--nior-gold, #c9a25e);
-          font-style: italic;
+        .nior-hero-word {
+          display: inline-block;
+          opacity: 0.14;
+          transform: translateY(0.22em);
+          filter: blur(5.5px);
+          will-change: opacity, transform, filter;
+          margin: 0 0.15em;
+          transition: color 0.3s ease;
+          color: var(--nior-white, #ffffff);
+
+          &.em {
+            color: var(--nior-gold, #c9a25e);
+            font-style: italic;
+          }
         }
       }
     }
