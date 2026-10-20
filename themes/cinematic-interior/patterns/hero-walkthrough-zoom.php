@@ -70,8 +70,6 @@
           <span class="nior-walkthrough-hud__divider">/</span>
           <span class="nior-walkthrough-hud__total">05</span>
         </div>
-        <div class="nior-walkthrough-hud__sep"></div>
-        <span id="niorWalkthroughZoneTag" class="nior-walkthrough-hud__tag">ATRIUM PORTAL</span>
       </div>
       <div class="nior-walkthrough-hud__progress-track">
         <div id="niorWalkthroughProgressFill" class="nior-walkthrough-hud__progress-fill"></div>

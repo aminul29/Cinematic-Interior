@@ -16,17 +16,8 @@ export function initWalkthroughZoom() {
     ? niorConfig.walkthroughImages.length
     : ((niorConfig && niorConfig.walkthroughTotalFrames) ? niorConfig.walkthroughTotalFrames : 5);
 
-  // Spatial Zone Tags for the architectural HUD indicator (5 curated zones)
-  const zoneTags = [
-    'ATRIUM PORTAL',
-    'CENTRAL ROTUNDA',
-    'VELVET LOUNGE',
-    'LINEAR BAR & MILLWORK',
-    'GRAND SALON FINALE',
-  ];
-
   // Resolve image paths (frame-01.jpg to frame-05.jpg) with robust cache-busting
-  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.8.33';
+  const themeVersion = (niorConfig && niorConfig.version) ? niorConfig.version : '1.9.5';
   const hasConfigImages = niorConfig && Array.isArray(niorConfig.walkthroughImages) && niorConfig.walkthroughImages.length > 0;
   const imageSources = hasConfigImages
     ? niorConfig.walkthroughImages
@@ -49,7 +40,6 @@ export function initWalkthroughZoom() {
   const hudEl = document.getElementById('niorWalkthroughHUD');
   const frameNumEl = document.getElementById('niorWalkthroughFrameNum');
   const totalEl = hudEl ? hudEl.querySelector('.nior-walkthrough-hud__total') : null;
-  const zoneTagEl = document.getElementById('niorWalkthroughZoneTag');
   const progressFillEl = document.getElementById('niorWalkthroughProgressFill');
   const scrollHintEl = document.getElementById('niorWalkthroughScrollHint');
   const growDotEl = document.getElementById('niorHeroGrowDot');
@@ -330,13 +320,6 @@ export function initWalkthroughZoom() {
       const numStr = String(displayIndex + 1).padStart(2, '0');
       if (frameNumEl.textContent !== numStr) {
         frameNumEl.textContent = numStr;
-      }
-    }
-
-    if (zoneTagEl) {
-      const tag = zoneTags[displayIndex] || 'NIOR ATELIER';
-      if (zoneTagEl.textContent !== tag) {
-        zoneTagEl.textContent = tag;
       }
     }
 
