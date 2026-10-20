@@ -176,7 +176,7 @@
         <h3 style="font-family: var(--font-serif); font-size: clamp(2rem, 3.5vw, 2.8rem); margin-bottom: 0; color: var(--nior-white);">Sector Expertise</h3>
       </div>
 
-      <div class="nior-sectors-grid">
+      <div class="nior-sectors-grid nior-sectors-grid--2col">
         <div class="nior-sector-card">
           <div class="nior-sector-card__img">
             <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/dining.jpg' ) ); ?>" alt="Hospitality & Dining Architecture" loading="lazy" />

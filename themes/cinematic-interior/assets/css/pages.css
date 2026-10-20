@@ -277,7 +277,44 @@
   }
 }
 
-.nior-sectors-grid,
+.nior-sectors-showcase {
+  .nior-sectors-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  .nior-sector-card {
+    .nior-sector-card__body {
+      padding: 24px 24px 26px;
+    }
+
+    h4 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+}
+
+.nior-sectors-grid--2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
 .nior-materials-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
