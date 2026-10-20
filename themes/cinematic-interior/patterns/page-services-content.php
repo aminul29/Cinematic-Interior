@@ -34,8 +34,8 @@
       <!-- Division 01: Interior Architecture & Design -->
       <div class="nior-service-item">
         <picture class="nior-service-item__picture" aria-hidden="true">
-          <source srcset="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-01.webp' ) ); ?>" type="image/webp" />
-          <img class="nior-service-item__bg" src="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-01.png' ) ); ?>" alt="" loading="lazy" />
+          <source srcset="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-01.webp' ) . '?v=' . filemtime( get_theme_file_path( '/assets/img/services/service-bg-01.webp' ) ) ); ?>" type="image/webp" />
+          <img class="nior-service-item__bg" src="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-01.png' ) . '?v=' . filemtime( get_theme_file_path( '/assets/img/services/service-bg-01.png' ) ) ); ?>" alt="" loading="lazy" />
         </picture>
         <div class="nior-service-item__overlay" aria-hidden="true"></div>
         <div class="nior-service-item__content">
@@ -67,8 +67,8 @@
       <!-- Division 02: Design & Build -->
       <div class="nior-service-item">
         <picture class="nior-service-item__picture" aria-hidden="true">
-          <source srcset="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-02.webp' ) ); ?>" type="image/webp" />
-          <img class="nior-service-item__bg" src="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-02.png' ) ); ?>" alt="" loading="lazy" />
+          <source srcset="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-02.webp' ) . '?v=' . filemtime( get_theme_file_path( '/assets/img/services/service-bg-02.webp' ) ) ); ?>" type="image/webp" />
+          <img class="nior-service-item__bg" src="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-02.png' ) . '?v=' . filemtime( get_theme_file_path( '/assets/img/services/service-bg-02.png' ) ) ); ?>" alt="" loading="lazy" />
         </picture>
         <div class="nior-service-item__overlay" aria-hidden="true"></div>
         <div class="nior-service-item__content">
@@ -104,8 +104,8 @@
       <!-- Division 03: Custom Fabrication -->
       <div class="nior-service-item">
         <picture class="nior-service-item__picture" aria-hidden="true">
-          <source srcset="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-03.webp' ) ); ?>" type="image/webp" />
-          <img class="nior-service-item__bg" src="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-03.png' ) ); ?>" alt="" loading="lazy" />
+          <source srcset="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-03.webp' ) . '?v=' . filemtime( get_theme_file_path( '/assets/img/services/service-bg-03.webp' ) ) ); ?>" type="image/webp" />
+          <img class="nior-service-item__bg" src="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-03.png' ) . '?v=' . filemtime( get_theme_file_path( '/assets/img/services/service-bg-03.png' ) ) ); ?>" alt="" loading="lazy" />
         </picture>
         <div class="nior-service-item__overlay" aria-hidden="true"></div>
         <div class="nior-service-item__content">
@@ -136,8 +136,8 @@
       <!-- Division 04: Commercial & Brand Experience Design -->
       <div class="nior-service-item">
         <picture class="nior-service-item__picture" aria-hidden="true">
-          <source srcset="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-04.webp' ) ); ?>" type="image/webp" />
-          <img class="nior-service-item__bg" src="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-04.png' ) ); ?>" alt="" loading="lazy" />
+          <source srcset="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-04.webp' ) . '?v=' . filemtime( get_theme_file_path( '/assets/img/services/service-bg-04.webp' ) ) ); ?>" type="image/webp" />
+          <img class="nior-service-item__bg" src="<?php echo esc_url( get_theme_file_uri( '/assets/img/services/service-bg-04.png' ) . '?v=' . filemtime( get_theme_file_path( '/assets/img/services/service-bg-04.png' ) ) ); ?>" alt="" loading="lazy" />
         </picture>
         <div class="nior-service-item__overlay" aria-hidden="true"></div>
         <div class="nior-service-item__content">

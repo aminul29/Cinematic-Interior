@@ -240,12 +240,12 @@
 
     .nior-service-item__bg {
       transform: scale(1.06);
-      opacity: 0.36;
+      opacity: 0.72;
     }
 
     .nior-service-item__overlay {
-      background: radial-gradient(circle at 85% 15%, rgba(201, 162, 94, 0.12) 0%, transparent 55%),
-                  linear-gradient(180deg, rgba(12, 13, 14, 0.65) 0%, rgba(12, 13, 14, 0.88) 60%, rgba(12, 13, 14, 0.97) 100%);
+      background: radial-gradient(circle at 85% 15%, rgba(201, 162, 94, 0.12) 0%, transparent 60%),
+                  linear-gradient(180deg, rgba(12, 13, 14, 0.20) 0%, rgba(12, 13, 14, 0.45) 50%, rgba(12, 13, 14, 0.72) 100%);
     }
 
     .nior-service-item__icon {
@@ -280,7 +280,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    opacity: 0.22;
+    opacity: 0.52;
     transition: transform 0.8s var(--ease-out-luxury), opacity 0.6s ease;
   }
 
@@ -289,8 +289,8 @@
     inset: 0;
     z-index: 2;
     pointer-events: none;
-    background: radial-gradient(circle at 85% 15%, rgba(201, 162, 94, 0.05) 0%, transparent 55%),
-                linear-gradient(180deg, rgba(12, 13, 14, 0.72) 0%, rgba(12, 13, 14, 0.90) 60%, rgba(12, 13, 14, 0.98) 100%);
+    background: radial-gradient(circle at 85% 15%, rgba(201, 162, 94, 0.08) 0%, transparent 60%),
+                linear-gradient(180deg, rgba(12, 13, 14, 0.30) 0%, rgba(12, 13, 14, 0.56) 50%, rgba(12, 13, 14, 0.80) 100%);
     transition: background 0.6s ease;
   }
 
@@ -324,19 +324,22 @@
     color: var(--nior-gold);
     display: block;
     margin-bottom: 14px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
     transition: color 0.3s ease;
   }
 
   h3 {
     font-size: 24px;
     margin-bottom: 14px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
     transition: color 0.3s ease;
   }
 
   p {
     font-size: 14px;
     line-height: 1.8;
-    color: var(--nior-muted);
+    color: #c5c9d1;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
     margin-bottom: 0;
   }
 
@@ -344,14 +347,15 @@
     list-style: none;
     margin: 20px 0 0;
     padding: 16px 0 0;
-    border-top: 1px solid var(--nior-border);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     gap: 8px 16px;
 
     li {
       font-size: 13px;
-      color: var(--nior-muted);
+      color: #c5c9d1;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
       position: relative;
       padding-left: 14px;
       line-height: 1.5;
