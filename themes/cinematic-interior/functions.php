@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CINEMATIC_INTERIOR_VERSION', '1.9.19' );
+define( 'CINEMATIC_INTERIOR_VERSION', '1.9.20' );
 define( 'CINEMATIC_INTERIOR_THEME_DIR', get_template_directory() );
 define( 'CINEMATIC_INTERIOR_THEME_URI', get_template_directory_uri() );
 
@@ -372,28 +372,23 @@ function cinematic_interior_register_patterns() {
 add_action( 'init', 'cinematic_interior_register_patterns', 25 );
 
 /**
- * Dynamically resolves theme asset URLs inside template parts (e.g. Header logo)
+ * Dynamically resolves theme asset URLs inside rendered blocks and template parts
  * ensuring seamless rendering across different environment directory names
- * (cinematic-interior vs nioratelier vs nioratelier-theme) and across local/production hosts.
+ * (cinematic-interior vs interior vs nioratelier) and across local/production hosts.
  */
 function cinematic_interior_filter_template_part_assets( $block_content, $block ) {
-    if ( isset( $block['attrs']['slug'] ) && 'header' === $block['attrs']['slug'] ) {
-        $theme_uri = esc_url( get_template_directory_uri() );
-        $block_content = str_replace(
-            array(
-                '/wp-content/themes/cinematic-interior/assets/img/logo-cropped.webp',
-                '/wp-content/themes/nioratelier/assets/img/logo-cropped.webp',
-                '/wp-content/themes/nioratelier-theme/assets/img/logo-cropped.webp',
-                'https://nioratelier.com/wp-content/themes/nioratelier/assets/img/logo-cropped.webp',
-                'http://nioratelier.local/wp-content/themes/nioratelier-theme/assets/img/logo-cropped.webp',
-            ),
-            $theme_uri . '/assets/img/logo-cropped.webp',
-            $block_content
-        );
+    if ( empty( $block_content ) ) {
+        return $block_content;
     }
-    return $block_content;
+    $theme_uri = esc_url( get_template_directory_uri() );
+    return preg_replace(
+        '#(?:https?://[^/]+)?/wp-content/themes/[a-zA-Z0-9_-]+/assets/img/logo-cropped\.webp#i',
+        $theme_uri . '/assets/img/logo-cropped.webp',
+        $block_content
+    );
 }
-add_filter( 'render_block_core_template_part', 'cinematic_interior_filter_template_part_assets', 10, 2 );
+add_filter( 'render_block_core/template-part', 'cinematic_interior_filter_template_part_assets', 10, 2 );
+add_filter( 'render_block', 'cinematic_interior_filter_template_part_assets', 10, 2 );
 
 // Backward compatibility function aliases
 if ( ! function_exists( 'nioratelier_setup' ) ) {

@@ -30,12 +30,21 @@
           <span class="nior-scenario-num">01 / Commercial</span>
           <h3>Commercial Interiors</h3>
           <p class="nior-scenario-desc">
-            Professional environments that express brand identity, support business operations and elevate the experience of every space.
+            Purposeful environments that unite brand identity, functionality and customer experience.
           </p>
-          <div class="nior-scenario-tags">
-            <span>Brand Identity</span>
-            <span>Workplace Strategy</span>
-            <span>Turnkey Build</span>
+          <div class="nior-scenario-specs">
+            <div class="nior-scenario-spec">
+              <span class="nior-scenario-spec__label">Project Type</span>
+              <span class="nior-scenario-spec__value">Commercial · Corporate · Workplace</span>
+            </div>
+            <div class="nior-scenario-spec">
+              <span class="nior-scenario-spec__label">Scope</span>
+              <span class="nior-scenario-spec__value">Interior Design · Space Planning · Design &amp; Build</span>
+            </div>
+            <div class="nior-scenario-spec">
+              <span class="nior-scenario-spec__label">Key Features</span>
+              <span class="nior-scenario-spec__value">Brand Identity · Lighting · Material Selection</span>
+            </div>
           </div>
           <a href="<?php echo esc_url( home_url( '/services' ) ); ?>" class="nior-scenario-link">
             <span>Explore Services</span>
@@ -46,22 +55,31 @@
         </div>
       </article>
 
-      <!-- Scenario 02: Retail & Shopping Malls -->
+      <!-- Scenario 02: Retail & Shopping Mall -->
       <article class="nior-scenario-card">
         <div class="nior-scenario-card__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/jewelry.jpg' ) ); ?>" alt="Retail & Shopping Malls Architecture" loading="lazy" width="960" height="600" />
+          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/jewelry.jpg' ) ); ?>" alt="Retail Environments Interior Architecture" loading="lazy" width="960" height="600" />
           <div class="nior-scenario-card__scrim"></div>
         </div>
         <div class="nior-scenario-card__content">
-          <span class="nior-scenario-num">02 / Retail</span>
-          <h3>Retail & Shopping Malls</h3>
+          <span class="nior-scenario-num">02 / Retail &amp; Shopping Mall</span>
+          <h3>Retail Environments</h3>
           <p class="nior-scenario-desc">
-            Distinctive retail environments designed around visual identity, customer journeys and memorable shopping experiences.
+            Brand-led spaces designed to attract customers and create memorable shopping experiences.
           </p>
-          <div class="nior-scenario-tags">
-            <span>Customer Journey</span>
-            <span>Display Architecture</span>
-            <span>Visual Identity</span>
+          <div class="nior-scenario-specs">
+            <div class="nior-scenario-spec">
+              <span class="nior-scenario-spec__label">Project Type</span>
+              <span class="nior-scenario-spec__value">Retail · Flagship · Pop-Up · Shopping Mall</span>
+            </div>
+            <div class="nior-scenario-spec">
+              <span class="nior-scenario-spec__label">Scope</span>
+              <span class="nior-scenario-spec__value">Spatial Design · Brand Integration · Build</span>
+            </div>
+            <div class="nior-scenario-spec">
+              <span class="nior-scenario-spec__label">Key Features</span>
+              <span class="nior-scenario-spec__value">Brand Visibility · Customer Journey · Display Strategy · Lighting</span>
+            </div>
           </div>
           <a href="<?php echo esc_url( home_url( '/services' ) ); ?>" class="nior-scenario-link">
             <span>Explore Services</span>
@@ -75,19 +93,28 @@
       <!-- Scenario 03: F&B & Hospitality -->
       <article class="nior-scenario-card">
         <div class="nior-scenario-card__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/bar.jpg' ) ); ?>" alt="F&B & Hospitality Architecture" loading="lazy" width="960" height="600" />
+          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/bar.jpg' ) ); ?>" alt="Hospitality Interiors Architecture" loading="lazy" width="960" height="600" />
           <div class="nior-scenario-card__scrim"></div>
         </div>
         <div class="nior-scenario-card__content">
-          <span class="nior-scenario-num">03 / Hospitality</span>
-          <h3>F&B & Hospitality</h3>
+          <span class="nior-scenario-num">03 / F&amp;B &amp; Hospitality</span>
+          <h3>Hospitality Interiors</h3>
           <p class="nior-scenario-desc">
-            Inviting destinations that bring together atmosphere, spatial planning and brand identity to create meaningful customer experiences.
+            Atmospheric spaces that blend brand identity, comfort and memorable dining experiences.
           </p>
-          <div class="nior-scenario-tags">
-            <span>Atmosphere Design</span>
-            <span>Spatial Planning</span>
-            <span>Custom Fabrication</span>
+          <div class="nior-scenario-specs">
+            <div class="nior-scenario-spec">
+              <span class="nior-scenario-spec__label">Project Type</span>
+              <span class="nior-scenario-spec__value">Restaurant · Café · Lounge · Hospitality</span>
+            </div>
+            <div class="nior-scenario-spec">
+              <span class="nior-scenario-spec__label">Scope</span>
+              <span class="nior-scenario-spec__value">Interior Design · Lighting · Custom Fabrication · Build</span>
+            </div>
+            <div class="nior-scenario-spec">
+              <span class="nior-scenario-spec__label">Key Features</span>
+              <span class="nior-scenario-spec__value">Atmosphere · Customer Flow · Seating Strategy · Brand Experience</span>
+            </div>
           </div>
           <a href="<?php echo esc_url( home_url( '/services' ) ); ?>" class="nior-scenario-link">
             <span>Explore Services</span>
@@ -98,22 +125,31 @@
         </div>
       </article>
 
-      <!-- Scenario 04: Residential & Villas -->
+      <!-- Scenario 04: Private Residences & Villas -->
       <article class="nior-scenario-card">
         <div class="nior-scenario-card__media">
-          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/showhouse.jpg' ) ); ?>" alt="Residential & Villas Interior Architecture" loading="lazy" width="960" height="600" />
+          <img src="<?php echo esc_url( get_theme_file_uri( '/assets/img/projects/showhouse.jpg' ) ); ?>" alt="Private Residences and Villas Interior Architecture" loading="lazy" width="960" height="600" />
           <div class="nior-scenario-card__scrim"></div>
         </div>
         <div class="nior-scenario-card__content">
           <span class="nior-scenario-num">04 / Residential</span>
-          <h3>Residential & Villas</h3>
+          <h3>Private Residences And Villas</h3>
           <p class="nior-scenario-desc">
-            Thoughtfully designed living spaces that balance comfort, character, materiality and functionality.
+            Personalised spaces that balance character, comfort and functionality.
           </p>
-          <div class="nior-scenario-tags">
-            <span>Bespoke Living</span>
-            <span>Material Detailing</span>
-            <span>Custom Joinery</span>
+          <div class="nior-scenario-specs">
+            <div class="nior-scenario-spec">
+              <span class="nior-scenario-spec__label">Project Type</span>
+              <span class="nior-scenario-spec__value">Villa · Residence · Private Home</span>
+            </div>
+            <div class="nior-scenario-spec">
+              <span class="nior-scenario-spec__label">Scope</span>
+              <span class="nior-scenario-spec__value">Interior Architecture · Interior Design · Custom Details · Renovation &amp; Build</span>
+            </div>
+            <div class="nior-scenario-spec">
+              <span class="nior-scenario-spec__label">Key Features</span>
+              <span class="nior-scenario-spec__value">Materiality · Spatial Planning · Lighting · Bespoke Details</span>
+            </div>
           </div>
           <a href="<?php echo esc_url( home_url( '/services' ) ); ?>" class="nior-scenario-link">
             <span>Explore Services</span>

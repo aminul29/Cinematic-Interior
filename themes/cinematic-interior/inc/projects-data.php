@@ -40,7 +40,7 @@ function nioratelier_get_portfolio_sections() {
             'number'      => '01',
             'eyebrow'     => 'Corporate & Exhibition',
             'title'       => 'Commercial Projects',
-            'description' => 'Professional environments that express brand identity, support business operations and elevate the experience of every space.',
+            'description' => 'Purposeful environments that unite brand identity, functionality and customer experience.',
             'projects'    => array(
                 array(
                     'slug'        => 'corporate-showroom',

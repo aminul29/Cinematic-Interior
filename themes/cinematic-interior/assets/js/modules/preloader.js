@@ -66,12 +66,16 @@ export function initPreloader(onComplete) {
   // Preloader logo recovery fallback for cross-environment directory discrepancies
   const preloaderLogo = document.querySelector('.nior-preloader__logo-img');
   if (preloaderLogo && window.niorConfig?.themeUri) {
-    preloaderLogo.addEventListener('error', () => {
-      const targetSrc = `${window.niorConfig.themeUri}/assets/img/logo-cropped.webp`;
-      if (preloaderLogo.src !== targetSrc) {
-        preloaderLogo.src = targetSrc;
-      }
-    }, { once: true });
+    const targetSrc = `${window.niorConfig.themeUri}/assets/img/logo-cropped.webp`;
+    if (preloaderLogo.complete && preloaderLogo.naturalWidth === 0) {
+      preloaderLogo.src = targetSrc;
+    } else {
+      preloaderLogo.addEventListener('error', () => {
+        if (preloaderLogo.src !== targetSrc) {
+          preloaderLogo.src = targetSrc;
+        }
+      }, { once: true });
+    }
   }
 
   // Global top scroll progress bar
@@ -100,12 +104,16 @@ export function initPreloader(onComplete) {
   // Header logo recovery fallback for cross-environment directory discrepancies
   const headerLogo = document.querySelector('.nior-header__logo-img');
   if (headerLogo && window.niorConfig?.themeUri) {
-    headerLogo.addEventListener('error', () => {
-      const targetSrc = `${window.niorConfig.themeUri}/assets/img/logo-cropped.webp`;
-      if (headerLogo.src !== targetSrc) {
-        headerLogo.src = targetSrc;
-      }
-    }, { once: true });
+    const targetSrc = `${window.niorConfig.themeUri}/assets/img/logo-cropped.webp`;
+    if (headerLogo.complete && headerLogo.naturalWidth === 0) {
+      headerLogo.src = targetSrc;
+    } else {
+      headerLogo.addEventListener('error', () => {
+        if (headerLogo.src !== targetSrc) {
+          headerLogo.src = targetSrc;
+        }
+      }, { once: true });
+    }
   }
 
   // Mobile drawer toggle

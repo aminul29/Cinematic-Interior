@@ -193,7 +193,38 @@
       margin-bottom: 24px;
       overflow-wrap: break-word;
     }
-      margin-bottom: 24px;
+
+    .nior-scenario-specs {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 28px;
+      width: 100%;
+      border-top: 1px solid var(--nior-border, rgba(201, 162, 94, 0.16));
+      padding-top: 18px;
+
+      .nior-scenario-spec {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .nior-scenario-spec__label {
+          font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: var(--nior-gold, #c9a25e);
+        }
+
+        .nior-scenario-spec__value {
+          font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
+          font-size: 12.5px;
+          line-height: 1.5;
+          letter-spacing: 0.02em;
+          color: var(--nior-muted, rgba(245, 245, 247, 0.72));
+        }
+      }
     }
 
     .nior-scenario-tags {

@@ -33,9 +33,11 @@
           <div class="item">
             <span class="label">Headquarters Office</span>
             <div class="val">
-              S-03-03A, Empire Kota Damansara,<br />
-              Persiaran Surian, 47810 Petaling Jaya,<br />
-              Selangor, Malaysia.
+              <a href="https://www.google.com/maps/search/?api=1&query=S-03-03A%2C+Empire+Kota+Damansara%2C+Persiaran+Surian%2C+47810+Petaling+Jaya%2C+Selangor%2C+Malaysia" target="_blank" rel="noopener noreferrer" title="Open in Google Maps">
+                S-03-03A, Empire Kota Damansara,<br />
+                Persiaran Surian, 47810 Petaling Jaya,<br />
+                Selangor, Malaysia.
+              </a>
             </div>
           </div>
 
@@ -67,6 +69,40 @@
               <a href="https://www.nioratelier.com" target="_blank" rel="noopener">www.nioratelier.com</a>
             </div>
           </div>
+        </div>
+
+        <div class="nior-contact-map-wrap">
+          <div class="nior-contact-map-header">
+            <span class="label">Location Map</span>
+            <a href="https://www.google.com/maps/search/?api=1&query=S-03-03A%2C+Empire+Kota+Damansara%2C+Persiaran+Surian%2C+47810+Petaling+Jaya%2C+Selangor%2C+Malaysia" target="_blank" rel="noopener noreferrer" class="nior-contact-map-sublink" title="Open Empire Kota Damansara in Google Maps">
+              <span>Empire Kota Damansara</span>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </div>
+          <div class="nior-contact-map-frame">
+            <iframe
+              src="https://maps.google.com/maps?q=Empire+Kota+Damansara%2C%20Persiaran%20Surian%2C%2047810%20Petaling%20Jaya%2C%20Selangor%2C%20Malaysia&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Google Map location of Nior Atelier Headquarters at Empire Kota Damansara">
+            </iframe>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=S-03-03A%2C+Empire+Kota+Damansara%2C+Persiaran+Surian%2C+47810+Petaling+Jaya%2C+Selangor%2C+Malaysia" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="nior-contact-map-btn"
+             title="Open in Google Maps for directions and navigation">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span>Open in Google Maps / Directions</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
         </div>
       </div>
 
