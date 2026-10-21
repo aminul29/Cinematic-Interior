@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CINEMATIC_INTERIOR_VERSION', '1.9.15' );
+define( 'CINEMATIC_INTERIOR_VERSION', '1.9.16' );
 define( 'CINEMATIC_INTERIOR_THEME_DIR', get_template_directory() );
 define( 'CINEMATIC_INTERIOR_THEME_URI', get_template_directory_uri() );
 
@@ -154,6 +154,14 @@ function cinematic_interior_enqueue_assets() {
         );
         $prev_handle = $handle;
     }
+
+    // 2b. Core theme stylesheet
+    wp_enqueue_style(
+        'cinematic-interior-style',
+        get_stylesheet_uri(),
+        array( $prev_handle ),
+        CINEMATIC_INTERIOR_VERSION
+    );
 
     // 3. Vendor scripts: GSAP, ScrollTrigger, Lenis
     wp_enqueue_script(

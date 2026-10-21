@@ -135,12 +135,13 @@ body .wp-site-blocks > .nior-rack-section,
 .nior-rack-headline {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: clamp(2.4rem, 5.5vw, 5.2rem);
-  line-height: 1.1;
+  font-size: clamp(1.8rem, 5.5vw, 5.2rem);
+  line-height: 1.15;
   max-width: 22ch;
   margin: 0 auto;
   color: var(--nior-white, #ffffff);
   letter-spacing: -0.015em;
+  overflow-wrap: break-word;
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.95), 0 2px 10px rgba(0, 0, 0, 0.9);
 
   span.rack-word {
@@ -561,6 +562,11 @@ body .wp-site-blocks > .nior-rack-section,
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     margin: 28px 0;
+
+    @media (max-width: 540px) {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
 
     .nior-impact-item {
       display: flex;

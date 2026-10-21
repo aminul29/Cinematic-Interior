@@ -6,6 +6,7 @@
   color: var(--nior-white, #ffffff);
   padding: clamp(90px, 14vh, 160px) 0;
   overflow: hidden;
+  box-sizing: border-box;
   margin-left: clamp(16px, 4.5vw, 60px);
   margin-right: clamp(16px, 4.5vw, 60px);
   border-top-left-radius: clamp(28px, 4.5vw, 64px);
@@ -16,10 +17,20 @@
   will-change: margin-left, margin-right, border-radius, box-shadow;
   transform: translate3d(0, 0, 0);
 
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 0;
+    padding: clamp(60px, 10vh, 100px) 0;
+    box-shadow: none;
+  }
+
   .nior-scenarios-header {
     text-align: center;
     max-width: 760px;
     margin: 0 auto clamp(48px, 8vh, 80px);
+    width: 100%;
+    box-sizing: border-box;
 
     .nior-eyebrow {
       display: inline-block;
@@ -34,12 +45,13 @@
 
     h2 {
       font-family: var(--font-serif, "Playfair Display", Georgia, serif);
-      font-size: clamp(2.4rem, 4.8vw, 4rem);
+      font-size: clamp(2rem, 4.8vw, 4rem);
       font-weight: 500;
       line-height: 1.15;
       letter-spacing: -0.01em;
       color: var(--nior-white, #ffffff);
       margin-bottom: 16px;
+      overflow-wrap: break-word;
     }
 
     p {
@@ -47,6 +59,7 @@
       font-size: clamp(0.95rem, 1.2vw, 1.1rem);
       color: var(--nior-muted, #9ca3af);
       line-height: 1.6;
+      overflow-wrap: break-word;
     }
   }
 
@@ -63,6 +76,9 @@
     grid-template-columns: 1.15fr 0.85fr;
     gap: clamp(32px, 5vw, 64px);
     align-items: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 
     &:nth-child(even) {
       grid-template-columns: 0.85fr 1.15fr;
@@ -101,6 +117,9 @@
     aspect-ratio: 16 / 10;
     background-color: var(--nior-surface, #141618);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 
     img {
       width: 100%;
@@ -128,6 +147,9 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 
     .nior-scenario-num {
       font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
@@ -140,6 +162,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      max-width: 100%;
 
       &::after {
         content: "";
@@ -148,16 +171,18 @@
         height: 1px;
         background: var(--nior-gold, #c9a25e);
         opacity: 0.6;
+        flex-shrink: 0;
       }
     }
 
     h3 {
       font-family: var(--font-serif, "Playfair Display", Georgia, serif);
-      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      font-size: clamp(1.6rem, 3.2vw, 2.6rem);
       font-weight: 500;
       line-height: 1.2;
       color: var(--nior-white, #ffffff);
       margin-bottom: 14px;
+      overflow-wrap: break-word;
     }
 
     .nior-scenario-desc {
@@ -165,6 +190,9 @@
       font-size: clamp(0.92rem, 1.1vw, 1.05rem);
       color: var(--nior-muted, #9ca3af);
       line-height: 1.65;
+      margin-bottom: 24px;
+      overflow-wrap: break-word;
+    }
       margin-bottom: 24px;
     }
 

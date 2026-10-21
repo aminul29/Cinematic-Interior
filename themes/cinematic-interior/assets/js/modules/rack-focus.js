@@ -65,6 +65,19 @@ export function initRackFocus() {
       if (!nextSection) return;
       const p = clamp(progress, 0, 1);
       const vw = window.innerWidth;
+      const isMobile = vw <= 768;
+
+      if (isMobile) {
+        // On mobile devices, keep edges completely flush to prevent any horizontal clipping
+        nextSection.style.borderTopLeftRadius = '0px';
+        nextSection.style.borderTopRightRadius = '0px';
+        nextSection.style.borderBottomLeftRadius = '0px';
+        nextSection.style.borderBottomRightRadius = '0px';
+        nextSection.style.marginLeft = '0px';
+        nextSection.style.marginRight = '0px';
+        nextSection.style.boxShadow = 'none';
+        return;
+      }
 
       // Huge border radius: 56px on desktop (scales down on smaller viewports)
       const maxRadius = Math.min(64, Math.max(28, vw * 0.045));

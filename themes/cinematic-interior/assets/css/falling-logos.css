@@ -108,18 +108,19 @@
 /* Mobile Layout (2 columns) */
 @media (max-width: 680px) {
   .nior-falling-grid {
-    gap: 12px;
+    gap: 10px;
   }
   .nior-logo-chip {
-    flex: 0 1 calc((100% - 12px) / 2);
-    min-width: 140px;
-    height: 105px;
-    min-height: 105px;
-    padding: 16px 12px;
+    flex: 0 1 calc((100% - 10px) / 2);
+    min-width: 0;
+    max-width: 100%;
+    height: 100px;
+    min-height: 100px;
+    padding: 14px 10px;
   }
   .nior-logo-chip .nior-logo-chip__img {
-    max-width: 115px;
-    max-height: 36px;
+    max-width: 110px;
+    max-height: 34px;
   }
 }
 

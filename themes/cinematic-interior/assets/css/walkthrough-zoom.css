@@ -416,10 +416,37 @@
 @media (max-width: 768px) {
   .nior-walkthrough-hero-track {
     .nior-hero-center-brand {
-      width: 90vw;
+      width: calc(100% - 32px);
+      max-width: 100%;
+
       .nior-hero-center-brand__title {
-        letter-spacing: 0.18em;
-        padding-left: 0.18em;
+        font-size: clamp(1.6rem, 7vw, 2.5rem);
+        letter-spacing: 0.12em;
+        padding-left: 0.12em;
+        overflow-wrap: break-word;
+      }
+
+      .nior-hero-center-brand__tagline {
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        padding-left: 0.16em;
+        white-space: normal;
+        flex-wrap: wrap;
+        text-align: center;
+      }
+    }
+
+    .nior-walkthrough-titles {
+      width: calc(100% - 32px);
+      max-width: 100%;
+
+      .nior-walkthrough-title-card {
+        padding: 24px 16px;
+
+        .nior-walkthrough-title {
+          font-size: clamp(1.6rem, 6.5vw, 2.4rem);
+          overflow-wrap: break-word;
+        }
       }
     }
 
@@ -436,6 +463,7 @@
     .nior-walkthrough-hud {
       right: 16px;
       bottom: 20px;
+      max-width: calc(100% - 32px);
 
       .nior-walkthrough-hud__pill {
         padding: 6px 14px;
