@@ -70,15 +70,15 @@
           <div class="nior-scenario-specs">
             <div class="nior-scenario-spec">
               <span class="nior-scenario-spec__label">Project Type</span>
-              <span class="nior-scenario-spec__value">Retail · Flagship · Pop-Up · Shopping Mall</span>
+              <span class="nior-scenario-spec__value">Retail &middot; Flagship &middot; Pop-Up &middot; Shopping Mall</span>
             </div>
             <div class="nior-scenario-spec">
               <span class="nior-scenario-spec__label">Scope</span>
-              <span class="nior-scenario-spec__value">Spatial Design · Brand Integration · Build</span>
+              <span class="nior-scenario-spec__value">Spatial Design &middot; Brand Integration &middot; Build</span>
             </div>
             <div class="nior-scenario-spec">
               <span class="nior-scenario-spec__label">Key Features</span>
-              <span class="nior-scenario-spec__value">Brand Visibility · Customer Journey · Display Strategy · Lighting</span>
+              <span class="nior-scenario-spec__value">Brand Visibility &middot; Customer Journey &middot; Display Strategy &middot; Lighting</span>
             </div>
           </div>
           <a href="<?php echo esc_url( home_url( '/services' ) ); ?>" class="nior-scenario-link">
@@ -105,15 +105,15 @@
           <div class="nior-scenario-specs">
             <div class="nior-scenario-spec">
               <span class="nior-scenario-spec__label">Project Type</span>
-              <span class="nior-scenario-spec__value">Restaurant · Café · Lounge · Hospitality</span>
+              <span class="nior-scenario-spec__value">Restaurant &middot; Caf&eacute; &middot; Lounge &middot; Hospitality</span>
             </div>
             <div class="nior-scenario-spec">
               <span class="nior-scenario-spec__label">Scope</span>
-              <span class="nior-scenario-spec__value">Interior Design · Lighting · Custom Fabrication · Build</span>
+              <span class="nior-scenario-spec__value">Interior Design &middot; Lighting &middot; Custom Fabrication &middot; Build</span>
             </div>
             <div class="nior-scenario-spec">
               <span class="nior-scenario-spec__label">Key Features</span>
-              <span class="nior-scenario-spec__value">Atmosphere · Customer Flow · Seating Strategy · Brand Experience</span>
+              <span class="nior-scenario-spec__value">Atmosphere &middot; Customer Flow &middot; Seating Strategy &middot; Brand Experience</span>
             </div>
           </div>
           <a href="<?php echo esc_url( home_url( '/services' ) ); ?>" class="nior-scenario-link">
@@ -140,15 +140,15 @@
           <div class="nior-scenario-specs">
             <div class="nior-scenario-spec">
               <span class="nior-scenario-spec__label">Project Type</span>
-              <span class="nior-scenario-spec__value">Villa · Residence · Private Home</span>
+              <span class="nior-scenario-spec__value">Villa &middot; Residence &middot; Private Home</span>
             </div>
             <div class="nior-scenario-spec">
               <span class="nior-scenario-spec__label">Scope</span>
-              <span class="nior-scenario-spec__value">Interior Architecture · Interior Design · Custom Details · Renovation &amp; Build</span>
+              <span class="nior-scenario-spec__value">Interior Architecture &middot; Interior Design &middot; Custom Details &middot; Renovation &amp; Build</span>
             </div>
             <div class="nior-scenario-spec">
               <span class="nior-scenario-spec__label">Key Features</span>
-              <span class="nior-scenario-spec__value">Materiality · Spatial Planning · Lighting · Bespoke Details</span>
+              <span class="nior-scenario-spec__value">Materiality &middot; Spatial Planning &middot; Lighting &middot; Bespoke Details</span>
             </div>
           </div>
           <a href="<?php echo esc_url( home_url( '/services' ) ); ?>" class="nior-scenario-link">
