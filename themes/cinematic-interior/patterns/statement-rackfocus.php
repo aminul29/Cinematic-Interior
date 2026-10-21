@@ -33,7 +33,7 @@
         <span class="rack-word em">purpose.</span>
       </h2>
       <p id="niorRackSub" class="nior-rack-sub">
-        At NIOR ATELIER, we combine creative direction, spatial design and technical execution to create considered environments for brands, businesses and private clients — from the first concept to the final detail.
+        At NIOR ATELIER, we unite creative direction, spatial design and technical execution to create purposeful environments that express each brand's identity and elevate the way people experience a space — from initial concept to final completion.
       </p>
     </div>
   </div>
