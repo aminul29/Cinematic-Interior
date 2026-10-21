@@ -18,17 +18,14 @@ export function initRackFocus() {
   // Locate the next section (Cinematic Scenarios)
   const nextSection = section.nextElementSibling || document.getElementById('niorScenarios');
 
-  // 1. GSAP ScrollTrigger Pinning of "Our Philosophy" Stage
-  // Keeps the Philosophy stage pinned at top: 0 while the next section glides up over it.
+  // 1. GSAP ScrollTrigger Coordination of "Our Philosophy" Stage
+  // The stage uses native CSS position: sticky to stay pinned at top: 0 with zero layout offset.
   if (stage && nextSection && ScrollTrigger) {
     ScrollTrigger.create({
       trigger: section,
       start: 'top top',
       endTrigger: nextSection,
       end: 'top top',
-      pin: stage,
-      pinSpacing: false,
-      anticipatePin: 1,
       onToggle: (self) => {
         if (self.isActive) {
           section.style.visibility = 'visible';
