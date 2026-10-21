@@ -35,15 +35,15 @@
           <div class="nior-scenario-specs">
             <div class="nior-scenario-spec">
               <span class="nior-scenario-spec__label">Project Type</span>
-              <span class="nior-scenario-spec__value">Commercial · Corporate · Workplace</span>
+              <span class="nior-scenario-spec__value">Commercial &middot; Corporate &middot; Workplace</span>
             </div>
             <div class="nior-scenario-spec">
               <span class="nior-scenario-spec__label">Scope</span>
-              <span class="nior-scenario-spec__value">Interior Design · Space Planning · Design &amp; Build</span>
+              <span class="nior-scenario-spec__value">Interior Design &middot; Space Planning &middot; Design &amp; Build</span>
             </div>
             <div class="nior-scenario-spec">
               <span class="nior-scenario-spec__label">Key Features</span>
-              <span class="nior-scenario-spec__value">Brand Identity · Lighting · Material Selection</span>
+              <span class="nior-scenario-spec__value">Brand Identity &middot; Lighting &middot; Material Selection</span>
             </div>
           </div>
           <a href="<?php echo esc_url( home_url( '/services' ) ); ?>" class="nior-scenario-link">
