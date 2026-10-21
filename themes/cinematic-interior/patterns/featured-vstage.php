@@ -27,12 +27,12 @@
         </p>
 
         <div class="nior-vstage-impact-grid">
-          <div class="nior-impact-item"><span class="num">01</span> Visual Identity</div>
-          <div class="nior-impact-item"><span class="num">02</span> Spatial Planning</div>
-          <div class="nior-impact-item"><span class="num">03</span> Layered Lighting</div>
-          <div class="nior-impact-item"><span class="num">04</span> Seating Zones</div>
-          <div class="nior-impact-item"><span class="num">05</span> High-Energy Atmosphere</div>
-          <div class="nior-impact-item"><span class="num">06</span> Customer Engagement</div>
+          <div class="nior-impact-item">Visual Identity</div>
+          <div class="nior-impact-item">Spatial Planning</div>
+          <div class="nior-impact-item">Layered Lighting</div>
+          <div class="nior-impact-item">Seating Zones</div>
+          <div class="nior-impact-item">High-Energy Atmosphere</div>
+          <div class="nior-impact-item">Customer Engagement</div>
         </div>
 
         <div style="margin-top: 32px;">

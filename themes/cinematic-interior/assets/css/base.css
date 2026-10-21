@@ -96,11 +96,16 @@ header.wp-block-template-part {
 .nior-container {
   width: 100%;
   max-width: var(--container-max);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: clamp(16px, 4vw, 48px);
-  padding-right: clamp(16px, 4vw, 48px);
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: clamp(20px, 4vw, 48px);
+  padding-right: clamp(20px, 4vw, 48px);
   box-sizing: border-box;
+
+  @media (min-width: 1361px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* Base Typographic Hierarchy */

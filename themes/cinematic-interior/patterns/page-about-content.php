@@ -41,55 +41,12 @@
       </div>
     </div>
 
-    <!-- What We Do: 8 Core Capabilities Grid -->
-    <div class="nior-content-block" style="margin-top: 60px;">
-      <span class="nior-eyebrow">What We Do</span>
-      <h3 style="font-family: var(--font-serif); font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 12px; color: var(--nior-white);">Complete Spatial Capabilities</h3>
-      <p style="color: var(--nior-muted); max-width: 680px; margin-bottom: 32px; font-size: 15px;">
-        We approach every project as a complete spatial experience, balancing creative vision with technical requirements and practical execution.
-      </p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
-        <div class="nior-pillar-card" style="padding: 24px;">
-          <span class="nior-pillar-num">01</span>
-          <h4 style="color: var(--nior-white); font-size: 18px; margin: 8px 0 0; font-family: var(--font-sans);">Interior Architecture</h4>
-        </div>
-        <div class="nior-pillar-card" style="padding: 24px;">
-          <span class="nior-pillar-num">02</span>
-          <h4 style="color: var(--nior-white); font-size: 18px; margin: 8px 0 0; font-family: var(--font-sans);">Interior Design</h4>
-        </div>
-        <div class="nior-pillar-card" style="padding: 24px;">
-          <span class="nior-pillar-num">03</span>
-          <h4 style="color: var(--nior-white); font-size: 18px; margin: 8px 0 0; font-family: var(--font-sans);">Design &amp; Build</h4>
-        </div>
-        <div class="nior-pillar-card" style="padding: 24px;">
-          <span class="nior-pillar-num">04</span>
-          <h4 style="color: var(--nior-white); font-size: 18px; margin: 8px 0 0; font-family: var(--font-sans);">Renovation &amp; Construction</h4>
-        </div>
-        <div class="nior-pillar-card" style="padding: 24px;">
-          <span class="nior-pillar-num">05</span>
-          <h4 style="color: var(--nior-white); font-size: 18px; margin: 8px 0 0; font-family: var(--font-sans);">Custom Fabrication</h4>
-        </div>
-        <div class="nior-pillar-card" style="padding: 24px;">
-          <span class="nior-pillar-num">06</span>
-          <h4 style="color: var(--nior-white); font-size: 18px; margin: 8px 0 0; font-family: var(--font-sans);">Lighting &amp; Atmosphere Design</h4>
-        </div>
-        <div class="nior-pillar-card" style="padding: 24px;">
-          <span class="nior-pillar-num">07</span>
-          <h4 style="color: var(--nior-white); font-size: 18px; margin: 8px 0 0; font-family: var(--font-sans);">Brand Experience Integration</h4>
-        </div>
-        <div class="nior-pillar-card" style="padding: 24px;">
-          <span class="nior-pillar-num">08</span>
-          <h4 style="color: var(--nior-white); font-size: 18px; margin: 8px 0 0; font-family: var(--font-sans);">Commercial Space Strategy</h4>
-        </div>
-      </div>
-    </div>
-
     <!-- Beyond Interior Design: 11,000 SQ FT Factory -->
     <div class="nior-content-block" style="margin-top: 70px; padding-top: 50px; border-top: 1px solid var(--nior-border);">
       <span class="nior-eyebrow">Beyond Interior Design</span>
       <h3 style="font-family: var(--font-serif); font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 12px; color: var(--nior-white);">Crafted In-House. Designed With Purpose.</h3>
       <p style="color: var(--nior-muted); max-width: 760px; margin-bottom: 30px; font-size: 15px; line-height: 1.8;">
-        Located in Johor Bahru, our headquarters and furniture factory occupy approximately 11,000 sq ft, bringing our operational workspace and furniture production capabilities together. This integrated setup supports closer coordination between design development, fabrication and project execution, helping us carry the original design intent through to the finished space.
+        Based in Johor Bahru, our 11,000 sq ft headquarters brings design development and furniture production together. This integrated setup allows us to coordinate materials, fabrication and project execution while maintaining the original design intent from concept to completion.
       </p>
       <div class="nior-factory-grid">
         <div class="nior-factory-card nior-factory-card--featured">
@@ -111,7 +68,6 @@
 </section>
 <!-- /wp:html -->
 
-<!-- wp:pattern {"slug":"cinematic-interior/value-pillars"} /-->
 <!-- wp:pattern {"slug":"cinematic-interior/integrated-process"} /-->
 <!-- wp:pattern {"slug":"cinematic-interior/cta-handover"} /-->
 
