@@ -218,6 +218,13 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 30px;
 
+  @media (min-width: 769px) {
+    .nior-service-item:nth-child(even) {
+      margin-top: 50px;
+      margin-bottom: -50px;
+    }
+  }
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }

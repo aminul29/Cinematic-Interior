@@ -7,7 +7,7 @@
  */
 ?>
 <!-- wp:html -->
-<div class="nior-page-hero nior-page-hero--services" style="background-image: linear-gradient(180deg, rgba(12, 13, 14, 0.45) 0%, rgba(12, 13, 14, 0.62) 100%), url('<?php echo esc_url( get_theme_file_uri( '/assets/img/our-services-banner-bg.jpg' ) ); ?>');">
+<div class="nior-page-hero nior-page-hero--services" style="background-image: linear-gradient(180deg, rgba(12, 13, 14, 0.45) 0%, rgba(12, 13, 14, 0.62) 100%), url('<?php echo esc_url( get_theme_file_uri( '/assets/img/our-services-banner.png' ) ); ?>');">
   <div class="nior-container">
     <div class="nior-page-hero__inner">
       <span class="nior-eyebrow">From Concept to Completion</span>
