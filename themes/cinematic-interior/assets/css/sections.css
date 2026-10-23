@@ -148,9 +148,9 @@ body .wp-site-blocks > .nior-rack-section,
 .nior-rack-headline {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: clamp(1.8rem, 5.5vw, 5.2rem);
-  line-height: 1.15;
-  max-width: min(22ch, 100%);
+  font-size: clamp(1.4rem, 2.8vw, 2.65rem);
+  line-height: 1.08;
+  max-width: min(26ch, 100%);
   margin-left: auto;
   margin-right: auto;
   text-align: center;
