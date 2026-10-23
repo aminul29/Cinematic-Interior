@@ -4,18 +4,32 @@
 
 /* Page Hero Banner */
 .nior-page-hero {
-  padding-top: calc(var(--header-height) + clamp(60px, 10vh, 120px));
-  padding-bottom: clamp(60px, 8vh, 100px);
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  padding-top: calc(var(--header-height) + clamp(36px, 5vh, 72px));
+  padding-bottom: clamp(36px, 5vh, 72px);
   background: radial-gradient(circle at top right, rgba(201, 162, 94, 0.08) 0%, var(--nior-obsidian) 70%);
   position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  .nior-container {
+    width: 100%;
+  }
 
   .nior-page-hero__inner {
     max-width: 860px;
+    width: 100%;
   }
 
   h1 {
-    font-size: clamp(3rem, 6vw, 5.2rem);
+    font-size: clamp(2.8rem, 5.5vw, 5.2rem);
     margin-bottom: 20px;
+    line-height: 1.15;
   }
 
   p.nior-lead {
@@ -29,7 +43,10 @@
   &.nior-page-hero--projects,
   &.nior-page-hero--contact,
   &.nior-projects-hero {
-    min-height: 55vh;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     background-size: cover;
@@ -40,6 +57,85 @@
 
     h1, .nior-eyebrow, p.nior-lead {
       text-shadow: 0 2px 24px rgba(0, 0, 0, 0.9), 0 1px 4px rgba(0, 0, 0, 0.8);
+    }
+  }
+
+  /* When used on <main> container in fallback templates, allow content expansion */
+  &:is(main) {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  @media (max-width: 768px) {
+    padding-top: calc(var(--header-height) + 24px);
+    padding-bottom: 28px;
+
+    h1 {
+      font-size: clamp(2.2rem, 7vw, 3.2rem);
+      margin-bottom: 16px;
+    }
+
+    p.nior-lead {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+  }
+
+  @media (max-height: 600px) {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-top: calc(var(--header-height) + 16px);
+    padding-bottom: 16px;
+
+    &.nior-page-hero--about,
+    &.nior-page-hero--services,
+    &.nior-page-hero--projects,
+    &.nior-page-hero--contact,
+    &.nior-projects-hero {
+      height: auto;
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+  }
+}
+
+/* WordPress Logged-In Admin Bar Viewport Offset */
+body.admin-bar {
+  .nior-page-hero {
+    height: calc(100vh - 32px);
+    height: calc(100dvh - 32px);
+    min-height: calc(100vh - 32px);
+    min-height: calc(100dvh - 32px);
+
+    &.nior-page-hero--about,
+    &.nior-page-hero--services,
+    &.nior-page-hero--projects,
+    &.nior-page-hero--contact,
+    &.nior-projects-hero {
+      height: calc(100vh - 32px);
+      height: calc(100dvh - 32px);
+      min-height: calc(100vh - 32px);
+      min-height: calc(100dvh - 32px);
+    }
+
+    @media screen and (max-width: 782px) {
+      height: calc(100vh - 46px);
+      height: calc(100dvh - 46px);
+      min-height: calc(100vh - 46px);
+      min-height: calc(100dvh - 46px);
+
+      &.nior-page-hero--about,
+      &.nior-page-hero--services,
+      &.nior-page-hero--projects,
+      &.nior-page-hero--contact,
+      &.nior-projects-hero {
+        height: calc(100vh - 46px);
+        height: calc(100dvh - 46px);
+        min-height: calc(100vh - 46px);
+        min-height: calc(100dvh - 46px);
+      }
     }
   }
 }

@@ -361,4 +361,23 @@ body.editor-styles-wrapper,
       margin-right: auto;
     }
   }
+
+  /* -------------------------------------------------------------------------
+     8. Inner Page Hero Banner In-Editor Polish
+     ------------------------------------------------------------------------- */
+  .nior-page-hero {
+    min-height: 480px;
+    height: auto;
+    padding-top: clamp(48px, 8vh, 80px);
+    padding-bottom: clamp(48px, 8vh, 80px);
+
+    &.nior-page-hero--about,
+    &.nior-page-hero--services,
+    &.nior-page-hero--projects,
+    &.nior-page-hero--contact,
+    &.nior-projects-hero {
+      min-height: 480px;
+      height: auto;
+    }
+  }
 }
