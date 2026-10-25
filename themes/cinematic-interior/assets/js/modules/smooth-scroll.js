@@ -16,7 +16,6 @@ export function initSmoothScroll() {
   }
 
   // Buttery-smooth, weighted luxury Lenis configuration
-  // Keep native 120Hz compositor touch scrolling on mobile while smoothing desktop wheel
   const lenis = new Lenis({
     duration: 1.35,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Velvety exponential deceleration
@@ -24,15 +23,18 @@ export function initSmoothScroll() {
     gestureOrientation: 'vertical',
     smoothWheel: true,
     wheelMultiplier: 0.88, // Softens aggressive wheel jumps
-    touchMultiplier: 1.0,  // Neutral 1:1 touch mapping
-    syncTouch: false,      // Do not mimic or hijack touch momentum on smartphones
-    smoothTouch: false,    // Maintain native 60/120Hz smartphone momentum scroll
+    touchMultiplier: 1.0,  // Neutral 1:1 touch mapping (prevents erratic 1.5x jumps while keeping sync)
   });
 
-  // Keep ScrollTrigger coordinate system in sync
+  // Keep ScrollTrigger coordinate system in sync on both wheel and touch
   if (ScrollTrigger) {
     lenis.on('scroll', ScrollTrigger.update);
   }
+
+  // Fail-safe direct window scroll listener to guarantee ScrollTrigger sync on all mobile devices
+  window.addEventListener('scroll', () => {
+    if (ScrollTrigger) ScrollTrigger.update();
+  }, { passive: true });
 
   const updateTicker = (time) => {
     lenis.raf(time * 1000);

@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-define( 'CINEMATIC_INTERIOR_VERSION', '1.9.32' );
+define( 'CINEMATIC_INTERIOR_VERSION', '1.9.33' );
 define( 'CINEMATIC_INTERIOR_THEME_DIR', get_template_directory() );
 define( 'CINEMATIC_INTERIOR_THEME_URI', get_template_directory_uri() );
 

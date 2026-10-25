@@ -100,7 +100,7 @@ export function initWalkthroughZoom() {
   function resizeCanvas() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const width = window.innerWidth;
-    const height = stageEl && stageEl.clientHeight ? stageEl.clientHeight : window.innerHeight;
+    const height = window.innerHeight;
 
     const targetW = Math.floor(width * dpr);
     const targetH = Math.floor(height * dpr);
@@ -164,6 +164,7 @@ export function initWalkthroughZoom() {
 
   /**
    * High-Performance Cover-Fit Draw with Center Scaling
+   * Intelligent Adaptive Framing: Prevents extreme 300-400% zoom-in on portrait smartphone screens
    */
   function drawCoverImage(img, scale = 1, alpha = 1) {
     if (!img || !img.complete || img.naturalWidth === 0 || alpha <= 0.001) return;
@@ -173,15 +174,39 @@ export function initWalkthroughZoom() {
     const iw = img.naturalWidth;
     const ih = img.naturalHeight;
 
-    // Cover aspect ratio multiplier
     const hRatio = cw / iw;
     const vRatio = ch / ih;
-    const baseRatio = Math.max(hRatio, vRatio);
+
+    let baseRatio;
+    if (ch > cw) {
+      // Portrait Screen (Phones / Tablets in Portrait):
+      // Avoid aggressive 300-400% height zoom-in that crops away the architectural room.
+      // Use architectural fit with generous breathing room (preserving >85% of full room width):
+      const maxZoom = 1.15;
+      baseRatio = Math.min(vRatio, hRatio * maxZoom);
+    } else {
+      // Landscape Screen (Desktop / Tablet Landscape): Full-bleed cover
+      baseRatio = Math.max(hRatio, vRatio);
+    }
 
     const drawW = iw * baseRatio * scale;
     const drawH = ih * baseRatio * scale;
     const dx = (cw - drawW) * 0.5;
     const dy = (ch - drawH) * 0.5;
+
+    // Atmospheric ambient backdrop on portrait screens to fill vertical screen boundaries softly
+    if (ch > cw && drawH < ch) {
+      const coverRatio = Math.max(hRatio, vRatio);
+      const bgW = iw * coverRatio;
+      const bgH = ih * coverRatio;
+      const bgX = (cw - bgW) * 0.5;
+      const bgY = (ch - bgH) * 0.5;
+
+      context.save();
+      context.globalAlpha = Math.max(0, Math.min(1, alpha * 0.25));
+      context.drawImage(img, bgX, bgY, bgW, bgH);
+      context.restore();
+    }
 
     context.globalAlpha = Math.max(0, Math.min(1, alpha));
     context.drawImage(img, dx, dy, drawW, drawH);
@@ -456,12 +481,12 @@ export function initWalkthroughZoom() {
     }
   }
 
-  // Setup GSAP ScrollTrigger without magnetic auto-snap (Fluid natural scrub)
+  // Setup GSAP ScrollTrigger without magnetic auto-snap (Fluid natural scrub with 0.5s damping)
   const trigger = ScrollTrigger.create({
     trigger: track,
     start: 'top top',
     end: 'bottom bottom',
-    scrub: true,
+    scrub: 0.5,
     fastScrollEnd: true,
     preventOverlaps: true,
     onUpdate: (self) => {

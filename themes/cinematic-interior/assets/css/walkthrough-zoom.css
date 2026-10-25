@@ -415,15 +415,6 @@
 /* Responsive Adaptations */
 @media (max-width: 768px) {
   .nior-walkthrough-hero-track {
-    /* Calibrate scrub track length to 340vh on mobile for fatigue-free thumb navigation */
-    height: 340vh;
-
-    .nior-walkthrough-hero-stage {
-      height: 100vh;
-      height: 100dvh;
-      min-height: -webkit-fill-available;
-    }
-
     .nior-hero-center-brand {
       width: calc(100% - 32px);
       max-width: 100%;
