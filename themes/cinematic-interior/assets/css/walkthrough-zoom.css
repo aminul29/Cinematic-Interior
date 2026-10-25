@@ -178,8 +178,8 @@
           display: inline-block;
           opacity: 0.38;
           transform: translateY(0.18em);
-          filter: blur(2.2px);
-          will-change: opacity, transform, filter;
+          filter: none;
+          will-change: opacity, transform;
           margin: 0 0.15em;
           transition: color 0.3s ease;
           color: var(--nior-white, #ffffff);

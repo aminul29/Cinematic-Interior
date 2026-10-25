@@ -163,8 +163,8 @@ export function initWalkthroughZoom() {
   }
 
   /**
-   * High-Performance Cover-Fit Draw with Center Scaling
-   * Intelligent Adaptive Framing: Prevents extreme 300-400% zoom-in on portrait smartphone screens
+   * High-Performance Clean Single-Layer Cover-Fit Draw with Center Scaling
+   * Guarantees zero double-background ghosting and seamless edge-to-edge coverage.
    */
   function drawCoverImage(img, scale = 1, alpha = 1) {
     if (!img || !img.complete || img.naturalWidth === 0 || alpha <= 0.001) return;
@@ -176,37 +176,12 @@ export function initWalkthroughZoom() {
 
     const hRatio = cw / iw;
     const vRatio = ch / ih;
-
-    let baseRatio;
-    if (ch > cw) {
-      // Portrait Screen (Phones / Tablets in Portrait):
-      // Avoid aggressive 300-400% height zoom-in that crops away the architectural room.
-      // Use architectural fit with generous breathing room (preserving >85% of full room width):
-      const maxZoom = 1.15;
-      baseRatio = Math.min(vRatio, hRatio * maxZoom);
-    } else {
-      // Landscape Screen (Desktop / Tablet Landscape): Full-bleed cover
-      baseRatio = Math.max(hRatio, vRatio);
-    }
+    const baseRatio = Math.max(hRatio, vRatio);
 
     const drawW = iw * baseRatio * scale;
     const drawH = ih * baseRatio * scale;
     const dx = (cw - drawW) * 0.5;
     const dy = (ch - drawH) * 0.5;
-
-    // Atmospheric ambient backdrop on portrait screens to fill vertical screen boundaries softly
-    if (ch > cw && drawH < ch) {
-      const coverRatio = Math.max(hRatio, vRatio);
-      const bgW = iw * coverRatio;
-      const bgH = ih * coverRatio;
-      const bgX = (cw - bgW) * 0.5;
-      const bgY = (ch - bgH) * 0.5;
-
-      context.save();
-      context.globalAlpha = Math.max(0, Math.min(1, alpha * 0.25));
-      context.drawImage(img, bgX, bgY, bgW, bgH);
-      context.restore();
-    }
 
     context.globalAlpha = Math.max(0, Math.min(1, alpha));
     context.drawImage(img, dx, dy, drawW, drawH);
@@ -357,21 +332,13 @@ export function initWalkthroughZoom() {
         const wordDuration = 0.16;
         const baseOpacity = 0.38;
 
-        const isMobileScreen = window.innerWidth <= 768;
-
         heroWords.forEach((word, k) => {
           const start = wordStarts[k] !== undefined ? wordStarts[k] : (k / (heroWords.length - 1)) * 0.8;
           const o = Math.max(0, Math.min(1, (s - start) / wordDuration));
 
           word.style.opacity = (baseOpacity + (1 - baseOpacity) * o).toFixed(3);
           word.style.transform = `translate3d(0, ${((1 - o) * 0.18).toFixed(3)}em, 0)`;
-
-          // On mobile, bypass dynamic blur to conserve GPU pipelines and guarantee solid 60/120fps
-          if (!isMobileScreen) {
-            word.style.filter = `blur(${((1 - o) * 2.2).toFixed(2)}px)`;
-          } else if (word.style.filter) {
-            word.style.filter = '';
-          }
+          word.style.filter = 'none';
         });
       } else {
         cardAlpha = 0;
