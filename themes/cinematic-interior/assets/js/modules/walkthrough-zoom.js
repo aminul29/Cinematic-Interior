@@ -100,7 +100,7 @@ export function initWalkthroughZoom() {
   function resizeCanvas() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const width = window.innerWidth;
-    const height = window.innerHeight;
+    const height = stageEl && stageEl.clientHeight ? stageEl.clientHeight : window.innerHeight;
 
     const targetW = Math.floor(width * dpr);
     const targetH = Math.floor(height * dpr);
@@ -332,13 +332,21 @@ export function initWalkthroughZoom() {
         const wordDuration = 0.16;
         const baseOpacity = 0.38;
 
+        const isMobileScreen = window.innerWidth <= 768;
+
         heroWords.forEach((word, k) => {
           const start = wordStarts[k] !== undefined ? wordStarts[k] : (k / (heroWords.length - 1)) * 0.8;
           const o = Math.max(0, Math.min(1, (s - start) / wordDuration));
 
           word.style.opacity = (baseOpacity + (1 - baseOpacity) * o).toFixed(3);
           word.style.transform = `translate3d(0, ${((1 - o) * 0.18).toFixed(3)}em, 0)`;
-          word.style.filter = `blur(${((1 - o) * 2.2).toFixed(2)}px)`;
+
+          // On mobile, bypass dynamic blur to conserve GPU pipelines and guarantee solid 60/120fps
+          if (!isMobileScreen) {
+            word.style.filter = `blur(${((1 - o) * 2.2).toFixed(2)}px)`;
+          } else if (word.style.filter) {
+            word.style.filter = '';
+          }
         });
       } else {
         cardAlpha = 0;
@@ -454,6 +462,8 @@ export function initWalkthroughZoom() {
     start: 'top top',
     end: 'bottom bottom',
     scrub: true,
+    fastScrollEnd: true,
+    preventOverlaps: true,
     onUpdate: (self) => {
       state.progress = self.progress;
       render(state.progress);
@@ -464,16 +474,32 @@ export function initWalkthroughZoom() {
     },
   });
 
-  // Debounced window resize handler
+  // Debounced window resize handler with mobile URL-bar suppression
   let resizeTimer = null;
+  let lastWindowWidth = window.innerWidth;
+  let lastWindowHeight = window.innerHeight;
+
   const onResize = () => {
+    const currentWidth = window.innerWidth;
+    const currentHeight = window.innerHeight;
+
+    // Mobile address bar expand/collapse triggers 'resize' with ONLY vertical height changes.
+    // Suppress mid-scroll canvas wipe and disruptive ScrollTrigger.refresh() during active vertical scrolling.
+    const isMobile = currentWidth <= 768;
+    if (isMobile && currentWidth === lastWindowWidth && Math.abs(currentHeight - lastWindowHeight) < 160) {
+      return;
+    }
+
+    lastWindowWidth = currentWidth;
+    lastWindowHeight = currentHeight;
+
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       resizeCanvas();
       updateDiscOrigin();
       render(state.progress);
       ScrollTrigger.refresh();
-    }, 120);
+    }, 150);
   };
   window.addEventListener('resize', onResize, { passive: true });
 

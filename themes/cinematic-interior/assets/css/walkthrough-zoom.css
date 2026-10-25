@@ -19,7 +19,7 @@
     position: sticky;
     top: 0;
     height: 100vh;
-    height: 100svh;
+    height: 100dvh;
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -415,6 +415,15 @@
 /* Responsive Adaptations */
 @media (max-width: 768px) {
   .nior-walkthrough-hero-track {
+    /* Calibrate scrub track length to 340vh on mobile for fatigue-free thumb navigation */
+    height: 340vh;
+
+    .nior-walkthrough-hero-stage {
+      height: 100vh;
+      height: 100dvh;
+      min-height: -webkit-fill-available;
+    }
+
     .nior-hero-center-brand {
       width: calc(100% - 32px);
       max-width: 100%;
@@ -460,18 +469,9 @@
       }
     }
 
+    /* Clean cinema-first mobile view: HUD hidden on smartphones */
     .nior-walkthrough-hud {
-      right: 16px;
-      bottom: 20px;
-      max-width: calc(100% - 32px);
-
-      .nior-walkthrough-hud__pill {
-        padding: 6px 14px;
-      }
-
-      .nior-walkthrough-hud__progress-track {
-        width: 100%;
-      }
+      display: none;
     }
 
     .nior-walkthrough-scroll-hint {
