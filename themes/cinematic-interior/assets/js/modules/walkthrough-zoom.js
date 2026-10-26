@@ -98,7 +98,7 @@ export function initWalkthroughZoom() {
    * Avoids expensive GPU texture reallocations during active scroll frames.
    */
   function resizeCanvas() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 3);
     const width = window.innerWidth;
     const height = window.innerHeight;
 
@@ -298,8 +298,8 @@ export function initWalkthroughZoom() {
         brandY = -25;
       }
 
-      brandEl.style.opacity = brandAlpha;
-      brandEl.style.transform = `translateY(${brandY}px)`;
+      brandEl.style.opacity = brandAlpha >= 0.999 ? '1' : (brandAlpha <= 0.001 ? '0' : brandAlpha.toFixed(3));
+      brandEl.style.transform = Math.abs(brandY) < 0.1 ? 'none' : `translate3d(0, ${(Math.round(brandY * 10) / 10).toFixed(1)}px, 0)`;
     }
 
     // 2b. Persistent Center-Stage Cinematic Title with Optical Rack-Focus Word Reveal (Frames 02-04)

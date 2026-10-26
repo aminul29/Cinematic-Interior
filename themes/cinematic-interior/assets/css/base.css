@@ -45,6 +45,7 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* WordPress Block Layout & Header Spacing Normalization */
@@ -133,6 +134,7 @@ img, video {
   max-width: 100%;
   height: auto;
   display: block;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Section Header Eyebrow */

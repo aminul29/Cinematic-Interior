@@ -166,11 +166,12 @@ body .wp-site-blocks > .nior-rack-section,
     display: inline-block;
     opacity: 0.14;
     transform: translateY(0.25em);
-    filter: blur(6px);
-    will-change: opacity, transform, filter;
+    filter: none;
     margin: 0 0.10em;
     transition: color 0.3s ease;
     color: var(--nior-white, #ffffff);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
     &.em {
       color: var(--nior-gold, #c9a25e);

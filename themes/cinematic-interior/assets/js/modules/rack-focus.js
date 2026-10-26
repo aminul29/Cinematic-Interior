@@ -183,7 +183,7 @@ export function initRackFocus() {
 
       word.style.opacity = (baseWordOpacity + (1 - baseWordOpacity) * o).toFixed(3);
       word.style.transform = `translateY(${((1 - o) * 0.22).toFixed(3)}em)`;
-      word.style.filter = `blur(${((1 - o) * 5.5).toFixed(2)}px)`;
+      word.style.filter = 'none';
     }
 
     // 4. Subtitle reveals gracefully as word sequence nears completion

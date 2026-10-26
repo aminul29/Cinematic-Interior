@@ -15,7 +15,7 @@ $all_projects       = nioratelier_get_all_portfolio_projects();
 $total_all_projects = count( $all_projects );
 ?>
 <!-- wp:html -->
-<div class="nior-page-hero nior-page-hero--projects nior-projects-hero" style="background-image: linear-gradient(180deg, rgba(12, 13, 14, 0.40) 0%, rgba(12, 13, 14, 0.65) 100%), url('<?php echo esc_url( get_theme_file_uri( '/assets/img/our-projects-banner-bg.png' ) ); ?>');">
+<div class="nior-page-hero nior-page-hero--projects nior-projects-hero" style="background-image: linear-gradient(180deg, rgba(12, 13, 14, 0.40) 0%, rgba(12, 13, 14, 0.65) 100%), url('<?php echo esc_url( get_theme_file_uri( '/assets/img/our-projects-banner-bg.webp' ) ); ?>');">
   <div class="nior-container">
     <div class="nior-page-hero__inner">
       <span class="nior-eyebrow">Selected Works</span>
