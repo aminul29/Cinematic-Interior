@@ -31,11 +31,6 @@ export function initSmoothScroll() {
     lenis.on('scroll', ScrollTrigger.update);
   }
 
-  // Fail-safe direct window scroll listener to guarantee ScrollTrigger sync on all mobile devices
-  window.addEventListener('scroll', () => {
-    if (ScrollTrigger) ScrollTrigger.update();
-  }, { passive: true });
-
   const updateTicker = (time) => {
     lenis.raf(time * 1000);
   };

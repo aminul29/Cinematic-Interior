@@ -8,7 +8,6 @@
   height: 480vh;
   background-color: var(--nior-obsidian, #0c0d0e);
   color: var(--nior-white, #ffffff);
-  overflow-x: clip;
   margin: 0;
   margin-top: 0;
   margin-bottom: -100vh;
@@ -19,13 +18,15 @@
     position: sticky;
     top: 0;
     height: 100vh;
-    height: 100dvh;
+    height: 100lvh;
     width: 100%;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   /* Canvas Media Container */
@@ -44,8 +45,6 @@
       width: 100%;
       height: 100%;
       display: block;
-      will-change: transform;
-      transform: translateZ(0);
       background-color: #0c0d0e;
       image-rendering: -webkit-optimize-contrast;
     }

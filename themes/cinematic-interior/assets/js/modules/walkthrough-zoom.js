@@ -26,7 +26,7 @@ export function initWalkthroughZoom() {
         return `${themeUri}/assets/img/walkthrough/frame-${num}.jpg?v=${themeVersion}`;
       });
 
-  const context = canvas.getContext('2d', { alpha: false, desynchronized: true });
+  const context = canvas.getContext('2d', { alpha: false });
   if (context) {
     context.imageSmoothingEnabled = true;
     context.imageSmoothingQuality = 'high';
@@ -448,19 +448,29 @@ export function initWalkthroughZoom() {
     }
   }
 
-  // Setup GSAP ScrollTrigger without magnetic auto-snap (Fluid natural scrub with 0.5s damping)
+  // Setup GSAP Tween Proxy for True 60/120fps Scrub Interpolation
+  const scrubProxy = { progress: 0 };
+  const scrubTween = gsap.to(scrubProxy, {
+    progress: 1,
+    ease: 'none',
+    paused: true,
+    onUpdate: () => {
+      state.progress = scrubProxy.progress;
+      render(scrubProxy.progress);
+    },
+  });
+
+  // Setup GSAP ScrollTrigger with true tween-based smooth scrub
   const trigger = ScrollTrigger.create({
     trigger: track,
     start: 'top top',
     end: 'bottom bottom',
-    scrub: 0.5,
+    scrub: 0.35,
+    animation: scrubTween,
     fastScrollEnd: true,
     preventOverlaps: true,
-    onUpdate: (self) => {
-      state.progress = self.progress;
-      render(state.progress);
-    },
     onRefresh: (self) => {
+      scrubTween.progress(self.progress);
       state.progress = self.progress;
       render(state.progress);
     },
