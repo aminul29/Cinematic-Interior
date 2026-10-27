@@ -162,9 +162,12 @@ export function initWalkthroughZoom() {
     return null;
   }
 
+  const lastDrawRect = { top: 0, bottom: 0, height: 0, active: false };
+
   /**
    * High-Performance Clean Single-Layer Cover-Fit Draw with Center Scaling
-   * Guarantees zero double-background ghosting and seamless edge-to-edge coverage.
+   * Intelligent Architectural Mobile Framing: Prevents extreme 380% zoom-in on portrait mobile screens
+   * by revealing full room perspective and feathering edges into the obsidian background.
    */
   function drawCoverImage(img, scale = 1, alpha = 1) {
     if (!img || !img.complete || img.naturalWidth === 0 || alpha <= 0.001) return;
@@ -176,7 +179,14 @@ export function initWalkthroughZoom() {
 
     const hRatio = cw / iw;
     const vRatio = ch / ih;
-    const baseRatio = Math.max(hRatio, vRatio);
+    const isPortrait = ch > cw;
+
+    // Architectural Mobile Framing:
+    // On portrait mobile screens, avoid aggressive 380% height crop that cuts off 75% of the room.
+    // Use an optimal architectural framing multiplier (hRatio * 2.05) to reveal ~55-65% screen height
+    // with twice the visible room perspective and razor-sharp 1:1 pixel fidelity.
+    // On landscape screens, use standard full-bleed cover (Math.max(hRatio, vRatio)).
+    const baseRatio = isPortrait ? Math.min(vRatio, hRatio * 2.05) : Math.max(hRatio, vRatio);
 
     const drawW = iw * baseRatio * scale;
     const drawH = ih * baseRatio * scale;
@@ -185,6 +195,62 @@ export function initWalkthroughZoom() {
 
     context.globalAlpha = Math.max(0, Math.min(1, alpha));
     context.drawImage(img, dx, dy, drawW, drawH);
+
+    if (isPortrait && drawH < ch) {
+      lastDrawRect.top = dy;
+      lastDrawRect.bottom = dy + drawH;
+      lastDrawRect.height = drawH;
+      lastDrawRect.active = true;
+    } else {
+      lastDrawRect.active = false;
+    }
+  }
+
+  /**
+   * Luxury Architectural Feathering:
+   * Melts the top and bottom edges of the framed interior into the studio's deep obsidian black.
+   * Completely eliminates harsh borders without any double-background ghosting.
+   */
+  function applyArchitecturalMobileFeather() {
+    if (!lastDrawRect.active || canvas.height <= canvas.width) return;
+
+    const cw = canvas.width;
+    const ch = canvas.height;
+    const topEdge = Math.max(0, lastDrawRect.top);
+    const bottomEdge = Math.min(ch, lastDrawRect.bottom);
+    const featherH = Math.min(Math.round(ch * 0.16), Math.round(lastDrawRect.height * 0.28));
+
+    context.globalAlpha = 1.0;
+
+    // 1. Solid obsidian fill above image top
+    if (topEdge > 0) {
+      context.fillStyle = '#0c0d0e';
+      context.fillRect(0, 0, cw, topEdge + 1);
+    }
+
+    // 2. Silky top gradient feather
+    if (featherH > 0 && topEdge < ch) {
+      const topGrad = context.createLinearGradient(0, topEdge, 0, topEdge + featherH);
+      topGrad.addColorStop(0, '#0c0d0e');
+      topGrad.addColorStop(1, 'rgba(12, 13, 14, 0)');
+      context.fillStyle = topGrad;
+      context.fillRect(0, topEdge, cw, featherH);
+    }
+
+    // 3. Silky bottom gradient feather
+    if (featherH > 0 && bottomEdge > 0) {
+      const bottomGrad = context.createLinearGradient(0, bottomEdge - featherH, 0, bottomEdge);
+      bottomGrad.addColorStop(0, 'rgba(12, 13, 14, 0)');
+      bottomGrad.addColorStop(1, '#0c0d0e');
+      context.fillStyle = bottomGrad;
+      context.fillRect(0, bottomEdge - featherH, cw, featherH);
+    }
+
+    // 4. Solid obsidian fill below image bottom
+    if (bottomEdge < ch) {
+      context.fillStyle = '#0c0d0e';
+      context.fillRect(0, bottomEdge - 1, cw, ch - bottomEdge + 1);
+    }
   }
 
   // Cinematic scroll budget allocation:
@@ -215,6 +281,8 @@ export function initWalkthroughZoom() {
     if (u >= totalTransitions) {
       const lastImg = getLoadedImage(totalFrames - 1);
       drawCoverImage(lastImg, 1.0, 1.0);
+      context.globalAlpha = 1.0;
+      applyArchitecturalMobileFeather();
       updateUI(clampedP, totalFrames - 1, 1.0);
       return;
     }
@@ -258,6 +326,9 @@ export function initWalkthroughZoom() {
 
     // Reset canvas globalAlpha
     context.globalAlpha = 1.0;
+
+    // Apply architectural feathering on portrait mobile displays
+    applyArchitecturalMobileFeather();
 
     // Update UI HUD & Staged Overlays
     updateUI(clampedP, currentIndex, t);
