@@ -77,8 +77,12 @@ export function initProjectGallery() {
       const isCurrent = i === normalizedIndex;
       btn.classList.toggle('is-active', isCurrent);
       btn.setAttribute('aria-selected', isCurrent ? 'true' : 'false');
-      if (isCurrent) {
-        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      if (isCurrent && els.filmstrip) {
+        const offsetLeft = btn.offsetLeft - (els.filmstrip.clientWidth - btn.clientWidth) / 2;
+        els.filmstrip.scrollTo({
+          left: Math.max(0, offsetLeft),
+          behavior: 'smooth',
+        });
       }
     });
 
@@ -99,6 +103,9 @@ export function initProjectGallery() {
       thumbImg.src = url;
       thumbImg.alt = '';
       thumbImg.loading = 'lazy';
+      thumbImg.decoding = 'async';
+      thumbImg.width = 76;
+      thumbImg.height = 54;
       btn.appendChild(thumbImg);
 
       btn.addEventListener('click', () => updateStage(idx));
@@ -137,6 +144,11 @@ export function initProjectGallery() {
     buildFilmstrip();
     updateStage(startIndex);
 
+    // Cleanse any external animation inline styles before opening
+    lightbox.style.opacity = '';
+    lightbox.style.transform = '';
+    lightbox.style.visibility = '';
+
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -150,9 +162,19 @@ export function initProjectGallery() {
     state.isOpen = false;
     lightbox.classList.remove('is-open');
     lightbox.setAttribute('aria-hidden', 'true');
+    lightbox.style.opacity = '';
+    lightbox.style.transform = '';
     document.body.style.overflow = '';
     if (window.niorLenis && typeof window.niorLenis.start === 'function') {
       window.niorLenis.start();
+    }
+    // Clean up DOM and memory in filmstrip and main image to free GPU textures
+    if (els.img) {
+      els.img.src = '';
+      els.img.alt = '';
+    }
+    if (els.filmstrip) {
+      els.filmstrip.innerHTML = '';
     }
     if (state.triggerCard) {
       state.triggerCard.focus({ preventScroll: true });

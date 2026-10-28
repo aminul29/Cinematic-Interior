@@ -80,7 +80,6 @@ $total_all_projects = count( $all_projects );
           <article
             class="nior-portfolio-card"
             tabindex="0"
-            role="button"
             aria-label="<?php echo esc_attr( sprintf( 'Open %s gallery (%d photos)', $project['title'], $total_photos ) ); ?>"
             data-sector="<?php echo esc_attr( $project['sector_id'] ); ?>"
             data-project-slug="<?php echo esc_attr( $project['slug'] ); ?>"
@@ -95,6 +94,9 @@ $total_all_projects = count( $all_projects );
                 src="<?php echo esc_url( $cover_url ); ?>"
                 alt="<?php echo esc_attr( $project['title'] ); ?>"
                 loading="lazy"
+                decoding="async"
+                width="800"
+                height="600"
               />
               <div class="nior-portfolio-card__badge">
                 <svg class="nior-portfolio-card__badge-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -126,7 +128,7 @@ $total_all_projects = count( $all_projects );
                       data-photo-src="<?php echo esc_url( $thumb_url ); ?>"
                       aria-label="<?php echo esc_attr( sprintf( 'View photo %d of %s', $thumb_idx + 1, $project['title'] ) ); ?>"
                     >
-                      <img src="<?php echo esc_url( $thumb_url ); ?>" alt="" loading="lazy" />
+                      <img src="<?php echo esc_url( $thumb_url ); ?>" alt="" loading="lazy" decoding="async" width="80" height="60" />
                     </button>
                   <?php endforeach; ?>
 

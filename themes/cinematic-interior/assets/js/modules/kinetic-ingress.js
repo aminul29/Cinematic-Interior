@@ -314,8 +314,7 @@ export function initKineticIngress() {
           scrollTrigger: {
             trigger: card,
             start: 'top 85%',
-            end: 'bottom 15%',
-            toggleActions: 'play reverse play reverse',
+            once: true,
           },
         }
       );
@@ -488,7 +487,11 @@ export function initKineticIngress() {
         el.classList.contains('nior-page-hero') ||
         el.classList.contains('nior-walkthrough-hero-track') ||
         el.classList.contains('nior-rack-section') ||
-        el.classList.contains('nior-portfolio-unified')
+        el.classList.contains('nior-portfolio-unified') ||
+        el.classList.contains('nior-falling-section') ||
+        el.classList.contains('nior-lightbox') ||
+        el.id === 'nior-project-lightbox' ||
+        el.getAttribute('role') === 'dialog'
       ) {
         return false;
       }
