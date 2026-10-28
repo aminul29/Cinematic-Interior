@@ -99,10 +99,8 @@ export function initWalkthroughZoom() {
    */
   function resizeCanvas() {
     const dpr = Math.min(window.devicePixelRatio || 1, 3);
-    const isMobile = window.innerWidth <= 768;
-    const stageRect = stageEl ? stageEl.getBoundingClientRect() : null;
-    const width = stageRect ? Math.round(stageRect.width) : window.innerWidth;
-    const height = isMobile ? 530 : (stageRect ? Math.round(stageRect.height) : window.innerHeight);
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
     const targetW = Math.floor(width * dpr);
     const targetH = Math.floor(height * dpr);
@@ -179,38 +177,48 @@ export function initWalkthroughZoom() {
     const iw = img.naturalWidth;
     const ih = img.naturalHeight;
 
-    const hRatio = cw / iw;
-    const vRatio = ch / ih;
     const isMobile = window.innerWidth <= 768;
     const isPortrait = isMobile || (ch > cw);
 
-    // Architectural Framing:
-    // Fixed 530px height on mobile: full-bleed cover (Math.max(hRatio, vRatio))
-    // scales the image by vRatio = 530/1441 = 0.368, creating a razor-sharp 530px image
-    // anchored flush to top: 0 (dy = 0) with zero black bars above or below.
-    const baseRatio = Math.max(hRatio, vRatio);
+    let drawW;
+    let drawH;
+    let dx;
+    let dy;
 
-    const drawW = iw * baseRatio * scale;
-    const drawH = ih * baseRatio * scale;
-    const dx = (cw - drawW) * 0.5;
-    const dy = isPortrait ? 0 : (ch - drawH) * 0.5;
+    if (isPortrait) {
+      // Fixed 530px height hero on mobile:
+      // Render the image at fixed 530px height (scaled with DPR) anchored flush to top: 0 (dy = 0)
+      // The header floats completely transparently directly over the architectural ceiling.
+      const dpr = Math.min(window.devicePixelRatio || 1, 3);
+      const targetDrawH = 530 * dpr;
+      const ratio = targetDrawH / ih;
+      drawW = iw * ratio * scale;
+      drawH = targetDrawH * scale;
+      dx = (cw - drawW) * 0.5;
+      dy = 0;
+
+      lastDrawRect.top = 0;
+      lastDrawRect.bottom = drawH;
+      lastDrawRect.height = drawH;
+      lastDrawRect.active = (drawH < ch);
+    } else {
+      const hRatio = cw / iw;
+      const vRatio = ch / ih;
+      const baseRatio = Math.max(hRatio, vRatio);
+      drawW = iw * baseRatio * scale;
+      drawH = ih * baseRatio * scale;
+      dx = (cw - drawW) * 0.5;
+      dy = (ch - drawH) * 0.5;
+      lastDrawRect.active = false;
+    }
 
     context.globalAlpha = Math.max(0, Math.min(1, alpha));
     context.drawImage(img, dx, dy, drawW, drawH);
-
-    if (isPortrait && drawH < ch) {
-      lastDrawRect.top = dy;
-      lastDrawRect.bottom = dy + drawH;
-      lastDrawRect.height = drawH;
-      lastDrawRect.active = true;
-    } else {
-      lastDrawRect.active = false;
-    }
   }
 
   /**
    * Luxury Architectural Feathering:
-   * Melts the bottom edge of the framed interior into the studio's deep obsidian black.
+   * Melts the bottom edge of the 530px framed interior into the studio's deep obsidian black.
    * Keeps the top edge 100% clean and transparent directly under the luxury header.
    */
   function applyArchitecturalMobileFeather() {
@@ -220,7 +228,8 @@ export function initWalkthroughZoom() {
     const ch = canvas.height;
     const topEdge = Math.max(0, lastDrawRect.top);
     const bottomEdge = Math.min(ch, lastDrawRect.bottom);
-    const featherH = Math.min(Math.round(ch * 0.16), Math.round(lastDrawRect.height * 0.28));
+    // Luxury silky bottom gradient feather height (approx 120px-140px on mobile)
+    const featherH = Math.min(Math.round(ch * 0.18), Math.round(lastDrawRect.height * 0.28));
 
     context.globalAlpha = 1.0;
 
@@ -239,16 +248,17 @@ export function initWalkthroughZoom() {
       context.fillRect(0, topEdge, cw, featherH);
     }
 
-    // 3. Silky bottom gradient feather
+    // 3. Silky bottom divider gradient feather: melts bottom of 530px hero into obsidian black
     if (featherH > 0 && bottomEdge > 0 && bottomEdge < ch) {
       const bottomGrad = context.createLinearGradient(0, bottomEdge - featherH, 0, bottomEdge);
       bottomGrad.addColorStop(0, 'rgba(12, 13, 14, 0)');
+      bottomGrad.addColorStop(0.5, 'rgba(12, 13, 14, 0.65)');
       bottomGrad.addColorStop(1, '#0c0d0e');
       context.fillStyle = bottomGrad;
       context.fillRect(0, bottomEdge - featherH, cw, featherH);
     }
 
-    // 4. Solid obsidian fill below image bottom
+    // 4. Solid obsidian fill below 530px image bottom down to screen bottom
     if (bottomEdge < ch) {
       context.fillStyle = '#0c0d0e';
       context.fillRect(0, bottomEdge - 1, cw, ch - bottomEdge + 1);
@@ -549,50 +559,6 @@ export function initWalkthroughZoom() {
     },
   });
 
-  // Ambient room cycle for fixed 530px mobile hero
-  let mobileCycleTimer = null;
-  let mobileFrameIndex = 0;
-
-  function updateMobileMode() {
-    const isMobile = window.innerWidth <= 768;
-    if (isMobile) {
-      if (rackSection) {
-        rackSection.style.visibility = 'visible';
-        rackSection.style.opacity = '1';
-        rackSection.style.pointerEvents = 'auto';
-        if (rackStage) {
-          rackStage.style.visibility = 'visible';
-          rackStage.style.opacity = '1';
-          rackStage.style.pointerEvents = 'auto';
-        }
-      }
-      if (!mobileCycleTimer) {
-        mobileCycleTimer = setInterval(() => {
-          if (document.hidden) return;
-          const rect = track.getBoundingClientRect();
-          if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-
-          mobileFrameIndex = (mobileFrameIndex + 1) % totalFrames;
-          const targetP = mobileFrameIndex / Math.max(1, totalFrames - 1);
-          gsap.to(scrubProxy, {
-            progress: targetP,
-            duration: 1.1,
-            ease: 'power2.inOut',
-            onUpdate: () => {
-              state.progress = scrubProxy.progress;
-              render(scrubProxy.progress);
-            },
-          });
-        }, 4000);
-      }
-    } else {
-      if (mobileCycleTimer) {
-        clearInterval(mobileCycleTimer);
-        mobileCycleTimer = null;
-      }
-    }
-  }
-
   // Debounced window resize handler with mobile URL-bar suppression
   let resizeTimer = null;
   let lastWindowWidth = window.innerWidth;
@@ -616,7 +582,6 @@ export function initWalkthroughZoom() {
     resizeTimer = setTimeout(() => {
       resizeCanvas();
       updateDiscOrigin();
-      updateMobileMode();
       render(state.progress);
       ScrollTrigger.refresh();
     }, 150);
@@ -627,7 +592,6 @@ export function initWalkthroughZoom() {
   setTimeout(() => {
     resizeCanvas();
     updateDiscOrigin();
-    updateMobileMode();
     ScrollTrigger.refresh();
     render(0);
   }, 180);

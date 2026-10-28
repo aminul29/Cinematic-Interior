@@ -408,28 +408,33 @@
 /* Responsive Adaptations */
 @media (max-width: 768px) {
   .nior-walkthrough-hero-track {
-    /* Hero section height fixed to 530px on mobile */
-    height: 530px;
-    margin-bottom: 0;
-    margin-block-end: 0;
+    /* Scroll-locked mobile scrubbing track */
+    height: 320vh;
+    margin-bottom: -100vh;
+    margin-block-end: -100vh;
 
     .nior-walkthrough-hero-stage {
-      position: relative;
+      position: sticky;
       top: 0;
-      height: 530px;
-      min-height: 530px;
-      max-height: 530px;
+      height: 100vh;
+      height: 100lvh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
     }
 
     .nior-hero-center-brand {
       width: calc(100% - 32px);
       max-width: 100%;
-      inset: 0;
-      margin: auto;
-      height: fit-content;
+      top: clamp(170px, 30vh, 250px);
+      bottom: auto;
+      margin: 0 auto;
 
       .nior-hero-center-brand__title {
-        font-size: clamp(1.6rem, 7vw, 2.3rem);
+        font-size: clamp(1.6rem, 7vw, 2.5rem);
         letter-spacing: 0.12em;
         padding-left: 0.12em;
         overflow-wrap: break-word;
@@ -437,12 +442,12 @@
       }
 
       .nior-hero-center-brand__divider {
-        width: 50px;
-        margin: 12px 0;
+        width: 60px;
+        margin: 14px 0;
       }
 
       .nior-hero-center-brand__tagline {
-        font-size: 0.72rem;
+        font-size: 0.74rem;
         letter-spacing: 0.18em;
         padding-left: 0.18em;
         white-space: normal;
@@ -455,9 +460,9 @@
     .nior-walkthrough-titles {
       width: calc(100% - 32px);
       max-width: 100%;
-      inset: 0;
-      margin: auto;
-      height: fit-content;
+      top: clamp(170px, 30vh, 250px);
+      bottom: auto;
+      margin: 0 auto;
 
       .nior-walkthrough-title-card {
         padding: 24px 16px;
