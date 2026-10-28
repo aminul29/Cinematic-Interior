@@ -3,15 +3,15 @@
  * Entry ES Module loading all specialized components.
  */
 
-import { initSmoothScroll } from './modules/smooth-scroll.js?v=1.9.41';
-import { initPreloader } from './modules/preloader.js?v=1.9.41';
-import { initHeroCanvas } from './modules/hero-canvas.js?v=1.9.41';
-import { initVideoScrub } from './modules/video-scrub.js?v=1.9.41';
-import { initWalkthroughZoom } from './modules/walkthrough-zoom.js?v=1.9.41';
-import { initFallingLogos } from './modules/falling-logos.js?v=1.9.41';
-import { initRackFocus } from './modules/rack-focus.js?v=1.9.41';
-import { initKineticIngress } from './modules/kinetic-ingress.js?v=1.9.41';
-import { initProjectGallery } from './modules/project-gallery.js?v=1.9.41';
+import { initSmoothScroll } from './modules/smooth-scroll.js?v=1.9.42';
+import { initPreloader } from './modules/preloader.js?v=1.9.42';
+import { initHeroCanvas } from './modules/hero-canvas.js?v=1.9.42';
+import { initVideoScrub } from './modules/video-scrub.js?v=1.9.42';
+import { initWalkthroughZoom } from './modules/walkthrough-zoom.js?v=1.9.42';
+import { initFallingLogos } from './modules/falling-logos.js?v=1.9.42';
+import { initRackFocus } from './modules/rack-focus.js?v=1.9.42';
+import { initKineticIngress } from './modules/kinetic-ingress.js?v=1.9.42';
+import { initProjectGallery } from './modules/project-gallery.js?v=1.9.42';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize buttery-smooth Lenis scrolling

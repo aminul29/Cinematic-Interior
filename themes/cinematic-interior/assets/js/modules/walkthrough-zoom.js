@@ -98,7 +98,8 @@ export function initWalkthroughZoom() {
    * Avoids expensive GPU texture reallocations during active scroll frames.
    */
   function resizeCanvas() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 3);
+    const isMobile = window.innerWidth <= 768;
+    const dpr = isMobile ? Math.min(window.devicePixelRatio || 1, 2) : Math.min(window.devicePixelRatio || 1, 3);
     const width = window.innerWidth;
     const height = window.innerHeight;
 
@@ -180,37 +181,27 @@ export function initWalkthroughZoom() {
     const isMobile = window.innerWidth <= 768;
     const isPortrait = isMobile || (ch > cw);
 
-    let drawW;
-    let drawH;
-    let dx;
+    const hRatio = cw / iw;
+    const vRatio = ch / ih;
+    const baseRatio = Math.max(hRatio, vRatio);
+    const drawW = iw * baseRatio * scale;
+    const drawH = ih * baseRatio * scale;
+    const dx = (cw - drawW) * 0.5;
+
     let dy;
-
     if (isPortrait) {
-      // Fixed 530px height hero on mobile:
-      // Render the image at fixed 530px height (scaled with DPR) anchored flush to top: 0 (dy = 0)
-      // The header floats completely transparently directly over the architectural ceiling.
-      const dpr = Math.min(window.devicePixelRatio || 1, 3);
-      const targetDrawH = 530 * dpr;
-      const ratio = targetDrawH / ih;
-      drawW = iw * ratio * scale;
-      drawH = targetDrawH * scale;
-      dx = (cw - drawW) * 0.5;
-      dy = 0;
-
-      lastDrawRect.top = 0;
-      lastDrawRect.bottom = drawH;
-      lastDrawRect.height = drawH;
-      lastDrawRect.active = (drawH < ch);
+      // Architectural portrait framing:
+      // Fill full 100vh/100lvh height edge-to-edge with subtle top bias
+      // so architectural ceiling and lighting sit naturally under the transparent floating header
+      dy = Math.min(0, (ch - drawH) * 0.12);
     } else {
-      const hRatio = cw / iw;
-      const vRatio = ch / ih;
-      const baseRatio = Math.max(hRatio, vRatio);
-      drawW = iw * baseRatio * scale;
-      drawH = ih * baseRatio * scale;
-      dx = (cw - drawW) * 0.5;
       dy = (ch - drawH) * 0.5;
-      lastDrawRect.active = false;
     }
+
+    lastDrawRect.top = dy;
+    lastDrawRect.bottom = dy + drawH;
+    lastDrawRect.height = drawH;
+    lastDrawRect.active = false;
 
     context.globalAlpha = Math.max(0, Math.min(1, alpha));
     context.drawImage(img, dx, dy, drawW, drawH);

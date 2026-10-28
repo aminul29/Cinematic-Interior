@@ -429,9 +429,11 @@
     .nior-hero-center-brand {
       width: calc(100% - 32px);
       max-width: 100%;
-      top: clamp(170px, 30vh, 250px);
-      bottom: auto;
-      margin: 0 auto;
+      inset: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      height: fit-content;
 
       .nior-hero-center-brand__title {
         font-size: clamp(1.6rem, 7vw, 2.5rem);
@@ -460,9 +462,11 @@
     .nior-walkthrough-titles {
       width: calc(100% - 32px);
       max-width: 100%;
-      top: clamp(170px, 30vh, 250px);
-      bottom: auto;
-      margin: 0 auto;
+      inset: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      height: fit-content;
 
       .nior-walkthrough-title-card {
         padding: 24px 16px;
