@@ -17,6 +17,18 @@ export function initRackFocus() {
 
   // Locate the next section (Cinematic Scenarios)
   const nextSection = section.nextElementSibling || document.getElementById('niorScenarios');
+  const isMobile = window.innerWidth <= 768;
+
+  if (isMobile) {
+    section.style.visibility = 'visible';
+    section.style.opacity = '1';
+    section.style.pointerEvents = 'auto';
+    if (stage) {
+      stage.style.visibility = 'visible';
+      stage.style.opacity = '1';
+      stage.style.pointerEvents = 'auto';
+    }
+  }
 
   // 1. GSAP ScrollTrigger Pinning of "Our Philosophy" Stage
   // Keeps the Philosophy stage pinned at top: 0 while the next section glides up over it.
@@ -37,7 +49,7 @@ export function initRackFocus() {
           stage.style.visibility = 'visible';
           stage.style.opacity = '1';
           stage.style.pointerEvents = 'auto';
-        } else if (self.scroll() < self.start) {
+        } else if (!isMobile && self.scroll() < self.start) {
           section.style.visibility = 'hidden';
           section.style.opacity = '0';
           section.style.pointerEvents = 'none';

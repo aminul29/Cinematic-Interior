@@ -89,6 +89,20 @@ body .wp-site-blocks > .nior-rack-section,
   border-top: none;
 }
 
+@media (max-width: 768px) {
+  body .nior-rack-section {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  body .nior-rack-stage {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
 .nior-rack-stage {
   position: relative;
   top: 0;

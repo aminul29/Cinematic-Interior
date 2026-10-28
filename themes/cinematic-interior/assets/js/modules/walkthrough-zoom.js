@@ -99,8 +99,10 @@ export function initWalkthroughZoom() {
    */
   function resizeCanvas() {
     const dpr = Math.min(window.devicePixelRatio || 1, 3);
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    const isMobile = window.innerWidth <= 768;
+    const stageRect = stageEl ? stageEl.getBoundingClientRect() : null;
+    const width = stageRect ? Math.round(stageRect.width) : window.innerWidth;
+    const height = isMobile ? 530 : (stageRect ? Math.round(stageRect.height) : window.innerHeight);
 
     const targetW = Math.floor(width * dpr);
     const targetH = Math.floor(height * dpr);
@@ -179,15 +181,14 @@ export function initWalkthroughZoom() {
 
     const hRatio = cw / iw;
     const vRatio = ch / ih;
-    const isPortrait = ch > cw;
+    const isMobile = window.innerWidth <= 768;
+    const isPortrait = isMobile || (ch > cw);
 
-    // Architectural Mobile Framing:
-    // On portrait mobile screens, avoid aggressive 380% height crop that cuts off 75% of the room.
-    // Anchor the image flush to top: 0 (dy = 0) so the fixed header sits completely transparently
-    // directly on top of the hero image ceiling with zero dark gap or letterboxing.
-    // Framed with an optimal ratio (hRatio * 2.35) for razor-sharp 1:1 pixel fidelity.
-    // On landscape screens, use standard full-bleed cover (Math.max(hRatio, vRatio)).
-    const baseRatio = isPortrait ? Math.min(vRatio, hRatio * 2.35) : Math.max(hRatio, vRatio);
+    // Architectural Framing:
+    // Fixed 530px height on mobile: full-bleed cover (Math.max(hRatio, vRatio))
+    // scales the image by vRatio = 530/1441 = 0.368, creating a razor-sharp 530px image
+    // anchored flush to top: 0 (dy = 0) with zero black bars above or below.
+    const baseRatio = Math.max(hRatio, vRatio);
 
     const drawW = iw * baseRatio * scale;
     const drawH = ih * baseRatio * scale;
@@ -548,6 +549,50 @@ export function initWalkthroughZoom() {
     },
   });
 
+  // Ambient room cycle for fixed 530px mobile hero
+  let mobileCycleTimer = null;
+  let mobileFrameIndex = 0;
+
+  function updateMobileMode() {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      if (rackSection) {
+        rackSection.style.visibility = 'visible';
+        rackSection.style.opacity = '1';
+        rackSection.style.pointerEvents = 'auto';
+        if (rackStage) {
+          rackStage.style.visibility = 'visible';
+          rackStage.style.opacity = '1';
+          rackStage.style.pointerEvents = 'auto';
+        }
+      }
+      if (!mobileCycleTimer) {
+        mobileCycleTimer = setInterval(() => {
+          if (document.hidden) return;
+          const rect = track.getBoundingClientRect();
+          if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+
+          mobileFrameIndex = (mobileFrameIndex + 1) % totalFrames;
+          const targetP = mobileFrameIndex / Math.max(1, totalFrames - 1);
+          gsap.to(scrubProxy, {
+            progress: targetP,
+            duration: 1.1,
+            ease: 'power2.inOut',
+            onUpdate: () => {
+              state.progress = scrubProxy.progress;
+              render(scrubProxy.progress);
+            },
+          });
+        }, 4000);
+      }
+    } else {
+      if (mobileCycleTimer) {
+        clearInterval(mobileCycleTimer);
+        mobileCycleTimer = null;
+      }
+    }
+  }
+
   // Debounced window resize handler with mobile URL-bar suppression
   let resizeTimer = null;
   let lastWindowWidth = window.innerWidth;
@@ -571,6 +616,7 @@ export function initWalkthroughZoom() {
     resizeTimer = setTimeout(() => {
       resizeCanvas();
       updateDiscOrigin();
+      updateMobileMode();
       render(state.progress);
       ScrollTrigger.refresh();
     }, 150);
@@ -581,6 +627,7 @@ export function initWalkthroughZoom() {
   setTimeout(() => {
     resizeCanvas();
     updateDiscOrigin();
+    updateMobileMode();
     ScrollTrigger.refresh();
     render(0);
   }, 180);
