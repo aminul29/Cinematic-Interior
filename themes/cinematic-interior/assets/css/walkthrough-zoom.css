@@ -408,9 +408,15 @@
 /* Responsive Adaptations */
 @media (max-width: 768px) {
   .nior-walkthrough-hero-track {
+    /* Snappy responsive scroll length on mobile: 320vh down from 480vh */
+    height: 320vh;
+
     .nior-hero-center-brand {
       width: calc(100% - 32px);
       max-width: 100%;
+      top: clamp(170px, 30vh, 250px);
+      bottom: auto;
+      margin: 0 auto;
 
       .nior-hero-center-brand__title {
         font-size: clamp(1.6rem, 7vw, 2.5rem);
@@ -434,6 +440,9 @@
     .nior-walkthrough-titles {
       width: calc(100% - 32px);
       max-width: 100%;
+      top: clamp(170px, 30vh, 250px);
+      bottom: auto;
+      margin: 0 auto;
 
       .nior-walkthrough-title-card {
         padding: 24px 16px;

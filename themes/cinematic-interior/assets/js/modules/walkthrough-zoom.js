@@ -183,15 +183,16 @@ export function initWalkthroughZoom() {
 
     // Architectural Mobile Framing:
     // On portrait mobile screens, avoid aggressive 380% height crop that cuts off 75% of the room.
-    // Use an optimal architectural framing multiplier (hRatio * 2.05) to reveal ~55-65% screen height
-    // with twice the visible room perspective and razor-sharp 1:1 pixel fidelity.
+    // Anchor the image flush to top: 0 (dy = 0) so the fixed header sits completely transparently
+    // directly on top of the hero image ceiling with zero dark gap or letterboxing.
+    // Framed with an optimal ratio (hRatio * 2.35) for razor-sharp 1:1 pixel fidelity.
     // On landscape screens, use standard full-bleed cover (Math.max(hRatio, vRatio)).
-    const baseRatio = isPortrait ? Math.min(vRatio, hRatio * 2.05) : Math.max(hRatio, vRatio);
+    const baseRatio = isPortrait ? Math.min(vRatio, hRatio * 2.35) : Math.max(hRatio, vRatio);
 
     const drawW = iw * baseRatio * scale;
     const drawH = ih * baseRatio * scale;
     const dx = (cw - drawW) * 0.5;
-    const dy = (ch - drawH) * 0.5;
+    const dy = isPortrait ? 0 : (ch - drawH) * 0.5;
 
     context.globalAlpha = Math.max(0, Math.min(1, alpha));
     context.drawImage(img, dx, dy, drawW, drawH);
@@ -208,8 +209,8 @@ export function initWalkthroughZoom() {
 
   /**
    * Luxury Architectural Feathering:
-   * Melts the top and bottom edges of the framed interior into the studio's deep obsidian black.
-   * Completely eliminates harsh borders without any double-background ghosting.
+   * Melts the bottom edge of the framed interior into the studio's deep obsidian black.
+   * Keeps the top edge 100% clean and transparent directly under the luxury header.
    */
   function applyArchitecturalMobileFeather() {
     if (!lastDrawRect.active || canvas.height <= canvas.width) return;
@@ -222,14 +223,14 @@ export function initWalkthroughZoom() {
 
     context.globalAlpha = 1.0;
 
-    // 1. Solid obsidian fill above image top
+    // 1. Solid obsidian fill above image top (only if image doesn't start at top)
     if (topEdge > 0) {
       context.fillStyle = '#0c0d0e';
       context.fillRect(0, 0, cw, topEdge + 1);
     }
 
-    // 2. Silky top gradient feather
-    if (featherH > 0 && topEdge < ch) {
+    // 2. Silky top gradient feather (only if image doesn't start at top)
+    if (topEdge > 0 && featherH > 0 && topEdge < ch) {
       const topGrad = context.createLinearGradient(0, topEdge, 0, topEdge + featherH);
       topGrad.addColorStop(0, '#0c0d0e');
       topGrad.addColorStop(1, 'rgba(12, 13, 14, 0)');
@@ -238,7 +239,7 @@ export function initWalkthroughZoom() {
     }
 
     // 3. Silky bottom gradient feather
-    if (featherH > 0 && bottomEdge > 0) {
+    if (featherH > 0 && bottomEdge > 0 && bottomEdge < ch) {
       const bottomGrad = context.createLinearGradient(0, bottomEdge - featherH, 0, bottomEdge);
       bottomGrad.addColorStop(0, 'rgba(12, 13, 14, 0)');
       bottomGrad.addColorStop(1, '#0c0d0e');
