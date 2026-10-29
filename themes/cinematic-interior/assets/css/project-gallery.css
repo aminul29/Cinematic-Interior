@@ -355,13 +355,7 @@
     box-shadow: 0 32px 80px rgba(0, 0, 0, 0.75);
     transform: scale(0.96) translateY(12px);
     will-change: transform;
-    transition: transform 0.42s var(--ease-out-luxury), width 0.35s var(--ease-out-luxury);
-  }
-
-  &.is-compact-aspect {
-    .nior-lightbox__dialog {
-      width: min(880px, 94vw);
-    }
+    transition: transform 0.42s var(--ease-out-luxury);
   }
 
   .nior-lightbox__header {
