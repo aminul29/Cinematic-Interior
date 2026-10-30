@@ -87,3 +87,7 @@ When developing permitted features, all AI agents must strictly adhere to the fo
 1. **Surgical Diffs**: Make minimal, precise changes to achieve the objective. Avoid unnecessary refactoring of adjacent code.
 2. **Preserve Documentation**: Maintain all existing docblocks, comments, and parameter type hints.
 3. **Verify Assumptions**: Confirm file paths and function signatures before making changes.
+
+### E. Local WP Environment & CLI Operations
+1. **Local CLI Runner**: This workspace is hosted inside Local WP (`nioratelier`). AI agents should use `localwp cli nioratelier -- <command>` (or the `localwp-cli` skill) to execute WP-CLI commands (`plugin`, `theme`, `db`, `search-replace`, `core`) with automatic database socket, PHP, and environment configuration.
+2. **Site State Management**: If the site is halted, wake it with `localwp start nioratelier` before running CLI commands. Use `localwp info nioratelier --json` for quick status and metadata inspection.

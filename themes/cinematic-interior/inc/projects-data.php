@@ -43,6 +43,48 @@ function nioratelier_get_portfolio_sections() {
             'description' => 'Purposeful environments that unite brand identity, functionality and customer experience.',
             'projects'    => array(
                 array(
+                    'slug'        => 'bradbury-office',
+                    'title'       => 'Bradbury Office',
+                    'category'    => 'Corporate Workspace',
+                    'description' => 'Polished marble reception, acoustic glass partitions, and bespoke executive suites.',
+                    'count'       => 5,
+                ),
+                array(
+                    'slug'        => 'ceva-logistics',
+                    'title'       => 'CEVA Logistics Hub',
+                    'category'    => 'Logistics & Operations Center',
+                    'description' => 'High-efficiency logistics offices, dynamic circulation spine, and ergonomic command centers.',
+                    'count'       => 10,
+                ),
+                array(
+                    'slug'        => 'dasher',
+                    'title'       => 'Dasher Headquarters',
+                    'category'    => 'Tech & Creative Office',
+                    'description' => 'Industrial chic open plan, acoustic baffle ceilings, and collaborative breakout pods.',
+                    'count'       => 8,
+                ),
+                array(
+                    'slug'        => 'jome',
+                    'title'       => 'Jome Experience Space',
+                    'category'    => 'Brand Showroom & Workspace',
+                    'description' => 'Architectural arches, curated warm neutral tones, and ambient linear illumination.',
+                    'count'       => 10,
+                ),
+                array(
+                    'slug'        => 'lumiere-bi-skin',
+                    'title'       => 'Lumière Bi Skin',
+                    'category'    => 'Aesthetic & Wellness Clinic',
+                    'description' => 'Minimalist organic curves, fluted champagne portals, and soft indirect lighting.',
+                    'count'       => 8,
+                ),
+                array(
+                    'slug'        => 'executive-office-interior',
+                    'title'       => 'Apex Executive Suites',
+                    'category'    => 'Executive Workspace',
+                    'description' => 'Monolithic marble desks, floor-to-ceiling glass pavilions, and custom linear joinery.',
+                    'count'       => 11,
+                ),
+                array(
                     'slug'        => 'corporate-showroom',
                     'title'       => 'FinTech & Sports Pavilion',
                     'category'    => 'Exhibition Center',
@@ -58,6 +100,20 @@ function nioratelier_get_portfolio_sections() {
             'title'       => 'F&B & Hospitality',
             'description' => 'Inviting destinations that bring together atmosphere, spatial planning and brand identity to create meaningful customer experiences.',
             'projects'    => array(
+                array(
+                    'slug'        => 'guang-restaurant-bar',
+                    'title'       => 'Guang Restaurant & Bar',
+                    'category'    => 'Contemporary Dining & Bar',
+                    'description' => 'Emerald glazed tiles, sculptural koi bar counter, and warm timber lattice ceilings.',
+                    'count'       => 6,
+                ),
+                array(
+                    'slug'        => 'lucha-loco',
+                    'title'       => 'Lucha Loco',
+                    'category'    => 'Vibrant Dining & Cocktail Bar',
+                    'description' => 'Tropical courtyard greenery, neon-infused cocktail bar, and intimate leather booth seating.',
+                    'count'       => 9,
+                ),
                 array(
                     'slug'        => 'vstage-lounge',
                     'title'       => 'V Stage Lounge',
@@ -109,6 +165,34 @@ function nioratelier_get_portfolio_sections() {
             'title'       => 'Retail & Shopping Mall',
             'description' => 'Distinctive retail environments designed around visual identity, customer journeys and memorable shopping experiences.',
             'projects'    => array(
+                array(
+                    'slug'        => 'dreame',
+                    'title'       => 'Dreame Innovation Store',
+                    'category'    => 'Smart Tech Flagship',
+                    'description' => 'Futuristic metallic portals, halo-lit display pedestals, and streamlined customer flow.',
+                    'count'       => 10,
+                ),
+                array(
+                    'slug'        => 'hm',
+                    'title'       => 'H&M Flagship Store',
+                    'category'    => 'Fashion Retail Concept',
+                    'description' => 'Spacious illuminated navigation portals, terrazzo flooring, and warm timber accents.',
+                    'count'       => 12,
+                ),
+                array(
+                    'slug'        => 'mac-cosmetics',
+                    'title'       => 'MAC Cosmetics Boutique',
+                    'category'    => 'Luxury Beauty Boutique',
+                    'description' => 'High-contrast monochrome makeup stations, bespoke mirror lighting, and gloss black joinery.',
+                    'count'       => 8,
+                ),
+                array(
+                    'slug'        => 'ralph-lauren',
+                    'title'       => 'Ralph Lauren Flagship',
+                    'category'    => 'Haute Couture & Heritage Retail',
+                    'description' => 'Mahogany millwork, brass detailing, and classic American heritage salon atmosphere.',
+                    'count'       => 11,
+                ),
                 array(
                     'slug'        => 'cle-de-peau',
                     'title'       => 'Clé de Peau Beauté',
